@@ -11,10 +11,16 @@ im Hauptmenü verschiedene Optionen auswählen (Lernziel setzen, Übersicht Lern
 
 ### Lernziel setzen
 
-Der Benutzer muss verschiedene Angaben zu einem Lernziel machen. Die Anwendung bietet ihm
-vorgefertigte Antwortmöglichkeiten sowie Eingabemöglichkeiten für eigene Angaben. Es müssen folgende Dinge festgelegt werden: 
-Das Themengebiet des Lernziels (Mathematik, Biologie, ...), das Medium mit welchem gelernt wird (Buch, Internetartikel, Video), 
-der Umfang (Buchseiten 100-120, 1h Videokurs), der Ort an welchem gelernt wird und der Zeitrahmen in dem gelernt wird. 
+Wählt der Benutzer im Hauptmenü "Lernziel setzen", kann er dies in einer neuen Ansicht machen.
+Dort wird er zuerst nach Art (Action), Feld/Disziplin (Field) gefragt. Nach der Eingabe wird er von der Anwendung gefragt: "Ist Dein ##Benutzerangaben## spezifisch genug?". 
+Wird diese Frage vom Benutzer mit "Nein" beantwortet, dann kann er die Eingaben weiter bearbeiten. Antwortet er mit Ja geht es wie folgt weiter.
+
+In einer neuen Ansicht, in der noch die vorherigen Angaben für den Benutzer sichtbar sind, legt er die Menge (Amount), z.B. Seiten oder Antworten fest, und gibt die für das Erfüllen des Ziels vermutete Zeit an. 
+Danach wird er von der Anwendung gefragt: "Ist dein Ziel messbar, quantifzierbar oder realistisch terminierbar?" Wird diese Frage vom Benutzer mit Nein beantwortet, dann kann er die Eingaben weiter bearbeiten. Antwortet er mit Ja geht es wie folgt weiter.
+
+Der Benutzer kann dem Ziel ein Geokoordinate zuweisen, welche sagt wo das Lernen begonnen wurde.
+Das Ziel wird in der Anwendung gespeichert.
+
 
 ### Übersicht Lernziele
 
