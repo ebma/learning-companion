@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#4dd0e1</color>
-    <color name="colorPrimaryDark">#00574B</color>
-    <color name="colorAccent">#D81B60</color>
+    <color name="colorPrimary">#6729be</color>
+    <color name="colorPrimaryDark">#4d19ae</color>
+    <color name="colorAccent">#80be29</color>
+
+    <color name="colorBackgroundGrey">#cfcfcf</color>
+    <color name="colorMainActivityButtons">#cef991</color>
+
+    <color name="colorMainActivityButtonOverview">#ffc35c</color>
+    <color name="colorMainActivityButtonNew">#b4f56d</color>
+    <color name="colorMainActivityButtonSettings">#9cc8fa</color>
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
