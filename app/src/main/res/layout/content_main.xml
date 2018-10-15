@@ -8,58 +8,61 @@
     tools:context=".MainActivity"
     tools:showIn="@layout/activity_main">
 
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <Button
+        android:id="@+id/btn_overview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:paddingLeft="70dp"
-        android:paddingTop="30dp"
-        android:paddingRight="70dp"
-        android:paddingBottom="70dp"
+        android:layout_height="wrap_content"
 
-        >
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="@color/colorMainActivityButtonOverview"
+        android:paddingTop="@dimen/btn_main_padding_ver"
+        android:paddingBottom="@dimen/btn_main_padding_ver"
 
-        <Button
-            android:id="@+id/btn_overview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+        android:text="@string/btn_overview"
+        app:layout_constraintBottom_toTopOf="@+id/btn_setGoal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-            android:backgroundTint="@color/colorMainActivityButtonOverview"
-            android:paddingTop="@dimen/btn_main_padding_ver"
-            android:paddingBottom="@dimen/btn_main_padding_ver"
-            android:text="@string/btn_overview"
+    <Button
+        android:id="@+id/btn_setGoal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-            android:layout_marginBottom="60dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="60dp"
+        android:backgroundTint="@color/colorMainActivityButtonSetGoal"
+        android:paddingTop="@dimen/btn_main_padding_ver"
+        android:paddingBottom="@dimen/btn_main_padding_ver"
 
-            />
+        android:text="@string/btn_setGoal"
+        app:layout_constraintBottom_toTopOf="@+id/btn_settings"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_overview" />
 
-        <Button
-            android:id="@+id/btn_setGoal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+    <Button
+        android:id="@+id/btn_settings"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
 
-            android:layout_marginBottom="60dp"
-            android:backgroundTint="@color/colorMainActivityButtonNew"
-            android:paddingTop="@dimen/btn_main_padding_ver"
-            android:paddingBottom="@dimen/btn_main_padding_ver"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:backgroundTint="@color/colorMainActivityButtonSettings"
+        android:paddingTop="@dimen/btn_main_padding_ver"
+        android:paddingBottom="@dimen/btn_main_padding_ver"
 
-            android:text="@string/btn_setGoal"
+        android:text="@string/btn_settings"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_setGoal" />
 
-            />
-
-        <Button
-            android:id="@+id/btn_settings"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-
-            android:backgroundTint="@color/colorMainActivityButtonSettings"
-            android:paddingTop="@dimen/btn_main_padding_ver"
-            android:paddingBottom="@dimen/btn_main_padding_ver"
-            android:text="@string/btn_settings"
-
-            />
-
-    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
