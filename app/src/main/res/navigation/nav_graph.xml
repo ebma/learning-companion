@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/setGoalActivityFragment">
+
+    <fragment
+        android:id="@+id/setGoalActivityFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.SetGoalActivityFragment"
+        android:label="fragment_set_goal"
+        tools:layout="@layout/fragment_set_goal" >
+        <action
+            android:id="@+id/action_setGoalActivityFragment_to_goalNoHelpInfoFragment"
+            app:destination="@id/goalWithHelpInfoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalWithHelpInfoFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpInfoFragment"
+        android:label="fragment_goal_with_help_info"
+        tools:layout="@layout/fragment_goal_with_help_info">
+        <action
+            android:id="@+id/action_goalNoHelpInfoFragment_to_goalNoHelpStepActionFragment"
+            app:destination="@id/goalWithHelpStepActionFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalWithHelpStepActionFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpStepActionFragment"
+        android:label="fragment_goal_with_help_step_action"
+        tools:layout="@layout/fragment_goal_with_help_step_action">
+        <action
+            android:id="@+id/action_goalNoHelpStepActionFragment_to_goalNoHelpStepFieldFragment"
+            app:destination="@id/goalWithHelpStepFieldFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalWithHelpStepFieldFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpStepFieldFragment"
+        android:label="fragment_goal_with_help_step_field"
+        tools:layout="@layout/fragment_goal_with_help_step_field" />
+</navigation>
