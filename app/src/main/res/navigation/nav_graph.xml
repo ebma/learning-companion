@@ -20,8 +20,12 @@
         android:label="fragment_goal_with_help_info"
         tools:layout="@layout/fragment_goal_with_help_info">
         <action
-            android:id="@+id/action_goalNoHelpInfoFragment_to_goalNoHelpStepActionFragment"
-            app:destination="@id/goalWithHelpStepActionFragment" />
+            android:id="@+id/action_goalWithHelpInfoFragment_to_goalWithHelpStepActionFragment"
+            app:destination="@id/goalWithHelpStepActionFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepActionFragment"
@@ -29,8 +33,12 @@
         android:label="fragment_goal_with_help_step_action"
         tools:layout="@layout/fragment_goal_with_help_step_action">
         <action
-            android:id="@+id/action_goalNoHelpStepActionFragment_to_goalNoHelpStepFieldFragment"
-            app:destination="@id/goalWithHelpStepFieldFragment" />
+            android:id="@+id/action_goalWithHelpStepActionFragment_to_goalWithHelpStepFieldFragment"
+            app:destination="@id/goalWithHelpStepFieldFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepFieldFragment"
