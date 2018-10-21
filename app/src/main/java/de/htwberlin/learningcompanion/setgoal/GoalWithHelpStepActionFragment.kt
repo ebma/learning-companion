@@ -15,7 +15,6 @@ class GoalWithHelpStepActionFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        addDoneButtonClickListener()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -27,7 +26,7 @@ class GoalWithHelpStepActionFragment : Fragment() {
 
     private fun addDoneButtonClickListener(){
         val doneButton = rootView.findViewById<Button>(R.id.btn_done)
-        doneButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.goalWithHelpStepFieldFragment, null))
+        doneButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goalWithHelpStepActionFragment_to_goalWithHelpStepFieldFragment, null))
     }
 
 }

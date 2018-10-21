@@ -17,7 +17,7 @@ class GoalWithHelpInfoFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_goal_with_help_info, container, false)
 
         val constraintLayout = view.findViewById<ConstraintLayout>(R.id.cl_goal_with_help_info)
-        constraintLayout.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.goalWithHelpStepActionFragment, null))
+        constraintLayout.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goalWithHelpInfoFragment_to_goalWithHelpStepActionFragment, null))
         return view
     }
 
