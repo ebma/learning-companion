@@ -11,14 +11,19 @@ import de.htwberlin.learningcompanion.R
 
 class GoalWithHelpInfoFragment : Fragment() {
 
+    private lateinit var rootView: View
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
 
-        val view = inflater.inflate(R.layout.fragment_goal_with_help_info, container, false)
+        rootView = inflater.inflate(R.layout.fragment_goal_with_help_info, container, false)
+        addLayoutClickListener()
+        return rootView
+    }
 
-        val constraintLayout = view.findViewById<ConstraintLayout>(R.id.cl_goal_with_help_info)
+    private fun addLayoutClickListener(){
+        val constraintLayout = rootView.findViewById<ConstraintLayout>(R.id.cl_goal_with_help_info)
         constraintLayout.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goalWithHelpInfoFragment_to_goalWithHelpStepActionFragment, null))
-        return view
     }
 
 }
