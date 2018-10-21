@@ -73,5 +73,18 @@
         android:id="@+id/goalNoHelpInfoFragment"
         android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpInfoFragment"
         android:label="fragment_goal_no_help_info"
-        tools:layout="@layout/fragment_goal_no_help_info" />
+        tools:layout="@layout/fragment_goal_no_help_info" >
+        <action
+            android:id="@+id/action_goalNoHelpInfoFragment_to_goalNoHelpUserInputFragment"
+            app:destination="@id/goalNoHelpUserInputFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/goalNoHelpUserInputFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpUserInputFragment"
+        android:label="fragment_goal_no_help_user_input"
+        tools:layout="@layout/fragment_goal_no_help_user_input" />
 </navigation>
