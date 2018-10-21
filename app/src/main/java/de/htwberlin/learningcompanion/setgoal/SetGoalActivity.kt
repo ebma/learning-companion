@@ -18,7 +18,7 @@ class SetGoalActivity : FragmentActivity() {
 
 
         navController = Navigation.findNavController(this, R.id.navhost_set_goal)
-        navController.navigate(R.id.action_setGoalActivityFragment_to_goalNoHelpInfoFragment)
+        navController.navigate(R.id.action_setGoalActivityFragment_to_goalDecidePathFragment)
     }
 
 }

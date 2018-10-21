@@ -9,10 +9,14 @@
         android:id="@+id/setGoalActivityFragment"
         android:name="de.htwberlin.learningcompanion.setgoal.SetGoalActivityFragment"
         android:label="fragment_set_goal"
-        tools:layout="@layout/fragment_set_goal" >
+        tools:layout="@layout/fragment_set_goal">
         <action
-            android:id="@+id/action_setGoalActivityFragment_to_goalNoHelpInfoFragment"
-            app:destination="@id/goalWithHelpInfoFragment" />
+            android:id="@+id/action_setGoalActivityFragment_to_goalDecidePathFragment"
+            app:destination="@id/goalDecidePathFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpInfoFragment"
@@ -45,4 +49,29 @@
         android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepFieldFragment"
         android:label="fragment_goal_with_help_step_field"
         tools:layout="@layout/fragment_goal_with_help_step_field" />
+    <fragment
+        android:id="@+id/goalDecidePathFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalDecidePathFragment"
+        android:label="fragment_goal_decide_path"
+        tools:layout="@layout/fragment_goal_decide_path">
+        <action
+            android:id="@+id/action_goalDecidePathFragment_to_goalWithHelpInfoFragment"
+            app:destination="@id/goalWithHelpInfoFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_goalDecidePathFragment_to_goalNoHelpInfoFragment"
+            app:destination="@id/goalNoHelpInfoFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right"/>
+    </fragment>
+    <fragment
+        android:id="@+id/goalNoHelpInfoFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpInfoFragment"
+        android:label="fragment_goal_no_help_info"
+        tools:layout="@layout/fragment_goal_no_help_info" />
 </navigation>

@@ -14,6 +14,9 @@
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
 
+    <color name="lightgreen">#64dd17</color>
+    <color name="lightred">#d32f2f</color>
+
     <color name="textcolor_black">#000000</color>
     <color name="textcolor_white">#FFFFFF</color>
 
