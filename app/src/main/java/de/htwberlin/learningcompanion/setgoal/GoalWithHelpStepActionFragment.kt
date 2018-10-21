@@ -9,20 +9,25 @@ import android.widget.Button
 import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.R
 
-class GoalNoHelpStepActionFragment : Fragment() {
+class GoalWithHelpStepActionFragment : Fragment() {
+
+    private lateinit var rootView : View
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        addDoneButtonClickListener()
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        rootView = inflater.inflate(R.layout.fragment_goal_with_help_step_action, container, false)
 
-        val view = inflater.inflate(R.layout.fragment_goal_with_help_step_action, container, false)
+        addDoneButtonClickListener()
+        return rootView
+    }
 
-        val doneButton = view.findViewById<Button>(R.id.btn_done)
+    private fun addDoneButtonClickListener(){
+        val doneButton = rootView.findViewById<Button>(R.id.btn_done)
         doneButton.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.goalWithHelpStepFieldFragment, null))
-        return view
     }
 
 }

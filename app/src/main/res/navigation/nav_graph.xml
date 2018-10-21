@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepActionFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpStepActionFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepActionFragment"
         android:label="fragment_goal_with_help_step_action"
         tools:layout="@layout/fragment_goal_with_help_step_action">
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepFieldFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpStepFieldFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepFieldFragment"
         android:label="fragment_goal_with_help_step_field"
         tools:layout="@layout/fragment_goal_with_help_step_field" />
 </navigation>
