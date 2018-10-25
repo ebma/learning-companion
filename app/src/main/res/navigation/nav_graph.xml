@@ -86,5 +86,34 @@
         android:id="@+id/goalNoHelpUserInputFragment"
         android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpUserInputFragment"
         android:label="fragment_goal_no_help_user_input"
-        tools:layout="@layout/fragment_goal_no_help_user_input" />
+        tools:layout="@layout/fragment_goal_no_help_user_input">
+        <action
+            android:id="@+id/action_goalNoHelpUserInputFragment_to_goalSummaryFragment"
+            app:destination="@id/goalSummaryFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalSummaryFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalSummaryFragment"
+        android:label="fragment_goal_summary"
+        tools:layout="@layout/fragment_goal_summary">
+        <argument
+            android:name="action"
+            app:argType="string" />
+        <argument
+            android:name="field"
+            app:argType="string" />
+        <argument
+            android:name="medium"
+            app:argType="string" />
+        <argument
+            android:name="amount"
+            app:argType="string" />
+        <argument
+            android:name="timestamp"
+            app:argType="string" />
+    </fragment>
 </navigation>

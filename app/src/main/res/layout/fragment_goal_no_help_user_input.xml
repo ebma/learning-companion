@@ -11,6 +11,7 @@
         android:id="@+id/tv_title"
         android:layout_width="336dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
         android:text="What is your goal?"
         android:textAlignment="center"
         android:textColor="@color/textcolor_black"
@@ -18,7 +19,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="8dp" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/textInputLayout"
@@ -31,6 +32,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_action"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="[action]"
@@ -48,6 +50,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_discipline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="[discipline]" />
@@ -64,6 +67,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout2">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="[medium]" />
@@ -80,6 +84,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayout3">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="[amount]" />
