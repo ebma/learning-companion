@@ -48,7 +48,11 @@
         android:id="@+id/goalWithHelpStepFieldFragment"
         android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepFieldFragment"
         android:label="fragment_goal_with_help_step_field"
-        tools:layout="@layout/fragment_goal_with_help_step_field" />
+        tools:layout="@layout/fragment_goal_with_help_step_field" >
+        <action
+            android:id="@+id/action_goalWithHelpStepFieldFragment_to_goalWithHelpStepObjectFragment"
+            app:destination="@id/goalWithHelpStepObjectFragment" />
+    </fragment>
     <fragment
         android:id="@+id/goalDecidePathFragment"
         android:name="de.htwberlin.learningcompanion.setgoal.GoalDecidePathFragment"
@@ -86,6 +90,27 @@
         android:id="@+id/goalNoHelpUserInputFragment"
         android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpUserInputFragment"
         android:label="fragment_goal_no_help_user_input"
+        tools:layout="@layout/fragment_goal_no_help_user_input" />
+    <fragment
+        android:id="@+id/goalWithHelpStepObjectFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepObjectFragment"
+        android:label="fragment_goal_with_help_step_object">
+        <action
+            android:id="@+id/action_goalWithHelpStepObjectFragment_to_goalWithHelpStepAmountFragment"
+            app:destination="@id/goalWithHelpStepAmountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalWithHelpStepAmountFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepAmountFragment"
+        android:label="fragment_goal_with_help_step_amount">
+        <action
+            android:id="@+id/action_goalWithHelpStepAmountFragment_to_goalWithHelpStepDurationFragment"
+            app:destination="@id/goalWithHelpStepDurationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalWithHelpStepDurationFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepDurationFragment"
+        android:label="fragment_goal_with_help_step_duration" />
         tools:layout="@layout/fragment_goal_no_help_user_input">
         <action
             android:id="@+id/action_goalNoHelpUserInputFragment_to_goalSummaryFragment"

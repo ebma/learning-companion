@@ -10,7 +10,7 @@ import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.R
 
 
-class GoalWithHelpStepFieldFragment : Fragment() {
+class GoalWithHelpStepDurationFragment : Fragment() {
 
     private lateinit var rootView : View
 
@@ -28,7 +28,7 @@ class GoalWithHelpStepFieldFragment : Fragment() {
     private fun addDoneButtonClickListener(){
         val doneButton = rootView.findViewById<Button>(R.id.btn_done)
         doneButton.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.action_goalWithHelpStepFieldFragment_to_goalWithHelpStepObjectFragment, null))
+                R.id.action_goalWithHelpStepActionFragment_to_goalWithHelpStepFieldFragment, null))
     }
 
 }
