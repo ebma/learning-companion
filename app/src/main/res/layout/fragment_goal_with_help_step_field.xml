@@ -38,7 +38,7 @@
         android:layout_marginTop="104dp"
         android:layout_marginBottom="8dp"
         android:text="* math \n* history \n* programming/CS \n* economics"
-        app:layout_constraintBottom_toTopOf="@+id/et_action"
+        app:layout_constraintBottom_toTopOf="@+id/et_field"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.619"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,7 +46,7 @@
         app:layout_constraintVertical_bias="0.202" />
 
     <EditText
-        android:id="@+id/et_action"
+        android:id="@+id/et_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="260dp"
@@ -64,7 +64,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/white"
         android:text="Done"
         app:layout_constraintBottom_toBottomOf="parent"
