@@ -42,7 +42,7 @@ class GoalWithHelpStepAmountFragment : Fragment() {
         bundle.putString("action", action)
         bundle.putString("field", field)
         bundle.putString("medium", medium)
-        bundle.putString("medium", amountEditText.text.toString())
+        bundle.putString("amount", amountEditText.text.toString())
 
         Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepAmountFragment_to_goalWithHelpStepDurationFragment, bundle)
     }

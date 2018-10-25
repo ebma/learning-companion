@@ -35,7 +35,7 @@ class GoalWithHelpStepObjectFragment : Fragment() {
         val action = arguments?.getString("action")
         val field = arguments?.getString("field")
 
-        val mediumEditText = rootView.findViewById<EditText>(R.id.et_medium)
+        val mediumEditText = rootView.findViewById<EditText>(R.id.et_object)
 
         val bundle = Bundle()
         bundle.putString("action", action)

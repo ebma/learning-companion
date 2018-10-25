@@ -37,7 +37,7 @@ class GoalWithHelpStepFieldFragment : Fragment() {
 
         val bundle = Bundle()
         bundle.putString("action", action)
-        bundle.putString("discipline", fieldEditText.text.toString())
+        bundle.putString("field", fieldEditText.text.toString())
 
         Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepFieldFragment_to_goalWithHelpStepObjectFragment, bundle)
     }

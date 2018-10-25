@@ -37,7 +37,7 @@ class GoalSummaryFragment : Fragment() {
     private fun initVariablesFromArguments() {
         amount = arguments?.getString("amount")
         action = arguments?.getString("action")
-        discipline = arguments?.getString("discipline")
+        discipline = arguments?.getString("field")
         medium = arguments?.getString("medium")
         timestamp = arguments?.getString("timestamp")
     }

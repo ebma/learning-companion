@@ -80,7 +80,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
 
     private fun navigateToSummaryFragmentWithValues() {
         val actionEditText = rootView.findViewById<TextInputEditText>(R.id.et_action)
-        val fieldEditText = rootView.findViewById<TextInputEditText>(R.id.et_discipline)
+        val fieldEditText = rootView.findViewById<TextInputEditText>(R.id.et_field)
         val amountEditText = rootView.findViewById<TextInputEditText>(R.id.et_amount)
         val mediumEditText = rootView.findViewById<TextInputEditText>(R.id.et_medium)
 

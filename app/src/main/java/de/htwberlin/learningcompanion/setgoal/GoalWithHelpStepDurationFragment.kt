@@ -37,14 +37,18 @@ class GoalWithHelpStepDurationFragment : Fragment() {
         val medium = arguments?.getString("medium")
         val amount = arguments?.getString("amount")
 
-        val durationEditText = rootView.findViewById<EditText>(R.id.et_duration)
+        val durationForEditText = rootView.findViewById<EditText>(R.id.et_duration_for)
+        val durationUntilEditText = rootView.findViewById<EditText>(R.id.et_duration_until)
 
         val bundle = Bundle()
         bundle.putString("action", action)
         bundle.putString("field", field)
         bundle.putString("medium", medium)
         bundle.putString("amount", amount)
-        bundle.putString("timestamp", durationEditText.text.toString())
+        if (durationForEditText.text.toString().length > 0)
+            bundle.putString("timestamp", durationForEditText.text.toString())
+        else
+            bundle.putString("timestamp", durationUntilEditText.text.toString())
 
         Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepDurationFragment_to_goalSummaryFragment, bundle)
     }
