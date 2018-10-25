@@ -10,7 +10,7 @@ import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.R
 
 
-class GoalWithHelpStepFieldFragment : Fragment() {
+class GoalWithHelpStepAmountFragment : Fragment() {
 
     private lateinit var rootView : View
 

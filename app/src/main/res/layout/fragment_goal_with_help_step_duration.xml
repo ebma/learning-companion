@@ -11,7 +11,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="@string/goal_with_help_object_info1"
+        android:text="@string/goal_with_help_duration_info1"
         android:textSize="20sp"
         android:textColor="@color/textcolor_black"
         app:layout_constraintEnd_toEndOf="parent"
@@ -27,9 +27,10 @@
         android:text="For example:"
         app:layout_constraintBottom_toTopOf="@+id/et_action"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
+        app:layout_constraintHorizontal_bias="0.24"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1"
+        app:layout_constraintVertical_bias="0.626" />
 
     <TextView
         android:layout_width="wrap_content"
@@ -42,20 +43,19 @@
         app:layout_constraintHorizontal_bias="0.568"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1"
-        app:layout_constraintVertical_bias="0.503" />
+        app:layout_constraintVertical_bias="0.671" />
 
     <EditText
         android:id="@+id/et_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="228dp"
         android:ems="10"
         android:hint="[object]"
         android:inputType="text|textAutoCorrect"
         android:singleLine="true"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/tv_goal_with_help_action_info2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1" />
 
@@ -64,23 +64,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
         android:backgroundTint="@color/white"
         android:text="Done"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_action" />
-
-    <TextView
-        android:id="@+id/tv_goal_with_help_action_info2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="...delete..."
-        android:textColor="@color/textcolor_black"
-        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_action"
+        app:layout_constraintVertical_bias="0.18" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
