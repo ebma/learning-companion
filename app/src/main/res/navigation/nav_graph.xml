@@ -94,5 +94,21 @@
     <fragment
         android:id="@+id/goalWithHelpStepObjectFragment"
         android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepObjectFragment"
-        android:label="GoalWithHelpStepObjectFragment" />
+        android:label="fragment_goal_with_help_step_object">
+        <action
+            android:id="@+id/action_goalWithHelpStepObjectFragment_to_goalWithHelpStepAmountFragment"
+            app:destination="@id/goalWithHelpStepAmountFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalWithHelpStepAmountFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepAmountFragment"
+        android:label="fragment_goal_with_help_step_amount">
+        <action
+            android:id="@+id/action_goalWithHelpStepAmountFragment_to_goalWithHelpStepDurationFragment"
+            app:destination="@id/goalWithHelpStepDurationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/goalWithHelpStepDurationFragment"
+        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepDurationFragment"
+        android:label="fragment_goal_with_help_step_duration" />
 </navigation>

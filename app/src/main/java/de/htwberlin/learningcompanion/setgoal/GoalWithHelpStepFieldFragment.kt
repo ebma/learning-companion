@@ -28,7 +28,7 @@ class GoalWithHelpStepFieldFragment : Fragment() {
     private fun addDoneButtonClickListener(){
         val doneButton = rootView.findViewById<Button>(R.id.btn_done)
         doneButton.setOnClickListener(Navigation.createNavigateOnClickListener(
-                R.id.action_goalWithHelpStepActionFragment_to_goalWithHelpStepFieldFragment, null))
+                R.id.action_goalWithHelpStepFieldFragment_to_goalWithHelpStepObjectFragment, null))
     }
 
 }
