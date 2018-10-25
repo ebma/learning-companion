@@ -80,13 +80,13 @@ class GoalNoHelpUserInputFragment : Fragment() {
 
     private fun navigateToSummaryFragmentWithValues() {
         val actionEditText = rootView.findViewById<TextInputEditText>(R.id.et_action)
-        val disciplineEditText = rootView.findViewById<TextInputEditText>(R.id.et_discipline)
+        val fieldEditText = rootView.findViewById<TextInputEditText>(R.id.et_discipline)
         val amountEditText = rootView.findViewById<TextInputEditText>(R.id.et_amount)
         val mediumEditText = rootView.findViewById<TextInputEditText>(R.id.et_medium)
 
         val bundle = Bundle()
         bundle.putString("action", actionEditText.text.toString())
-        bundle.putString("discipline", disciplineEditText.text.toString())
+        bundle.putString("field", fieldEditText.text.toString())
         bundle.putString("medium", mediumEditText.text.toString())
         bundle.putString("amount", amountEditText.text.toString())
         if (untilRadioButton.isSelected)

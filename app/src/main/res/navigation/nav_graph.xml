@@ -56,6 +56,9 @@
             app:exitAnim="@anim/slide_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
+        <argument
+            android:name="action"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/goalDecidePathFragment"
@@ -114,6 +117,12 @@
             app:exitAnim="@anim/slide_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
+        <argument
+            android:name="action"
+            app:argType="string" />
+        <argument
+            android:name="field"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepAmountFragment"
@@ -126,6 +135,15 @@
             app:exitAnim="@anim/slide_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
+        <argument
+            android:name="action"
+            app:argType="string" />
+        <argument
+            android:name="field"
+            app:argType="string" />
+        <argument
+            android:name="medium"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepDurationFragment"
@@ -138,6 +156,18 @@
             app:exitAnim="@anim/slide_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
+        <argument
+            android:name="action"
+            app:argType="string" />
+        <argument
+            android:name="medium"
+            app:argType="string" />
+        <argument
+            android:name="field"
+            app:argType="string" />
+        <argument
+            android:name="amount"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/goalSummaryFragment"
