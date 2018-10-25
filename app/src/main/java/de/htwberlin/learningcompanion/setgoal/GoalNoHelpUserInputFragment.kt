@@ -89,7 +89,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
         bundle.putString("discipline", disciplineEditText.text.toString())
         bundle.putString("medium", mediumEditText.text.toString())
         bundle.putString("amount", amountEditText.text.toString())
-        if (untilRadioButton.isEnabled)
+        if (untilRadioButton.isSelected)
             bundle.putString("timestamp", untilAmountEditText.text.toString())
         else
             bundle.putString("timestamp", forAmountEditText.text.toString())
