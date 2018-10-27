@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.textfield.TextInputEditText
@@ -61,17 +62,39 @@ class GoalNoHelpUserInputFragment : Fragment() {
     }
 
     private fun addTimePickerDialogToUntilAmountEditText() {
+        untilAmountEditText.isFocusable = false // this will prevent keyboard from showing
+        untilAmountEditText.clearFocus()
+
         untilAmountEditText.setOnClickListener {
-            val mcurrentTime = Calendar.getInstance()
-            val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
-            val minute = mcurrentTime.get(Calendar.MINUTE)
-            val mTimePicker: TimePickerDialog
-            mTimePicker = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
-                untilAmountEditText.setText(selectedHour.toString() + ":" + selectedMinute)
-            }, hour, minute, true)
-            mTimePicker.setTitle(getString(R.string.select_time))
-            mTimePicker.show()
+            showTimePickerDialogForTextView(it as TextView)
         }
+    }
+
+    private fun showTimePickerDialogForTextView(view: TextView) {
+        val mcurrentTime = Calendar.getInstance()
+        val hour = mcurrentTime.get(Calendar.HOUR_OF_DAY)
+        val minute = mcurrentTime.get(Calendar.MINUTE)
+        val mTimePicker: TimePickerDialog
+        mTimePicker = TimePickerDialog(activity, TimePickerDialog.OnTimeSetListener { timePicker, selectedHour, selectedMinute ->
+            view.text = createTimeStringFromValues(selectedHour, selectedMinute)
+        }, hour, minute, true)
+        mTimePicker.setTitle(getString(R.string.select_time))
+        mTimePicker.show()
+    }
+
+    private fun createTimeStringFromValues(hour: Int, minute: Int): String {
+        var minuteString = minute.toString()
+        var hourString = hour.toString()
+
+        if (minute < 10) {
+            minuteString = "0$minuteString"
+        }
+
+        if (hour < 10) {
+            hourString = "0$hourString"
+        }
+
+        return "$hourString:$minuteString"
     }
 
     private fun addDoneButtonClickListener() {
@@ -89,7 +112,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
         bundle.putString("field", fieldEditText.text.toString())
         bundle.putString("medium", mediumEditText.text.toString())
         bundle.putString("amount", amountEditText.text.toString())
-        if (untilRadioButton.isSelected)
+        if (untilRadioButton.isChecked)
             bundle.putString("timestamp", untilAmountEditText.text.toString())
         else
             bundle.putString("timestamp", forAmountEditText.text.toString())
