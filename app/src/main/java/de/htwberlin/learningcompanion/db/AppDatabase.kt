@@ -12,12 +12,14 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun goalDao(): GoalDAO
 
     companion object {
-        var INSTANCE: AppDatabase? = null
+        private lateinit var INSTANCE: AppDatabase
+        private var instantiated = false
 
-        fun get(context: Context): AppDatabase? {
-            if (INSTANCE == null) {
+        fun get(context: Context): AppDatabase {
+            if (!instantiated) {
                 synchronized(AppDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "database.db").allowMainThreadQueries().build()
+                    instantiated = true
                 }
             }
             return INSTANCE

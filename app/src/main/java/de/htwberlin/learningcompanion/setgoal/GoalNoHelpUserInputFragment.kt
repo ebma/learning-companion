@@ -115,7 +115,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
         if (untilRadioButton.isChecked)
             bundle.putString("timestamp", untilAmountEditText.text.toString())
         else
-            bundle.putString("timestamp", forAmountEditText.text.toString())
+            bundle.putString("duration", forAmountEditText.text.toString())
 
         Navigation.findNavController(rootView).navigate(R.id.action_goalNoHelpUserInputFragment_to_goalSummaryFragment, bundle)
     }

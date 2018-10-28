@@ -45,8 +45,8 @@ class GoalWithHelpStepDurationFragment : Fragment() {
         bundle.putString("field", field)
         bundle.putString("medium", medium)
         bundle.putString("amount", amount)
-        if (durationForEditText.text.toString().length > 0)
-            bundle.putString("timestamp", durationForEditText.text.toString())
+        if (durationForEditText.text.toString().isNotEmpty())
+            bundle.putString("duration", durationForEditText.text.toString())
         else
             bundle.putString("timestamp", durationUntilEditText.text.toString())
 

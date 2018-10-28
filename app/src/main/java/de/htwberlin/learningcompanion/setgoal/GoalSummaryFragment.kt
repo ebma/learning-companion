@@ -5,16 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.db.AppDatabase
+import de.htwberlin.learningcompanion.model.Goal
 
 class GoalSummaryFragment : Fragment() {
 
     private var action: String? = null
     private var amount: String? = null
-    private var discipline: String? = null
+    private var field: String? = null
     private var medium: String? = null
+    private var duration: String? = null
     private var timestamp: String? = null
 
 
@@ -27,6 +32,9 @@ class GoalSummaryFragment : Fragment() {
         initVariablesFromArguments()
         findViews()
         setGoalTextInTextView()
+
+        addYesButtonOnClickListener()
+        addNoButtonClickListener()
         return rootView
     }
 
@@ -37,16 +45,44 @@ class GoalSummaryFragment : Fragment() {
     private fun initVariablesFromArguments() {
         amount = arguments?.getString("amount")
         action = arguments?.getString("action")
-        discipline = arguments?.getString("field")
+        field = arguments?.getString("field")
         medium = arguments?.getString("medium")
+
+        duration = arguments?.getString("duration")
         timestamp = arguments?.getString("timestamp")
     }
 
     private fun setGoalTextInTextView() {
-        val goalText = "${action} ${discipline} ${medium} ${amount} for/until ${timestamp}"
+        val goalText = "${action} ${field} ${medium} ${amount} for/until ${timestamp ?: duration}"
 
         goalTextTextView.text = goalText
     }
 
+    private fun addNoButtonClickListener() {
+        Navigation.findNavController(rootView).navigate(R.id.action_goalSummaryFragment_to_goalDecidePathFragment)
+    }
 
+    private fun addYesButtonOnClickListener() {
+        rootView.findViewById<Button>(R.id.btn_yes).setOnClickListener {
+            val goal = createGoalFromArguments()
+            saveGoalToDatabase(goal)
+        }
+    }
+
+    private fun createGoalFromArguments(): Goal {
+        var goal: Goal
+        goal = try {
+            val durationInMin = duration?.toInt()
+            Goal(action!!, amount!!, field!!, medium!!, durationInMin, null)
+        } catch (e: NumberFormatException) {
+            e.printStackTrace()
+            Goal(action!!, amount!!, field!!, medium!!, null, timestamp!!)
+        }
+
+        return goal
+    }
+
+    private fun saveGoalToDatabase(goal: Goal) {
+        context?.let { AppDatabase.get(it).goalDao().insertGoal(goal) }
+    }
 }
