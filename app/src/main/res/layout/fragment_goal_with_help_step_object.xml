@@ -10,7 +10,7 @@
         android:id="@+id/tv_goal_with_help_action_info1"
         android:layout_width="322dp"
         android:layout_height="49dp"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="@dimen/tv_with_help_info_top_margin"
         android:text="@string/goal_with_help_object_info1"
         android:textColor="@color/textcolor_black"
         android:textSize="20sp"
@@ -23,51 +23,46 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="152dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginStart="@dimen/tv_with_help_for_example_hor_start"
+        android:layout_marginTop="@dimen/tv_with_help_for_example_vert"
         android:text="For example:"
-        app:layout_constraintBottom_toTopOf="@+id/et_action"
-        app:layout_constraintEnd_toStartOf="@+id/textView2"
-        app:layout_constraintHorizontal_bias="0.986"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1"
-        app:layout_constraintVertical_bias="0.676" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tv_with_help_example_list_hor_start"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="* book \n* lecture \n* exercises \n* paper"
         app:layout_constraintBottom_toTopOf="@+id/et_object"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1"
-        app:layout_constraintVertical_bias="0.735" />
+        app:layout_constraintVertical_bias="0.694" />
 
     <EditText
         android:id="@+id/et_object"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="236dp"
+        android:layout_marginBottom="@dimen/et_with_help_input_field"
         android:ems="10"
-        android:hint="[object]"
+        android:hint="[medium]"
         android:inputType="text|textAutoCorrect"
         android:singleLine="true"
         android:textAlignment="center"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1" />
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/btn_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginBottom="50dp"
+        android:layout_marginBottom="@dimen/btn_with_help_hor"
         android:backgroundTint="@color/white"
         android:text="Done"
         app:layout_constraintBottom_toBottomOf="parent"
