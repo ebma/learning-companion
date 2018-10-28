@@ -2,6 +2,7 @@ package de.htwberlin.learningcompanion.setgoal
 
 
 import android.app.TimePickerDialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,7 +14,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.textfield.TextInputEditText
+import com.google.android.material.textfield.TextInputLayout
 import de.htwberlin.learningcompanion.R
+import org.jetbrains.anko.support.v4.runOnUiThread
 import java.util.*
 
 
@@ -26,6 +29,17 @@ class GoalNoHelpUserInputFragment : Fragment() {
     private lateinit var forRadioButton: RadioButton
     private lateinit var untilRadioButton: RadioButton
     private lateinit var doneButton: Button
+
+    private lateinit var actionEditText: TextInputEditText
+    private lateinit var fieldEditText: TextInputEditText
+    private lateinit var amountEditText: TextInputEditText
+    private lateinit var mediumEditText: TextInputEditText
+
+
+    private lateinit var actionInputLayout: TextInputLayout
+    private lateinit var fieldInputLayout: TextInputLayout
+    private lateinit var amountInputLayout: TextInputLayout
+    private lateinit var mediumInputLayout: TextInputLayout
 
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
@@ -47,6 +61,16 @@ class GoalNoHelpUserInputFragment : Fragment() {
         forRadioButton = rootView.findViewById(R.id.rb_for)
 
         doneButton = rootView.findViewById(R.id.btn_done)
+
+        actionEditText = rootView.findViewById(R.id.et_action)
+        fieldEditText = rootView.findViewById(R.id.et_field)
+        amountEditText = rootView.findViewById(R.id.et_amount)
+        mediumEditText = rootView.findViewById(R.id.et_medium)
+
+        actionInputLayout = rootView.findViewById(R.id.til_action)
+        fieldInputLayout = rootView.findViewById(R.id.til_field)
+        amountInputLayout = rootView.findViewById(R.id.til_amount)
+        mediumInputLayout = rootView.findViewById(R.id.til_medium)
     }
 
     private fun addRadioButtonClickListeners() {
@@ -98,26 +122,81 @@ class GoalNoHelpUserInputFragment : Fragment() {
     }
 
     private fun addDoneButtonClickListener() {
-        doneButton.setOnClickListener { navigateToSummaryFragmentWithValues() }
+        doneButton.setOnClickListener {
+            navigateToSummaryFragmentWithValues()
+        }
     }
 
     private fun navigateToSummaryFragmentWithValues() {
-        val actionEditText = rootView.findViewById<TextInputEditText>(R.id.et_action)
-        val fieldEditText = rootView.findViewById<TextInputEditText>(R.id.et_field)
-        val amountEditText = rootView.findViewById<TextInputEditText>(R.id.et_amount)
-        val mediumEditText = rootView.findViewById<TextInputEditText>(R.id.et_medium)
-
         val bundle = Bundle()
-        bundle.putString("action", actionEditText.text.toString())
-        bundle.putString("field", fieldEditText.text.toString())
-        bundle.putString("medium", mediumEditText.text.toString())
-        bundle.putString("amount", amountEditText.text.toString())
-        if (untilRadioButton.isChecked)
-            bundle.putString("timestamp", untilAmountEditText.text.toString())
-        else
-            bundle.putString("duration", forAmountEditText.text.toString())
 
-        Navigation.findNavController(rootView).navigate(R.id.action_goalNoHelpUserInputFragment_to_goalSummaryFragment, bundle)
+        fillBundleWithArguments(bundle)
+
+        if (bundle.size() == 5)
+            Navigation.findNavController(rootView).navigate(R.id.action_goalNoHelpUserInputFragment_to_goalSummaryFragment, bundle)
+    }
+
+    private fun fillBundleWithArguments(bundle: Bundle) {
+        actionEditText.text.toString().let {
+            if (it.isEmpty()) {
+                tintTextInputLayout(actionInputLayout, true)
+            } else {
+                bundle.putString("action", it)
+                tintTextInputLayout(actionInputLayout, false)
+            }
+        }
+
+        fieldEditText.text.toString().let {
+            if (it.isEmpty()) {
+                tintTextInputLayout(fieldInputLayout, true)
+            } else {
+                bundle.putString("field", it)
+                tintTextInputLayout(fieldInputLayout, false)
+            }
+        }
+
+        mediumEditText.text.toString().let {
+            if (it.isEmpty()) {
+                tintTextInputLayout(mediumInputLayout, true)
+            } else {
+                bundle.putString("medium", it)
+                tintTextInputLayout(mediumInputLayout, false)
+            }
+        }
+
+        amountEditText.text.toString().let {
+            if (it.isEmpty()) {
+                tintTextInputLayout(amountInputLayout, true)
+            } else {
+                bundle.putString("amount", it)
+                tintTextInputLayout(amountInputLayout, false)
+            }
+        }
+
+        if (untilRadioButton.isChecked) {
+            untilAmountEditText.text.toString().let {
+                if (it.isEmpty()) {
+                    // TODO something?
+                } else
+                    bundle.putString("timestamp", it)
+            }
+        } else {
+            forAmountEditText.text.toString().let {
+                if (it.isEmpty()) {
+                    // TODO something?
+                } else
+                    bundle.putString("duration", it)
+            }
+        }
+    }
+
+    private fun tintTextInputLayout(layout: TextInputLayout, errorTint: Boolean) {
+        runOnUiThread {
+            if (errorTint)
+                layout.defaultHintTextColor = ColorStateList.valueOf(resources.getColor(android.R.color.holo_red_dark))
+            else
+                layout.defaultHintTextColor = ColorStateList.valueOf(resources.getColor(android.R.color.darker_gray))
+        }
     }
 
 }
