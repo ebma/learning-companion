@@ -1,5 +1,6 @@
 package de.htwberlin.learningcompanion.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import de.htwberlin.learningcompanion.model.Goal
 
@@ -19,4 +20,7 @@ interface GoalDAO {
 
     @Query("SELECT * FROM goal")
     fun getGoals(): List<Goal>
+
+    @Query("SELECT * FROM goal")
+    fun getGoalsAsLiveData(): LiveData<List<Goal>>
 }

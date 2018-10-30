@@ -2,16 +2,18 @@ package de.htwberlin.learningcompanion
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
+import com.google.android.material.snackbar.Snackbar
 import de.htwberlin.learningcompanion.setgoal.SetGoalActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -58,13 +60,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation view item clicks here.
+        // Handle navigation rootView item clicks here.
         when (item.itemId) {
             R.id.nav_setgoal -> {
                 startSetGoalActivity()
             }
             R.id.nav_gallery -> {
-
+                displaySelectedScreen(item.itemId)
             }
             R.id.nav_slideshow -> {
 
@@ -82,6 +84,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun displaySelectedScreen(itemId: Int) {
+
+        //creating fragment object
+        var fragment: Fragment? = null
+
+        //initializing the fragment object which is selected
+        when (itemId) {
+            R.id.nav_gallery -> fragment = GoalOverviewFragment()
+        }
+
+        //replacing the fragment
+        if (fragment != null) {
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.content_main, fragment)
+            ft.commit()
+        }
     }
 
     private fun startSetGoalActivity() {

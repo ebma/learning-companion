@@ -1,16 +1,15 @@
 package de.htwberlin.learningcompanion.setgoal
 
-import androidx.fragment.app.Fragment
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.R
 
 /**
- * A placeholder fragment containing a simple view.
+ * A placeholder fragment containing a simple rootView.
  */
 class SetGoalActivityFragment : Fragment() {
 
