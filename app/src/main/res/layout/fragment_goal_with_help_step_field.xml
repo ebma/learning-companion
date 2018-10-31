@@ -35,25 +35,47 @@
         android:layout_marginTop="104dp"
         android:layout_marginBottom="8dp"
         android:text="* math \n* history \n* programming/CS \n* economics"
-        app:layout_constraintBottom_toTopOf="@+id/et_field"
+        app:layout_constraintBottom_toTopOf="@+id/til_field"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.623" />
 
-    <EditText
-        android:id="@+id/et_field"
+    <!--<EditText-->
+        <!--android:id="@+id/et_field"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="@dimen/et_with_help_input_field"-->
+        <!--android:ems="10"-->
+        <!--android:hint="[discipline]"-->
+        <!--android:inputType="text|textAutoCorrect"-->
+        <!--android:singleLine="true"-->
+        <!--android:textAlignment="center"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.503"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_field"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/et_with_help_input_field"
-        android:ems="10"
-        android:hint="[discipline]"
-        android:inputType="text|textAutoCorrect"
-        android:singleLine="true"
-        android:textAlignment="center"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="[discipline]"
+            android:inputType="text|textAutoCorrect"
+            android:singleLine="true"
+            android:textAlignment="center" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_done"

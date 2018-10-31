@@ -1,6 +1,7 @@
 package de.htwberlin.learningcompanion.setgoal
 
 import android.app.TimePickerDialog
+import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,7 +12,9 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.google.android.material.textfield.TextInputLayout
 import de.htwberlin.learningcompanion.R
+import org.jetbrains.anko.support.v4.runOnUiThread
 import java.util.*
 
 
@@ -100,30 +103,71 @@ class GoalWithHelpStepDurationFragment : Fragment() {
     }
 
     private fun navigateToSummaryFragmentWithValues() {
-        val action = arguments?.getString("action")
-        val field = arguments?.getString("field")
-        val medium = arguments?.getString("medium")
-        val amount = arguments?.getString("amount")
+//        val action = arguments?.getString("action")
+//        val field = arguments?.getString("field")
+//        val medium = arguments?.getString("medium")
+//        val amount = arguments?.getString("amount")
 
-        val durationForEditText = rootView.findViewById<EditText>(R.id.et_duration_for)
-        val durationUntilEditText = rootView.findViewById<EditText>(R.id.et_duration_until)
+//        val durationForEditText = rootView.findViewById<EditText>(R.id.et_duration_for)
+//        val durationUntilEditText = rootView.findViewById<EditText>(R.id.et_duration_until)
 
         val bundle = Bundle()
-        bundle.putString("action", action)
-        bundle.putString("field", field)
-        bundle.putString("medium", medium)
-        bundle.putString("amount", amount)
+        fillBundleWithArguments(bundle)
+//        bundle.putString("action", action)
+//        bundle.putString("field", field)
+//        bundle.putString("medium", medium)
+//        bundle.putString("amount", amount)
         /*if (durationForEditText.text.toString().length > 0)
             bundle.putString("timestamp", durationForEditText.text.toString())
         else
             bundle.putString("timestamp", durationUntilEditText.text.toString()) */
 
-        if (untilRadioButton.isChecked)
-            bundle.putString("timestamp", untilAmountEditText.text.toString())
-        else
-            bundle.putString("timestamp", forAmountEditText.text.toString())
+//        if (untilRadioButton.isChecked)
+//            bundle.putString("timestamp", untilAmountEditText.text.toString())
+//        else
+//            bundle.putString("timestamp", forAmountEditText.text.toString())
 
-        Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepDurationFragment_to_goalSummaryFragment, bundle)
+        if(bundle.size() == 5)
+            Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepDurationFragment_to_goalSummaryFragment, bundle)
     }
+
+    private fun fillBundleWithArguments(bundle: Bundle) {
+        val action = arguments?.getString("action")
+        val field = arguments?.getString("field")
+        val medium = arguments?.getString("medium")
+        val amount = arguments?.getString("amount")
+
+//        val fieldEditText = rootView.findViewById<EditText>(R.id.et_field)
+
+        bundle.putString("action", action)
+        bundle.putString("field", field)
+        bundle.putString("medium", medium)
+        bundle.putString("amount", amount)
+
+        if (untilRadioButton.isChecked) {
+            untilAmountEditText.text.toString().let {
+                if (it.isEmpty()) {
+                    // TODO something?
+                } else
+                    bundle.putString("timestamp", it)
+            }
+        } else {
+            forAmountEditText.text.toString().let {
+                if (it.isEmpty()) {
+                    // TODO something?
+                } else
+                    bundle.putString("duration", it)
+            }
+        }
+    }
+
+//    private fun tintTextInputLayout(layout: TextInputLayout, errorTint: Boolean) {
+//        runOnUiThread {
+//            if (errorTint)
+//                layout.defaultHintTextColor = ColorStateList.valueOf(resources.getColor(android.R.color.holo_red_dark))
+//            else
+//                layout.defaultHintTextColor = ColorStateList.valueOf(resources.getColor(android.R.color.darker_gray))
+//        }
+//    }
 
 }

@@ -35,25 +35,47 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="* 5 pages \n* page 294 - page 350 \n* 3 chapters \n* 7 exercises"
-        app:layout_constraintBottom_toTopOf="@+id/et_amount"
+        app:layout_constraintBottom_toTopOf="@+id/til_amount"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1"
         app:layout_constraintVertical_bias="0.761" />
 
-    <EditText
-        android:id="@+id/et_amount"
+    <!--<EditText-->
+        <!--android:id="@+id/et_amount"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginBottom="@dimen/et_with_help_input_field"-->
+        <!--android:ems="10"-->
+        <!--android:hint="[amount]"-->
+        <!--android:inputType="text|textAutoCorrect"-->
+        <!--android:singleLine="true"-->
+        <!--android:textAlignment="center"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintHorizontal_bias="0.503"-->
+        <!--app:layout_constraintStart_toStartOf="parent" />-->
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/til_amount"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/et_with_help_input_field"
-        android:ems="10"
-        android:hint="[amount]"
-        android:inputType="text|textAutoCorrect"
-        android:singleLine="true"
-        android:textAlignment="center"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_amount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="[amount]"
+            android:inputType="text|textAutoCorrect"
+            android:singleLine="true"
+            android:textAlignment="center" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_done"
@@ -67,7 +89,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_amount"
+        app:layout_constraintTop_toBottomOf="@+id/til_amount"
         app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
