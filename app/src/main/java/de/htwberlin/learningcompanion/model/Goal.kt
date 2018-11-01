@@ -3,7 +3,7 @@ package de.htwberlin.learningcompanion.model
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "goal")
+@Entity(tableName = "goals")
 data class Goal(
         val action: String,
         val amount: String,

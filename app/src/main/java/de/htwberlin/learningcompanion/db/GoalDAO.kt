@@ -15,10 +15,10 @@ interface GoalDAO {
     @Delete
     fun deleteGoal(goal: Goal)
 
-    @Query("SELECT * FROM goal WHERE id == :id")
+    @Query("SELECT * FROM goals WHERE id == :id")
     fun getGoalByID(id: Int): List<Goal>
 
-    @Query("SELECT * FROM goal")
+    @Query("SELECT * FROM goals")
     fun getGoals(): List<Goal>
 
     @Query("SELECT * FROM goal")

@@ -9,11 +9,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
-import com.google.android.material.snackbar.Snackbar
+import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
+import de.htwberlin.learningcompanion.myplace.MyPlaceFragment
 import de.htwberlin.learningcompanion.setgoal.SetGoalActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
-
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -22,17 +22,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
-
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
         drawer_layout.addDrawerListener(toggle)
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        displaySelectedScreen(R.id.nav_mainscreen)
     }
 
     override fun onBackPressed() {
@@ -60,24 +57,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
-        // Handle navigation rootView item clicks here.
+        // Handle navigation view item clicks here.
         when (item.itemId) {
             R.id.nav_setgoal -> {
                 startSetGoalActivity()
             }
-            R.id.nav_gallery -> {
-                displaySelectedScreen(item.itemId)
+            R.id.nav_myplace -> {
+                displaySelectedScreen(R.id.nav_myplace)
             }
-            R.id.nav_slideshow -> {
+            R.id.nav_mainscreen -> {
+                displaySelectedScreen(R.id.nav_mainscreen)
 
             }
-            R.id.nav_manage -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
+            R.id.nav_recommendation -> {
 
             }
         }
@@ -93,7 +85,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //initializing the fragment object which is selected
         when (itemId) {
-            R.id.nav_gallery -> fragment = GoalOverviewFragment()
+            R.id.nav_mainscreen -> fragment = MainScreenFragment()
+            R.id.nav_myplace -> fragment = MyPlaceFragment()
         }
 
         //replacing the fragment

@@ -21,64 +21,75 @@
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="@dimen/tv_with_help_for_example_hor_start"
+        android:layout_marginTop="@dimen/tv_with_help_for_example_vert"
         android:text="For example:"
-        app:layout_constraintBottom_toTopOf="@+id/et_action"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.241"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/tv_with_help_example_list_hor_start"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:text="* read \n* write \n* play"
-        app:layout_constraintBottom_toTopOf="@+id/et_action"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/til_action"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1"
+        app:layout_constraintVertical_bias="0.7" />
 
-    <EditText
+    <!--<EditText
         android:id="@+id/et_action"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/et_with_help_input_field"
         android:ems="10"
         android:hint="[action]"
         android:inputType="text|textAutoCorrect"
         android:singleLine="true"
         android:textAlignment="center"
-        app:layout_constraintBottom_toTopOf="@+id/tv_goal_with_help_action_info2"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1" />
+        app:layout_constraintHorizontal_bias="0.503"
+        app:layout_constraintStart_toStartOf="parent" />-->
+
+    <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/til_action"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/et_with_help_input_field"
+
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/et_action"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="[action]"
+                android:inputType="text|textAutoCorrect"
+                android:singleLine="true"
+                android:textAlignment="center" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Done"
+        android:layout_marginBottom="@dimen/btn_main_padding_ver"
         android:backgroundTint="@color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_action" />
-
-    <TextView
-        android:id="@+id/tv_goal_with_help_action_info2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="32dp"
-        android:text="@string/goal_with_help_action_info2"
-        android:textColor="@color/textcolor_black"
-        android:textSize="20sp"
+        android:text="Next"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/til_action"
+        app:layout_constraintVertical_bias="0.976" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
