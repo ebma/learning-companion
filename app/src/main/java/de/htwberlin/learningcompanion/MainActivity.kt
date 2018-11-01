@@ -2,13 +2,13 @@ package de.htwberlin.learningcompanion
 
 import android.content.Intent
 import android.os.Bundle
-import com.google.android.material.snackbar.Snackbar
-import com.google.android.material.navigation.NavigationView
-import androidx.core.view.GravityCompat
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.GravityCompat
+import androidx.fragment.app.Fragment
+import com.google.android.material.navigation.NavigationView
 import de.htwberlin.learningcompanion.setgoal.SetGoalActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -19,11 +19,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
-
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
 
         val toggle = ActionBarDrawerToggle(
                 this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
@@ -63,13 +58,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_setgoal -> {
                 startSetGoalActivity()
             }
-            R.id.nav_gallery -> {
+            R.id.nav_overview -> {
 
             }
-            R.id.nav_slideshow -> {
-
+            R.id.nav_alert -> {
+                displaySelectedScreen(R.id.nav_alert)
             }
-            R.id.nav_manage -> {
+            R.id.nav_recommendation -> {
 
             }
             R.id.nav_share -> {
@@ -82,6 +77,24 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         drawer_layout.closeDrawer(GravityCompat.START)
         return true
+    }
+
+    private fun displaySelectedScreen(itemId: Int) {
+
+        //creating fragment object
+        var fragment: Fragment? = null
+
+        //initializing the fragment object which is selected
+        when (itemId) {
+            R.id.nav_alert -> fragment = MyPlaceFragment()
+        }
+
+        //replacing the fragment
+        if (fragment != null) {
+            val ft = supportFragmentManager.beginTransaction()
+            ft.replace(R.id.content_main, fragment)
+            ft.commit()
+        }
     }
 
     private fun startSetGoalActivity() {
