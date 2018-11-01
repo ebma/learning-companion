@@ -26,7 +26,7 @@
             android:title="Recommendation" />
     </group>
 
-    <item android:title="">
+    <group>
         <menu>
             <item
                 android:id="@+id/nav_setting"
@@ -38,6 +38,6 @@
                 android:icon="@drawable/ic_info"
                 android:title="Help" />
         </menu>
-    </item>
+    </group>
 
 </menu>
