@@ -35,7 +35,7 @@ dependencies {
     implementation "androidx.room:room-runtime:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
-    def anko_version='0.10.7'
+    def anko_version = '0.10.7'
     implementation "org.jetbrains.anko:anko:$anko_version"
 
     testImplementation 'junit:junit:4.12'
