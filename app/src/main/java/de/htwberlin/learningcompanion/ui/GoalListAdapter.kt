@@ -8,8 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Goal
 
-class GoalListAdapter(private val goalDataSet: ArrayList<Goal>) :
-        RecyclerView.Adapter<GoalListAdapter.MyViewHolder>() {
+class GoalListAdapter(private val goalDataSet: ArrayList<Goal>) : RecyclerView.Adapter<GoalListAdapter.MyViewHolder>() {
 
     // Provide a reference to the views for each data item
     // Complex data items may need more than one rootView per item, and
@@ -34,4 +33,5 @@ class GoalListAdapter(private val goalDataSet: ArrayList<Goal>) :
     }
 
     override fun getItemCount() = goalDataSet.size
+
 }

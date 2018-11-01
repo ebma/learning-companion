@@ -16,7 +16,7 @@ import de.htwberlin.learningcompanion.ui.GoalListAdapter
 class GoalOverviewFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var viewAdapter: RecyclerView.Adapter<*>
+    private lateinit var viewAdapter: GoalListAdapter
     private lateinit var viewManager: RecyclerView.LayoutManager
 
     private lateinit var viewModel: GoalOverviewViewModel
@@ -36,6 +36,7 @@ class GoalOverviewFragment : Fragment() {
         viewModel = ViewModelProviders.of(this).get(GoalOverviewViewModel::class.java)
         viewModel.getGoals().observe(this, Observer<List<Goal>> { goals ->
             goalList.addAll(goals)
+            viewAdapter.notifyDataSetChanged()
         })
 
         viewManager = LinearLayoutManager(context)
