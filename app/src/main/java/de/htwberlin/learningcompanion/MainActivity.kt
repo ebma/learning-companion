@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import de.htwberlin.learningcompanion.myplace.MyPlaceFragment
 import de.htwberlin.learningcompanion.setgoal.SetGoalActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -58,19 +59,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_setgoal -> {
                 startSetGoalActivity()
             }
-            R.id.nav_overview -> {
-
+            R.id.nav_myplace -> {
+                displaySelectedScreen(R.id.nav_myplace)
             }
             R.id.nav_alert -> {
-                displaySelectedScreen(R.id.nav_alert)
             }
             R.id.nav_recommendation -> {
-
-            }
-            R.id.nav_share -> {
-
-            }
-            R.id.nav_send -> {
 
             }
         }
@@ -86,7 +80,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //initializing the fragment object which is selected
         when (itemId) {
-            R.id.nav_alert -> fragment = MyPlaceFragment()
+            R.id.nav_myplace -> fragment = MyPlaceFragment()
         }
 
         //replacing the fragment
