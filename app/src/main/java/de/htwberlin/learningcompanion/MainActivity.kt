@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.myplace.MyPlaceFragment
 import de.htwberlin.learningcompanion.setgoal.SetGoalActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -27,6 +28,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+
+        displaySelectedScreen(R.id.nav_mainscreen)
     }
 
     override fun onBackPressed() {
@@ -62,7 +65,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_myplace -> {
                 displaySelectedScreen(R.id.nav_myplace)
             }
-            R.id.nav_alert -> {
+            R.id.nav_mainscreen -> {
+                displaySelectedScreen(R.id.nav_mainscreen)
+
             }
             R.id.nav_recommendation -> {
 
@@ -80,6 +85,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         //initializing the fragment object which is selected
         when (itemId) {
+            R.id.nav_mainscreen -> fragment = MainScreenFragment()
             R.id.nav_myplace -> fragment = MyPlaceFragment()
         }
 
