@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 
 class MainScreenFragment : Fragment() {
@@ -14,6 +15,13 @@ class MainScreenFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_main_screen, container, false)
+    }
+
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+
+        (activity as MainActivity)?.supportActionBar?.setTitle("Main Screen")
+
     }
 
 

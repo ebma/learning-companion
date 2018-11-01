@@ -14,4 +14,6 @@ data class Goal(
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
+
+    var completed: Boolean = false
 }

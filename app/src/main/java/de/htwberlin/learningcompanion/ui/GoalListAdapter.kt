@@ -24,12 +24,24 @@ class GoalListAdapter(private val goalDataSet: ArrayList<Goal>) : RecyclerView.A
         return MyViewHolder(view)
     }
 
-    // Replace the contents of a rootView (invoked by the layout manager)
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        // - get element from your dataset at this position
-        // - replace the contents of the rootView with that element
-        holder.rootView.findViewById<TextView>(R.id.tv_goal).text = goalDataSet[position].action
-        holder.rootView.findViewById<TextView>(R.id.tv_goal_duration).text = goalDataSet[position].durationInMin.toString()
+
+        holder.rootView.findViewById<TextView>(R.id.tv_goal).text = getGoalText(goalDataSet[position])
+
+        holder.rootView.findViewById<TextView>(R.id.tv_goal_duration).text = getGoalDurationText(goalDataSet[position])
+
+    }
+
+    private fun getGoalText(goal: Goal): String {
+        return goal.action.plus(goal.field).plus(goal.medium).plus(goal.amount)
+    }
+
+    private fun getGoalDurationText(goal: Goal): String {
+        return if (goal.durationInMin != null) {
+            "${goal.durationInMin} minutes"
+        } else {
+            "${goal.untilTimeStamp}"
+        }
     }
 
     override fun getItemCount() = goalDataSet.size

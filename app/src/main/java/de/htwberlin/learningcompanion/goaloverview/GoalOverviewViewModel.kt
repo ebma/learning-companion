@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion
+package de.htwberlin.learningcompanion.goaloverview
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
