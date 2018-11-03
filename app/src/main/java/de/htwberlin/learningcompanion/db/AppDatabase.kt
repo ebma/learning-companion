@@ -13,13 +13,11 @@ abstract class AppDatabase : RoomDatabase() {
 
     companion object {
         private lateinit var INSTANCE: AppDatabase
-        private var instantiated = false
 
         fun get(context: Context): AppDatabase {
-            if (!instantiated) {
+            if (!::INSTANCE.isInitialized) {
                 synchronized(AppDatabase::class) {
                     INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "database.db").allowMainThreadQueries().build()
-                    instantiated = true
                 }
             }
             return INSTANCE
