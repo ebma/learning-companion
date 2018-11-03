@@ -8,8 +8,7 @@ data class Place(
         val background: String,
         val name: String,
         val address: String,
-        val lightLevel: Int = 0,
-        val noiseLevel: Int = 0) {
+        val addressString: String) {
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

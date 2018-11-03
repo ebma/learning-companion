@@ -43,6 +43,18 @@ class GetLocationActivity : AppCompatActivity(), OnMapReadyCallback {
     private var lastKnownLocation: Location? = null
 
 
+    companion object {
+        private val TAG = GetLocationActivity::class.java.simpleName
+        private val DEFAULT_ZOOM = 15
+        private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
+
+        // Keys for storing activity state.
+        @JvmStatic
+        private val KEY_CAMERA_POSITION = "camera_position"
+        @JvmStatic
+        private val KEY_LOCATION = "location"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -167,18 +179,21 @@ class GetLocationActivity : AppCompatActivity(), OnMapReadyCallback {
      * Prompts the user for permission to use the device location.
      */
     private fun getLocationPermission() {
-        /*
-         * Request location permission, so that we can get the location of the
-         * device. The result of the permission request is handled by a callback,
-         * onRequestPermissionsResult.
-         */
-        if (ContextCompat.checkSelfPermission(this.applicationContext,
-                        android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            locationPermissionGranted = true
+        // Here, thisActivity is the current activity
+        if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // Permission is not granted
+            // Should we show an explanation?
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, android.Manifest.permission.ACCESS_FINE_LOCATION)) {
+                // Show an explanation to the user *asynchronously* -- don't block
+                // this thread waiting for the user's response! After the user
+                // sees the explanation, try again to request the permission.
+            } else {
+                // No explanation needed, we can request the permission.
+                ActivityCompat.requestPermissions(this, arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+
+            }
         } else {
-            ActivityCompat.requestPermissions(this,
-                    arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION),
-                    PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION)
+            locationPermissionGranted = true
         }
     }
 
@@ -218,18 +233,6 @@ class GetLocationActivity : AppCompatActivity(), OnMapReadyCallback {
         } catch (e: SecurityException) {
             Log.e("Exception: %s", e.message)
         }
-
     }
 
-    companion object {
-
-        private val TAG = GetLocationActivity::class.java.simpleName
-        private val DEFAULT_ZOOM = 15
-        private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
-
-        // Keys for storing activity state.
-        private val KEY_CAMERA_POSITION = "camera_position"
-        private val KEY_LOCATION = "location"
-
-    }
 }
