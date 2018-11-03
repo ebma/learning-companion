@@ -131,9 +131,6 @@ class GetLocationActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         })
 
-        // Prompt the user for permission.
-        getLocationPermission()
-
         // Turn on the My Location layer and the related control on the map.
         updateLocationUI()
 
