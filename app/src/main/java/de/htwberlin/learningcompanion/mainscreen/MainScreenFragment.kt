@@ -20,7 +20,7 @@ class MainScreenFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity)?.supportActionBar?.setTitle("Main Screen")
+        (activity as MainActivity).supportActionBar?.title = "Main Screen"
 
     }
 

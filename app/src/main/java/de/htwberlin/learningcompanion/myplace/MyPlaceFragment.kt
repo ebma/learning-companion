@@ -11,10 +11,9 @@ import de.htwberlin.learningcompanion.R
 
 class MyPlaceFragment : Fragment() {
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        (activity as MainActivity)?.supportActionBar?.setTitle("My place")
+        (activity as MainActivity).supportActionBar?.title = "My place"
 
         return inflater.inflate(R.layout.fragment_my_place, container, false)
     }
