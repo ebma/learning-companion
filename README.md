@@ -24,6 +24,15 @@ Das Ziel wird in der Anwendung gespeichert.
 
 ### Übersicht Lernziele
 
+
+### Übersicht Orte
+
+
+### Start des Lernen mit Lernziel
+
+Der Benutzer öffnet die Applikation und wird von "Charlie" begrüsst. Sollte noch kein Lernziel als aktuelles Lernziel gesetzt sein, schlägt "Charlie" das Anlegen/Auswählen eines Lernziels vor.
+Sollte noch kein Ort ausgewählt sein, oder seit dem letztem Lernen mehr als eine Stunde vergangen sein, dann schlägt "Charlie" das Anlegen/Asuwählen eines Ortes vor.
+
 ### Avatar
 
 ### Einstellungen
