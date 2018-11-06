@@ -38,7 +38,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="[action]"
-            android:textAlignment="textStart" />
+            android:imeOptions="actionNext"
+            android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -57,6 +58,8 @@
             android:id="@+id/et_field"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
             android:hint="[discipline]" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -76,6 +79,8 @@
             android:id="@+id/et_medium"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
             android:hint="[medium]" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -95,6 +100,8 @@
             android:id="@+id/et_amount"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:imeOptions="actionNext"
+            android:singleLine="true"
             android:hint="[amount]" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -138,6 +145,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
+                android:checked="true"
                 android:text="for" />
 
             <RadioButton
@@ -158,8 +166,8 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:ems="10"
-            android:enabled="false"
             android:inputType="number"
+            android:singleLine="true"
             app:layout_constraintEnd_toStartOf="@+id/tv_min"
             app:layout_constraintStart_toEndOf="@+id/radioGroup"
             app:layout_constraintTop_toTopOf="parent" />
@@ -175,6 +183,7 @@
             android:ems="10"
             android:enabled="false"
             android:inputType="time"
+            android:singleLine="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/radioGroup"
