@@ -20,7 +20,7 @@ class MainScreenFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.title = "Main Screen"
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_main_screen)
 
     }
 
