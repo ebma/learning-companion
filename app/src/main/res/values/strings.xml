@@ -9,7 +9,7 @@
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Learning Companion</string>
-    <string name="nav_header_subtitle">I\'m Charlie</string>
+    <string name="nav_header_subtitle_en">I\'m Charlie. Click me!</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="title_activity_set_goal">Set a new goal</string>
 
