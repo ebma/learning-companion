@@ -7,27 +7,27 @@
         <item
             android:id="@+id/nav_mainscreen"
             android:icon="@drawable/ic_mainscreen"
-            android:title="Main Screen" />
+            android:title="@string/title_nav_menu_main_screen_en" />
         <item
             android:id="@+id/nav_myplace"
             android:icon="@drawable/ic_house"
-            android:title="My Place" />
+            android:title="@string/title_nav_menu_place_en" />
         <item
             android:id="@+id/nav_setgoal"
             android:icon="@drawable/ic_goal"
-            android:title="My Goal" />
+            android:title="@string/title_nav_menu_goal_en" />
         <item
             android:id="@+id/nav_overview"
             android:icon="@drawable/ic_overview"
-            android:title="Overview" />
+            android:title="@string/title_nav_menu_overview_en" />
         <item
             android:id="@+id/nav_alert"
             android:icon="@drawable/ic_alert"
-            android:title="Alert" />
+            android:title="@string/title_nav_menu_alert_en" />
         <item
             android:id="@+id/nav_recommendation"
             android:icon="@drawable/ic_recommendation"
-            android:title="Recommendation" />
+            android:title="@string/title_nav_menu_recommendation_en" />
     </group>
 
     <group android:checkableBehavior="single">
@@ -35,12 +35,12 @@
             <item
                 android:id="@+id/nav_setting"
                 android:icon="@drawable/ic_menu_manage"
-                android:title="Setting" />
+                android:title="@string/title_nav_menu_settings_en" />
 
             <item
                 android:id="@+id/nav_help"
                 android:icon="@drawable/ic_info"
-                android:title="Help" />
+                android:title="@string/title_nav_menu_help_en" />
         </menu>
     </group>
 

@@ -36,7 +36,7 @@ class GoalOverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity)?.supportActionBar?.setTitle("Overview")
+        (activity as MainActivity).supportActionBar?.title = "Overview"
 
 
         viewModel = ViewModelProviders.of(this).get(GoalOverviewViewModel::class.java)
