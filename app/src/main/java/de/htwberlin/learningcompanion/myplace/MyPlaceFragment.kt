@@ -11,6 +11,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
+import kotlinx.android.synthetic.main.fragment_my_place.*
 
 
 class MyPlaceFragment : Fragment() {
@@ -43,7 +44,8 @@ class MyPlaceFragment : Fragment() {
         if (requestCode == RC_LOCATION_ACTIVITY) {
             when (resultCode) {
                 Activity.RESULT_OK -> {
-
+                    val address = data?.extras?.getString(LOCATION_STRING_EXTRA)
+                    et_address.setText(address)
                 }
                 Activity.RESULT_CANCELED -> {
 

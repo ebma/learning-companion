@@ -1,5 +1,7 @@
 package de.htwberlin.learningcompanion.myplace
 
+import android.app.Activity
+import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
 import android.os.Bundle
@@ -13,14 +15,15 @@ import kotlinx.android.synthetic.main.activity_get_location.*
 import kotlinx.android.synthetic.main.content_get_location.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import org.jetbrains.anko.toast
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
+import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
+val LOCATION_STRING_EXTRA = "location_extra"
 
 /**
  * An activity that displays a map showing the place at the device's current location.
@@ -35,6 +38,7 @@ class GetLocationActivity : AppCompatActivity() {
     // location retrieved by the Fused Location Provider.
     private var lastKnownLocation: Location? = null
 
+    private lateinit var gpsLocationProvider: IMyLocationProvider
 
     companion object {
         private val TAG = GetLocationActivity::class.java.simpleName
@@ -69,23 +73,30 @@ class GetLocationActivity : AppCompatActivity() {
 
         addLocationOverlay()
 
-        getDeviceLocation()
-
         btn_save_location.onClick {
-            toast("Location saved!")
+            onSaveButtonClick()
         }
 
+    }
+
+    private fun onSaveButtonClick() {
+        val intent = Intent()
+        intent.putExtra(LOCATION_STRING_EXTRA, "TestAddress")
+        setResult(Activity.RESULT_OK, intent)
+        finish()
     }
 
     public override fun onResume() {
         super.onResume()
         map?.onResume()
-        mLocationOverlay.enableMyLocation()
+        startLocationProvider()
+
     }
 
     public override fun onPause() {
         super.onPause()
         map?.onPause()
+        stopLocationProvider()
     }
 
     private fun addLocationOverlay() {
@@ -94,20 +105,22 @@ class GetLocationActivity : AppCompatActivity() {
         map?.overlays?.add(mLocationOverlay)
     }
 
-    /**
-     * Gets the current location of the device, and positions the map's camera.
-     */
-    private fun getDeviceLocation() {
+    private fun startLocationProvider() {
         if (locationPermissionGranted) {
-            val gpsMyLocationProvider = GpsMyLocationProvider(applicationContext)
-            val location = gpsMyLocationProvider.lastKnownLocation
+            gpsLocationProvider = GpsMyLocationProvider(applicationContext)
+            val location = gpsLocationProvider.lastKnownLocation
             Log.d(TAG, "last known location $location")
 
-            gpsMyLocationProvider.startLocationProvider { location, source ->
+            gpsLocationProvider.startLocationProvider { location, source ->
                 moveCameraToLocation(location)
+                lastKnownLocation = location
                 Log.d(TAG, "location changed to ${location?.latitude} ${location?.longitude}")
             }
         }
+    }
+
+    private fun stopLocationProvider() {
+        gpsLocationProvider.stopLocationProvider()
     }
 
     private fun moveCameraToLocation(location: Location?) {
@@ -153,7 +166,7 @@ class GetLocationActivity : AppCompatActivity() {
                 // If request is cancelled, the result arrays are empty.
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     locationPermissionGranted = true
-                    getDeviceLocation()
+                    startLocationProvider()
                 }
             }
         }
