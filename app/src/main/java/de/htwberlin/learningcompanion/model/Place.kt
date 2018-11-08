@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 data class Place(
         val background: String,
         val name: String,
-        val address: String,
+        val latitude: Double,
+        val longitude: Double,
         val addressString: String) {
 
     @PrimaryKey(autoGenerate = true)

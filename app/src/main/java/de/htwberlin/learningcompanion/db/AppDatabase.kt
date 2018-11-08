@@ -5,24 +5,25 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import de.htwberlin.learningcompanion.model.Goal
+import de.htwberlin.learningcompanion.model.Place
 
-@Database(entities = [Goal::class], version = 1)
+@Database(entities = [Goal::class, Place::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun goalDao(): GoalDAO
 
-    companion object {
-        private lateinit var INSTANCE: AppDatabase
-        private var instantiated = false
+    abstract fun placeDao(): PlaceDAO
 
-        fun get(context: Context): AppDatabase {
-            if (!instantiated) {
-                synchronized(AppDatabase::class) {
-                    INSTANCE = Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "database.db").allowMainThreadQueries().build()
-                    instantiated = true
-                }
-            }
-            return INSTANCE
+    companion object {
+
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun get(context: Context): AppDatabase = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: buildDatabase(context).also { INSTANCE = it }
         }
+
+        private fun buildDatabase(context: Context) =
+                Room.databaseBuilder(context.applicationContext, AppDatabase::class.java, "database.db").allowMainThreadQueries().build()
     }
 }
