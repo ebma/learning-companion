@@ -23,7 +23,7 @@
             android:windowSoftInputMode="adjustPan"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".myplace.GetLocationActivity"
+            android:name=".myplace.details.GetLocationActivity"
             android:label="@string/title_activity_get_location"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

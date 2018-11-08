@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import de.htwberlin.learningcompanion.goaloverview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
-import de.htwberlin.learningcompanion.myplace.MyPlaceFragment
+import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
 import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
