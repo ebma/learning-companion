@@ -27,6 +27,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
+        nav_view.setCheckedItem(R.id.nav_mainscreen)
 
         displaySelectedScreen(R.id.nav_mainscreen)
     }

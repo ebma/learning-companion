@@ -9,9 +9,12 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
+import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Goal
+import kotlinx.android.synthetic.main.activity_main.*
 
 class GoalSummaryFragment : Fragment() {
 
@@ -66,6 +69,7 @@ class GoalSummaryFragment : Fragment() {
         rootView.findViewById<Button>(R.id.btn_yes).setOnClickListener {
             val goal = createGoalFromArguments()
             saveGoalToDatabase(goal)
+            navigateToMainScreen()
         }
     }
 
@@ -84,5 +88,12 @@ class GoalSummaryFragment : Fragment() {
 
     private fun saveGoalToDatabase(goal: Goal) {
         context?.let { AppDatabase.get(it).goalDao().insertGoal(goal) }
+    }
+
+    private fun navigateToMainScreen() {
+        (activity as MainActivity).nav_view.setCheckedItem(R.id.nav_mainscreen)
+
+        val fragment = MainScreenFragment()
+        activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.content_main, fragment)?.commit()
     }
 }
