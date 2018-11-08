@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import de.htwberlin.learningcompanion.goaloverview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
-import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
+import de.htwberlin.learningcompanion.myplace.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         //initializing the fragment object which is selected
         when (itemId) {
             R.id.nav_mainscreen -> fragment = MainScreenFragment()
-            R.id.nav_myplace -> fragment = MyPlaceFragment()
+            R.id.nav_myplace -> fragment = PlaceOverviewFragment()
             R.id.nav_overview -> fragment = GoalOverviewFragment()
             R.id.nav_setgoal -> fragment = GoalNavHostFragment()
         }

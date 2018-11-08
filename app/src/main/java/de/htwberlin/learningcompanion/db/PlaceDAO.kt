@@ -1,5 +1,6 @@
 package de.htwberlin.learningcompanion.db
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import de.htwberlin.learningcompanion.model.Place
 
@@ -19,4 +20,7 @@ interface PlaceDAO {
 
     @Query("SELECT * FROM places")
     fun getPlaces(): List<Place>
+
+    @Query("SELECT * FROM places")
+    fun getPlacesAsLiveData(): LiveData<List<Place>>
 }
