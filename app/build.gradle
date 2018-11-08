@@ -46,7 +46,11 @@ dependencies {
     def anko_version = '0.10.7'
     implementation "org.jetbrains.anko:anko:$anko_version"
 
+    // Open Street Map
     implementation 'org.osmdroid:osmdroid-android:6.0.2'
+
+    // image library
+    implementation 'com.squareup.picasso:picasso:2.71828'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.0'

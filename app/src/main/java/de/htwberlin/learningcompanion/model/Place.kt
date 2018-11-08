@@ -5,7 +5,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "places")
 data class Place(
-        val background: String,
+        val imageUri: String,
         val name: String,
         val latitude: Double,
         val longitude: Double,
@@ -13,4 +13,6 @@ data class Place(
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0
+
+    var currentPlace: Boolean = false
 }
