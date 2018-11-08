@@ -1,19 +1,23 @@
 package de.htwberlin.learningcompanion.ui
 
+import android.net.Uri
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Place
+import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
 
-class PlaceListAdapter(private val placeDataSet: ArrayList<Place>) : RecyclerView.Adapter<PlaceListAdapter.PlaceViewHolder>() {
+class PlaceListAdapter(private val placeDataSet: ArrayList<Place>, val supportFragmentManager: FragmentManager) : RecyclerView.Adapter<PlaceListAdapter.PlaceViewHolder>() {
 
-    class PlaceViewHolder(val rootView: View) : RecyclerView.ViewHolder(rootView), View.OnClickListener {
-        private var place: Place? = null
+    class PlaceViewHolder(val rootView: View, private val supportFragmentManager: FragmentManager) : RecyclerView.ViewHolder(rootView), View.OnClickListener {
+        private lateinit var place: Place
 
         private val tvName: TextView
         private val tvAddress: TextView
@@ -27,28 +31,30 @@ class PlaceListAdapter(private val placeDataSet: ArrayList<Place>) : RecyclerVie
         }
 
         override fun onClick(v: View) {
-            val context = itemView.context
-//            val showPhotoIntent = Intent(context, PhotoActivity::class.java)
-//            showPhotoIntent.putExtra(PHOTO_KEY, photo)
-//            context.startActivity(showPhotoIntent)
+            navigateToPlaceDetailFragment()
         }
 
         fun bindPlace(place: Place) {
             this.place = place
-            Picasso.get().load(place.imageUri).fit().into(ivPlacePreview)
             tvName.text = place.name
             tvAddress.text = place.addressString
+
+            val uri = Uri.parse(place.imageUri)
+            Picasso.get().load(uri).fit().into(ivPlacePreview)
         }
 
-        companion object {
-            private val PHOTO_KEY = "PHOTO"
+        private fun navigateToPlaceDetailFragment() {
+            val fragment = MyPlaceFragment()
+            val bundle = Bundle()
+            bundle.putLong("ID", place.id)
+            fragment.arguments = bundle
+            supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
         }
     }
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceListAdapter.PlaceViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.place_list_item, parent, false) as View
-        return PlaceViewHolder(view)
+        return PlaceViewHolder(view, supportFragmentManager)
     }
 
     override fun onBindViewHolder(holder: PlaceViewHolder, position: Int) {

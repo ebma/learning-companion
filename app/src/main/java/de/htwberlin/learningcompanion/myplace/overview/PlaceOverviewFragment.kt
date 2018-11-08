@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Place
+import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
 import de.htwberlin.learningcompanion.ui.PlaceListAdapter
+import kotlinx.android.synthetic.main.place_overview_fragment.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class PlaceOverviewFragment : Fragment() {
 
@@ -35,22 +38,31 @@ class PlaceOverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_history)
-
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_place)
 
         viewModel = ViewModelProviders.of(this).get(PlaceOverviewViewModel::class.java)
         viewModel.getPlaces().observe(this, Observer<List<Place>> { places ->
+            placeList.clear()
             placeList.addAll(places)
             viewAdapter.notifyDataSetChanged()
         })
 
         viewManager = LinearLayoutManager(context)
-        viewAdapter = PlaceListAdapter(placeList)
+        viewAdapter = PlaceListAdapter(placeList, activity!!.supportFragmentManager)
 
         recyclerView = rootView.findViewById<RecyclerView>(R.id.rv_places).apply {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
         }
+
+        btn_new_place.onClick {
+            navigateToPlaceDetailFragment()
+        }
+    }
+
+    private fun navigateToPlaceDetailFragment() {
+        val fragment = MyPlaceFragment()
+        activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
     }
 }

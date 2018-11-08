@@ -12,11 +12,14 @@ interface PlaceDAO {
     @Update
     fun updatePlace(place: Place)
 
+    @Update
+    fun updatePlaces(places: List<Place>)
+
     @Delete
     fun deletePlace(place: Place)
 
     @Query("SELECT * FROM places WHERE id == :id")
-    fun getPlaceByID(id: Int): List<Place>
+    fun getPlaceByID(id: Long): Place
 
     @Query("SELECT * FROM places")
     fun getPlaces(): List<Place>

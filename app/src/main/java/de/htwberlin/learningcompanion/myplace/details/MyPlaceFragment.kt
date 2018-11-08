@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.MainActivity
@@ -33,6 +34,7 @@ class MyPlaceFragment : Fragment() {
 
     private lateinit var etName: EditText
     private lateinit var etAddress: EditText
+    private lateinit var ivImagePreview: ImageView
     private lateinit var btnSave: Button
 
     private var longitude: Double = 0.0
@@ -41,8 +43,6 @@ class MyPlaceFragment : Fragment() {
     private var imageUri: Uri? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        (activity as MainActivity).supportActionBar?.title = "My place"
-
         rootView = inflater.inflate(R.layout.fragment_my_place, container, false)
 
         findViews()
@@ -50,12 +50,39 @@ class MyPlaceFragment : Fragment() {
         addGalleryButtonClickListener()
         addSaveButtonClickListener()
 
+        checkForEditablePlace()
+
         return rootView
+    }
+
+    private fun checkForEditablePlace() {
+        if (arguments != null) {
+            (activity as MainActivity).supportActionBar?.title = "Edit place"
+
+
+            val id = arguments!!.getLong("ID")
+            context?.let {
+                val placeByID = AppDatabase.get(it).placeDao().getPlaceByID(id)
+                initLayoutWithPlace(placeByID)
+            }
+        } else {
+            (activity as MainActivity).supportActionBar?.title = "New place"
+
+        }
+    }
+
+    private fun initLayoutWithPlace(place: Place) {
+        etName.setText(place.name)
+        etAddress.setText(place.addressString)
+
+        val uri = Uri.parse(place.imageUri)
+        Picasso.get().load(uri).fit().into(ivImagePreview)
     }
 
     private fun findViews() {
         etName = rootView.findViewById(R.id.et_name)
         etAddress = rootView.findViewById(R.id.et_address)
+        ivImagePreview = rootView.findViewById(R.id.iv_image_preview)
         btnSave = rootView.findViewById(R.id.btn_save)
     }
 
@@ -69,6 +96,8 @@ class MyPlaceFragment : Fragment() {
                 savePlace(place)
                 toast("Place saved to Database")
                 navigateToMainScreen()
+            } else {
+                toast("Missing arguments")
             }
         }
     }
@@ -94,7 +123,7 @@ class MyPlaceFragment : Fragment() {
     }
 
     private fun addAddressClickListener() {
-        rootView.findViewById<EditText>(R.id.et_address).setOnClickListener {
+        etAddress.setOnClickListener {
             startGetLocationActivity()
         }
     }
@@ -119,9 +148,8 @@ class MyPlaceFragment : Fragment() {
             val uri = data.data
             imageUri = uri
 
-            Picasso.get().load(uri).fit().into(iv_image_preview)
-        } else
+            Picasso.get().load(uri).fit().into(ivImagePreview)
             super.onActivityResult(requestCode, resultCode, data)
+        }
     }
-
 }
