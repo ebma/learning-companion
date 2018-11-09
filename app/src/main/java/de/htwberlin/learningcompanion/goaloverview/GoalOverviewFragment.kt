@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Goal
-import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
 import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
 import de.htwberlin.learningcompanion.ui.GoalListAdapter
 import kotlinx.android.synthetic.main.goal_overview_fragment.*
@@ -40,7 +39,7 @@ class GoalOverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_history)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_goal)
 
 
         viewModel = ViewModelProviders.of(this).get(GoalOverviewViewModel::class.java)
