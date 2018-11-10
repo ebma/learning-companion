@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.network.LocationToAddressRequest
 import kotlinx.android.synthetic.main.activity_get_location.*
 import kotlinx.android.synthetic.main.content_get_location.*
 import org.jetbrains.anko.ctx
@@ -74,9 +75,27 @@ class GetLocationActivity : AppCompatActivity() {
         addLocationOverlay()
 
         btn_save_location.onClick {
-            onSaveButtonClick()
+            getAddress()
+            // onSaveButtonClick()
         }
 
+    }
+
+    private fun getAddress() {
+        if (lastKnownLocation != null) {
+            val request = LocationToAddressRequest(applicationContext)
+
+            val geoPoint = GeoPoint(lastKnownLocation!!)
+            request.getAddressForLocation(geoPoint, object : LocationToAddressRequest.Callback {
+                override fun onResult(address: String) {
+                    Log.d(TAG, "address: $address")
+                }
+
+                override fun onError(errorMessage: String) {
+                    Log.e(TAG, errorMessage)
+                }
+            })
+        }
     }
 
     private fun onSaveButtonClick() {
@@ -120,7 +139,8 @@ class GetLocationActivity : AppCompatActivity() {
     }
 
     private fun stopLocationProvider() {
-        gpsLocationProvider.stopLocationProvider()
+        if (::gpsLocationProvider.isInitialized)
+            gpsLocationProvider.stopLocationProvider()
     }
 
     private fun moveCameraToLocation(location: Location?) {
