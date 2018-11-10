@@ -16,6 +16,7 @@ import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Place
+import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_my_place.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -43,6 +44,9 @@ class MyPlaceFragment : Fragment() {
 
     private var imageUri: Uri? = null
 
+    private var editMode = false
+    private var place: Place? = null
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_my_place, container, false)
 
@@ -58,26 +62,29 @@ class MyPlaceFragment : Fragment() {
 
     private fun checkForEditablePlace() {
         if (arguments != null) {
-            (activity as MainActivity).supportActionBar?.title = "Edit place"
-
-
             val id = arguments!!.getLong("ID")
             context?.let {
-                val placeByID = AppDatabase.get(it).placeDao().getPlaceByID(id)
-                initLayoutWithPlace(placeByID)
+                place = AppDatabase.get(it).placeDao().getPlaceByID(id)
             }
-        } else {
-            (activity as MainActivity).supportActionBar?.title = "New place"
+            if (place != null) {
+                initLayoutWithPlace(place!!)
+            }
 
+            setActivityTitle("Edit place")
+            editMode = true
+
+        } else {
+            setActivityTitle("New Place")
+            editMode = false
         }
     }
 
     private fun initLayoutWithPlace(place: Place) {
         etName.setText(place.name)
-        tvAddress.setText(place.addressString)
+        tvAddress.text = place.addressString
+        imageUri = place.imageUri
 
-        val uri = Uri.parse(place.imageUri)
-        Picasso.get().load(uri).fit().into(ivImagePreview)
+        Picasso.get().load(imageUri).fit().into(ivImagePreview)
     }
 
     private fun findViews() {
@@ -95,14 +102,26 @@ class MyPlaceFragment : Fragment() {
             val addressString = tvAddress.text.toString()
 
             if (nameString.isNotEmpty() && addressString.isNotEmpty() && imageUri != null) {
-                val place = Place(imageUri.toString(), nameString, latitude, longitude, addressString)
-                savePlace(place)
-                toast("Place saved to Database")
+                if (editMode && place != null) {
+                    val updatedPlace = Place(imageUri!!, nameString, latitude, longitude, addressString)
+                    updatedPlace.id = place?.id ?: 0
+                    updatePlace(updatedPlace)
+                    toast("Place updated")
+                } else {
+                    val place = Place(imageUri!!, nameString, latitude, longitude, addressString)
+                    savePlace(place)
+                    toast("Place saved to Database")
+                }
                 navigateToMainScreen()
             } else {
                 toast("Missing arguments")
             }
         }
+    }
+
+    private fun updatePlace(place: Place) {
+        context?.let { AppDatabase.get(it).placeDao().updatePlace(place) }
+
     }
 
     private fun savePlace(place: Place) {
@@ -140,8 +159,12 @@ class MyPlaceFragment : Fragment() {
         if (requestCode == RC_LOCATION_ACTIVITY) {
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    val address = data?.extras?.getString(LOCATION_STRING_EXTRA)
-                    tv_address.setText(address)
+                    val addressDisplayName = data?.extras?.getString(LOCATION_DISPLAYNAME_EXTRA)
+                    tv_address.text = addressDisplayName
+
+                    latitude = data?.extras?.getDouble(LOCATION_LATITUDE_EXTRA) ?: 0.0
+                    longitude = data?.extras?.getDouble(LOCATION_LONGITUDE_EXTRA) ?: 0.0
+
                 }
                 Activity.RESULT_CANCELED -> {
 

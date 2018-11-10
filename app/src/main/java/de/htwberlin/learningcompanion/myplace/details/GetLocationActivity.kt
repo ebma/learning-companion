@@ -26,7 +26,9 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
-val LOCATION_STRING_EXTRA = "location_extra"
+val LOCATION_DISPLAYNAME_EXTRA = "location_name_extra"
+val LOCATION_LATITUDE_EXTRA = "location_latitude_extra"
+val LOCATION_LONGITUDE_EXTRA = "location_longitude_extra"
 
 /**
  * An activity that displays a map showing the place at the device's current location.
@@ -114,7 +116,9 @@ class GetLocationActivity : AppCompatActivity() {
             toast("Please get the address first")
         } else {
             val intent = Intent()
-            intent.putExtra(LOCATION_STRING_EXTRA, address!!.display_name)
+            intent.putExtra(LOCATION_DISPLAYNAME_EXTRA, address!!.display_name)
+            intent.putExtra(LOCATION_LATITUDE_EXTRA, address!!.lat)
+            intent.putExtra(LOCATION_LONGITUDE_EXTRA, address!!.lon)
             setResult(Activity.RESULT_OK, intent)
             finish()
         }

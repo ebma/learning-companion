@@ -6,8 +6,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.util.setActivityTitle
 
 class MainScreenFragment : Fragment() {
 
@@ -20,7 +20,7 @@ class MainScreenFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_main_screen)
+        setActivityTitle(getString(R.string.title_nav_menu_main_screen))
 
     }
 

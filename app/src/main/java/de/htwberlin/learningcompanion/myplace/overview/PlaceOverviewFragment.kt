@@ -9,11 +9,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Place
 import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
 import de.htwberlin.learningcompanion.ui.PlaceListAdapter
+import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.place_overview_fragment.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -39,7 +39,7 @@ class PlaceOverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_place)
+        setActivityTitle(getString(R.string.title_nav_menu_place))
 
         viewModel = ViewModelProviders.of(this).get(PlaceOverviewViewModel::class.java)
         viewModel.getPlaces().observe(this, Observer<List<Place>> { places ->

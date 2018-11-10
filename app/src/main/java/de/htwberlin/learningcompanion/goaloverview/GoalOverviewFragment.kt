@@ -9,10 +9,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.ui.GoalListAdapter
+import de.htwberlin.learningcompanion.util.setActivityTitle
 
 
 class GoalOverviewFragment : Fragment() {
@@ -36,7 +36,7 @@ class GoalOverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_history)
+        setActivityTitle(getString(R.string.title_nav_menu_history))
 
 
         viewModel = ViewModelProviders.of(this).get(GoalOverviewViewModel::class.java)
