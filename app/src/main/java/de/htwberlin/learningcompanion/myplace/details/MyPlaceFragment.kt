@@ -8,10 +8,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.MainActivity
@@ -32,10 +29,14 @@ class MyPlaceFragment : Fragment() {
 
     private lateinit var rootView: View
 
-    private lateinit var etName: EditText
-    private lateinit var etAddress: EditText
     private lateinit var ivImagePreview: ImageView
+
+    private lateinit var etName: EditText
+    private lateinit var tvAddress: TextView
+
     private lateinit var btnSave: Button
+    private lateinit var btnSetAddress: Button
+    private lateinit var btnGetImageFromGallery: ImageButton
 
     private var longitude: Double = 0.0
     private var latitude: Double = 0.0
@@ -73,7 +74,7 @@ class MyPlaceFragment : Fragment() {
 
     private fun initLayoutWithPlace(place: Place) {
         etName.setText(place.name)
-        etAddress.setText(place.addressString)
+        tvAddress.setText(place.addressString)
 
         val uri = Uri.parse(place.imageUri)
         Picasso.get().load(uri).fit().into(ivImagePreview)
@@ -81,15 +82,17 @@ class MyPlaceFragment : Fragment() {
 
     private fun findViews() {
         etName = rootView.findViewById(R.id.et_name)
-        etAddress = rootView.findViewById(R.id.et_address)
+        tvAddress = rootView.findViewById(R.id.tv_address)
         ivImagePreview = rootView.findViewById(R.id.iv_image_preview)
         btnSave = rootView.findViewById(R.id.btn_save)
+        btnSetAddress = rootView.findViewById(R.id.btn_set_address)
+        btnGetImageFromGallery = rootView.findViewById(R.id.ib_gallery)
     }
 
     private fun addSaveButtonClickListener() {
         btnSave.onClick {
             val nameString = etName.text.toString()
-            val addressString = etAddress.text.toString()
+            val addressString = tvAddress.text.toString()
 
             if (nameString.isNotEmpty() && addressString.isNotEmpty() && imageUri != null) {
                 val place = Place(imageUri.toString(), nameString, latitude, longitude, addressString)
@@ -114,7 +117,7 @@ class MyPlaceFragment : Fragment() {
     }
 
     private fun addGalleryButtonClickListener() {
-        rootView.findViewById<ImageButton>(R.id.ib_gallery).onClick {
+        btnGetImageFromGallery.onClick {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -123,7 +126,7 @@ class MyPlaceFragment : Fragment() {
     }
 
     private fun addAddressClickListener() {
-        etAddress.setOnClickListener {
+        btnSetAddress.setOnClickListener {
             startGetLocationActivity()
         }
     }
@@ -138,7 +141,7 @@ class MyPlaceFragment : Fragment() {
             when (resultCode) {
                 Activity.RESULT_OK -> {
                     val address = data?.extras?.getString(LOCATION_STRING_EXTRA)
-                    et_address.setText(address)
+                    tv_address.setText(address)
                 }
                 Activity.RESULT_CANCELED -> {
 

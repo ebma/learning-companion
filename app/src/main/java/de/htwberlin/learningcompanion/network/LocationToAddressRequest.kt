@@ -1,6 +1,7 @@
 package de.htwberlin.learningcompanion.network
 
 import android.content.Context
+import de.htwberlin.learningcompanion.model.Address
 import org.osmdroid.util.GeoPoint
 import retrofit2.Call
 import retrofit2.Callback
@@ -12,7 +13,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class LocationToAddressRequest(val context: Context) : Callback<Address> {
 
     interface Callback {
-        fun onResult(address: String)
+        fun onResult(address: Address)
         fun onError(errorMessage: String)
     }
 
@@ -37,7 +38,7 @@ class LocationToAddressRequest(val context: Context) : Callback<Address> {
         if (response.isSuccessful) {
             val address = response.body()
             System.out.println(address?.display_name)
-            callback.onResult(address?.display_name!!)
+            callback.onResult(address!!)
         } else {
             System.out.println(response.errorBody())
         }

@@ -1,5 +1,6 @@
 package de.htwberlin.learningcompanion.network
 
+import de.htwberlin.learningcompanion.model.Address
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

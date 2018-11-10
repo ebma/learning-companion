@@ -17,6 +17,7 @@ import de.htwberlin.learningcompanion.ui.PlaceListAdapter
 import kotlinx.android.synthetic.main.place_overview_fragment.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
+
 class PlaceOverviewFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
@@ -54,6 +55,7 @@ class PlaceOverviewFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
+
         }
 
         btn_new_place.onClick {

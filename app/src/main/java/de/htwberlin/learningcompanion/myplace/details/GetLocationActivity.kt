@@ -11,11 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.model.Address
 import de.htwberlin.learningcompanion.network.LocationToAddressRequest
 import kotlinx.android.synthetic.main.activity_get_location.*
 import kotlinx.android.synthetic.main.content_get_location.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.toast
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -38,6 +40,8 @@ class GetLocationActivity : AppCompatActivity() {
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private var lastKnownLocation: Location? = null
+
+    private var address: Address? = null
 
     private lateinit var gpsLocationProvider: IMyLocationProvider
 
@@ -74,9 +78,12 @@ class GetLocationActivity : AppCompatActivity() {
 
         addLocationOverlay()
 
-        btn_save_location.onClick {
+        btn_get_address.onClick {
             getAddress()
-            // onSaveButtonClick()
+        }
+
+        btn_save_location.onClick {
+            onSaveButtonClick()
         }
 
     }
@@ -87,22 +94,30 @@ class GetLocationActivity : AppCompatActivity() {
 
             val geoPoint = GeoPoint(lastKnownLocation!!)
             request.getAddress(geoPoint, object : LocationToAddressRequest.Callback {
-                override fun onResult(address: String) {
-                    Log.d(TAG, "address: $address")
+                override fun onResult(addressResult: Address) {
+                    tv_address.text = addressResult.display_name
+                    address = addressResult
+                    Log.d(TAG, "address: $addressResult")
                 }
 
                 override fun onError(errorMessage: String) {
                     Log.e(TAG, errorMessage)
                 }
             })
+        } else {
+            toast("Your location was not found yet")
         }
     }
 
     private fun onSaveButtonClick() {
-        val intent = Intent()
-        intent.putExtra(LOCATION_STRING_EXTRA, "TestAddress")
-        setResult(Activity.RESULT_OK, intent)
-        finish()
+        if (address == null) {
+            toast("Please get the address first")
+        } else {
+            val intent = Intent()
+            intent.putExtra(LOCATION_STRING_EXTRA, address!!.display_name)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
     }
 
     public override fun onResume() {
