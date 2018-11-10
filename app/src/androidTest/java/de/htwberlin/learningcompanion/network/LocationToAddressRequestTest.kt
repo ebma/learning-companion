@@ -28,7 +28,7 @@ class LocationToAddressRequestTest {
         var result: String? = null
 
         val request = LocationToAddressRequest(context)
-        request.getAddressForLocation(location, object : LocationToAddressRequest.Callback {
+        request.getAddress(location, object : LocationToAddressRequest.Callback {
             override fun onResult(address: String) {
                 result = address
 

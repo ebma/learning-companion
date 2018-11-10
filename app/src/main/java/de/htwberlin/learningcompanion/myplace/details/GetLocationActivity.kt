@@ -86,7 +86,7 @@ class GetLocationActivity : AppCompatActivity() {
             val request = LocationToAddressRequest(applicationContext)
 
             val geoPoint = GeoPoint(lastKnownLocation!!)
-            request.getAddressForLocation(geoPoint, object : LocationToAddressRequest.Callback {
+            request.getAddress(geoPoint, object : LocationToAddressRequest.Callback {
                 override fun onResult(address: String) {
                     Log.d(TAG, "address: $address")
                 }

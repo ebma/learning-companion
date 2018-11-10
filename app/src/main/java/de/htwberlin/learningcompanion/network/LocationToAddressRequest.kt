@@ -1,14 +1,15 @@
 package de.htwberlin.learningcompanion.network
 
 import android.content.Context
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.VolleyError
-import com.android.volley.toolbox.StringRequest
-import org.json.JSONException
 import org.osmdroid.util.GeoPoint
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 
-class LocationToAddressRequest(val context: Context) {
+
+class LocationToAddressRequest(val context: Context) : Callback<Address> {
 
     interface Callback {
         fun onResult(address: String)
@@ -17,52 +18,33 @@ class LocationToAddressRequest(val context: Context) {
 
     private lateinit var callback: Callback
 
-    fun getAddressForLocation(location: GeoPoint, callback: Callback) {
+    private val BASE_URL = "https://nominatim.openstreetmap.org/"
+
+    fun getAddress(location: GeoPoint, callback: Callback) {
         this.callback = callback
 
-        VolleyService.initialize(context.applicationContext)
+        val retrofit = Retrofit.Builder().baseUrl(BASE_URL)
+                .addConverterFactory(GsonConverterFactory.create())
+                .build()
 
-        val queue = VolleyService.requestQueue
-        val url = createURL(location)
+        val nominatimAPI = retrofit.create<NominatimAPI>(NominatimAPI::class.java)
 
-        val stringRequest = StringRequest(Request.Method.GET, url,
-                Response.Listener<String> { response -> handleResponse(response) },
-                Response.ErrorListener { error -> handleError(error) }
-        )
-//        {
-//            override fun getParams(): MutableMap<String, String> {
-//                val headers = HashMap<String, String>()
-//                headers["Content-Type"] = "application/json"
-//                return headers
-//            }
-//        } as JsonObjectRequest
-
-        queue.add(stringRequest)
-//        queue.start()
+        val call = nominatimAPI.getAddress("json", location.latitude, location.longitude)
+        call.enqueue(this)
     }
 
-    private fun createURL(location: GeoPoint): String {
-        return "https://nominatim.openstreetmap.org/reverse?format=json&lat=${location.latitude}&lon=${location.longitude}"
-    }
-
-    private fun handleResponse(response: String) {
-        val address = tryGetAddressFromJSONString(response) ?: ""
-        callback.onResult(address)
-    }
-
-    private fun tryGetAddressFromJSONString(jsonString: String): String? {
-        return try {
-
-            ""
-        } catch (e: JSONException) {
-            e.printStackTrace()
-            null
+    override fun onResponse(call: Call<Address>, response: Response<Address>) {
+        if (response.isSuccessful) {
+            val address = response.body()
+            System.out.println(address?.display_name)
+            callback.onResult(address?.display_name!!)
+        } else {
+            System.out.println(response.errorBody())
         }
     }
 
-    private fun handleError(error: VolleyError) {
-        error.printStackTrace()
-        callback.onError(error.message
-                ?: "An error occurred with your request. Code: ${error.networkResponse.statusCode}")
+    override fun onFailure(call: Call<Address>, t: Throwable) {
+        t.printStackTrace()
+        callback.onError(t.message!!)
     }
 }
