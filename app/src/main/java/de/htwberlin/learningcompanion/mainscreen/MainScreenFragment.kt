@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.sensors.LearningSessionEvaluator
 import de.htwberlin.learningcompanion.sensors.SensorHandler
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -54,7 +55,11 @@ class MainScreenFragment : Fragment() {
 
     private fun stopSensorHandler() {
         sensorHandler.stop()
+        startEvaluation()
+    }
 
+    private fun startEvaluation() {
+        val learningSessionEvaluater = LearningSessionEvaluator(sensorHandler.dataList, arrayListOf<Float>())
     }
 
 }

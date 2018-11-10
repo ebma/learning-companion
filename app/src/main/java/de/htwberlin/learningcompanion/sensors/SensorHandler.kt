@@ -11,12 +11,6 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
 
     private val DEFAULT_TIME_BETWEEN_DATA_EVENTS = 0.2 // average time during sensor events
 
-    private val lowestThreshold = 5.0
-    private val lowThreshold = 30.0
-    private val mediumThreshold = 50.0
-    private val highThreshold = 100.0
-    private val highestThreshold = 150.0
-
     private var intervalInSeconds: Int = 0
     private var intervalCounter = 0
 
