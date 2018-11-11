@@ -14,7 +14,7 @@ import de.htwberlin.learningcompanion.model.Place
 import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
 import de.htwberlin.learningcompanion.ui.PlaceListAdapter
 import de.htwberlin.learningcompanion.util.setActivityTitle
-import kotlinx.android.synthetic.main.place_overview_fragment.*
+import kotlinx.android.synthetic.main.fragment_place_overview.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
@@ -31,7 +31,7 @@ class PlaceOverviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.place_overview_fragment, container, false)
+        rootView = inflater.inflate(R.layout.fragment_place_overview, container, false)
 
         return rootView
     }

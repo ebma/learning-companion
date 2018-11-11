@@ -28,7 +28,7 @@ class GoalOverviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.goal_overview_fragment, container, false)
+        rootView = inflater.inflate(R.layout.fragment_goal_overview, container, false)
 
         return rootView
     }
