@@ -12,7 +12,10 @@ import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Goal
+import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
 import de.htwberlin.learningcompanion.ui.GoalListAdapter
+import kotlinx.android.synthetic.main.goal_overview_fragment.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
 class GoalOverviewFragment : Fragment() {
@@ -36,7 +39,7 @@ class GoalOverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_history)
+        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_goal)
 
 
         viewModel = ViewModelProviders.of(this).get(GoalOverviewViewModel::class.java)
@@ -52,15 +55,25 @@ class GoalOverviewFragment : Fragment() {
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
-
             // use a linear layout manager
             layoutManager = viewManager
-
             // specify an viewAdapter (see also next example)
             adapter = viewAdapter
+        }
+        btn_new_goal.onClick {
+            navigateToSetGoalFragment()
 
         }
 
+
+    }
+    private fun navigateToSetGoalFragment() {
+        val fragment = GoalNavHostFragment()
+//        var fragment: Fragment? = null
+//        R.id.nav_setgoal -> fragment = GoalNavHostFragment()
+
+        activity!!.supportFragmentManager.beginTransaction().addToBackStack(
+                "detailfragment").replace(R.id.content_main, fragment).commit()
     }
 
 }
