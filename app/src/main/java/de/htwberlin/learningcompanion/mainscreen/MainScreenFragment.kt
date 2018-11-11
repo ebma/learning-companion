@@ -1,13 +1,17 @@
 package de.htwberlin.learningcompanion.mainscreen
 
 
+import android.Manifest
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
+import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.REQUEST_RECORD_AUDIO_PERMISSION
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
@@ -64,23 +68,26 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun onStartButtonClick() {
-        val goals = GoalRepository.get(context!!).goalsList
-        val places = PlaceRepository.get(context!!).placesList
+        if ((activity as MainActivity).permissionToRecordAccepted) {
+            val goals = GoalRepository.get(context!!).goalsList
+            val places = PlaceRepository.get(context!!).placesList
 
-        if (goals != null && goals.isNotEmpty()) {
-            if (places != null && places.isNotEmpty()) {
+//            if (goals == null || goals.isEmpty()) {
+//                showSelectGoalDialog()
+//            } else if (places == null || places.isEmpty()) {
+//                showSelectPlaceDialog()
+//            } else {
                 startSensorHandler()
-            } else {
-                showSelectPlaceDialog()
-            }
+//            }
         } else {
-            showSelectGoalDialog()
+            requestPermissions()
         }
     }
 
     private fun startSensorHandler() {
-        sensorHandler.start(INTERVAL_IN_SECONDS)
+        sensorHandler.start(1)
     }
+
 
     private fun stopSensorHandler() {
         sensorHandler.stop()
@@ -112,6 +119,11 @@ class MainScreenFragment : Fragment() {
     private fun navigateToGoalFragment() {
         val fragment = GoalNavHostFragment()
         activity!!.supportFragmentManager.beginTransaction().addToBackStack("goalfragment").replace(R.id.content_main, fragment).commit()
+    }
+
+    private fun requestPermissions() {
+        val permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+        ActivityCompat.requestPermissions(activity!!, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
     }
 
 }
