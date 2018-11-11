@@ -105,7 +105,6 @@
         android:ems="10"
         android:focusable="false"
         android:singleLine="false"
-        android:text="Sesamstreet 123"
         android:textAlignment="center"
         android:textSize="20sp"
         app:layout_constraintBottom_toTopOf="@+id/btn_save"

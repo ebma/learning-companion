@@ -40,7 +40,7 @@ class GoalRepository private constructor(context: Context) {
         return appDatabase.goalDao().getGoalByID(goalID)
     }
 
-    fun getCurrentGoal(): Goal {
+    fun getCurrentGoal(): Goal? {
         return appDatabase.goalDao().getCurrentGoal()
     }
 

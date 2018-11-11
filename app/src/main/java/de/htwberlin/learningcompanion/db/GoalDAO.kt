@@ -28,7 +28,7 @@ interface GoalDAO {
     fun getGoals(): List<Goal>
 
     @Query("SELECT * FROM goals WHERE currentGoal == 1")
-    fun getCurrentGoal(): Goal
+    fun getCurrentGoal(): Goal?
 
     @Query("SELECT * FROM goals")
     fun getGoalsAsLiveData(): LiveData<List<Goal>>

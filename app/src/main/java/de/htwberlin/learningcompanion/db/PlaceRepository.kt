@@ -40,7 +40,7 @@ class PlaceRepository private constructor(context: Context) {
         return appDatabase.placeDao().getPlaceByID(placeID)
     }
 
-    fun getCurrentPlace(): Place {
+    fun getCurrentPlace(): Place? {
         return appDatabase.placeDao().getCurrentPlace()
     }
 
