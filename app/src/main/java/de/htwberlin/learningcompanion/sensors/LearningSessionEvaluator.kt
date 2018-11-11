@@ -10,7 +10,7 @@ enum class LightLevel { LOWEST, LOW, MEDIUM, HIGH, HIGHEST }
 enum class NoiseLevel { LOWEST, LOW, MEDIUM, HIGH, HIGHEST }
 
 class LearningSessionEvaluator(private val lightValues: ArrayList<Float>,
-                               private val noiseValues: ArrayList<Float>) {
+                               private val noiseValues: ArrayList<Int>) {
 
     private val TAG = LearningSessionEvaluator::class.java.simpleName
 
@@ -40,10 +40,10 @@ class LearningSessionEvaluator(private val lightValues: ArrayList<Float>,
         return NoiseLevel.HIGH
     }
 
-    private fun calculateAverage(values: ArrayList<Float>): Double {
+    private fun <T : Number> calculateAverage(values: ArrayList<T>): Double {
         var sum = 0.0
 
-        values.forEach { sum += it }
+        values.forEach { sum = sum.plus(it.toFloat()) }
 
         return sum / values.size
     }

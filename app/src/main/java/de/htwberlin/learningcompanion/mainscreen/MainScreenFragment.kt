@@ -69,16 +69,14 @@ class MainScreenFragment : Fragment() {
 
     private fun onStartButtonClick() {
         if ((activity as MainActivity).permissionToRecordAccepted) {
-            val goals = GoalRepository.get(context!!).goalsList
-            val places = PlaceRepository.get(context!!).placesList
+            val currentGoal = GoalRepository.get(context!!).getCurrentGoal()
+            val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
 
-//            if (goals == null || goals.isEmpty()) {
-//                showSelectGoalDialog()
-//            } else if (places == null || places.isEmpty()) {
-//                showSelectPlaceDialog()
-//            } else {
-                startSensorHandler()
-//            }
+            when {
+                currentGoal == null -> showSelectGoalDialog()
+                currentPlace == null -> showSelectPlaceDialog()
+                else -> startSensorHandler()
+            }
         } else {
             requestPermissions()
         }
@@ -94,7 +92,7 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun startEvaluation() {
-        val learningSessionEvaluater = LearningSessionEvaluator(sensorHandler.dataList, arrayListOf<Float>())
+        val learningSessionEvaluater = LearningSessionEvaluator(sensorHandler.lightDataList, sensorHandler.noiseDataList)
     }
 
     private fun showSelectPlaceDialog() {

@@ -18,7 +18,8 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
 
     private var lightSensor: Sensor? = null
 
-    val dataList = arrayListOf<Float>()
+    val lightDataList = arrayListOf<Float>()
+    val noiseDataList = arrayListOf<Int>()
 
     private var mRecorder: MediaRecorder? = null
 
@@ -90,7 +91,9 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
     }
 
     private fun onCollectData(event: SensorEvent) {
-        dataList.add(event.values[0])
+        lightDataList.add(event.values[0])
+        noiseDataList.add(getAmplitude())
+
         eventCounter = 0
         info { "${event.values[0]} added" }
         info { "Amplitude: ${getAmplitude()}" }
