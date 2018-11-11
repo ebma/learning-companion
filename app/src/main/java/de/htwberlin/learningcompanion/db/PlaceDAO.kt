@@ -24,6 +24,9 @@ interface PlaceDAO {
     @Query("SELECT * FROM places WHERE id == :id")
     fun getPlaceByID(id: Long): Place
 
+    @Query("SELECT * FROM places WHERE currentPlace == 1")
+    fun getCurrentPlace(): Place
+
     @Query("SELECT * FROM places")
     fun getPlaces(): List<Place>
 

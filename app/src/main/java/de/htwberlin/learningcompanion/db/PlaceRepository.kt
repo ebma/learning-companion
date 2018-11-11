@@ -11,6 +11,7 @@ class PlaceRepository private constructor(context: Context) {
     private val context: Context = context.applicationContext
 
     var placesLiveData: LiveData<List<Place>>
+    var placesList: List<Place>? = null
 
     private val appDatabase: AppDatabase
     private val executor = Executors.newSingleThreadExecutor()
@@ -21,6 +22,8 @@ class PlaceRepository private constructor(context: Context) {
     init {
         appDatabase = AppDatabase.get(this.context)
         placesLiveData = allPlaces
+
+        placesLiveData.observeForever { places -> placesList = places }
     }
 
     fun setPlaceAsCurrentPlace(place: Place) {
@@ -37,12 +40,20 @@ class PlaceRepository private constructor(context: Context) {
         return appDatabase.placeDao().getPlaceByID(placeID)
     }
 
+    fun getCurrentPlace(): Place {
+        return appDatabase.placeDao().getCurrentPlace()
+    }
+
     fun insertPlaceList(placeList: List<Place>) {
         executor.execute { appDatabase.placeDao().insertPlaces(placeList) }
     }
 
     fun insertPlace(place: Place) {
         executor.execute { appDatabase.placeDao().insertPlace(place) }
+    }
+
+    fun updatePlace(place: Place) {
+        executor.execute { appDatabase.placeDao().updatePlace(place) }
     }
 
     fun deletePlace(place: Place) {

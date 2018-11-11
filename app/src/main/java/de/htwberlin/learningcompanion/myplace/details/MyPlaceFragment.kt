@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
+import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Place
 import de.htwberlin.learningcompanion.util.setActivityTitle
@@ -120,12 +121,16 @@ class MyPlaceFragment : Fragment() {
     }
 
     private fun updatePlace(place: Place) {
-        context?.let { AppDatabase.get(it).placeDao().updatePlace(place) }
+        context?.let { PlaceRepository.get(it).updatePlace(place) }
 
     }
 
     private fun savePlace(place: Place) {
-        context?.let { AppDatabase.get(it).placeDao().insertPlace(place) }
+        context?.let {
+            place.currentPlace = true
+            PlaceRepository.get(it).insertPlace(place)
+            PlaceRepository.get(it).setPlaceAsCurrentPlace(place)
+        }
     }
 
     private fun navigateToMainScreen() {

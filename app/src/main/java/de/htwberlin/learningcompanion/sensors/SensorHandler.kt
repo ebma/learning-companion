@@ -12,7 +12,7 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
     private val DEFAULT_TIME_BETWEEN_DATA_EVENTS = 0.2 // average time during sensor events
 
     private var intervalInSeconds: Int = 0
-    private var intervalCounter = 0
+    private var eventCounter = 0
 
     private var lightSensor: Sensor? = null
 
@@ -20,7 +20,7 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
 
     fun start(intervalInSeconds: Int) {
         this.intervalInSeconds = intervalInSeconds
-        intervalCounter = intervalInSeconds * 10 // make interval counter high enough so that the first value is collected
+        eventCounter = intervalInSeconds * 10 // make eventcounter high enough so that the first value is immediately collected on start
 
         lightSensor = sensorManager.getDefaultSensor(Sensor.TYPE_LIGHT)
         sensorManager.registerListener(this, lightSensor, SensorManager.SENSOR_DELAY_NORMAL)
@@ -36,11 +36,11 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
 
     override fun onSensorChanged(event: SensorEvent) {
         if (event.sensor == lightSensor) {
-            intervalCounter += 1
+            eventCounter += 1
 
-            if (intervalCounter * DEFAULT_TIME_BETWEEN_DATA_EVENTS >= intervalInSeconds) {
+            if (eventCounter * DEFAULT_TIME_BETWEEN_DATA_EVENTS >= intervalInSeconds) {
                 dataList.add(event.values[0])
-                intervalCounter = 0
+                eventCounter = 0
                 info { "${event.values[0]} added" }
             }
         }

@@ -8,11 +8,19 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.db.GoalRepository
+import de.htwberlin.learningcompanion.db.PlaceRepository
+import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
 import de.htwberlin.learningcompanion.sensors.LearningSessionEvaluator
 import de.htwberlin.learningcompanion.sensors.SensorHandler
+import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
 import de.htwberlin.learningcompanion.util.setActivityTitle
+import org.jetbrains.anko.noButton
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.sensorManager
+import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.yesButton
 
 class MainScreenFragment : Fragment() {
 
@@ -42,10 +50,31 @@ class MainScreenFragment : Fragment() {
 
     private fun addClickListeners() {
         btnStart.onClick {
-            startSensorHandler()
+            onStartButtonClick()
         }
         btnQuit.onClick {
+            onQuitButtonClick()
             stopSensorHandler()
+        }
+    }
+
+    private fun onQuitButtonClick() {
+        stopSensorHandler()
+        startEvaluation()
+    }
+
+    private fun onStartButtonClick() {
+        val goals = GoalRepository.get(context!!).goalsList
+        val places = PlaceRepository.get(context!!).placesList
+
+        if (goals != null && goals.isNotEmpty()) {
+            if (places != null && places.isNotEmpty()) {
+                startSensorHandler()
+            } else {
+                showSelectPlaceDialog()
+            }
+        } else {
+            showSelectGoalDialog()
         }
     }
 
@@ -55,11 +84,34 @@ class MainScreenFragment : Fragment() {
 
     private fun stopSensorHandler() {
         sensorHandler.stop()
-        startEvaluation()
     }
 
     private fun startEvaluation() {
         val learningSessionEvaluater = LearningSessionEvaluator(sensorHandler.dataList, arrayListOf<Float>())
+    }
+
+    private fun showSelectPlaceDialog() {
+        alert("Please take your time and create one before starting your learning session.", "We detected that you did not yet create a place!") {
+            yesButton { navigateToMyPlaceFragment() }
+            noButton { toast("Learning session aborted") }
+        }.show()
+    }
+
+    private fun navigateToMyPlaceFragment() {
+        val fragment = MyPlaceFragment()
+        activity!!.supportFragmentManager.beginTransaction().addToBackStack("myplacefragment").replace(R.id.content_main, fragment).commit()
+    }
+
+    private fun showSelectGoalDialog() {
+        alert("Please take your time and create one before starting your learning session.", "We detected that you did not yet create a goal!") {
+            yesButton { navigateToGoalFragment() }
+            noButton { toast("Learning session aborted") }
+        }.show()
+    }
+
+    private fun navigateToGoalFragment() {
+        val fragment = GoalNavHostFragment()
+        activity!!.supportFragmentManager.beginTransaction().addToBackStack("goalfragment").replace(R.id.content_main, fragment).commit()
     }
 
 }
