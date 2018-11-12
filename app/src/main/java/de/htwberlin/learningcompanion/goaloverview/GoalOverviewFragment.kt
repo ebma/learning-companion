@@ -45,6 +45,7 @@ class GoalOverviewFragment : Fragment() {
 
         viewModel = ViewModelProviders.of(this).get(GoalOverviewViewModel::class.java)
         viewModel.getGoals().observe(this, Observer<List<Goal>> { goals ->
+            goalList.clear()
             goalList.addAll(goals)
             viewAdapter.notifyDataSetChanged()
         })

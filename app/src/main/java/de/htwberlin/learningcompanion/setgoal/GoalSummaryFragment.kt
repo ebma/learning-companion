@@ -74,16 +74,11 @@ class GoalSummaryFragment : Fragment() {
     }
 
     private fun createGoalFromArguments(): Goal {
-        var goal: Goal
-        goal = try {
-            val durationInMin = duration?.toInt()
-            Goal(action!!, amount!!, field!!, medium!!, durationInMin, null)
-        } catch (e: NumberFormatException) {
-            e.printStackTrace()
+        return if (duration != null) {
+            Goal(action!!, amount!!, field!!, medium!!, duration?.toInt(), null)
+        } else {
             Goal(action!!, amount!!, field!!, medium!!, null, timestamp!!)
         }
-
-        return goal
     }
 
     private fun saveGoalToDatabase(goal: Goal) {
