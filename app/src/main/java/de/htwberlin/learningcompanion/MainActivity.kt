@@ -19,7 +19,7 @@ const val REQUEST_RECORD_AUDIO_PERMISSION = 200
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
-    var permissionToRecordAccepted = false
+    private val listeners = mutableListOf<PermissionListener>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -90,10 +90,26 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        permissionToRecordAccepted = if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
-            grantResults[0] == PackageManager.PERMISSION_GRANTED
-        } else {
-            false
+        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                notifyListeners(permissions[0], true)
+            } else {
+                notifyListeners(permissions[0], false)
+            }
+        }
+    }
+
+    fun addPermissionListener(listener: PermissionListener) {
+        listeners.add(listener)
+    }
+
+    private fun notifyListeners(permission: String, accepted: Boolean) {
+        listeners.forEach {
+            if (accepted) {
+                it.onPermissionAccepted(permission)
+            } else {
+                it.onPermissionRevoked(permission)
+            }
         }
     }
 }

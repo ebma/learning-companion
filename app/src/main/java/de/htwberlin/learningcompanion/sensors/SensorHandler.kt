@@ -29,9 +29,9 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
         this.intervalInSeconds = intervalInSeconds
 
         if (!running) {
+            running = true
             startLightSensor()
             startRecording()
-            running = true
         }
     }
 
@@ -52,7 +52,7 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
             try {
                 prepare()
             } catch (e: IOException) {
-
+                e.printStackTrace()
             }
 
             start()
@@ -61,10 +61,10 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
 
     fun stop() {
         if (running) {
+            running = false
             sensorManager.unregisterListener(this)
 
             stopRecording()
-            running = false
         }
     }
 
@@ -91,12 +91,15 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
     }
 
     private fun onCollectData(event: SensorEvent) {
-        lightDataList.add(event.values[0])
-        noiseDataList.add(getAmplitude())
+        val amplitude = getAmplitude()
+        val lightValue = event.values[0]
+
+        lightDataList.add(lightValue)
+        noiseDataList.add(amplitude)
 
         eventCounter = 0
         info { "${event.values[0]} added" }
-        info { "Amplitude: ${getAmplitude()}" }
+        info { "Amplitude: ${amplitude}" }
     }
 
     private fun getAmplitude(): Int {

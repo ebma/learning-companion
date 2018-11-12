@@ -1,10 +1,7 @@
 package de.htwberlin.learningcompanion.sensors
 
 import android.util.Log
-import de.htwberlin.learningcompanion.util.LIGHT_HIGHEST_THRESHOLD
-import de.htwberlin.learningcompanion.util.LIGHT_HIGH_THRESHOLD
-import de.htwberlin.learningcompanion.util.LIGHT_LOW_THRESHOLD
-import de.htwberlin.learningcompanion.util.LIGHT_MEDIUM_THRESHOLD
+import de.htwberlin.learningcompanion.util.*
 
 enum class LightLevel { LOWEST, LOW, MEDIUM, HIGH, HIGHEST }
 enum class NoiseLevel { LOWEST, LOW, MEDIUM, HIGH, HIGHEST }
@@ -17,7 +14,7 @@ class LearningSessionEvaluator(private val lightValues: ArrayList<Float>,
     private var lightLevel: LightLevel = LightLevel.MEDIUM
     private var noiseLevel: NoiseLevel = NoiseLevel.MEDIUM
 
-    private fun evaluateLight(): LightLevel {
+    public fun evaluateLight(): LightLevel {
         val lightAverage = calculateAverage(lightValues)
 
         when (lightAverage) {
@@ -34,10 +31,21 @@ class LearningSessionEvaluator(private val lightValues: ArrayList<Float>,
         return lightLevel
     }
 
-    private fun evaluateNoise(): NoiseLevel {
+    public fun evaluateNoise(): NoiseLevel {
         val noiseAverage = calculateAverage(noiseValues)
 
-        return NoiseLevel.HIGH
+        when (noiseAverage) {
+            in 0.0..NOISE_LOW_THRESHOLD -> noiseLevel = NoiseLevel.LOWEST
+            in NOISE_LOW_THRESHOLD..NOISE_MEDIUM_THRESHOLD -> noiseLevel = NoiseLevel.LOW
+            in NOISE_MEDIUM_THRESHOLD..NOISE_HIGH_THRESHOLD -> noiseLevel = NoiseLevel.MEDIUM
+            in NOISE_HIGH_THRESHOLD..NOISE_HIGHEST_THRESHOLD -> noiseLevel = NoiseLevel.HIGH
+            in NOISE_HIGHEST_THRESHOLD..Double.MAX_VALUE -> noiseLevel = NoiseLevel.HIGHEST
+            else -> {
+                Log.d(TAG, "error with evaluating noise")
+            }
+        }
+
+        return noiseLevel
     }
 
     private fun <T : Number> calculateAverage(values: ArrayList<T>): Double {
