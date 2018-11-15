@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.MainActivity
@@ -33,6 +34,8 @@ class MainScreenFragment : Fragment() {
     private lateinit var btnStart: Button
     private lateinit var btnQuit: Button
 
+    private lateinit var tvCharlieInfo: TextView
+
     private val INTERVAL_IN_SECONDS = 5
     private var permissionToRecordAccepted = false
 
@@ -44,12 +47,14 @@ class MainScreenFragment : Fragment() {
 
         findViews()
         addClickListeners()
+        showCharlieInfoText()
         return rootView
     }
 
     private fun findViews() {
         btnStart = rootView.findViewById(R.id.btn_start)
         btnQuit = rootView.findViewById(R.id.btn_quit)
+        tvCharlieInfo = rootView.findViewById(R.id.tv_charlie_info_text)
     }
 
     private fun addClickListeners() {
@@ -72,7 +77,7 @@ class MainScreenFragment : Fragment() {
             val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
 
             when {
-                //currentGoal == null -> showSelectGoalDialog()
+                currentGoal == null -> showSelectGoalDialog()
                 currentPlace == null -> showSelectPlaceDialog()
                 else -> startSensorHandler()
             }
@@ -81,10 +86,28 @@ class MainScreenFragment : Fragment() {
         }
     }
 
-    private fun startSensorHandler() {
-        sensorHandler.start(INTERVAL_IN_SECONDS)
+    private fun showCharlieInfoText() {
+        val currentGoal = GoalRepository.get(context!!).getCurrentGoal()
+        val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
+
+        when {
+            currentGoal == null -> showSelectGoalInfoText()
+            currentPlace == null -> showSelectPlaceInfoText()
+        }
     }
 
+    private fun showSelectGoalInfoText() {
+        tvCharlieInfo.text = "Please press \"Menu\" and go to \"My Goals\" to set the goal that you want to achieve."
+    }
+
+    private fun showSelectPlaceInfoText() {
+        tvCharlieInfo.text = "Please press \"Menu\" and go to \"My places\" to set the place where you want to learn."
+    }
+
+    private fun startSensorHandler() {
+        sensorHandler.clear()
+        sensorHandler.start(INTERVAL_IN_SECONDS)
+    }
 
     private fun stopSensorHandler() {
         sensorHandler.stop()
@@ -98,7 +121,7 @@ class MainScreenFragment : Fragment() {
     private fun showSessionResultDialog(learningSessionEvaluator: LearningSessionEvaluator) {
         alert {
             title = "Evaluation"
-            positiveButton("Got it!") { toast("Yes!") }
+            positiveButton("Got it!") { }
             customView {
                 verticalLayout {
                     textView("LightLevel: ${learningSessionEvaluator.evaluateLight()}")

@@ -35,6 +35,11 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
         }
     }
 
+    fun clear() {
+        lightDataList.clear()
+        noiseDataList.clear()
+    }
+
     private fun startLightSensor() {
         eventCounter = intervalInSeconds * 10 // make eventcounter high enough so that the first value is immediately collected on start
 
