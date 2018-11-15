@@ -35,7 +35,7 @@ class PlaceOverviewFragment : Fragment() {
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_place_overview, container, false)
 
-        initHeaderLayout()
+        updateHeaderLayout()
         return rootView
     }
 
@@ -49,6 +49,7 @@ class PlaceOverviewFragment : Fragment() {
             placeList.clear()
             placeList.addAll(places)
             viewAdapter.notifyDataSetChanged()
+            updateHeaderLayout()
         })
 
         viewManager = LinearLayoutManager(context)
@@ -66,10 +67,10 @@ class PlaceOverviewFragment : Fragment() {
         }
     }
 
-    private fun initHeaderLayout() {
+    private fun updateHeaderLayout() {
         val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
         if (currentPlace != null) {
-            rootView.findViewById<TextView>(R.id.tv_current_place_displayname).text = currentPlace.addressString
+            rootView.findViewById<TextView>(R.id.tv_current_place_displayname).text = currentPlace.name
         }
     }
 

@@ -33,7 +33,7 @@ class MainScreenFragment : Fragment() {
     private lateinit var btnStart: Button
     private lateinit var btnQuit: Button
 
-    private val INTERVAL_IN_SECONDS = 10
+    private val INTERVAL_IN_SECONDS = 5
     private var permissionToRecordAccepted = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
