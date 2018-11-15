@@ -93,6 +93,7 @@ class MainScreenFragment : Fragment() {
         when {
             currentGoal == null -> showSelectGoalInfoText()
             currentPlace == null -> showSelectPlaceInfoText()
+            else -> showStartLearningInfoText()
         }
     }
 
@@ -104,13 +105,19 @@ class MainScreenFragment : Fragment() {
         tvCharlieInfo.text = "Please press \"Menu\" and go to \"My places\" to set the place where you want to learn."
     }
 
+    private fun showStartLearningInfoText() {
+        tvCharlieInfo.text = "You can start your learning session by clicking on the \"Start\" Button below."
+    }
+
     private fun startSensorHandler() {
         sensorHandler.clear()
         sensorHandler.start(INTERVAL_IN_SECONDS)
+        toast("Learning session started")
     }
 
     private fun stopSensorHandler() {
         sensorHandler.stop()
+        toast("Learning session stopped")
     }
 
     private fun startEvaluation() {
@@ -135,7 +142,7 @@ class MainScreenFragment : Fragment() {
     private fun showSelectPlaceDialog() {
         alert("Please take your time and create one before starting your learning session.", "We detected that you did not yet create a place!") {
             yesButton { navigateToMyPlaceFragment() }
-            noButton { toast("Learning session aborted") }
+            noButton { }
         }.show()
     }
 
@@ -147,7 +154,7 @@ class MainScreenFragment : Fragment() {
     private fun showSelectGoalDialog() {
         alert("Please take your time and create one before starting your learning session.", "We detected that you did not yet create a goal!") {
             yesButton { navigateToGoalFragment() }
-            noButton { toast("Learning session aborted") }
+            noButton { }
         }.show()
     }
 
