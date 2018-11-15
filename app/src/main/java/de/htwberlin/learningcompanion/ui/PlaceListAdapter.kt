@@ -1,6 +1,5 @@
 package de.htwberlin.learningcompanion.ui
 
-import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -51,8 +50,7 @@ class PlaceListAdapter(private val placeDataSet: ArrayList<Place>, val supportFr
                 PlaceRepository.get(itemView.context).setPlaceAsCurrentPlace(place)
             }
 
-            val uri = Uri.parse(place.imageUri)
-            Picasso.get().load(uri).fit().into(ivPlacePreview)
+            Picasso.get().load(place.imageUri).fit().into(ivPlacePreview)
         }
 
         private fun navigateToPlaceDetailFragment() {

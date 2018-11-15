@@ -17,6 +17,7 @@ class WelcomeActivity : Activity() {
     }
 
     private fun launchMainActivity() {
-        startActivity(Intent(this, MainActivity::class.java));
+        startActivity(Intent(this, MainActivity::class.java))
+        finish()
     }
 }

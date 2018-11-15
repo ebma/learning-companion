@@ -16,4 +16,9 @@ data class Goal(
     var id: Long = 0
 
     var completed: Boolean = false
+    var currentGoal: Boolean = false
+
+    fun getGoalText(): String {
+        return "${action}, ${field}, ${medium}, ${amount}"
+    }
 }

@@ -8,17 +8,16 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.ImageView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
+import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Place
+import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_my_place.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -32,15 +31,22 @@ class MyPlaceFragment : Fragment() {
 
     private lateinit var rootView: View
 
-    private lateinit var etName: EditText
-    private lateinit var etAddress: EditText
     private lateinit var ivImagePreview: ImageView
+
+    private lateinit var etName: EditText
+    private lateinit var tvAddress: TextView
+
     private lateinit var btnSave: Button
+    private lateinit var btnSetAddress: Button
+    private lateinit var btnGetImageFromGallery: ImageButton
 
     private var longitude: Double = 0.0
     private var latitude: Double = 0.0
 
     private var imageUri: Uri? = null
+
+    private var editMode = false
+    private var place: Place? = null
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_my_place, container, false)
@@ -57,44 +63,56 @@ class MyPlaceFragment : Fragment() {
 
     private fun checkForEditablePlace() {
         if (arguments != null) {
-            (activity as MainActivity).supportActionBar?.title = "Edit place"
-
-
             val id = arguments!!.getLong("ID")
             context?.let {
-                val placeByID = AppDatabase.get(it).placeDao().getPlaceByID(id)
-                initLayoutWithPlace(placeByID)
+                place = AppDatabase.get(it).placeDao().getPlaceByID(id)
             }
-        } else {
-            (activity as MainActivity).supportActionBar?.title = "New place"
+            if (place != null) {
+                initLayoutWithPlace(place!!)
+            }
 
+            setActivityTitle("Edit place")
+            editMode = true
+
+        } else {
+            setActivityTitle("New Place")
+            editMode = false
         }
     }
 
     private fun initLayoutWithPlace(place: Place) {
         etName.setText(place.name)
-        etAddress.setText(place.addressString)
+        tvAddress.text = place.addressString
+        imageUri = place.imageUri
 
-        val uri = Uri.parse(place.imageUri)
-        Picasso.get().load(uri).fit().into(ivImagePreview)
+        Picasso.get().load(imageUri).fit().into(ivImagePreview)
     }
 
     private fun findViews() {
         etName = rootView.findViewById(R.id.et_name)
-        etAddress = rootView.findViewById(R.id.et_address)
+        tvAddress = rootView.findViewById(R.id.tv_address)
         ivImagePreview = rootView.findViewById(R.id.iv_image_preview)
         btnSave = rootView.findViewById(R.id.btn_save)
+        btnSetAddress = rootView.findViewById(R.id.btn_set_address)
+        btnGetImageFromGallery = rootView.findViewById(R.id.ib_gallery)
     }
 
     private fun addSaveButtonClickListener() {
         btnSave.onClick {
             val nameString = etName.text.toString()
-            val addressString = etAddress.text.toString()
+            val addressString = tvAddress.text.toString()
 
             if (nameString.isNotEmpty() && addressString.isNotEmpty() && imageUri != null) {
-                val place = Place(imageUri.toString(), nameString, latitude, longitude, addressString)
-                savePlace(place)
-                toast("Place saved to Database")
+                if (editMode && place != null) {
+                    val updatedPlace = Place(imageUri!!, nameString, latitude, longitude, addressString)
+                    updatedPlace.id = place?.id ?: 0
+                    updatePlace(updatedPlace)
+                    toast("Place updated")
+                } else {
+                    val place = Place(imageUri!!, nameString, latitude, longitude, addressString)
+                    savePlace(place)
+                    toast("Place saved to Database")
+                }
                 navigateToMainScreen()
             } else {
                 toast("Missing arguments")
@@ -102,8 +120,17 @@ class MyPlaceFragment : Fragment() {
         }
     }
 
+    private fun updatePlace(place: Place) {
+        context?.let { PlaceRepository.get(it).updatePlace(place) }
+
+    }
+
     private fun savePlace(place: Place) {
-        context?.let { AppDatabase.get(it).placeDao().insertPlace(place) }
+        context?.let {
+            place.currentPlace = true
+            PlaceRepository.get(it).insertPlace(place)
+            PlaceRepository.get(it).setPlaceAsCurrentPlace(place)
+        }
     }
 
     private fun navigateToMainScreen() {
@@ -114,7 +141,7 @@ class MyPlaceFragment : Fragment() {
     }
 
     private fun addGalleryButtonClickListener() {
-        rootView.findViewById<ImageButton>(R.id.ib_gallery).onClick {
+        btnGetImageFromGallery.onClick {
             val intent = Intent()
             intent.type = "image/*"
             intent.action = Intent.ACTION_GET_CONTENT
@@ -123,7 +150,7 @@ class MyPlaceFragment : Fragment() {
     }
 
     private fun addAddressClickListener() {
-        etAddress.setOnClickListener {
+        btnSetAddress.setOnClickListener {
             startGetLocationActivity()
         }
     }
@@ -137,8 +164,12 @@ class MyPlaceFragment : Fragment() {
         if (requestCode == RC_LOCATION_ACTIVITY) {
             when (resultCode) {
                 Activity.RESULT_OK -> {
-                    val address = data?.extras?.getString(LOCATION_STRING_EXTRA)
-                    et_address.setText(address)
+                    val addressDisplayName = data?.extras?.getString(LOCATION_DISPLAYNAME_EXTRA)
+                    tv_address.text = addressDisplayName
+
+                    latitude = data?.extras?.getDouble(LOCATION_LATITUDE_EXTRA) ?: 0.0
+                    longitude = data?.extras?.getDouble(LOCATION_LONGITUDE_EXTRA) ?: 0.0
+
                 }
                 Activity.RESULT_CANCELED -> {
 

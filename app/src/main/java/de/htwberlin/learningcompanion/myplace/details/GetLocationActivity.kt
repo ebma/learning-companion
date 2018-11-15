@@ -11,10 +11,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.model.Address
+import de.htwberlin.learningcompanion.network.LocationToAddressRequest
 import kotlinx.android.synthetic.main.activity_get_location.*
 import kotlinx.android.synthetic.main.content_get_location.*
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.toast
 import org.osmdroid.config.Configuration
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
@@ -23,7 +26,9 @@ import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
 
-val LOCATION_STRING_EXTRA = "location_extra"
+val LOCATION_DISPLAYNAME_EXTRA = "location_name_extra"
+val LOCATION_LATITUDE_EXTRA = "location_latitude_extra"
+val LOCATION_LONGITUDE_EXTRA = "location_longitude_extra"
 
 /**
  * An activity that displays a map showing the place at the device's current location.
@@ -37,6 +42,8 @@ class GetLocationActivity : AppCompatActivity() {
     // The geographical location where the device is currently located. That is, the last-known
     // location retrieved by the Fused Location Provider.
     private var lastKnownLocation: Location? = null
+
+    private var address: Address? = null
 
     private lateinit var gpsLocationProvider: IMyLocationProvider
 
@@ -73,17 +80,48 @@ class GetLocationActivity : AppCompatActivity() {
 
         addLocationOverlay()
 
+        btn_get_address.onClick {
+            getAddress()
+        }
+
         btn_save_location.onClick {
             onSaveButtonClick()
         }
 
     }
 
+    private fun getAddress() {
+        if (lastKnownLocation != null) {
+            val request = LocationToAddressRequest(applicationContext)
+
+            val geoPoint = GeoPoint(lastKnownLocation!!)
+            request.getAddress(geoPoint, object : LocationToAddressRequest.Callback {
+                override fun onResult(addressResult: Address) {
+                    tv_address.text = addressResult.display_name
+                    address = addressResult
+                    Log.d(TAG, "address: $addressResult")
+                }
+
+                override fun onError(errorMessage: String) {
+                    Log.e(TAG, errorMessage)
+                }
+            })
+        } else {
+            toast("Your location was not found yet")
+        }
+    }
+
     private fun onSaveButtonClick() {
-        val intent = Intent()
-        intent.putExtra(LOCATION_STRING_EXTRA, "TestAddress")
-        setResult(Activity.RESULT_OK, intent)
-        finish()
+        if (address == null) {
+            toast("Please get the address first")
+        } else {
+            val intent = Intent()
+            intent.putExtra(LOCATION_DISPLAYNAME_EXTRA, address!!.display_name)
+            intent.putExtra(LOCATION_LATITUDE_EXTRA, address!!.lat)
+            intent.putExtra(LOCATION_LONGITUDE_EXTRA, address!!.lon)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
+        }
     }
 
     public override fun onResume() {
@@ -120,7 +158,8 @@ class GetLocationActivity : AppCompatActivity() {
     }
 
     private fun stopLocationProvider() {
-        gpsLocationProvider.stopLocationProvider()
+        if (::gpsLocationProvider.isInitialized)
+            gpsLocationProvider.stopLocationProvider()
     }
 
     private fun moveCameraToLocation(location: Location?) {
