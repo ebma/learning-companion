@@ -75,8 +75,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (itemId) {
             R.id.nav_mainscreen -> fragment = MainScreenFragment()
             R.id.nav_myplace -> fragment = PlaceOverviewFragment()
-            R.id.nav_overview -> fragment = GoalOverviewFragment()
-            R.id.nav_setgoal -> fragment = GoalNavHostFragment()
+            R.id.nav_overview -> fragment = MainScreenFragment()
+//            R.id.nav_setgoal -> fragment = GoalNavHostFragment()
+            R.id.nav_setgoal -> fragment = GoalOverviewFragment()
         }
 
         //replacing the fragment

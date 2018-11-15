@@ -11,8 +11,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Goal
+import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
 import de.htwberlin.learningcompanion.ui.GoalListAdapter
 import de.htwberlin.learningcompanion.util.setActivityTitle
+import kotlinx.android.synthetic.main.fragment_goal_overview.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
 class GoalOverviewFragment : Fragment() {
@@ -37,30 +40,41 @@ class GoalOverviewFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         setActivityTitle(getString(R.string.title_nav_menu_history))
+//        (activity as MainActivity).supportActionBar?.title = getString(R.string.title_nav_menu_goal)
 
 
         viewModel = ViewModelProviders.of(this).get(GoalOverviewViewModel::class.java)
         viewModel.getGoals().observe(this, Observer<List<Goal>> { goals ->
+            goalList.clear()
             goalList.addAll(goals)
             viewAdapter.notifyDataSetChanged()
         })
 
         viewManager = LinearLayoutManager(context)
-        viewAdapter = GoalListAdapter(goalList)
+        viewAdapter = GoalListAdapter(goalList, activity!!.supportFragmentManager)
 
         recyclerView = rootView.findViewById<RecyclerView>(R.id.rv_goals).apply {
             // use this setting to improve performance if you know that changes
             // in content do not change the layout size of the RecyclerView
             setHasFixedSize(true)
-
             // use a linear layout manager
             layoutManager = viewManager
-
             // specify an viewAdapter (see also next example)
             adapter = viewAdapter
-
+        }
+        btn_new_goal.onClick {
+            navigateToSetGoalFragment()
         }
 
+
+    }
+    private fun navigateToSetGoalFragment() {
+        val fragment = GoalNavHostFragment()
+//        var fragment: Fragment? = null
+//        R.id.nav_setgoal -> fragment = GoalNavHostFragment()
+
+        activity!!.supportFragmentManager.beginTransaction().addToBackStack(
+                "detailfragment").replace(R.id.content_main, fragment).commit()
     }
 
 }
