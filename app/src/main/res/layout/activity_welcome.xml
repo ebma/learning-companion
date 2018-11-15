@@ -5,7 +5,6 @@
     android:id="@+id/cl_welcome_activity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_welcome_activity"
     tools:context=".WelcomeActivity">
 
     <TextView
@@ -13,13 +12,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
-        android:text="Welcome to your"
-        android:textColor="@color/textcolor_white"
+        android:text="Hello, I am"
+        android:textColor="@color/textcolor_black"
         android:textSize="30sp"
         android:typeface="serif"
         app:layout_constraintBottom_toTopOf="@+id/guideline_top"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.28"
         app:layout_constraintStart_toStartOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
@@ -29,53 +28,12 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.2" />
 
-    <ImageView
-        android:id="@+id/iv_lightbulb"
-        android:layout_width="75dp"
-        android:layout_height="75dp"
-        android:layout_marginEnd="84dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_lightbulb"
-        app:layout_constraintBottom_toTopOf="@+id/iv_reading_book"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_timer"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="84dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="116dp"
-        android:src="@drawable/ic_timer"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_middle"
-        app:layout_constraintEnd_toStartOf="@+id/iv_reading_book"
-        app:layout_constraintHorizontal_bias="0.482"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <ImageView
-        android:id="@+id/iv_reading_book"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_reading_book"
-        app:layout_constraintBottom_toTopOf="@+id/guideline_middle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.602"
-        app:layout_constraintStart_toStartOf="parent" />
-
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline_middle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.6" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline_bottom"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.7" />
+        app:layout_constraintGuide_percent="0.56" />
 
     <TextView
         android:id="@+id/tv_title_learning"
@@ -84,33 +42,58 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="Learning"
+        android:text="Charlie"
         android:textAllCaps="false"
-        android:textColor="@color/textcolor_white"
-        android:textSize="31sp"
+        android:textColor="@color/purple"
+        android:textSize="40sp"
         android:textStyle=""
         android:typeface="serif"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.304"
+        app:layout_constraintHorizontal_bias="0.52"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline_bottom" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_top" />
 
     <TextView
         android:id="@+id/tv_title_companion"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="companion"
+        android:layout_marginBottom="32dp"
+        android:text="Tap anywhere"
         android:textAllCaps="false"
-        android:textColor="@color/textcolor_white"
-        android:textSize="31sp"
+        android:textSize="20sp"
         android:textStyle=""
         android:typeface="serif"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.751"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imageView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/charlie"
+        app:layout_constraintBottom_toTopOf="@+id/guideline_middle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginBottom="8dp"
+        android:text="I need information such as location, light level and noise level to know about your place. \n \nYou can change this anytime at Settings."
+        android:textSize="22sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_title_companion"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_title_learning" />
+        app:layout_constraintTop_toTopOf="@+id/guideline_middle" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
