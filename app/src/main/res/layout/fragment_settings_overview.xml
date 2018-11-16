@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".settings.SettingsOverviewFragment"
+    tools:layout_editor_absoluteY="81dp">
+
+
+    <TextView
+        android:id="@+id/tv_settings_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/settings_user_name"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_name"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <TextView
+        android:id="@+id/tv_settings_buddy_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/settings_buddy_name"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_user_name" />
+
+    <TextView
+        android:id="@+id/tv_settings_buddy_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/settings_buddy_image"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_gps"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_buddy_name" />
+
+    <TextView
+        android:id="@+id/tv_settings_gps"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/settings_gps"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_microphone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_buddy_image"
+        app:layout_constraintVertical_bias="0.904" />
+
+    <TextView
+        android:id="@+id/tv_settings_microphone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/settings_microphone"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_camera"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_gps" />
+
+    <TextView
+        android:id="@+id/tv_settings_camera"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:textSize="14sp"
+        android:text="@string/settings_camera"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_alert_setting"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_microphone" />
+
+    <TextView
+        android:id="@+id/tv_settings_alert_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/settings_alert_setting_info"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_start_end"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_camera" />
+
+    <TextView
+        android:id="@+id/tv_settings_start_end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:text="@string/settings_start_end"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_interval"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_alert_setting" />
+
+    <TextView
+        android:id="@+id/tv_settings_interval"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="16dp"
+        android:text="@string/settings_interval"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_frequency"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_start_end" />
+
+    <TextView
+        android:id="@+id/tv_settings_frequency"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/settings_frequency"
+        android:textSize="14sp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_can_changed_info"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_interval" />
+
+    <TextView
+        android:id="@+id/tv_settings_can_changed_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:gravity="center"
+        android:text="@string/settings_info_can_be_changed"
+        android:textColor="@color/red"
+        android:textSize="15sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

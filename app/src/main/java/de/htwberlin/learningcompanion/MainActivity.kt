@@ -12,6 +12,7 @@ import de.htwberlin.learningcompanion.goaloverview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.myplace.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
+import de.htwberlin.learningcompanion.settings.SettingsOverviewFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
@@ -48,8 +49,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         // Handle navigation view item clicks here.
         when (item.itemId) {
-            R.id.nav_setgoal -> {
-                displaySelectedScreen(R.id.nav_setgoal)
+            R.id.nav_mygoal -> {
+                displaySelectedScreen(R.id.nav_mygoal)
             }
             R.id.nav_myplace -> {
                 displaySelectedScreen(R.id.nav_myplace)
@@ -59,6 +60,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             }
             R.id.nav_overview -> {
                 displaySelectedScreen(R.id.nav_overview)
+            }
+            R.id.nav_setting -> {
+                displaySelectedScreen(R.id.nav_setting)
             }
         }
 
@@ -76,8 +80,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_mainscreen -> fragment = MainScreenFragment()
             R.id.nav_myplace -> fragment = PlaceOverviewFragment()
             R.id.nav_overview -> fragment = MainScreenFragment()
-//            R.id.nav_setgoal -> fragment = GoalNavHostFragment()
-            R.id.nav_setgoal -> fragment = GoalOverviewFragment()
+            R.id.nav_mygoal -> fragment = GoalOverviewFragment()
+            R.id.nav_setting -> fragment = SettingsOverviewFragment()
         }
 
         //replacing the fragment

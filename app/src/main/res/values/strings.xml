@@ -42,6 +42,17 @@
     <string name="title_nav_menu_settings">Settings</string>
     <string name="title_nav_menu_help">Help</string>
 
-
+    <string name="settings_user_name">User Name :</string>
+    <string name="settings_buddy_name">Buddy Name :</string>
+    <string name="settings_buddy_image">Buddy Image :</string>
+    <string name="settings_gps">GPS :</string>
+    <string name="settings_microphone">Microphone :</string>
+    <string name="settings_camera">Camera :</string>
+    <string name="settings_alert_setting_info">Alert Setting</string>
+    <string name="settings_start_end">Start and End :</string>
+    <string name="settings_interval">Interval :</string>
+    <string name="settings_frequency">Frequency :</string>
+    <string name="settings_info_can_be_changed">All Settings can be changed</string>
+    
 
 </resources>
