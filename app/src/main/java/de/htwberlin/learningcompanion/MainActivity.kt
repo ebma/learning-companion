@@ -9,6 +9,7 @@ import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import de.htwberlin.learningcompanion.goaloverview.GoalOverviewFragment
+import de.htwberlin.learningcompanion.help.HelpOverview
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.myplace.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
@@ -64,6 +65,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_setting -> {
                 displaySelectedScreen(R.id.nav_setting)
             }
+            R.id.nav_help -> {
+                displaySelectedScreen(R.id.nav_help)
+            }
         }
 
         drawer_layout.closeDrawer(GravityCompat.START)
@@ -82,6 +86,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_overview -> fragment = MainScreenFragment()
             R.id.nav_mygoal -> fragment = GoalOverviewFragment()
             R.id.nav_setting -> fragment = SettingsOverviewFragment()
+            R.id.nav_help -> fragment = HelpOverview()
         }
 
         //replacing the fragment
