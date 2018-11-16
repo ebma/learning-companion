@@ -13,7 +13,6 @@ class HelpOverview : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_help, container, false)
-
         return rootView
     }
 }

@@ -12,27 +12,19 @@
         android:id="@+id/tv_settings_user_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
         android:text="@string/settings_user_name"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_chainStyle="spread" />
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="40dp" />
 
     <TextView
         android:id="@+id/tv_settings_buddy_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/settings_buddy_name"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_user_name" />
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="91dp" />
 
     <TextView
         android:id="@+id/tv_settings_buddy_image"
@@ -41,92 +33,46 @@
         android:layout_marginStart="24dp"
         android:text="@string/settings_buddy_image"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_gps"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_buddy_name" />
-
-    <TextView
-        android:id="@+id/tv_settings_gps"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/settings_gps"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_microphone"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_buddy_image"
-        app:layout_constraintVertical_bias="0.904" />
-
-    <TextView
-        android:id="@+id/tv_settings_microphone"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="@string/settings_microphone"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_camera"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_gps" />
-
-    <TextView
-        android:id="@+id/tv_settings_camera"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="@string/settings_camera"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_alert_setting"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_microphone" />
+        tools:layout_editor_absoluteY="225dp" />
 
     <TextView
         android:id="@+id/tv_settings_alert_setting"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="8dp"
         android:text="@string/settings_alert_setting_info"
         android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_start_end"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_camera" />
+        app:layout_constraintTop_toTopOf="@+id/guideline2"
+        tools:layout_editor_absoluteX="24dp" />
 
     <TextView
         android:id="@+id/tv_settings_start_end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
+        android:layout_marginTop="32dp"
         android:text="@string/settings_start_end"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_interval"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_alert_setting" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_settings_alert_setting"
+        tools:layout_editor_absoluteX="24dp" />
 
     <TextView
         android:id="@+id/tv_settings_interval"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="16dp"
         android:text="@string/settings_interval"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_frequency"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_start_end" />
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="450dp" />
 
     <TextView
         android:id="@+id/tv_settings_frequency"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginBottom="8dp"
         android:text="@string/settings_frequency"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_can_changed_info"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_interval" />
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="508dp" />
 
     <TextView
         android:id="@+id/tv_settings_can_changed_info"
@@ -164,60 +110,11 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
-        android:layout_marginBottom="28dp"
         android:text="[   Charlie   ]"
-        app:layout_constraintBottom_toTopOf="@+id/textView22"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView22"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="[                  ]"
-        app:layout_constraintBottom_toTopOf="@+id/textView23"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView23"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="[                  ]"
-        app:layout_constraintBottom_toTopOf="@+id/textView24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView24"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="24dp"
-        android:text="[                  ]"
-        app:layout_constraintBottom_toTopOf="@+id/textView25"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textView25"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:layout_marginBottom="68dp"
-        android:text="[                  ]"
-        app:layout_constraintBottom_toTopOf="@+id/textView26"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="83dp" />
 
     <TextView
         android:id="@+id/textView26"
@@ -257,5 +154,22 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.797"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="340dp" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="20dp"
+        android:src="@drawable/charlie"
+        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

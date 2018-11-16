@@ -36,7 +36,7 @@ class MainScreenFragment : Fragment() {
 
     private lateinit var tvCharlieInfo: TextView
 
-    private val INTERVAL_IN_SECONDS = 5
+    private val INTERVAL_IN_SECONDS = 5 // maybe 1/min soon
     private var permissionToRecordAccepted = false
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
