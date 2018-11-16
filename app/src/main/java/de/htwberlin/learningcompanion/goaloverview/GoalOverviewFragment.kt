@@ -42,7 +42,7 @@ class GoalOverviewFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
-        setActivityTitle(getString(R.string.title_nav_menu_history))
+        setActivityTitle(getString(R.string.title_nav_menu_goal))
 
         viewModel = ViewModelProviders.of(this).get(GoalOverviewViewModel::class.java)
         viewModel.getGoals().observe(this, Observer<List<Goal>> { goals ->
