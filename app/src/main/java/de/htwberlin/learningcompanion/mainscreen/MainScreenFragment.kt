@@ -14,7 +14,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import de.htwberlin.learningcompanion.*
+import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.charlie.Charlie
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.learning.SessionHandler
@@ -48,7 +48,6 @@ class MainScreenFragment : Fragment() {
 
         findViews()
         addClickListeners()
-        addPermissionListener()
         setBackgroundPicture()
         showCharlieInfoText()
         return rootView
@@ -90,6 +89,8 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun onStartButtonClick() {
+        requestAudioPermission()
+
         if (permissionToRecordAccepted) {
             if (sessionHandler.canStartLearningSession()) {
                 sessionHandler.startLearningSession()
@@ -105,8 +106,6 @@ class MainScreenFragment : Fragment() {
 
                 })
             }
-        } else {
-            requestAudioPermission()
         }
     }
 
@@ -130,26 +129,16 @@ class MainScreenFragment : Fragment() {
         }
     }
 
-    private fun addPermissionListener() {
-        val permissionListener = object : PermissionListener {
-            override fun onPermissionAccepted(permission: String) {
-                if (permission == Manifest.permission.RECORD_AUDIO) {
-                    permissionToRecordAccepted = true
-                    onStartButtonClick()
-                } else if (permission == Manifest.permission.WRITE_EXTERNAL_STORAGE) {
-                    setBackgroundPicture()
-                }
-            }
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
-            override fun onPermissionRevoked(permission: String) {
-                if (permission == Manifest.permission.RECORD_AUDIO) {
-                    permissionToRecordAccepted = false
-                    (activity as MainActivity).removePermissionListener(this)
-                }
-            }
+        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
+            permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
         }
-
-        (activity as MainActivity).addPermissionListener(permissionListener)
     }
 
+    companion object {
+        const val REQUEST_RECORD_AUDIO_PERMISSION = 200
+        const val REQUEST_EXTERNAL_STORAGE_PERMISSION = 201
+    }
 }

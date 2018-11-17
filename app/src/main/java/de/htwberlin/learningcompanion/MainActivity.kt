@@ -1,6 +1,5 @@
 package de.htwberlin.learningcompanion
 
-import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -16,12 +15,7 @@ import de.htwberlin.learningcompanion.settings.SettingsOverviewFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
-const val REQUEST_RECORD_AUDIO_PERMISSION = 200
-const val REQUEST_EXTERNAL_STORAGE_PERMISSION = 201
-
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
-
-    private val listeners = mutableListOf<PermissionListener>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,34 +87,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val ft = supportFragmentManager.beginTransaction()
             ft.replace(R.id.content_main, fragment)
             ft.commit()
-        }
-    }
-
-
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-            notifyListeners(permissions[0], true)
-        } else {
-            notifyListeners(permissions[0], false)
-        }
-    }
-
-    fun addPermissionListener(listener: PermissionListener) {
-        listeners.add(listener)
-    }
-
-    fun removePermissionListener(listener: PermissionListener) {
-        listeners.remove(listener)
-    }
-
-    private fun notifyListeners(permission: String, accepted: Boolean) {
-        listeners.forEach {
-            if (accepted) {
-                it.onPermissionAccepted(permission)
-            } else {
-                it.onPermissionRevoked(permission)
-            }
         }
     }
 }
