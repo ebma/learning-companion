@@ -164,20 +164,24 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun requestPermissionsAndRetryStart() {
-        (activity as MainActivity).addPermissionListener(object : PermissionListener {
+        val permissionListener = object : PermissionListener {
             override fun onPermissionAccepted(permission: String) {
                 if (permission == Manifest.permission.RECORD_AUDIO) {
                     permissionToRecordAccepted = true
                     onStartButtonClick()
+                    (activity as MainActivity).removePermissionListener(this)
                 }
             }
 
             override fun onPermissionRevoked(permission: String) {
-                if (permission == Manifest.permission.RECORD_AUDIO)
+                if (permission == Manifest.permission.RECORD_AUDIO) {
                     permissionToRecordAccepted = false
+                    (activity as MainActivity).removePermissionListener(this)
+                }
             }
+        }
 
-        })
+        (activity as MainActivity).addPermissionListener(permissionListener)
 
         val permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
         ActivityCompat.requestPermissions(activity!!, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
