@@ -11,14 +11,12 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
 import com.squareup.picasso.Picasso
-import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
 import de.htwberlin.learningcompanion.db.PlaceRepository
-import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Place
+import de.htwberlin.learningcompanion.myplace.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.util.setActivityTitle
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_my_place.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.toast
@@ -113,7 +111,7 @@ class MyPlaceFragment : Fragment() {
                     savePlace(place)
                     toast("Place saved to Database")
                 }
-                navigateToMainScreen()
+                navigateToPlaceOverview()
             } else {
                 toast("Missing arguments")
             }
@@ -133,10 +131,10 @@ class MyPlaceFragment : Fragment() {
         }
     }
 
-    private fun navigateToMainScreen() {
-        (activity as MainActivity).nav_view.setCheckedItem(R.id.nav_mainscreen)
+    private fun navigateToPlaceOverview() {
+        // (activity as MainActivity).nav_view.setCheckedItem(R.id.nav_mainscreen)
 
-        val fragment = MainScreenFragment()
+        val fragment = PlaceOverviewFragment()
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.content_main, fragment)?.commit()
     }
 
