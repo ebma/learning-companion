@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
-import de.htwberlin.learningcompanion.db.AppDatabase
+import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Goal
 import kotlinx.android.synthetic.main.activity_main.*
@@ -82,7 +82,11 @@ class GoalSummaryFragment : Fragment() {
     }
 
     private fun saveGoalToDatabase(goal: Goal) {
-        context?.let { AppDatabase.get(it).goalDao().insertGoal(goal) }
+        context?.let {
+            goal.currentGoal = true
+            GoalRepository.get(it).insertGoal(goal)
+            GoalRepository.get(it).setGoalAsCurrentGoal(goal)
+        }
     }
 
     private fun navigateToMainScreen() {
