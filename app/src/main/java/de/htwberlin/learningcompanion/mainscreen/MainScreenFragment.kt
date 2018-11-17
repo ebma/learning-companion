@@ -58,9 +58,11 @@ class MainScreenFragment : Fragment() {
             val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
 
             if (currentPlace != null) {
-                val inputStream = activity!!.contentResolver.openInputStream(currentPlace.imageUri)
-                val drawable = Drawable.createFromStream(inputStream, currentPlace.imageUri.toString())
-                ivPlaceBackground.setImageDrawable(drawable)
+                if (currentPlace.imageUri != null) {
+                    val inputStream = activity!!.contentResolver.openInputStream(currentPlace.imageUri)
+                    val drawable = Drawable.createFromStream(inputStream, currentPlace.imageUri.toString())
+                    ivPlaceBackground.setImageDrawable(drawable)
+                }
             }
         } else {
             requestStoragePermission()

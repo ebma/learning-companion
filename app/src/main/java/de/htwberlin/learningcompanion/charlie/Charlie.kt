@@ -26,7 +26,10 @@ class Charlie(private val context: Context) {
     }
 
     private fun getStartLearningInfoText(): String {
-        return "You can start your learning session by clicking on the \"Start\" Button below."
+        // return "You can start your learning session by clicking on the \"Start\" Button below."
+        val currentGoal = GoalRepository.get(context).getCurrentGoal()
+
+        return "Your current goal is: \n${currentGoal!!.getGoalText()}"
     }
 
 }

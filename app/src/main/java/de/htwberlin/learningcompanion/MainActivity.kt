@@ -75,11 +75,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
 
     private fun displaySelectedScreen(itemId: Int) {
-
-        //creating fragment object
         var fragment: Fragment? = null
 
-        //initializing the fragment object which is selected
         when (itemId) {
             R.id.nav_mainscreen -> fragment = MainScreenFragment()
             R.id.nav_myplace -> fragment = PlaceOverviewFragment()
@@ -89,7 +86,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_help -> fragment = HelpOverview()
         }
 
-        //replacing the fragment
         if (fragment != null) {
             val ft = supportFragmentManager.beginTransaction()
             ft.replace(R.id.content_main, fragment)

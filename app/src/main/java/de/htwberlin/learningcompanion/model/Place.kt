@@ -7,11 +7,11 @@ import java.util.*
 
 @Entity(tableName = "places")
 data class Place(
-        val imageUri: Uri,
+        val imageUri: Uri?,
         val name: String,
         val latitude: Double,
         val longitude: Double,
-        val addressString: String) {
+        val addressString: String?) {
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

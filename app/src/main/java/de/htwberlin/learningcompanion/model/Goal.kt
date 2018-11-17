@@ -22,6 +22,10 @@ data class Goal(
     var currentGoal: Boolean = false
 
     fun getGoalText(): String {
-        return "${action}, ${field}, ${medium}, ${amount}"
+        return when {
+            untilTimeStamp != null -> "${action}, ${field}, ${medium}, ${amount} until ${untilTimeStamp}"
+            durationInMin != null -> "${action}, ${field}, ${medium}, ${amount} for ${durationInMin} minutes"
+            else -> "${action}, ${field}, ${medium}, ${amount}"
+        }
     }
 }

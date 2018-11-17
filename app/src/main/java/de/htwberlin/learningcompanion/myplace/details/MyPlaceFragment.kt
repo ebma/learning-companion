@@ -100,20 +100,20 @@ class MyPlaceFragment : Fragment() {
             val nameString = etName.text.toString()
             val addressString = tvAddress.text.toString()
 
-            if (nameString.isNotEmpty() && addressString.isNotEmpty() && imageUri != null) {
+            if (nameString.isNotEmpty()) {
                 if (editMode && place != null) {
-                    val updatedPlace = Place(imageUri!!, nameString, latitude, longitude, addressString)
+                    val updatedPlace = Place(imageUri, nameString, latitude, longitude, addressString)
                     updatedPlace.id = place?.id ?: 0
                     updatePlace(updatedPlace)
                     toast("Place updated")
                 } else {
-                    val place = Place(imageUri!!, nameString, latitude, longitude, addressString)
+                    val place = Place(imageUri, nameString, latitude, longitude, addressString)
                     savePlace(place)
                     toast("Place saved to Database")
                 }
                 navigateToPlaceOverview()
             } else {
-                toast("Missing arguments")
+                toast("Missing name")
             }
         }
     }

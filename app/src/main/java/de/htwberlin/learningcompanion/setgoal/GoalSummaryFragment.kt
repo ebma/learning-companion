@@ -54,9 +54,9 @@ class GoalSummaryFragment : Fragment() {
     }
 
     private fun setGoalTextInTextView() {
-        val goalText = "${action} ${field} ${medium} ${amount} for/until ${timestamp ?: duration}"
+        val goal = Goal(action!!, amount!!, field!!, medium!!, duration?.toInt(), timestamp)
 
-        goalTextTextView.text = goalText
+        goalTextTextView.text = goal.getGoalText()
     }
 
     private fun addNoButtonClickListener() {
