@@ -144,7 +144,8 @@ class MyPlaceFragment : Fragment() {
         btnGetImageFromGallery.onClick {
             val intent = Intent()
             intent.type = "image/*"
-            intent.action = Intent.ACTION_GET_CONTENT
+            intent.action = Intent.ACTION_OPEN_DOCUMENT // this is freaking important, else the uri will not be persistable
+            intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
             startActivityForResult(Intent.createChooser(intent, "Select Picture"), RC_PICK_IMAGE)
         }
     }

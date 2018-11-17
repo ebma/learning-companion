@@ -1,12 +1,10 @@
 package de.htwberlin.learningcompanion
 
-import android.Manifest
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.ActivityCompat
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
@@ -19,6 +17,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
 const val REQUEST_RECORD_AUDIO_PERMISSION = 200
+const val REQUEST_EXTERNAL_STORAGE_PERMISSION = 201
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -37,13 +36,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setCheckedItem(R.id.nav_mainscreen)
 
         displaySelectedScreen(R.id.nav_mainscreen)
-
-        requestStoragePermission()
-    }
-
-    private fun requestStoragePermission() {
-        val permissions: Array<String> = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-        ActivityCompat.requestPermissions(this, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
     }
 
     override fun onBackPressed() {
@@ -107,12 +99,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-        if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
-            if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                notifyListeners(permissions[0], true)
-            } else {
-                notifyListeners(permissions[0], false)
-            }
+        if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+            notifyListeners(permissions[0], true)
+        } else {
+            notifyListeners(permissions[0], false)
         }
     }
 
