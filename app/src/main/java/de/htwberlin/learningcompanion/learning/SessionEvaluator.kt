@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.sensors
+package de.htwberlin.learningcompanion.learning
 
 import android.util.Log
 import de.htwberlin.learningcompanion.util.*

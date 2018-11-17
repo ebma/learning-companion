@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.sensors
+package de.htwberlin.learningcompanion.learning
 
 import android.hardware.Sensor
 import android.hardware.SensorEvent

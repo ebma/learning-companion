@@ -16,22 +16,16 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.*
 import de.htwberlin.learningcompanion.charlie.Charlie
-import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
-import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
-import de.htwberlin.learningcompanion.sensors.LearningSessionEvaluator
-import de.htwberlin.learningcompanion.sensors.SensorHandler
-import de.htwberlin.learningcompanion.setgoal.GoalNavHostFragment
+import de.htwberlin.learningcompanion.learning.SessionHandler
 import de.htwberlin.learningcompanion.util.setActivityTitle
-import org.jetbrains.anko.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
-import org.jetbrains.anko.support.v4.alert
-import org.jetbrains.anko.support.v4.toast
 
 class MainScreenFragment : Fragment() {
 
     private lateinit var rootView: View
-    private lateinit var sensorHandler: SensorHandler
+
+    private lateinit var sessionHandler: SessionHandler
 
     private lateinit var btnStart: Button
     private lateinit var btnQuit: Button
@@ -41,7 +35,6 @@ class MainScreenFragment : Fragment() {
 
     private lateinit var ivPlaceBackground: ImageView
 
-    private val INTERVAL_IN_SECONDS = 5 // maybe 1/min soon
     private var permissionToRecordAccepted = false
 
     private lateinit var charlie: Charlie
@@ -50,7 +43,7 @@ class MainScreenFragment : Fragment() {
         rootView = inflater.inflate(R.layout.fragment_main_screen, container, false)
         setActivityTitle(getString(R.string.title_nav_menu_main_screen))
 
-        sensorHandler = SensorHandler(activity!!.sensorManager)
+        sessionHandler = SessionHandler(activity!!)
         charlie = Charlie(context!!)
 
         findViews()
@@ -93,19 +86,24 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun onQuitButtonClick() {
-        stopSensorHandler()
-        startEvaluation()
+        sessionHandler.stopLearningSession()
     }
 
     private fun onStartButtonClick() {
         if (permissionToRecordAccepted) {
-            val currentGoal = GoalRepository.get(context!!).getCurrentGoal()
-            val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
+            if (sessionHandler.canStartLearningSession()) {
+                sessionHandler.startLearningSession()
 
-            when {
-                currentGoal == null -> showSelectGoalDialog()
-                currentPlace == null -> showSelectPlaceDialog()
-                else -> startSensorHandler()
+                sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
+                    override fun onUpdate(millisUntilFinished: Long) {
+                        tvLearningInfo.text = sessionHandler.getSessionInfo()
+                    }
+
+                    override fun onFinish() {
+                        tvLearningInfo.text = "Learning session over"
+                    }
+
+                })
             }
         } else {
             requestAudioPermission()
@@ -114,60 +112,6 @@ class MainScreenFragment : Fragment() {
 
     private fun showCharlieInfoText() {
         tvCharlieInfo.text = charlie.getInfoText()
-    }
-
-    private fun startSensorHandler() {
-        sensorHandler.clear()
-        sensorHandler.start(INTERVAL_IN_SECONDS)
-        toast("Learning session started")
-    }
-
-    private fun stopSensorHandler() {
-        sensorHandler.stop()
-        toast("Learning session stopped")
-    }
-
-    private fun startEvaluation() {
-        val learningSessionEvaluator = LearningSessionEvaluator(sensorHandler.lightDataList, sensorHandler.noiseDataList)
-        showSessionResultDialog(learningSessionEvaluator)
-    }
-
-    private fun showSessionResultDialog(learningSessionEvaluator: LearningSessionEvaluator) {
-        alert {
-            title = "Evaluation"
-            positiveButton("Got it!") { }
-            customView {
-                verticalLayout {
-                    textView("LightLevel: ${learningSessionEvaluator.evaluateLight()}")
-                    textView("NoiseLevel: ${learningSessionEvaluator.evaluateNoise()}")
-                    padding = dip(16)
-                }
-            }
-        }.show()
-    }
-
-    private fun showSelectPlaceDialog() {
-        alert("Please take your time and create one before starting your learning session.", "We detected that you did not yet create a place!") {
-            yesButton { navigateToMyPlaceFragment() }
-            noButton { }
-        }.show()
-    }
-
-    private fun navigateToMyPlaceFragment() {
-        val fragment = MyPlaceFragment()
-        activity!!.supportFragmentManager.beginTransaction().addToBackStack("myplacefragment").replace(R.id.content_main, fragment).commit()
-    }
-
-    private fun showSelectGoalDialog() {
-        alert("Please take your time and create one before starting your learning session.", "We detected that you did not yet create a goal!") {
-            yesButton { navigateToGoalFragment() }
-            noButton { }
-        }.show()
-    }
-
-    private fun navigateToGoalFragment() {
-        val fragment = GoalNavHostFragment()
-        activity!!.supportFragmentManager.beginTransaction().addToBackStack("goalfragment").replace(R.id.content_main, fragment).commit()
     }
 
     private fun requestStoragePermission() {
