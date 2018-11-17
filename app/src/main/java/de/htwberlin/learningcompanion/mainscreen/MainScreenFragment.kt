@@ -15,6 +15,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.*
+import de.htwberlin.learningcompanion.charlie.Charlie
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
@@ -43,11 +44,14 @@ class MainScreenFragment : Fragment() {
     private val INTERVAL_IN_SECONDS = 5 // maybe 1/min soon
     private var permissionToRecordAccepted = false
 
+    private lateinit var charlie: Charlie
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_main_screen, container, false)
         setActivityTitle(getString(R.string.title_nav_menu_main_screen))
 
         sensorHandler = SensorHandler(activity!!.sensorManager)
+        charlie = Charlie(context!!)
 
         findViews()
         addClickListeners()
@@ -109,26 +113,7 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun showCharlieInfoText() {
-        val currentGoal = GoalRepository.get(context!!).getCurrentGoal()
-        val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
-
-        when {
-            currentGoal == null -> showSelectGoalInfoText()
-            currentPlace == null -> showSelectPlaceInfoText()
-            else -> showStartLearningInfoText()
-        }
-    }
-
-    private fun showSelectGoalInfoText() {
-        tvCharlieInfo.text = "Please press \"Menu\" and go to \"My Goals\" to set the goal that you want to achieve."
-    }
-
-    private fun showSelectPlaceInfoText() {
-        tvCharlieInfo.text = "Please press \"Menu\" and go to \"My places\" to set the place where you want to learn."
-    }
-
-    private fun showStartLearningInfoText() {
-        tvCharlieInfo.text = "You can start your learning session by clicking on the \"Start\" Button below."
+        tvCharlieInfo.text = charlie.getInfoText()
     }
 
     private fun startSensorHandler() {
