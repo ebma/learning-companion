@@ -36,6 +36,7 @@ class MainScreenFragment : Fragment() {
     private lateinit var btnQuit: Button
 
     private lateinit var tvCharlieInfo: TextView
+    private lateinit var tvLearningInfo: TextView
 
     private lateinit var ivPlaceBackground: ImageView
 
@@ -61,9 +62,6 @@ class MainScreenFragment : Fragment() {
             val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
 
             if (currentPlace != null) {
-//                val takeFlags: Int = activity!!.intent.flags and (Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION)
-//                activity!!.contentResolver.takePersistableUriPermission(currentPlace.imageUri, takeFlags)
-
                 val inputStream = activity!!.contentResolver.openInputStream(currentPlace.imageUri)
                 val drawable = Drawable.createFromStream(inputStream, currentPlace.imageUri.toString())
                 ivPlaceBackground.setImageDrawable(drawable)
@@ -76,7 +74,8 @@ class MainScreenFragment : Fragment() {
     private fun findViews() {
         btnStart = rootView.findViewById(R.id.btn_start)
         btnQuit = rootView.findViewById(R.id.btn_quit)
-        tvCharlieInfo = rootView.findViewById(R.id.tv_charlie_info_text)
+        tvCharlieInfo = rootView.findViewById(R.id.tv_charlie_info)
+        tvLearningInfo = rootView.findViewById(R.id.tv_learning_info)
         ivPlaceBackground = rootView.findViewById(R.id.iv_place_background)
     }
 
