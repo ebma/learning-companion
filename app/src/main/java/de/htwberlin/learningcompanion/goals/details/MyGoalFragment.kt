@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.goaloverview.details
+package de.htwberlin.learningcompanion.goals.details
 
 import androidx.fragment.app.Fragment
 

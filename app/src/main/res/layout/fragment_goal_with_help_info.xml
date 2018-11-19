@@ -5,7 +5,7 @@
     android:id="@+id/cl_goal_with_help_info"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".setgoal.GoalWithHelpInfoFragment">
+    tools:context=".goals.setgoal.GoalWithHelpInfoFragment">
 
     <TextView
         android:id="@+id/tv_with_help_info_title"

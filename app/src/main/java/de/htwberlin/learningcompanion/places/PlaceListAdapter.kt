@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.ui
+package de.htwberlin.learningcompanion.places
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.model.Place
-import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
+import de.htwberlin.learningcompanion.places.details.MyPlaceFragment
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class PlaceListAdapter(private val placeDataSet: ArrayList<Place>, val supportFragmentManager: FragmentManager) : RecyclerView.Adapter<PlaceListAdapter.PlaceViewHolder>() {
@@ -62,7 +62,7 @@ class PlaceListAdapter(private val placeDataSet: ArrayList<Place>, val supportFr
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceListAdapter.PlaceViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlaceViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.place_list_item, parent, false) as View
         return PlaceViewHolder(view, supportFragmentManager)
     }

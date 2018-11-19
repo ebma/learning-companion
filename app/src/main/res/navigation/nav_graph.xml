@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/goalWithHelpInfoFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpInfoFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalWithHelpInfoFragment"
         android:label="fragment_goal_with_help_info"
         tools:layout="@layout/fragment_goal_with_help_info">
         <action
@@ -20,7 +20,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepActionFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepActionFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalWithHelpStepActionFragment"
         android:label="fragment_goal_with_help_step_action"
         tools:layout="@layout/fragment_goal_with_help_step_action">
         <action
@@ -33,7 +33,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepFieldFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepFieldFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalWithHelpStepFieldFragment"
         android:label="fragment_goal_with_help_step_field"
         tools:layout="@layout/fragment_goal_with_help_step_field" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalDecidePathFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalDecidePathFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalDecidePathFragment"
         android:label="fragment_goal_decide_path"
         tools:layout="@layout/fragment_goal_decide_path">
         <action
@@ -69,7 +69,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalNoHelpInfoFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpInfoFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalNoHelpInfoFragment"
         android:label="fragment_goal_no_help_info"
         tools:layout="@layout/fragment_goal_no_help_info" >
         <action
@@ -82,7 +82,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalNoHelpUserInputFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalNoHelpUserInputFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalNoHelpUserInputFragment"
         android:label="fragment_goal_no_help_user_input"
         tools:layout="@layout/fragment_goal_no_help_user_input">
         <action
@@ -95,7 +95,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepObjectFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepObjectFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalWithHelpStepObjectFragment"
         android:label="fragment_goal_with_help_step_object">
         <action
             android:id="@+id/action_goalWithHelpStepObjectFragment_to_goalWithHelpStepAmountFragment"
@@ -113,7 +113,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepAmountFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepAmountFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalWithHelpStepAmountFragment"
         android:label="fragment_goal_with_help_step_amount">
         <action
             android:id="@+id/action_goalWithHelpStepAmountFragment_to_goalWithHelpStepDurationFragment"
@@ -134,7 +134,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalWithHelpStepDurationFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalWithHelpStepDurationFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalWithHelpStepDurationFragment"
         android:label="fragment_goal_with_help_step_duration">
         <action
             android:id="@+id/action_goalWithHelpStepDurationFragment_to_goalSummaryFragment"
@@ -158,7 +158,7 @@
     </fragment>
     <fragment
         android:id="@+id/goalSummaryFragment"
-        android:name="de.htwberlin.learningcompanion.setgoal.GoalSummaryFragment"
+        android:name="de.htwberlin.learningcompanion.goals.setgoal.GoalSummaryFragment"
         android:label="fragment_goal_summary"
         tools:layout="@layout/fragment_goal_summary">
         <argument

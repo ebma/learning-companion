@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.ui
+package de.htwberlin.learningcompanion.goals
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,8 +11,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
-import de.htwberlin.learningcompanion.db.PlaceRepository
-import de.htwberlin.learningcompanion.goaloverview.details.MyGoalFragment
+import de.htwberlin.learningcompanion.goals.details.MyGoalFragment
 import de.htwberlin.learningcompanion.model.Goal
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -69,7 +68,7 @@ class GoalListAdapter(private val goalDataSet: ArrayList<Goal>, val supportFragm
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): GoalListAdapter.MyViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.goal_list_item, parent, false) as View
         return MyViewHolder(view, supportFragmentManager)
     }

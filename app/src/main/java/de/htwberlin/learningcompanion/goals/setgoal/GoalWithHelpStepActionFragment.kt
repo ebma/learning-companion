@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.setgoal
+package de.htwberlin.learningcompanion.goals.setgoal
 
 import android.content.res.ColorStateList
 import android.os.Bundle

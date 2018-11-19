@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.myplace.details
+package de.htwberlin.learningcompanion.places.details
 
 
 import android.app.Activity
@@ -15,7 +15,7 @@ import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.model.Place
-import de.htwberlin.learningcompanion.myplace.overview.PlaceOverviewFragment
+import de.htwberlin.learningcompanion.places.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_my_place.*
 import org.jetbrains.anko.sdk27.coroutines.onClick

@@ -2,7 +2,7 @@
 <fragment xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".setgoal.GoalNavHostFragment"
+    tools:context=".goals.setgoal.GoalNavHostFragment"
 
     android:id="@+id/nav_host_fragment"
     android:layout_width="match_parent"

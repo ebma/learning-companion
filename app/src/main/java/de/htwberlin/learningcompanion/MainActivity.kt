@@ -7,10 +7,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
-import de.htwberlin.learningcompanion.goaloverview.GoalOverviewFragment
+import de.htwberlin.learningcompanion.goals.overview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.help.HelpOverview
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
-import de.htwberlin.learningcompanion.myplace.overview.PlaceOverviewFragment
+import de.htwberlin.learningcompanion.places.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.settings.SettingsOverviewFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*

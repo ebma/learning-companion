@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.setgoal
+package de.htwberlin.learningcompanion.goals.setgoal
 
 
 import android.os.Bundle

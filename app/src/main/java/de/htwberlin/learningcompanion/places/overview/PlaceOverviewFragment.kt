@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.myplace.overview
+package de.htwberlin.learningcompanion.places.overview
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.model.Place
-import de.htwberlin.learningcompanion.myplace.details.MyPlaceFragment
-import de.htwberlin.learningcompanion.ui.PlaceListAdapter
+import de.htwberlin.learningcompanion.places.PlaceListAdapter
+import de.htwberlin.learningcompanion.places.details.MyPlaceFragment
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_place_overview.*
 import org.jetbrains.anko.sdk27.coroutines.onClick

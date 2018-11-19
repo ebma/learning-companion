@@ -1,7 +1,6 @@
-package de.htwberlin.learningcompanion.setgoal
+package de.htwberlin.learningcompanion.goals.setgoal
 
 import android.app.TimePickerDialog
-import android.content.res.ColorStateList
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,9 +11,7 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.google.android.material.textfield.TextInputLayout
 import de.htwberlin.learningcompanion.R
-import org.jetbrains.anko.support.v4.runOnUiThread
 import java.util.*
 
 

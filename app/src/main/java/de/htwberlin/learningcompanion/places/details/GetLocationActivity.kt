@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.myplace.details
+package de.htwberlin.learningcompanion.places.details
 
 import android.app.Activity
 import android.content.Intent

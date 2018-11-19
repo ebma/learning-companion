@@ -21,7 +21,7 @@
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".myplace.details.GetLocationActivity"
+            android:name=".places.details.GetLocationActivity"
             android:label="@string/title_activity_get_location"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

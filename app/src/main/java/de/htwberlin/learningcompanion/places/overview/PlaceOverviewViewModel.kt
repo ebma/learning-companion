@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.myplace.overview
+package de.htwberlin.learningcompanion.places.overview
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

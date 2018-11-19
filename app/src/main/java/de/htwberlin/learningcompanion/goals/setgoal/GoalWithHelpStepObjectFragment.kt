@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.setgoal
+package de.htwberlin.learningcompanion.goals.setgoal
 
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.EditText
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.textfield.TextInputEditText
@@ -15,14 +14,13 @@ import de.htwberlin.learningcompanion.R
 import org.jetbrains.anko.support.v4.runOnUiThread
 
 
-class GoalWithHelpStepAmountFragment : Fragment() {
+class GoalWithHelpStepObjectFragment : Fragment() {
 
     private lateinit var rootView: View
 
-    private lateinit var amountEditText: TextInputEditText
-    private lateinit var amountInputLayout: TextInputLayout
+    private lateinit var objectEditText: TextInputEditText
+    private lateinit var objectInputLayout: TextInputLayout
     private lateinit var doneButton: Button
-
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -30,7 +28,7 @@ class GoalWithHelpStepAmountFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        rootView = inflater.inflate(R.layout.fragment_goal_with_help_step_amount, container, false)
+        rootView = inflater.inflate(R.layout.fragment_goal_with_help_step_object, container, false)
         findViews()
 
         addDoneButtonClickListener()
@@ -39,52 +37,49 @@ class GoalWithHelpStepAmountFragment : Fragment() {
 
     private fun findViews() {
 
-        amountEditText = rootView.findViewById(R.id.et_amount)
-        amountInputLayout = rootView.findViewById(R.id.til_amount)
+        objectEditText = rootView.findViewById(R.id.et_object)
+        objectInputLayout = rootView.findViewById(R.id.til_object)
         doneButton = rootView.findViewById<Button>(R.id.btn_done)
 
     }
 
     private fun addDoneButtonClickListener() {
         doneButton.setOnClickListener {
-            navigateToStepDurationFragmentWithValues()
+            navigateToStepAmountFragmentWithValues()
         }
     }
 
-    private fun navigateToStepDurationFragmentWithValues() {
+    private fun navigateToStepAmountFragmentWithValues() {
 //        val action = arguments?.getString("action")
 //        val field = arguments?.getString("field")
-//        val medium = arguments?.getString("medium")
 
-        val amountEditText = rootView.findViewById<EditText>(R.id.et_amount)
+//        val mediumEditText = rootView.findViewById<EditText>(R.id.et_object)
 
         val bundle = Bundle()
-        fillBundleWithArguments(bundle)
 //        bundle.putString("action", action)
 //        bundle.putString("field", field)
-//        bundle.putString("medium", medium)
-//        bundle.putString("amount", amountEditText.text.toString())
+//        bundle.putString("medium", mediumEditText.text.toString())
 
-        if(bundle.size() == 4)
-            Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepAmountFragment_to_goalWithHelpStepDurationFragment, bundle)
+        fillBundleWithArguments(bundle)
+
+        if(bundle.size() == 3)
+            Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepObjectFragment_to_goalWithHelpStepAmountFragment, bundle)
     }
 
     private fun fillBundleWithArguments(bundle: Bundle) {
         val action = arguments?.getString("action")
         val field = arguments?.getString("field")
-        val medium = arguments?.getString("medium")
 //        val fieldEditText = rootView.findViewById<EditText>(R.id.et_field)
 
         bundle.putString("action", action)
         bundle.putString("field", field)
-        bundle.putString("medium", medium)
 
-        amountEditText.text.toString().let {
+        objectEditText.text.toString().let {
             if (it.isEmpty()) {
-                tintTextInputLayout(amountInputLayout, true)
+                tintTextInputLayout(objectInputLayout, true)
             } else {
-                bundle.putString("amount", it)
-                tintTextInputLayout(amountInputLayout, false)
+                bundle.putString("medium", it)
+                tintTextInputLayout(objectInputLayout, false)
             }
         }
     }
@@ -97,5 +92,4 @@ class GoalWithHelpStepAmountFragment : Fragment() {
                 layout.defaultHintTextColor = ColorStateList.valueOf(resources.getColor(android.R.color.darker_gray))
         }
     }
-
 }

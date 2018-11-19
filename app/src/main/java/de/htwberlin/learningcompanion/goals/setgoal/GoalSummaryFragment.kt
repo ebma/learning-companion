@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.setgoal
+package de.htwberlin.learningcompanion.goals.setgoal
 
 
 import android.os.Bundle
@@ -11,7 +11,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
-import de.htwberlin.learningcompanion.goaloverview.GoalOverviewFragment
+import de.htwberlin.learningcompanion.goals.overview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.model.Goal
 
 class GoalSummaryFragment : Fragment() {
