@@ -18,6 +18,7 @@ import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.charlie.Charlie
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.learning.SessionHandler
+import de.htwberlin.learningcompanion.learning.evaluation.EvaluationNavHostFragment
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -87,7 +88,14 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun onQuitButtonClick() {
-        sessionHandler.stopLearningSession()
+        // sessionHandler.stopLearningSession()
+        navigateToEvaluateFragment()
+    }
+
+    private fun navigateToEvaluateFragment() {
+        val fragment = EvaluationNavHostFragment()
+
+        activity!!.supportFragmentManager.beginTransaction().addToBackStack("evaluation").replace(R.id.content_main, fragment).commit()
     }
 
     private fun onStartButtonClick() {

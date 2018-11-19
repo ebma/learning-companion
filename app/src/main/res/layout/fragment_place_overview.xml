@@ -75,7 +75,7 @@
             android:layout_height="50dp"
             android:layout_marginBottom="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/charlie"
+            android:src="@drawable/ic_charlie"
             android:text="Charlie"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_current_place_displayname"

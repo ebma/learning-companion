@@ -33,7 +33,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/charlie" />
+        app:srcCompat="@drawable/ic_charlie" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_charlie_info"
