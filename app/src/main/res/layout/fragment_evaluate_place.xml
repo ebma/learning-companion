@@ -53,7 +53,7 @@
         app:layout_constraintTop_toTopOf="@+id/guideline" />
 
     <TextView
-        android:id="@+id/tv_goal_text"
+        android:id="@+id/tv_place_text"
         android:layout_width="379dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -75,7 +75,7 @@
         android:text="How was the noise level?"
         android:textColor="@color/textcolor_white"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_goal_text" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_place_text" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_rate_noise"
@@ -89,6 +89,23 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_noise_header_text">
+
+        <com.warkiz.widget.IndicatorSeekBar
+            android:id="@+id/sb_noise_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isb_max="4"
+            app:isb_min="1"
+            app:isb_progress="2"
+            app:isb_ticks_count="4"
+            app:isb_show_indicator="none"
+            app:isb_thumb_color="@color/colorPrimary"
+            app:isb_track_progress_color="@color/colorPrimary"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -115,6 +132,23 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_brightness_header_text">
+
+        <com.warkiz.widget.IndicatorSeekBar
+            android:id="@+id/sb_brightness_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:isb_max="4"
+            app:isb_min="1"
+            app:isb_progress="2"
+            app:isb_ticks_count="4"
+            app:isb_show_indicator="none"
+            app:isb_thumb_color="@color/lightred"
+            app:isb_track_progress_color="@color/lightred"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
