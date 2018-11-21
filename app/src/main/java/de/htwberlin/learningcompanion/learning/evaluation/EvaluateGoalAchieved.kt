@@ -7,14 +7,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 
 class EvaluateGoalAchieved : Fragment() {
 
     private lateinit var rootView: View
     private lateinit var ivPlaceBackground: ImageView
+    private lateinit var tvGoalTextView: TextView
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_evaluate_goal_achieved, container, false)
@@ -25,8 +28,15 @@ class EvaluateGoalAchieved : Fragment() {
         super.onActivityCreated(savedInstanceState)
 
         ivPlaceBackground = rootView.findViewById(R.id.iv_place_background)
-        setBackgroundPicture()
+        tvGoalTextView = rootView.findViewById(R.id.tv_goal_text)
 
+        setBackgroundPicture()
+        setGoalText()
+
+    }
+
+    private fun setGoalText() {
+        tvGoalTextView.text = GoalRepository.get(context!!).getCurrentGoal()?.getGoalText()
     }
 
     private fun setBackgroundPicture() {
