@@ -115,6 +115,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.warkiz.widget.IndicatorSeekBar
+                android:id="@+id/sb_user_rating"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:isb_indicator_color="@color/colorPrimary"
@@ -138,5 +139,16 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <ImageButton
+        android:id="@+id/btn_next"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:src="@drawable/ic_arrow_forward"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
