@@ -14,9 +14,11 @@ import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.goals.GoalListAdapter
 import de.htwberlin.learningcompanion.goals.setgoal.GoalNavHostFragment
+import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_goal_overview.*
+import kotlinx.android.synthetic.main.fragment_place_overview.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
@@ -64,6 +66,9 @@ class GoalOverviewFragment : Fragment() {
         btn_new_goal.onClick {
             navigateToSetGoalFragment()
         }
+        btn_charlie_goal.onClick {
+            navigateToCharlie()
+        }
     }
 
     private fun updateHeaderLayout() {
@@ -76,6 +81,10 @@ class GoalOverviewFragment : Fragment() {
     private fun navigateToSetGoalFragment() {
         val fragment = GoalNavHostFragment()
 
+        activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
+    }
+    private fun navigateToCharlie() {
+        val fragment = MainScreenFragment()
         activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
     }
 

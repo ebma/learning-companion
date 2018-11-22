@@ -8,7 +8,7 @@
 
     <TextView
         android:id="@+id/tv_goal"
-        android:layout_width="0dp"
+        android:layout_width="61dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
@@ -24,7 +24,7 @@
 
     <TextView
         android:id="@+id/tv_goal_duration"
-        android:layout_width="0dp"
+        android:layout_width="57dp"
         android:layout_height="wrap_content"
         android:text="TextView"
         android:textSize="14sp"
@@ -58,8 +58,7 @@
         android:text="TextView"
         android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/btn_edit"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/tv_goal_duration2"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.448"
@@ -83,6 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="8dp"
         android:src="@drawable/ic_edit"
+        android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"

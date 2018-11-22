@@ -71,7 +71,7 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <ImageButton
-            android:id="@+id/btn_charlie"
+            android:id="@+id/btn_charlie_place"
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"

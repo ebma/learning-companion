@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.PlaceRepository
+import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Place
 import de.htwberlin.learningcompanion.places.PlaceListAdapter
 import de.htwberlin.learningcompanion.places.details.MyPlaceFragment
@@ -65,6 +66,9 @@ class PlaceOverviewFragment : Fragment() {
         btn_new_place.onClick {
             navigateToPlaceDetailFragment()
         }
+        btn_charlie_place.onClick {
+            navigateToCharlie()
+        }
     }
 
     private fun updateHeaderLayout() {
@@ -76,6 +80,11 @@ class PlaceOverviewFragment : Fragment() {
 
     private fun navigateToPlaceDetailFragment() {
         val fragment = MyPlaceFragment()
+        activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
+    }
+
+    private fun navigateToCharlie() {
+        val fragment = MainScreenFragment()
         activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
     }
 }

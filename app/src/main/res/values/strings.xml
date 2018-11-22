@@ -32,6 +32,8 @@
     <string name="goal_decide_path_title">Do you know how to set a goal?</string>
     <string name="goal_no_help_info_message">Your goal should be specific. measurable, attainable, realistic and timebound...</string>
     <string name="goal_no_help_info_title">Great!</string>
+    <string name="goal_summury_title">Your Goal is...</string>
+    <string name="goal_summury_correct">Correct?</string>
 
     <string name="goal_current_title">My current goal is ...</string>
 
