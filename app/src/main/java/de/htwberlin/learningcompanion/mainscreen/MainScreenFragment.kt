@@ -81,9 +81,13 @@ class MainScreenFragment : Fragment() {
     private fun addClickListeners() {
         btnStart.onClick {
             onStartButtonClick()
+            btnStart.visibility = View.INVISIBLE
+            btnQuit.visibility = View.VISIBLE
         }
         btnQuit.onClick {
             onQuitButtonClick()
+            btnStart.visibility = View.VISIBLE
+            btnQuit.visibility = View.INVISIBLE
         }
     }
 
