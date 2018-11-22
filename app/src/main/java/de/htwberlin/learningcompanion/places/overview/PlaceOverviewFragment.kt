@@ -69,6 +69,9 @@ class PlaceOverviewFragment : Fragment() {
         btn_charlie_place.onClick {
             navigateToCharlie()
         }
+        btn_edit_place.onClick {
+            navigateToEditPlace()
+        }
     }
 
     private fun updateHeaderLayout() {
@@ -86,5 +89,19 @@ class PlaceOverviewFragment : Fragment() {
     private fun navigateToCharlie() {
         val fragment = MainScreenFragment()
         activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
+    }
+
+    private fun navigateToEditPlace() {
+        val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
+
+        val fragment = MyPlaceFragment()
+        val bundle = Bundle()
+
+        if (currentPlace != null) {
+            bundle.putLong("ID", currentPlace!!.id)
+            fragment.arguments = bundle
+            activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
+        }
+
     }
 }

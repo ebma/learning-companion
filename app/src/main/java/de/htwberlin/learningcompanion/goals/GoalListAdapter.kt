@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.goals.details.MyGoalFragment
+import de.htwberlin.learningcompanion.goals.setgoal.GoalNoHelpUserInputFragment
 import de.htwberlin.learningcompanion.model.Goal
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -20,6 +21,7 @@ class GoalListAdapter(private val goalDataSet: ArrayList<Goal>, val supportFragm
 
         class MyViewHolder(val rootView: View, private val supportFragmentManager: FragmentManager) : RecyclerView.ViewHolder(rootView) {
         private lateinit var goal: Goal
+
         private val tvGoal: TextView
         private val tvDuration: TextView
 
@@ -31,7 +33,7 @@ class GoalListAdapter(private val goalDataSet: ArrayList<Goal>, val supportFragm
             tvDuration = rootView.findViewById(R.id.tv_goal_duration)
 
             btnEdit = rootView.findViewById(R.id.btn_edit)
-            btnEdit.onClick { navigateToGoalDetailFragment() }
+            btnEdit.onClick { navigateToGoalInoutFragment() }
             cbSetCurrent = rootView.findViewById(R.id.cb_set_current_goal)
         }
         fun bindGoal(goal: Goal) {
@@ -47,8 +49,8 @@ class GoalListAdapter(private val goalDataSet: ArrayList<Goal>, val supportFragm
 
         }
 
-        private fun navigateToGoalDetailFragment() {
-            val fragment = MyGoalFragment()
+        private fun navigateToGoalInoutFragment() {
+            val fragment = GoalNoHelpUserInputFragment()
             val bundle = Bundle()
             bundle.putLong("ID", goal.id)
             fragment.arguments = bundle

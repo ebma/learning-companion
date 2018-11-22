@@ -14,11 +14,11 @@ import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.goals.GoalListAdapter
 import de.htwberlin.learningcompanion.goals.setgoal.GoalNavHostFragment
+import de.htwberlin.learningcompanion.goals.setgoal.GoalNoHelpUserInputFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_goal_overview.*
-import kotlinx.android.synthetic.main.fragment_place_overview.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 
@@ -69,6 +69,9 @@ class GoalOverviewFragment : Fragment() {
         btn_charlie_goal.onClick {
             navigateToCharlie()
         }
+        btn_goal_edit.onClick {
+            navigateToEditGoal()
+        }
     }
 
     private fun updateHeaderLayout() {
@@ -86,6 +89,18 @@ class GoalOverviewFragment : Fragment() {
     private fun navigateToCharlie() {
         val fragment = MainScreenFragment()
         activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
+    }
+
+    private fun navigateToEditGoal() {
+        val fragment = GoalNoHelpUserInputFragment()
+        val bundle = Bundle()
+        val currentGoal = GoalRepository.get(context!!).getCurrentGoal()
+
+        if (currentGoal != null) {
+            bundle.putLong("ID", currentGoal!!.id)
+            fragment.arguments = bundle
+            activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
+        }
     }
 
 }
