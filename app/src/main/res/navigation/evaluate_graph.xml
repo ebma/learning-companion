@@ -22,5 +22,14 @@
         android:id="@+id/evaluatePlaceFragment"
         android:name="de.htwberlin.learningcompanion.learning.evaluation.EvaluatePlaceFragment"
         android:label="fragment_evaluate_place"
-        tools:layout="@layout/fragment_evaluate_place" />
+        tools:layout="@layout/fragment_evaluate_place">
+        <!--<action-->
+            <!--android:id="@+id/action_evaluatePlaceAchieved_to_mainScreenFragment"-->
+            <!--app:destination="@id/evaluateGoalAchieved"-->
+            <!--app:enterAnim="@anim/fade_in"-->
+            <!--app:exitAnim="@anim/slide_left"-->
+            <!--app:popEnterAnim="@anim/fade_in"-->
+            <!--app:popExitAnim="@anim/slide_right"-->
+            <!--/>-->
+    </fragment>
 </navigation>
