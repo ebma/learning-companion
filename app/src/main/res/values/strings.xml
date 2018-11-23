@@ -58,5 +58,13 @@
     <string name="settings_frequency">Frequency :</string>
     <string name="settings_info_can_be_changed">All Settings can be changed</string>
 
+    <string name="place_noise_rating_silent">silent</string>
+    <string name="place_noise_rating_quite">quite</string>
+    <string name="place_noise_rating_loud">loud</string>
+    <string name="place_noise_rating_noisy">noisy</string>
+    <string name="place_brightness_rating_dark">dark</string>
+    <string name="place_brightness_rating_dim">dim</string>
+    <string name="place_brightness_rating_bright">bright</string>
+    <string name="place_brightness_rating_shiny">shiny</string>
 
 </resources>
