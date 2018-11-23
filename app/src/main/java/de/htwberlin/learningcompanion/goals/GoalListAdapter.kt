@@ -1,60 +1,60 @@
 package de.htwberlin.learningcompanion.goals
 
-import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
-import android.widget.ImageButton
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
-import de.htwberlin.learningcompanion.goals.details.MyGoalFragment
-import de.htwberlin.learningcompanion.goals.setgoal.GoalNoHelpUserInputFragment
 import de.htwberlin.learningcompanion.model.Goal
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class GoalListAdapter(private val goalDataSet: ArrayList<Goal>, val supportFragmentManager: FragmentManager) :
         RecyclerView.Adapter<GoalListAdapter.MyViewHolder>() {
 
-        class MyViewHolder(val rootView: View, private val supportFragmentManager: FragmentManager) : RecyclerView.ViewHolder(rootView) {
+    class MyViewHolder(val rootView: View, private val supportFragmentManager: FragmentManager) : RecyclerView.ViewHolder(rootView) {
         private lateinit var goal: Goal
 
-        private val tvGoal: TextView
+        private val tvAction: TextView
+        private val tvAmount: TextView
+        private val tvMedium: TextView
+        private val tvField: TextView
         private val tvDuration: TextView
-
-        private val btnEdit: ImageButton
         private val cbSetCurrent: CheckBox
 
-        init {
-            tvGoal = rootView.findViewById(R.id.tv_goal)
-            tvDuration = rootView.findViewById(R.id.tv_goal_duration)
+        private val clGoalListItem: ConstraintLayout
 
-            btnEdit = rootView.findViewById(R.id.btn_edit)
-            btnEdit.onClick { navigateToGoalInoutFragment() }
+        init {
+            tvAction = rootView.findViewById(R.id.tv_action)
+            tvAmount = rootView.findViewById(R.id.tv_amount)
+            tvMedium = rootView.findViewById(R.id.tv_medium)
+            tvField = rootView.findViewById(R.id.tv_field)
+            tvDuration = rootView.findViewById(R.id.tv_duration)
             cbSetCurrent = rootView.findViewById(R.id.cb_set_current_goal)
+
+            clGoalListItem = rootView.findViewById(R.id.cl_goal_list_item)
         }
+
         fun bindGoal(goal: Goal) {
             this.goal = goal
-            tvGoal.text = getGoalText(goal)
+            tvAction.text = goal.action
+            tvAmount.text = goal.amount
+            tvMedium.text = goal.medium
+            tvField.text = goal.field
             tvDuration.text = getGoalDurationText(goal)
 
             cbSetCurrent.isChecked = goal.currentGoal
-
             cbSetCurrent.onClick {
                 GoalRepository.get(itemView.context).setGoalAsCurrentGoal(goal)
             }
 
-        }
-
-        private fun navigateToGoalInoutFragment() {
-            val fragment = GoalNoHelpUserInputFragment()
-            val bundle = Bundle()
-            bundle.putLong("ID", goal.id)
-            fragment.arguments = bundle
-            supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
+            clGoalListItem.onClick {
+                GoalRepository.get(itemView.context).setGoalAsCurrentGoal(goal)
+            }
         }
 
         private fun getGoalText(goal: Goal): String {
