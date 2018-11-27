@@ -91,12 +91,21 @@ class SessionHandler(private val activity: Activity) {
     }
 
     fun getSessionInfo(): String {
-        val lightLevel = learningSessionEvaluator.evaluateLight()
-        val noiseLevel = learningSessionEvaluator.evaluateNoise()
+        val lightLevel = getLightLevel()
+        val noiseLevel = getNoiseLevel()
 
         val timeString = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(remainingMillis), TimeUnit.MILLISECONDS.toMinutes(remainingMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(remainingMillis)), TimeUnit.MILLISECONDS.toSeconds(remainingMillis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(remainingMillis)))
 
         return "Light: $lightLevel \nNoise: $noiseLevel \nRemaining time: $timeString"
+    }
+
+    fun getLightLevel(): LightLevel {
+        return learningSessionEvaluator.evaluateLight();
+    }
+
+
+    fun getNoiseLevel(): NoiseLevel {
+        return learningSessionEvaluator.evaluateNoise();
     }
 
     interface LearningSessionObserver {

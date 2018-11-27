@@ -16,6 +16,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.charlie.Charlie
+import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.learning.SessionHandler
 import de.htwberlin.learningcompanion.learning.evaluation.EvaluationNavHostFragment
@@ -92,8 +93,17 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun onQuitButtonClick() {
-        // sessionHandler.stopLearningSession()
+        sessionHandler.stopLearningSession()
+        updateCurrentGoalWithSessionDetails();
         navigateToEvaluateFragment()
+    }
+
+    private fun updateCurrentGoalWithSessionDetails() {
+        val currentGoal = GoalRepository.get(context!!).getCurrentGoal()!!.apply {
+            brightnessRating = sessionHandler.getLightLevel();
+            noiseRating = sessionHandler.getNoiseLevel();
+        }
+        GoalRepository.get(context!!).updateGoal(currentGoal)
     }
 
     private fun navigateToEvaluateFragment() {
