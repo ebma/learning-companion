@@ -8,6 +8,7 @@ import androidx.room.TypeConverters
 import de.htwberlin.learningcompanion.db.converter.DateTypeConverter
 import de.htwberlin.learningcompanion.db.converter.LightLevelTypeConverter
 import de.htwberlin.learningcompanion.db.converter.NoiseLevelTypeConverter
+import de.htwberlin.learningcompanion.db.converter.UriTypeConverter
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.model.Place
 
@@ -19,6 +20,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun goalDao(): GoalDAO
 
     abstract fun placeDao(): PlaceDAO
+
+    abstract fun sessionDao(): LearningSessionDAO
 
     companion object {
 

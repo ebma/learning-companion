@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.db
+package de.htwberlin.learningcompanion.db.converter
 
 import android.net.Uri
 import androidx.room.TypeConverter
