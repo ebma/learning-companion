@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.db
+package de.htwberlin.learningcompanion.db.converter
 
 import androidx.room.TypeConverter
 import java.util.*

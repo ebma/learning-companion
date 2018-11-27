@@ -52,6 +52,10 @@ class GoalRepository private constructor(context: Context) {
         executor.execute { appDatabase.goalDao().insertGoal(goal) }
     }
 
+    fun updateGoal(goal: Goal) {
+        executor.execute { appDatabase.goalDao().updateGoal(goal) }
+    }
+
     fun deleteGoal(goal: Goal) {
         executor.execute { appDatabase.goalDao().deleteGoal(goal) }
     }

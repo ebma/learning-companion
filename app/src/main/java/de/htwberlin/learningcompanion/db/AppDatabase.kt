@@ -5,11 +5,15 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
+import de.htwberlin.learningcompanion.db.converter.DateTypeConverter
+import de.htwberlin.learningcompanion.db.converter.LightLevelTypeConverter
+import de.htwberlin.learningcompanion.db.converter.NoiseLevelTypeConverter
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.model.Place
 
 @Database(entities = [Goal::class, Place::class], version = 1)
-@TypeConverters(UriTypeConverter::class, DateTypeConverter::class)
+@TypeConverters(UriTypeConverter::class, DateTypeConverter::class,
+        LightLevelTypeConverter::class, NoiseLevelTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {
 
     abstract fun goalDao(): GoalDAO

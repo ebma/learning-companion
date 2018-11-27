@@ -2,6 +2,8 @@ package de.htwberlin.learningcompanion.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import de.htwberlin.learningcompanion.learning.LightLevel
+import de.htwberlin.learningcompanion.learning.NoiseLevel
 import java.util.*
 
 @Entity(tableName = "goals")
@@ -20,6 +22,10 @@ data class Goal(
 
     var completed: Boolean = false
     var currentGoal: Boolean = false
+
+    var userRating: Int = 0 // range 0..100
+    var noiseRating = NoiseLevel.MEDIUM;
+    var brightnessRating = LightLevel.MEDIUM;
 
     fun getGoalText(): String {
         return when {
