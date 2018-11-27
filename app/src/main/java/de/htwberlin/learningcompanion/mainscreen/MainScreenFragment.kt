@@ -93,7 +93,7 @@ class MainScreenFragment : Fragment() {
             if (quit) {
                 btnStart.visibility = View.VISIBLE
                 btnQuit.visibility = View.INVISIBLE
-            }   
+            }
         }
     }
 
