@@ -17,9 +17,11 @@ import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.charlie.Charlie
 import de.htwberlin.learningcompanion.db.GoalRepository
+import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.learning.SessionHandler
 import de.htwberlin.learningcompanion.learning.evaluation.EvaluationNavHostFragment
+import de.htwberlin.learningcompanion.model.LearningSession
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -94,16 +96,20 @@ class MainScreenFragment : Fragment() {
 
     private fun onQuitButtonClick() {
         sessionHandler.stopLearningSession()
-        updateCurrentGoalWithSessionDetails();
+        createNewSessionEntity()
         navigateToEvaluateFragment()
     }
 
-    private fun updateCurrentGoalWithSessionDetails() {
-        val currentGoal = GoalRepository.get(context!!).getCurrentGoal()!!.apply {
-            brightnessRating = sessionHandler.getLightLevel();
-            noiseRating = sessionHandler.getNoiseLevel();
+    private fun createNewSessionEntity() {
+        val goalID = GoalRepository.get(context!!).getCurrentGoal()!!.id
+        val placeID = PlaceRepository.get(context!!).getCurrentPlace()!!.id
+
+        val session = LearningSession(placeID, goalID).apply {
+            brightnessRating = sessionHandler.getLightLevel()
+            noiseRating = sessionHandler.getNoiseLevel()
         }
-        GoalRepository.get(context!!).updateGoal(currentGoal)
+
+        LearningSessionRepository.get(context!!).insertLearningSession(session)
     }
 
     private fun navigateToEvaluateFragment() {

@@ -30,6 +30,8 @@ class SessionHandler(private val activity: Activity) {
     private val sensorHandler = SensorHandler(activity.sensorManager)
     private val learningSessionEvaluator = LearningSessionEvaluator(sensorHandler.lightDataList, sensorHandler.noiseDataList)
 
+    private var sessionRunning = false
+
     fun canStartLearningSession(): Boolean {
         val currentGoal = GoalRepository.get(activity).getCurrentGoal()
         val currentPlace = PlaceRepository.get(activity).getCurrentPlace()
@@ -42,11 +44,14 @@ class SessionHandler(private val activity: Activity) {
     }
 
     fun startLearningSession() {
-        retrieveInformationFromGoal()
-        startTimer()
+        if (!sessionRunning) {
+            sessionRunning = true
+            retrieveInformationFromGoal()
+            startTimer()
 
-        sensorHandler.clear()
-        sensorHandler.start(INTERVAL_IN_SECONDS)
+            sensorHandler.clear()
+            sensorHandler.start(INTERVAL_IN_SECONDS)
+        }
     }
 
     private fun retrieveInformationFromGoal() {
@@ -86,8 +91,11 @@ class SessionHandler(private val activity: Activity) {
     }
 
     fun stopLearningSession() {
-        sensorHandler.stop()
-        timer.cancel()
+        if (sessionRunning) {
+            sessionRunning = false
+            sensorHandler.stop()
+            timer.cancel()
+        }
     }
 
     fun getSessionInfo(): String {

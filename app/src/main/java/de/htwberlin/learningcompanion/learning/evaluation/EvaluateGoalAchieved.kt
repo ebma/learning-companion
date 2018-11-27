@@ -14,7 +14,11 @@ import androidx.navigation.Navigation
 import com.warkiz.widget.IndicatorSeekBar
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
+import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
+import de.htwberlin.learningcompanion.model.Goal
+import de.htwberlin.learningcompanion.model.LearningSession
+import de.htwberlin.learningcompanion.model.Place
 
 class EvaluateGoalAchieved : Fragment() {
 
@@ -23,6 +27,10 @@ class EvaluateGoalAchieved : Fragment() {
     private lateinit var tvGoalTextView: TextView
     private lateinit var btnNext: ImageButton
     private lateinit var sbUserRating: IndicatorSeekBar
+
+    private lateinit var currentPlace: Place
+    private lateinit var currentGoal: Goal
+    private lateinit var currentLearningSession: LearningSession
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_evaluate_goal_achieved, container, false)
@@ -37,6 +45,10 @@ class EvaluateGoalAchieved : Fragment() {
         btnNext = rootView.findViewById(R.id.btn_next)
         sbUserRating = rootView.findViewById(R.id.sb_user_rating)
 
+        currentGoal = GoalRepository.get(context!!).getCurrentGoal()!!
+        currentPlace = PlaceRepository.get(context!!).getCurrentPlace()!!
+        currentLearningSession = LearningSessionRepository.get(context!!).getLearningSessionByGoalAndPlaceID(currentGoal.id, currentPlace.id)
+
         setBackgroundPicture()
         setGoalText()
         addButtonClickListener()
@@ -45,17 +57,19 @@ class EvaluateGoalAchieved : Fragment() {
 
     private fun addButtonClickListener() {
         btnNext.setOnClickListener {
+            updateSessionWithUserRating()
             navigateToNextFragmentWithValues()
         }
 
     }
 
+    private fun updateSessionWithUserRating() {
+        currentLearningSession.userRating = sbUserRating.progress
+        LearningSessionRepository.get(context!!).updateLearningSession(currentLearningSession)
+    }
+
     private fun navigateToNextFragmentWithValues() {
-        val bundle = Bundle()
-
-        bundle.putInt("user_rating", sbUserRating.progress)
-
-        Navigation.findNavController(rootView).navigate(R.id.action_evaluateGoalAchieved_to_evaluatePlaceFragment, bundle)
+        Navigation.findNavController(rootView).navigate(R.id.action_evaluateGoalAchieved_to_evaluatePlaceFragment, null)
     }
 
     private fun setGoalText() {
@@ -63,14 +77,10 @@ class EvaluateGoalAchieved : Fragment() {
     }
 
     private fun setBackgroundPicture() {
-        val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
-
-        if (currentPlace != null) {
-            if (currentPlace.imageUri != null) {
-                val inputStream = activity!!.contentResolver.openInputStream(currentPlace.imageUri)
-                val drawable = Drawable.createFromStream(inputStream, currentPlace.imageUri.toString())
-                ivPlaceBackground.setImageDrawable(drawable)
-            }
+        if (currentPlace.imageUri != null) {
+            val inputStream = activity!!.contentResolver.openInputStream(currentPlace.imageUri!!)
+            val drawable = Drawable.createFromStream(inputStream, currentPlace.imageUri.toString())
+            ivPlaceBackground.setImageDrawable(drawable)
         }
     }
 }

@@ -10,9 +10,10 @@ import de.htwberlin.learningcompanion.db.converter.LightLevelTypeConverter
 import de.htwberlin.learningcompanion.db.converter.NoiseLevelTypeConverter
 import de.htwberlin.learningcompanion.db.converter.UriTypeConverter
 import de.htwberlin.learningcompanion.model.Goal
+import de.htwberlin.learningcompanion.model.LearningSession
 import de.htwberlin.learningcompanion.model.Place
 
-@Database(entities = [Goal::class, Place::class], version = 1)
+@Database(entities = [Goal::class, Place::class, LearningSession::class], version = 1)
 @TypeConverters(UriTypeConverter::class, DateTypeConverter::class,
         LightLevelTypeConverter::class, NoiseLevelTypeConverter::class)
 abstract class AppDatabase : RoomDatabase() {

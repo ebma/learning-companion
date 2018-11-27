@@ -24,6 +24,9 @@ interface LearningSessionDAO {
     @Query("SELECT * FROM sessions WHERE id == :id")
     fun getLearningSessionByID(id: Long): LearningSession
 
+    @Query("SELECT * FROM sessions WHERE place_id == :placeID AND goal_id == :goalID")
+    fun getLearningSessionByGoalAndPlaceID(goalID: Long, placeID: Long): LearningSession
+
     @Query("SELECT * FROM sessions WHERE place_id == :id")
     fun getLearningSessionByPlaceID(id: Long): List<LearningSession>
 

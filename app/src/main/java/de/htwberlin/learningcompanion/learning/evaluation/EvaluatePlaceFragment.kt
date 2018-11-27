@@ -10,11 +10,15 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.warkiz.widget.IndicatorSeekBar
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.db.GoalRepository
+import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
+import de.htwberlin.learningcompanion.model.Goal
+import de.htwberlin.learningcompanion.model.LearningSession
+import de.htwberlin.learningcompanion.model.Place
 
 class EvaluatePlaceFragment : Fragment() {
 
@@ -30,6 +34,10 @@ class EvaluatePlaceFragment : Fragment() {
         return rootView
     }
 
+    private lateinit var currentGoal: Goal
+    private lateinit var currentPlace: Place
+    private lateinit var currentLearningSession: LearningSession
+
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
@@ -39,9 +47,26 @@ class EvaluatePlaceFragment : Fragment() {
         sbNoiseRating = rootView.findViewById(R.id.sb_noise_rating)
         sbBrightnessRating = rootView.findViewById(R.id.sb_brightness_rating)
 
+        currentGoal = GoalRepository.get(context!!).getCurrentGoal()!!
+        currentPlace = PlaceRepository.get(context!!).getCurrentPlace()!!
+        currentLearningSession = LearningSessionRepository.get(context!!).getLearningSessionByGoalAndPlaceID(currentGoal.id, currentPlace.id)
+
         setBackgroundPicture()
         setPlaceText()
         addButtonClickListener()
+
+        if (permissionsGranted()) {
+            // means that we collected the values and the user should not choose them
+            sbNoiseRating.isEnabled = false
+            sbNoiseRating.setProgress(currentLearningSession.noiseRating.ordinal.toFloat())
+            sbBrightnessRating.isEnabled = false
+            sbBrightnessRating.setProgress(currentLearningSession.noiseRating.ordinal.toFloat())
+        }
+    }
+
+    private fun permissionsGranted(): Boolean {
+        // TODO implement with actual permission check
+        return true
     }
 
     private fun addButtonClickListener() {
@@ -50,14 +75,7 @@ class EvaluatePlaceFragment : Fragment() {
         }
     }
 
-    // noch Funktionen -> save Rating to Database...
-
     private fun navigateToMainScreen() {
-//        val bundle = Bundle()
-//        bundle.putInt("noise_rating", sbNoiseRating.progress)
-//        bundle.putInt("brightness_rating", sbBrightnessRating.progress)
-//        Navigation.findNavController(rootView).navigate(R.id.action_evaluatePlaceAchieved_to_mainScreenFragment, bundle)
-
         val fragment = MainScreenFragment()
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.content_main, fragment)?.commit()
     }
