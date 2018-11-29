@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.learning.evaluation
+package de.htwberlin.learningcompanion.learning.session
 
 import android.os.Bundle
 import android.view.LayoutInflater

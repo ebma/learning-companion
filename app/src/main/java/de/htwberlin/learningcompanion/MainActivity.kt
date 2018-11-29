@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import de.htwberlin.learningcompanion.goals.overview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.help.HelpOverview
-import de.htwberlin.learningcompanion.learning.evaluation.SessionOverviewFragment
+import de.htwberlin.learningcompanion.learning.session.SessionOverviewFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.places.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.settings.SettingsOverviewFragment
