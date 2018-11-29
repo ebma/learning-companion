@@ -1,5 +1,6 @@
 package de.htwberlin.learningcompanion.learning.session
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -69,7 +70,12 @@ class LearningSessionListAdapter(private val sessionDataSet: ArrayList<LearningS
         }
 
         fun navigateToViewSessionFragment() {
+            val bundle = Bundle()
+            bundle.putLong("ID", session.id)
 
+            val fragment = SessionFragment()
+            fragment.arguments = bundle
+            supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
         }
 
         private fun getColorForNoiseLevel(noiseLevel: NoiseLevel): Int {
