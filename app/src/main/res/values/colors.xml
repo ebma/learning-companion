@@ -15,6 +15,8 @@
     <color name="white">#FFFFFF</color>
 
     <color name="lightgreen">#64dd17</color>
+    <color name="green">#558b2f</color>
+    <color name="orange">#f57f17</color>
     <color name="lightred">#d32f2f</color>
 
     <color name="textcolor_black">#000000</color>

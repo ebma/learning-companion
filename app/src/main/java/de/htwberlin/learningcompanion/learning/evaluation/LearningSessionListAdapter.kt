@@ -6,11 +6,14 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
+import de.htwberlin.learningcompanion.learning.LightLevel
+import de.htwberlin.learningcompanion.learning.NoiseLevel
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.model.LearningSession
 import de.htwberlin.learningcompanion.model.Place
@@ -56,9 +59,9 @@ class LearningSessionListAdapter(private val sessionDataSet: ArrayList<LearningS
             tvDate.text = dateFormat.format(session.createdAt)
             tvGoal.text = goal.getGoalText()
             tvPlace.text = place.name
-//            ivBrightness.colorFilter =
-//            ivNoise.colorFilter =
-//            ivUserrating.colorFilter =
+            ivBrightness.setColorFilter(getColorForLightLevel(session.brightnessRating))
+            ivNoise.setColorFilter(getColorForNoiseLevel(session.noiseRating))
+            ivUserrating.setColorFilter(getColorForUserrating(session.userRating))
 
             clSessionListItem.onClick {
                 navigateToViewSessionFragment()
@@ -67,6 +70,37 @@ class LearningSessionListAdapter(private val sessionDataSet: ArrayList<LearningS
 
         fun navigateToViewSessionFragment() {
 
+        }
+
+        private fun getColorForNoiseLevel(noiseLevel: NoiseLevel): Int {
+            return when (noiseLevel) {
+                NoiseLevel.LOWEST -> ContextCompat.getColor(itemView.context, R.color.lightgreen)
+                NoiseLevel.LOW -> ContextCompat.getColor(itemView.context, R.color.green)
+                NoiseLevel.MEDIUM -> ContextCompat.getColor(itemView.context, R.color.orange)
+                NoiseLevel.HIGH -> ContextCompat.getColor(itemView.context, R.color.lightred)
+                NoiseLevel.HIGHEST -> ContextCompat.getColor(itemView.context, R.color.red)
+            }
+        }
+
+        private fun getColorForLightLevel(lightLevel: LightLevel): Int {
+            return when (lightLevel) {
+                LightLevel.LOWEST -> ContextCompat.getColor(itemView.context, R.color.red)
+                LightLevel.LOW -> ContextCompat.getColor(itemView.context, R.color.lightred)
+                LightLevel.MEDIUM -> ContextCompat.getColor(itemView.context, R.color.orange)
+                LightLevel.HIGH -> ContextCompat.getColor(itemView.context, R.color.green)
+                LightLevel.HIGHEST -> ContextCompat.getColor(itemView.context, R.color.lightgreen)
+            }
+        }
+
+        private fun getColorForUserrating(userrating: Int): Int {
+            return when (userrating) {
+                in 0..20 -> ContextCompat.getColor(itemView.context, R.color.red)
+                in 21..40 -> ContextCompat.getColor(itemView.context, R.color.lightred)
+                in 41..60 -> ContextCompat.getColor(itemView.context, R.color.orange)
+                in 61..80 -> ContextCompat.getColor(itemView.context, R.color.green)
+                in 81..100 -> ContextCompat.getColor(itemView.context, R.color.lightgreen)
+                else -> ContextCompat.getColor(itemView.context, R.color.black)
+            }
         }
     }
 

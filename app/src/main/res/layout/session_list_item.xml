@@ -55,7 +55,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/tv_place"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_brightness" />
+        app:srcCompat="@drawable/ic_sunny" />
 
     <ImageView
         android:id="@+id/iv_noise"
@@ -68,7 +68,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_brightness"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/ic_volume_mute" />
+        app:srcCompat="@drawable/ic_volume_down" />
 
     <ImageView
         android:id="@+id/iv_rate"
