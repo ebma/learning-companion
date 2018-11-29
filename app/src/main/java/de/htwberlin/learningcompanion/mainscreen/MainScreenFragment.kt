@@ -26,6 +26,7 @@ import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.support.v4.toast
 import org.jetbrains.anko.yesButton
 
 class MainScreenFragment : Fragment() {
@@ -87,8 +88,6 @@ class MainScreenFragment : Fragment() {
     private fun addClickListeners() {
         btnStart.onClick {
             onStartButtonClick()
-            btnStart.visibility = View.INVISIBLE
-            btnQuit.visibility = View.VISIBLE
         }
         btnQuit.onClick {
             openQuitDialog()
@@ -96,13 +95,13 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun openQuitDialog() {
-        alert("we can finish this goal together.\n" +
-                "Do you REALLY want to quit?", "learn session quit") {
+        alert("We can finish this goal together!\n" +
+                "Do you REALLY want to quit?", "Quit learning session") {
             yesButton {
                 onQuitSelected()
             }
-
             noButton {
+                toast("Good :)")
             }
         }.show()
     }
@@ -135,24 +134,33 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun onStartButtonClick() {
-        requestAudioPermission()
+        if (canStartSession()) {
+            btnStart.visibility = View.INVISIBLE
+            btnQuit.visibility = View.VISIBLE
 
-        if (permissionToRecordAccepted) {
-            if (sessionHandler.canStartLearningSession()) {
-                sessionHandler.startLearningSession()
+            requestAudioPermission()
 
-                sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
-                    override fun onUpdate(millisUntilFinished: Long) {
-                        tvLearningInfo.text = sessionHandler.getSessionInfo()
-                    }
+            if (permissionToRecordAccepted) {
+                if (sessionHandler.canStartLearningSession()) {
+                    sessionHandler.startLearningSession()
 
-                    override fun onFinish() {
-                        tvLearningInfo.text = "Learning session over"
-                    }
+                    sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
+                        override fun onUpdate(millisUntilFinished: Long) {
+                            tvLearningInfo.text = sessionHandler.getSessionInfo()
+                        }
 
-                })
+                        override fun onFinish() {
+                            tvLearningInfo.text = "Learning session over"
+                        }
+
+                    })
+                }
             }
         }
+    }
+
+    private fun canStartSession(): Boolean {
+        return GoalRepository.get(context!!).getCurrentGoal() != null && PlaceRepository.get(context!!).getCurrentPlace() != null
     }
 
     private fun showCharlieInfoText() {

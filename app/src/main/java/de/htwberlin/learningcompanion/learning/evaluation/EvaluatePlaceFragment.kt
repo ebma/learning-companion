@@ -11,7 +11,7 @@ import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
-import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
+import de.htwberlin.learningcompanion.learning.session.SessionOverviewFragment
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.model.LearningSession
 import de.htwberlin.learningcompanion.model.Place
@@ -57,12 +57,12 @@ class EvaluatePlaceFragment : Fragment() {
 
     private fun addButtonClickListener() {
         btn_next.setOnClickListener {
-            navigateToMainScreen()
+            navigateToSessionOverview()
         }
     }
 
-    private fun navigateToMainScreen() {
-        val fragment = MainScreenFragment()
+    private fun navigateToSessionOverview() {
+        val fragment = SessionOverviewFragment()
         activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.content_main, fragment)?.commit()
     }
 
