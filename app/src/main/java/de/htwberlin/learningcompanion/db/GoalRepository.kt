@@ -36,7 +36,7 @@ class GoalRepository private constructor(context: Context) {
         appDatabase.goalDao().updateGoals(goals)
     }
 
-    fun getGoalByID(goalID: Int): Goal {
+    fun getGoalByID(goalID: Long): Goal {
         return appDatabase.goalDao().getGoalByID(goalID)
     }
 

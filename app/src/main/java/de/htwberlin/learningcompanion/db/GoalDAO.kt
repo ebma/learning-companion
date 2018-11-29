@@ -22,7 +22,7 @@ interface GoalDAO {
     fun deleteGoal(goal: Goal)
 
     @Query("SELECT * FROM goals WHERE id == :id")
-    fun getGoalByID(id: Int): Goal
+    fun getGoalByID(id: Long): Goal
 
     @Query("SELECT * FROM goals")
     fun getGoals(): List<Goal>

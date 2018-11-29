@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import de.htwberlin.learningcompanion.goals.overview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.help.HelpOverview
+import de.htwberlin.learningcompanion.learning.evaluation.SessionOverviewFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.places.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.settings.SettingsOverviewFragment
@@ -80,7 +81,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when (itemId) {
             R.id.nav_mainscreen -> fragment = MainScreenFragment()
             R.id.nav_myplace -> fragment = PlaceOverviewFragment()
-            R.id.nav_overview -> fragment = MainScreenFragment()
+            R.id.nav_overview -> fragment = SessionOverviewFragment()
             R.id.nav_mygoal -> fragment = GoalOverviewFragment()
             R.id.nav_setting -> fragment = SettingsOverviewFragment()
             R.id.nav_help -> fragment = HelpOverview()
