@@ -23,7 +23,10 @@ import de.htwberlin.learningcompanion.learning.SessionHandler
 import de.htwberlin.learningcompanion.learning.evaluation.EvaluationNavHostFragment
 import de.htwberlin.learningcompanion.model.LearningSession
 import de.htwberlin.learningcompanion.util.setActivityTitle
+import org.jetbrains.anko.noButton
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.yesButton
 
 class MainScreenFragment : Fragment() {
 
@@ -88,17 +91,30 @@ class MainScreenFragment : Fragment() {
             btnQuit.visibility = View.VISIBLE
         }
         btnQuit.onClick {
-            onQuitButtonClick()
-            btnStart.visibility = View.VISIBLE
-            btnQuit.visibility = View.INVISIBLE
+            openQuitDialog()
         }
     }
 
-    private fun onQuitButtonClick() {
+    private fun openQuitDialog() {
+        alert("we can finish this goal together.\n" +
+                "Do you REALLY want to quit?", "learn session quit") {
+            yesButton {
+                onQuitSelected()
+            }
+
+            noButton {
+            }
+        }.show()
+    }
+
+    private fun onQuitSelected() {
         sessionHandler.stopLearningSession()
         createNewSessionEntity()
         navigateToEvaluateFragment()
+        btnStart.visibility = View.VISIBLE
+        btnQuit.visibility = View.INVISIBLE
     }
+
 
     private fun createNewSessionEntity() {
         val goalID = GoalRepository.get(context!!).getCurrentGoal()!!.id
