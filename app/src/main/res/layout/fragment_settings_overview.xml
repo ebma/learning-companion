@@ -26,7 +26,7 @@
         android:layout_marginStart="16dp"
         android:text="@string/settings_buddy_name"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintBottom_toTopOf="@+id/hguideline1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_user_name" />
 
@@ -39,7 +39,7 @@
         android:text="[      you     ]"
         app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_name_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
@@ -49,9 +49,9 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="[   Charlie   ]"
-        app:layout_constraintBottom_toTopOf="@+id/guideline5"
+        app:layout_constraintBottom_toTopOf="@+id/hguideline1"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_you_text" />
 
     <TextView
@@ -61,9 +61,9 @@
         android:layout_marginStart="24dp"
         android:text="@string/settings_buddy_image"
         android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toTopOf="@+id/hguideline2"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline5" />
+        app:layout_constraintTop_toTopOf="@+id/hguideline1" />
 
     <TextView
         android:id="@+id/tv_settings_alert_setting"
@@ -74,7 +74,7 @@
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/tv_settings_start_end"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline2" />
+        app:layout_constraintTop_toBottomOf="@+id/hguideline3" />
 
     <TextView
         android:id="@+id/tv_settings_frequency"
@@ -82,7 +82,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/settings_frequency"
-        app:layout_constraintBottom_toBottomOf="@id/guideline4"
+        app:layout_constraintBottom_toBottomOf="@id/hguideline4"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_interval" />
 
@@ -113,7 +113,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/guideline4" />
+        app:layout_constraintTop_toTopOf="@+id/hguideline4" />
 
     <TextView
         android:id="@+id/tv_settings_start_end"
@@ -135,7 +135,7 @@
         android:text="[                                    ]"
         app:layout_constraintBottom_toTopOf="@+id/tv_settings_interval_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_alert_setting" />
 
     <TextView
@@ -147,7 +147,7 @@
         android:text="Every     [                  ] min"
         app:layout_constraintBottom_toTopOf="@+id/tv_settings_frecuency_text"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_start_end_text" />
 
     <TextView
@@ -157,13 +157,27 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:text="Total of [                  ] times"
-        app:layout_constraintBottom_toTopOf="@+id/guideline4"
+        app:layout_constraintBottom_toTopOf="@+id/hguideline4"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_interval_text" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline2"
+        android:id="@+id/hguideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.2" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hguideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.5" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hguideline3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -177,10 +191,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/ic_charlie"
-        app:layout_constraintBottom_toTopOf="@+id/guideline6"
+        app:layout_constraintBottom_toTopOf="@+id/hguideline2"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/vertical_guideline"
-        app:layout_constraintTop_toTopOf="@+id/guideline5"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
+        app:layout_constraintTop_toTopOf="@+id/hguideline1"
         app:layout_constraintVertical_bias="0.592" />
 
     <TextView
@@ -191,7 +205,7 @@
         android:text="@string/settings_gps"
         app:layout_constraintBottom_toTopOf="@+id/tv_settings_microphone"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/guideline6" />
+        app:layout_constraintTop_toBottomOf="@+id/hguideline2" />
 
     <TextView
         android:id="@+id/tv_settings_microphone"
@@ -199,33 +213,19 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:text="@string/settings_microphone"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
+        app:layout_constraintBottom_toTopOf="@+id/hguideline3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_gps" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline4"
+        android:id="@+id/hguideline4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_percent="0.94" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.5" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vertical_guideline"
+        android:id="@+id/vguideline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
