@@ -18,9 +18,11 @@ import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
+import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.support.v4.runOnUiThread
+import org.jetbrains.anko.support.v4.toast
 
 import java.util.*
 
@@ -164,9 +166,51 @@ class GoalNoHelpUserInputFragment : Fragment() {
     }
 
     private fun addDoneButtonClickListener() {
+        if (editMode) {
+            val actionString = actionEditText.text.toString()
+            val fieldString = fieldEditText.text.toString()
+            val amountString = amountEditText.text.toString()
+            val mediumString = mediumEditText.text.toString()
+
+            val durationInMin = 23
+            val untilTime = ""
+
+            var updateGoal = Goal("", "", "", "", 2)
+
+            if (untilRadioButton.isChecked) {
+                untilAmountEditText.text.toString().let {
+                    if (it.isEmpty()) {
+                        // TODO something?
+                    } else
+                    updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
+                }
+            } else {
+                forAmountEditText.text.toString().let {
+                    if (it.isEmpty()) {
+                        // TODO something?
+                    } else
+                        updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
+                }
+            }
+
+//            val updateGoal = Goal(actionString, amountString, fieldString, mediumString)
+            updateGoal.id = goal?.id ?: 0
+            updateGoal(updateGoal)
+            toast("Goal updated")
+        } else {
+            doneButton.setOnClickListener {
+                navigateToSummaryFragmentWithValues()
+            }
+        }
+
         doneButton.setOnClickListener {
             navigateToSummaryFragmentWithValues()
         }
+    }
+
+    private fun updateGoal(goal: Goal) {
+        context?.let { GoalRepository.get(it).updateGoal(goal) }
+
     }
 
     private fun navigateToSummaryFragmentWithValues() {
