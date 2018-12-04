@@ -73,6 +73,7 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="[action]"
+                android:maxLength="@integer/input_max_length"
                 android:inputType="text|textAutoCorrect"
                 android:singleLine="true"
                 android:textAlignment="center" />

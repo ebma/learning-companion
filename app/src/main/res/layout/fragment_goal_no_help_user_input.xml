@@ -38,6 +38,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="[action]"
+            android:maxLength="@integer/input_max_length"
             android:imeOptions="actionNext"
             android:singleLine="true" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -60,6 +61,7 @@
             android:layout_height="wrap_content"
             android:imeOptions="actionNext"
             android:singleLine="true"
+            android:maxLength="@integer/input_max_length"
             android:hint="[discipline]" />
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -80,6 +82,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionNext"
+            android:maxLength="@integer/input_max_length"
             android:singleLine="true"
             android:hint="[medium]" />
     </com.google.android.material.textfield.TextInputLayout>
@@ -101,6 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionNext"
+            android:maxLength="@integer/input_max_length"
             android:singleLine="true"
             android:hint="[amount]" />
     </com.google.android.material.textfield.TextInputLayout>
