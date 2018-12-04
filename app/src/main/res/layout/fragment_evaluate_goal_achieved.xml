@@ -123,7 +123,13 @@
                 app:isb_min="0"
                 app:isb_progress="50"
                 app:isb_show_indicator="circular_bubble"
+                app:isb_show_tick_marks_type="oval"
                 app:isb_thumb_color="@color/colorAccent"
+
+                app:isb_ticks_count="11"
+                app:isb_tick_marks_color="@color/colorPrimary"
+                app:isb_tick_marks_size="10dp"
+                app:isb_track_background_color="@color/light_grey"
                 app:isb_track_progress_color="@color/colorPrimary" />
         </com.warkiz.widget.IndicatorStayLayout>
 
