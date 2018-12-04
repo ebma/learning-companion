@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.R
@@ -23,7 +20,7 @@ class GoalWithHelpStepDurationFragment : Fragment() {
     private lateinit var untilAmountEditText: EditText
     private lateinit var forRadioButton: RadioButton
     private lateinit var untilRadioButton: RadioButton
-    private lateinit var doneButton: Button
+    private lateinit var doneButton: ImageButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

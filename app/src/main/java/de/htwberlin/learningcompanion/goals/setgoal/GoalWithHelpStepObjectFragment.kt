@@ -1,11 +1,13 @@
 package de.htwberlin.learningcompanion.goals.setgoal
 
 import android.content.res.ColorStateList
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.textfield.TextInputEditText
@@ -20,7 +22,7 @@ class GoalWithHelpStepObjectFragment : Fragment() {
 
     private lateinit var objectEditText: TextInputEditText
     private lateinit var objectInputLayout: TextInputLayout
-    private lateinit var doneButton: Button
+    private lateinit var doneButton: ImageButton
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -39,7 +41,7 @@ class GoalWithHelpStepObjectFragment : Fragment() {
 
         objectEditText = rootView.findViewById(R.id.et_object)
         objectInputLayout = rootView.findViewById(R.id.til_object)
-        doneButton = rootView.findViewById<Button>(R.id.btn_done)
+        doneButton = rootView.findViewById<ImageButton>(R.id.btn_done)
 
     }
 
