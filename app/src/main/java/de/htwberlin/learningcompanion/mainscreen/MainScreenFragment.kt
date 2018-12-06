@@ -122,6 +122,8 @@ class MainScreenFragment : Fragment() {
         val session = LearningSession(placeID, goalID).apply {
             brightnessRating = sessionHandler.getLightLevel()
             noiseRating = sessionHandler.getNoiseLevel()
+            noiseValues = sessionHandler.getNoiseValues()
+            lightValues = sessionHandler.getLightValues()
         }
 
         LearningSessionRepository.get(context!!).insertLearningSession(session)

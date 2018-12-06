@@ -30,6 +30,10 @@ data class LearningSession(
     var createdAt = Date()
 
     var userRating: Int = 0 // range 0..100
+
+    var noiseValues = arrayListOf<Int>()
+    var lightValues = arrayListOf<Float>()
+
     var noiseRating = NoiseLevel.MEDIUM
     var brightnessRating = LightLevel.MEDIUM
 }

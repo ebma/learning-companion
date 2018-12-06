@@ -28,7 +28,7 @@ class SessionHandler(private val activity: Activity) {
     private var remainingMillis = 0L
 
     private val sensorHandler = SensorHandler(activity.sensorManager)
-    private val learningSessionEvaluator = LearningSessionEvaluator(sensorHandler.lightDataList, sensorHandler.noiseDataList)
+    private val learningSessionEvaluator = SessionEvaluator(sensorHandler.lightDataList, sensorHandler.noiseDataList)
 
     private var sessionRunning = false
 
@@ -109,6 +109,14 @@ class SessionHandler(private val activity: Activity) {
 
     fun getLightLevel(): LightLevel {
         return learningSessionEvaluator.evaluateLight();
+    }
+
+    fun getLightValues(): ArrayList<Float> {
+        return sensorHandler.lightDataList
+    }
+
+    fun getNoiseValues(): ArrayList<Int> {
+        return sensorHandler.noiseDataList
     }
 
 
