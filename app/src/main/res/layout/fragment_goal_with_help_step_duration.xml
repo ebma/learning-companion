@@ -12,8 +12,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/tv_with_help_info_top_margin"
         android:text="@string/goal_with_help_duration_info1"
-        android:textSize="20sp"
         android:textColor="@color/textcolor_black"
+        android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -50,38 +50,58 @@
             android:text="until" />
     </RadioGroup>
 
-    <EditText
-        android:id="@+id/et_duration_for"
-        android:layout_width="wrap_content"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_edittext_holder"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="208dp"
-        android:layout_marginEnd="8dp"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="number"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
-        app:layout_constraintStart_toEndOf="@+id/radioGroup"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/et_duration_until"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="212dp"
-        android:ems="10"
-        android:enabled="false"
-        android:inputType="time"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.516"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/radioGroup"
-        app:layout_constraintTop_toBottomOf="@+id/et_duration_for"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <EditText
+            android:id="@+id/et_duration_until"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:enabled="false"
+            android:inputType="time"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/et_duration_for" />
+
+        <EditText
+            android:id="@+id/et_duration_for"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:ems="10"
+            android:enabled="false"
+            android:inputType="number"
+            app:layout_constraintBottom_toTopOf="@+id/et_duration_until"
+            app:layout_constraintEnd_toStartOf="@+id/tv_min"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_min"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="min"
+            app:layout_constraintBottom_toTopOf="@+id/et_duration_until"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ImageButton
         android:id="@+id/btn_done"
@@ -115,20 +135,20 @@
         app:layout_constraintVertical_bias="1.0" />
 
     <!--<Button-->
-        <!--android:id="@+id/btn_done"-->
-        <!--android:layout_width="wrap_content"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:layout_marginTop="8dp"-->
+    <!--android:id="@+id/btn_done"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginTop="8dp"-->
 
-        <!--android:layout_marginBottom="@dimen/btn_with_help_hor"-->
-        <!--android:backgroundTint="@color/white"-->
-        <!--android:text="Next"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintHorizontal_bias="0.522"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1"-->
-        <!--app:layout_constraintVertical_bias="1.0" />-->
+    <!--android:layout_marginBottom="@dimen/btn_with_help_hor"-->
+    <!--android:backgroundTint="@color/white"-->
+    <!--android:text="Next"-->
+    <!--app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--app:layout_constraintEnd_toEndOf="parent"-->
+    <!--app:layout_constraintHorizontal_bias="0.522"-->
+    <!--app:layout_constraintStart_toStartOf="parent"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/tv_goal_with_help_action_info1"-->
+    <!--app:layout_constraintVertical_bias="1.0" />-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
