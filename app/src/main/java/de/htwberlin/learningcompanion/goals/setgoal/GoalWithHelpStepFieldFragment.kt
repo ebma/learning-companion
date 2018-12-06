@@ -1,6 +1,7 @@
 package de.htwberlin.learningcompanion.goals.setgoal
 
 import android.content.res.ColorStateList
+import android.media.Image
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -22,6 +23,7 @@ class GoalWithHelpStepFieldFragment : Fragment() {
     private lateinit var fieldEditText: TextInputEditText
     private lateinit var fieldInputLayout: TextInputLayout
     private lateinit var doneButton: ImageButton
+    private lateinit var backButton: ImageButton
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -33,6 +35,8 @@ class GoalWithHelpStepFieldFragment : Fragment() {
         findViews()
 
         addDoneButtonClickListener()
+        addBackButtonClickListener()
+
         return rootView
     }
 
@@ -40,7 +44,8 @@ class GoalWithHelpStepFieldFragment : Fragment() {
 
         fieldEditText = rootView.findViewById(R.id.et_field)
         fieldInputLayout = rootView.findViewById(R.id.til_field)
-        doneButton = rootView.findViewById<ImageButton>(R.id.btn_done)
+        doneButton = rootView.findViewById(R.id.btn_done)
+        backButton = rootView.findViewById(R.id.btn_back)
 
     }
 
@@ -50,13 +55,22 @@ class GoalWithHelpStepFieldFragment : Fragment() {
         }
     }
 
-    private fun navigateToStepObjectFragmentWithValues() {
-//        var action = arguments?.getString("action")
-//        val fieldEditText = rootView.findViewById<EditText>(R.id.et_field)
+    private fun addBackButtonClickListener() {
+        backButton.setOnClickListener {
+            navigateToStepActionFragmentWithValues()
+        }
+    }
 
+    private fun navigateToStepActionFragmentWithValues() {
         val bundle = Bundle()
-//        bundle.putString("action", action)
-//        bundle.putString("field", fieldEditText.text.toString())
+        fillBundleWithArguments(bundle)
+
+        if(bundle.size() >= 1)
+            Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepFieldFragment_back_to_goalWithHelpStepActionFragment, bundle)
+    }
+
+    private fun navigateToStepObjectFragmentWithValues() {
+        val bundle = Bundle()
         fillBundleWithArguments(bundle)
 
         if(bundle.size() == 2)
@@ -65,8 +79,6 @@ class GoalWithHelpStepFieldFragment : Fragment() {
 
     private fun fillBundleWithArguments(bundle: Bundle) {
         var action = arguments?.getString("action")
-//        val fieldEditText = rootView.findViewById<EditText>(R.id.et_field)
-
         bundle.putString("action", action)
 
         fieldEditText.text.toString().let {

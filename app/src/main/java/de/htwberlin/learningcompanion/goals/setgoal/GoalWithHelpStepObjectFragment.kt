@@ -23,6 +23,7 @@ class GoalWithHelpStepObjectFragment : Fragment() {
     private lateinit var objectEditText: TextInputEditText
     private lateinit var objectInputLayout: TextInputLayout
     private lateinit var doneButton: ImageButton
+    private lateinit var backButton: ImageButton
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -34,6 +35,7 @@ class GoalWithHelpStepObjectFragment : Fragment() {
         findViews()
 
         addDoneButtonClickListener()
+        addBackButtonClickListener()
         return rootView
     }
 
@@ -41,7 +43,8 @@ class GoalWithHelpStepObjectFragment : Fragment() {
 
         objectEditText = rootView.findViewById(R.id.et_object)
         objectInputLayout = rootView.findViewById(R.id.til_object)
-        doneButton = rootView.findViewById<ImageButton>(R.id.btn_done)
+        doneButton = rootView.findViewById(R.id.btn_done)
+        backButton = rootView.findViewById(R.id.btn_back)
 
     }
 
@@ -49,6 +52,20 @@ class GoalWithHelpStepObjectFragment : Fragment() {
         doneButton.setOnClickListener {
             navigateToStepAmountFragmentWithValues()
         }
+    }
+
+    private fun addBackButtonClickListener() {
+        backButton.setOnClickListener {
+            navigateToStepFieldFragmentWithValues()
+        }
+    }
+
+    private fun navigateToStepFieldFragmentWithValues() {
+        val bundle = Bundle()
+        fillBundleWithArguments(bundle)
+
+        if(bundle.size() >= 2)
+            Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepObjectFragment_back_to_goalWithHelpStepFieldFragment, bundle)
     }
 
     private fun navigateToStepAmountFragmentWithValues() {

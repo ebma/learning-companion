@@ -23,6 +23,7 @@ class GoalWithHelpStepAmountFragment : Fragment() {
     private lateinit var amountEditText: TextInputEditText
     private lateinit var amountInputLayout: TextInputLayout
     private lateinit var doneButton: ImageButton
+    private lateinit var backButton: ImageButton
 
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -35,6 +36,7 @@ class GoalWithHelpStepAmountFragment : Fragment() {
         findViews()
 
         addDoneButtonClickListener()
+        addBackButtonClickListener()
         return rootView
     }
 
@@ -42,14 +44,28 @@ class GoalWithHelpStepAmountFragment : Fragment() {
 
         amountEditText = rootView.findViewById(R.id.et_amount)
         amountInputLayout = rootView.findViewById(R.id.til_amount)
-        doneButton = rootView.findViewById<ImageButton>(R.id.btn_done)
-
+        doneButton = rootView.findViewById(R.id.btn_done)
+        backButton = rootView.findViewById(R.id.btn_back)
     }
 
     private fun addDoneButtonClickListener() {
         doneButton.setOnClickListener {
             navigateToStepDurationFragmentWithValues()
         }
+    }
+
+    private fun addBackButtonClickListener() {
+        backButton.setOnClickListener {
+            navigateToStepObjectFragmentWithValues()
+        }
+    }
+
+    private fun navigateToStepObjectFragmentWithValues() {
+        val bundle = Bundle()
+        fillBundleWithArguments(bundle)
+
+        if(bundle.size() >= 3)
+            Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepObjectFragment_back_to_goalWithHelpStepObjectFragment, bundle)
     }
 
     private fun navigateToStepDurationFragmentWithValues() {

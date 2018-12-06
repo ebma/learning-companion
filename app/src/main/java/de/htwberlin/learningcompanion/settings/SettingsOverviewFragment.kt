@@ -22,7 +22,7 @@ class SettingsOverviewFragment : Fragment() {
     }
 
 
-    // TODO check permissions with
+    // check permissions with
     fun hasWritePermission(): Boolean {
         return ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
