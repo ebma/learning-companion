@@ -8,6 +8,7 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.fragment.app.FragmentManager
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
@@ -29,6 +30,8 @@ class PlaceListAdapter(private val placeDataSet: ArrayList<Place>, val supportFr
         private val btnEdit: ImageButton
         private val cbSetCurrent: CheckBox
 
+        private val clPlaceItem: ConstraintLayout
+
         init {
             tvName = rootView.findViewById(R.id.tv_name)
             tvAddress = rootView.findViewById(R.id.tv_address)
@@ -37,6 +40,8 @@ class PlaceListAdapter(private val placeDataSet: ArrayList<Place>, val supportFr
             btnEdit = rootView.findViewById(R.id.btn_edit)
             btnEdit.onClick { navigateToPlaceDetailFragment() }
             cbSetCurrent = rootView.findViewById(R.id.cb_current_place)
+
+            clPlaceItem = rootView.findViewById(R.id.cl_place_list_item)
         }
 
         fun bindPlace(place: Place) {
@@ -47,6 +52,10 @@ class PlaceListAdapter(private val placeDataSet: ArrayList<Place>, val supportFr
             cbSetCurrent.isChecked = place.currentPlace
 
             cbSetCurrent.onClick {
+                PlaceRepository.get(itemView.context).setPlaceAsCurrentPlace(place)
+            }
+
+            clPlaceItem.onClick {
                 PlaceRepository.get(itemView.context).setPlaceAsCurrentPlace(place)
             }
 
