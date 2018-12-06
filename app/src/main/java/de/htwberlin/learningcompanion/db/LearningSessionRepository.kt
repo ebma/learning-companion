@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.content.Context
 import androidx.lifecycle.LiveData
 import de.htwberlin.learningcompanion.model.LearningSession
-import java.util.concurrent.Executors
 
 class LearningSessionRepository private constructor(context: Context) {
 
@@ -14,7 +13,6 @@ class LearningSessionRepository private constructor(context: Context) {
     var sessionsList: List<LearningSession>? = null
 
     private val appDatabase: AppDatabase
-    private val executor = Executors.newSingleThreadExecutor()
 
     private val allLearningSessions: LiveData<List<LearningSession>>
         get() = appDatabase.sessionDao().getLearningSessionsAsLiveData()
@@ -43,15 +41,15 @@ class LearningSessionRepository private constructor(context: Context) {
     }
 
     fun insertLearningSession(session: LearningSession) {
-        executor.execute { appDatabase.sessionDao().insertLearningSession(session) }
+        appDatabase.sessionDao().insertLearningSession(session)
     }
 
     fun updateLearningSession(session: LearningSession) {
-        executor.execute { appDatabase.sessionDao().updateLearningSession(session) }
+        appDatabase.sessionDao().updateLearningSession(session)
     }
 
     fun deleteLearningSession(session: LearningSession) {
-        executor.execute { appDatabase.sessionDao().deleteLearningSession(session) }
+        appDatabase.sessionDao().deleteLearningSession(session)
     }
 
     companion object {

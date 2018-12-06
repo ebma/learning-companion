@@ -98,7 +98,7 @@ class MainScreenFragment : Fragment() {
         alert("We can finish this goal together!\n" +
                 "Do you REALLY want to quit?", "Quit learning session") {
             yesButton {
-                onQuitSelected()
+                finishLearningSession()
             }
             noButton {
                 toast("Good :)")
@@ -106,7 +106,7 @@ class MainScreenFragment : Fragment() {
         }.show()
     }
 
-    private fun onQuitSelected() {
+    private fun finishLearningSession() {
         sessionHandler.stopLearningSession()
         createNewSessionEntity()
         navigateToEvaluateFragment()
@@ -153,8 +153,8 @@ class MainScreenFragment : Fragment() {
 
                         override fun onFinish() {
                             tvLearningInfo.text = "Learning session over"
+                            finishLearningSession()
                         }
-
                     })
                 }
             }

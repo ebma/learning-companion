@@ -45,19 +45,19 @@ class PlaceRepository private constructor(context: Context) {
     }
 
     fun insertPlaceList(placeList: List<Place>) {
-        executor.execute { appDatabase.placeDao().insertPlaces(placeList) }
+        appDatabase.placeDao().insertPlaces(placeList)
     }
 
     fun insertPlace(place: Place) {
-        executor.execute { appDatabase.placeDao().insertPlace(place) }
+        appDatabase.placeDao().insertPlace(place)
     }
 
     fun updatePlace(place: Place) {
-        executor.execute { appDatabase.placeDao().updatePlace(place) }
+        appDatabase.placeDao().updatePlace(place)
     }
 
     fun deletePlace(place: Place) {
-        executor.execute { appDatabase.placeDao().deletePlace(place) }
+        appDatabase.placeDao().deletePlace(place)
     }
 
     companion object {
