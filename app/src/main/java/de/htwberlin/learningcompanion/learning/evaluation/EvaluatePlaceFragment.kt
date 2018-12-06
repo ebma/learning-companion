@@ -35,7 +35,7 @@ class EvaluatePlaceFragment : Fragment() {
 
         currentGoal = GoalRepository.get(context!!).getCurrentGoal()!!
         currentPlace = PlaceRepository.get(context!!).getCurrentPlace()!!
-        currentLearningSession = LearningSessionRepository.get(context!!).getLearningSessionByGoalAndPlaceID(currentGoal.id, currentPlace.id)
+        currentLearningSession = LearningSessionRepository.get(context!!).getNewestLearningSession()
 
         setBackgroundPicture()
         setPlaceText()

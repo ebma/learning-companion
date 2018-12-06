@@ -82,8 +82,8 @@ class GoalSummaryFragment : Fragment() {
     private fun saveGoalToDatabase(goal: Goal) {
         context?.let {
             goal.currentGoal = true
+            GoalRepository.get(it).setNoGoalAsCurrentGoal()
             GoalRepository.get(it).insertGoal(goal)
-            GoalRepository.get(it).setGoalAsCurrentGoal(goal)
         }
     }
 

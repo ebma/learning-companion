@@ -36,6 +36,16 @@ class PlaceRepository private constructor(context: Context) {
         appDatabase.placeDao().updatePlaces(places)
     }
 
+    fun setNoPlaceAsCurrent() {
+        val places = appDatabase.placeDao().getPlaces()
+
+        places.forEach {
+            it.currentPlace = false
+        }
+
+        appDatabase.placeDao().updatePlaces(places)
+    }
+
     fun getPlaceByID(placeID: Long): Place {
         return appDatabase.placeDao().getPlaceByID(placeID)
     }

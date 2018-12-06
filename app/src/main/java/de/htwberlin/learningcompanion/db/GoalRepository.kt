@@ -34,6 +34,16 @@ class GoalRepository private constructor(context: Context) {
         appDatabase.goalDao().updateGoals(goals)
     }
 
+    fun setNoGoalAsCurrentGoal() {
+        val goals = appDatabase.goalDao().getGoals()
+
+        goals.forEach {
+            it.currentGoal = false
+        }
+
+        appDatabase.goalDao().updateGoals(goals)
+    }
+
     fun getGoalByID(goalID: Long): Goal {
         return appDatabase.goalDao().getGoalByID(goalID)
     }

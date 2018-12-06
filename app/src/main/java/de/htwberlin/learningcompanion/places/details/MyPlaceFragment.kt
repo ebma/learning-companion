@@ -126,8 +126,8 @@ class MyPlaceFragment : Fragment() {
     private fun savePlace(place: Place) {
         context?.let {
             place.currentPlace = true
+            PlaceRepository.get(it).setNoPlaceAsCurrent()
             PlaceRepository.get(it).insertPlace(place)
-            PlaceRepository.get(it).setPlaceAsCurrentPlace(place)
         }
     }
 

@@ -28,8 +28,12 @@ class LearningSessionRepository private constructor(context: Context) {
         return appDatabase.sessionDao().getLearningSessionByID(sessionID)
     }
 
-    fun getLearningSessionByGoalAndPlaceID(goalID: Long, placeID: Long): LearningSession {
+    fun getLearningSessionByGoalAndPlaceID(goalID: Long, placeID: Long): List<LearningSession> {
         return appDatabase.sessionDao().getLearningSessionByGoalAndPlaceID(goalID, placeID)
+    }
+
+    fun getNewestLearningSession(): LearningSession {
+        return appDatabase.sessionDao().getNewestLearningSession()
     }
 
     fun getLearningSessionsByGoalID(goalID: Long): List<LearningSession> {
