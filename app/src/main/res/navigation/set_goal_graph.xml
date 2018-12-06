@@ -43,6 +43,13 @@
             app:exitAnim="@anim/slide_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_goalWithHelpStepFieldFragment_back_to_goalWithHelpStepActionFragment"
+            app:destination="@id/goalWithHelpStepActionFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
         <argument
             android:name="action"
             app:argType="string" />
@@ -104,6 +111,13 @@
             app:exitAnim="@anim/slide_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_goalWithHelpStepObjectFragment_back_to_goalWithHelpStepFieldFragment"
+            app:destination="@id/goalWithHelpStepFieldFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_right"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
         <argument
             android:name="action"
             app:argType="string" />
@@ -120,6 +134,13 @@
             app:destination="@id/goalWithHelpStepDurationFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_goalWithHelpStepObjectFragment_back_to_goalWithHelpStepObjectFragment"
+            app:destination="@id/goalWithHelpStepObjectFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_right"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
         <argument
@@ -141,6 +162,13 @@
             app:destination="@id/goalSummaryFragment"
             app:enterAnim="@anim/fade_in"
             app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_goalWithHelpStepObjectFragment_back_to_goalWithHelpStepAmountFragment"
+            app:destination="@id/goalWithHelpStepAmountFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_right"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
         <argument

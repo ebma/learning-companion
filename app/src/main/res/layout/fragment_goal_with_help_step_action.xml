@@ -73,23 +73,39 @@
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:hint="[action]"
+                android:maxLength="@integer/input_max_length"
                 android:inputType="text|textAutoCorrect"
                 android:singleLine="true"
                 android:textAlignment="center" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
+    <ImageButton
         android:id="@+id/btn_done"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="@dimen/btn_main_padding_ver"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="50dp"
         android:backgroundTint="@color/white"
-        android:text="Next"
+        android:src="@drawable/ic_arrow_forward"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.8"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/til_action"
-        app:layout_constraintVertical_bias="0.976" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <!--<Button-->
+        <!--android:id="@+id/btn_done"-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginBottom="@dimen/btn_main_padding_ver"-->
+        <!--android:backgroundTint="@color/white"-->
+        <!--android:text="Next"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toEndOf="parent"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/til_action"-->
+        <!--app:layout_constraintVertical_bias="0.976" />-->
 
 </androidx.constraintlayout.widget.ConstraintLayout>

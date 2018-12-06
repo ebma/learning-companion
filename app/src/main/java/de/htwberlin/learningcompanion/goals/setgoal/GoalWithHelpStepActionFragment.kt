@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.textfield.TextInputEditText
@@ -19,7 +20,7 @@ class GoalWithHelpStepActionFragment : Fragment() {
 
     private lateinit var actionEditText: TextInputEditText
     private lateinit var actionInputLayout: TextInputLayout
-    private lateinit var doneButton: Button
+    private lateinit var doneButton: ImageButton
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)
@@ -38,7 +39,7 @@ class GoalWithHelpStepActionFragment : Fragment() {
 
         actionEditText = rootView.findViewById(R.id.et_action)
         actionInputLayout = rootView.findViewById(R.id.til_action)
-        doneButton = rootView.findViewById<Button>(R.id.btn_done)
+        doneButton = rootView.findViewById<ImageButton>(R.id.btn_done)
     }
 
     private fun addDoneButtonClickListener() {

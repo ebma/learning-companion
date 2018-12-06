@@ -5,10 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.TextView
+import android.widget.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import de.htwberlin.learningcompanion.R
@@ -23,7 +20,8 @@ class GoalWithHelpStepDurationFragment : Fragment() {
     private lateinit var untilAmountEditText: EditText
     private lateinit var forRadioButton: RadioButton
     private lateinit var untilRadioButton: RadioButton
-    private lateinit var doneButton: Button
+    private lateinit var doneButton: ImageButton
+    private lateinit var backButton: ImageButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -31,6 +29,7 @@ class GoalWithHelpStepDurationFragment : Fragment() {
 
         findViews()
         addDoneButtonClickListener()
+        addBackButtonClickListener()
         addRadioButtonClickListeners()
         addTimePickerDialogToUntilAmountEditText()
 
@@ -45,6 +44,7 @@ class GoalWithHelpStepDurationFragment : Fragment() {
         forRadioButton = rootView.findViewById(R.id.rb_for_with_help)
 
         doneButton = rootView.findViewById(R.id.btn_done)
+        backButton = rootView.findViewById(R.id.btn_back)
     }
 
     private fun addRadioButtonClickListeners() {
@@ -97,6 +97,19 @@ class GoalWithHelpStepDurationFragment : Fragment() {
 
     private fun addDoneButtonClickListener() {
         doneButton.setOnClickListener { navigateToSummaryFragmentWithValues() }
+    }
+
+    private fun addBackButtonClickListener() {
+        backButton.setOnClickListener {
+            navigateToStepAmountFragmentWithValues()
+        }
+    }
+    private fun navigateToStepAmountFragmentWithValues() {
+        val bundle = Bundle()
+        fillBundleWithArguments(bundle)
+
+        if(bundle.size() >= 4)
+            Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepObjectFragment_back_to_goalWithHelpStepAmountFragment, bundle)
     }
 
     private fun navigateToSummaryFragmentWithValues() {
