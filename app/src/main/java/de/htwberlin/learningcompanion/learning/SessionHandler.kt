@@ -7,6 +7,7 @@ import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.model.Goal
 import org.jetbrains.anko.sensorManager
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 
@@ -56,7 +57,37 @@ class SessionHandler(private val activity: Activity) {
 
     private fun retrieveInformationFromGoal() {
         goal = GoalRepository.get(activity).getCurrentGoal()!!
-        goalTargetDurationInMin = goal.durationInMin ?: 0
+
+        goalTargetDurationInMin = getGoalTargetDuration(goal)
+    }
+
+    private fun getGoalTargetDuration(goal: Goal): Int {
+        return goal.durationInMin ?: calculateDurationUntilTimestamp(goal.untilTimeStamp!!)
+    }
+
+    private fun calculateDurationUntilTimestamp(timestamp: String): Int {
+        val rightNow = Calendar.getInstance()
+        val futureTime = Calendar.getInstance()
+
+        var timeStrings = timestamp.split(":")
+
+        futureTime.set(rightNow.get(Calendar.YEAR), rightNow.get(Calendar.MONTH), rightNow.get(Calendar.DAY_OF_MONTH), timeStrings[0].toInt(), timeStrings[1].toInt())
+
+        if (!rightNow.before(futureTime)) {
+            futureTime.set(rightNow.get(Calendar.YEAR), rightNow.get(Calendar.MONTH), rightNow.get(Calendar.DAY_OF_MONTH) + 1, timeStrings[0].toInt(), timeStrings[1].toInt())
+        }
+
+        var currentDate = rightNow.time
+        var futureDate = futureTime.time
+
+        var diffMs = futureDate.time - currentDate.time
+        var diffSec = diffMs / 1000
+        var min = diffSec / 60
+        var sec = diffSec % 60
+
+        System.out.println("The difference is " + min + " minutes and " + sec + " seconds.");
+        return min.toInt()
+
     }
 
     private fun startTimer() {

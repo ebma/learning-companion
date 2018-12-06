@@ -45,7 +45,7 @@ class EvaluatePlaceFragment : Fragment() {
             // means that we collected the values and the user should not choose them
             sb_noise_rating.setProgress(currentLearningSession.noiseRating.ordinal.toFloat())
             sb_noise_rating.isEnabled = false
-            sb_brightness_rating.setProgress(currentLearningSession.noiseRating.ordinal.toFloat())
+            sb_brightness_rating.setProgress(currentLearningSession.brightnessRating.ordinal.toFloat())
             sb_brightness_rating.isEnabled = false
         }
     }

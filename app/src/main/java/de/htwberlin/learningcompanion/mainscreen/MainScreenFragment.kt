@@ -73,7 +73,8 @@ class MainScreenFragment : Fragment() {
                 }
             }
         } else {
-            requestStoragePermission()
+            requestAllPermissions()
+//            requestStoragePermission()
         }
     }
 
@@ -179,6 +180,16 @@ class MainScreenFragment : Fragment() {
     private fun requestAudioPermission() {
         if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
+            ActivityCompat.requestPermissions(activity!!, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
+        } else {
+            permissionToRecordAccepted = true
+        }
+    }
+
+    private fun requestAllPermissions() {
+        if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
+                || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+            val permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE)
             ActivityCompat.requestPermissions(activity!!, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
         } else {
             permissionToRecordAccepted = true
