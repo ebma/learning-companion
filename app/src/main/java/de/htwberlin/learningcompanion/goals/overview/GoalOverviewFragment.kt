@@ -19,7 +19,11 @@ import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_goal_overview.*
+import org.jetbrains.anko.noButton
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.alert
+import org.jetbrains.anko.support.v4.toast
+import org.jetbrains.anko.yesButton
 
 
 class GoalOverviewFragment : Fragment() {
@@ -71,6 +75,30 @@ class GoalOverviewFragment : Fragment() {
         }
         btn_goal_edit.onClick {
             navigateToEditGoal()
+        }
+
+        btn_delete_goal.onClick {
+            openDeleteDialog()
+        }
+    }
+
+    private fun openDeleteDialog() {
+        alert("Do you REALLY want to delete the goal?", "Delete goal") {
+            yesButton {
+                deleteGoal()
+                updateHeaderLayout()
+            }
+            noButton {
+                toast("Good :)")
+            }
+        }.show()
+    }
+
+    private fun deleteGoal() {
+        val currentGoal = GoalRepository.get(context!!).getCurrentGoal()
+        if (currentGoal != null) {
+            GoalRepository.get(context!!).deleteGoal(currentGoal)
+            GoalRepository.get(context!!).setNoGoalAsCurrentGoal()
         }
     }
 
