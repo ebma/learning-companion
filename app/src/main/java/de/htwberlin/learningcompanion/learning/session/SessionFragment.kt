@@ -92,7 +92,7 @@ class SessionFragment : Fragment() {
         val leftAxis = brightness_chart.axisLeft
 
         var ll = LimitLine(LIGHT_MEDIUM_THRESHOLD.toFloat(), "Expected Average")
-        ll.lineColor = Color.RED
+        ll.lineColor = Color.DKGRAY
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
         ll.textSize = 10f
@@ -121,7 +121,7 @@ class SessionFragment : Fragment() {
 
         var dataSet = LineDataSet(entries, "Noise Amplitudes")
         dataSet.color = Color.BLUE
-        dataSet.valueTextColor = Color.CYAN
+        dataSet.valueTextColor = Color.argb(255, 100, 149, 237)
 
         val lineData = LineData(dataSet)
         noise_chart.data = lineData
@@ -134,7 +134,7 @@ class SessionFragment : Fragment() {
         val leftAxis = noise_chart.axisLeft
 
         var ll = LimitLine(NOISE_MEDIUM_THRESHOLD.toFloat(), "Expected Average")
-        ll.lineColor = Color.RED
+        ll.lineColor = Color.DKGRAY
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
         ll.textSize = 10f
