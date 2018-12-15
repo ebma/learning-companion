@@ -51,13 +51,21 @@ class MainScreenFragment : Fragment() {
         rootView = inflater.inflate(R.layout.fragment_main_screen, container, false)
         setActivityTitle(getString(R.string.title_nav_menu_main_screen))
 
-        sessionHandler = SessionHandler(activity!!)
+        sessionHandler = SessionHandler.get(activity!!)
         charlie = Charlie(context!!)
 
         findViews()
         addClickListeners()
         setBackgroundPicture()
         showCharlieInfoText()
+
+        if (sessionHandler.sessionRunning) {
+            showSessionInfoInBox()
+
+            btnStart.visibility = View.INVISIBLE
+            btnQuit.visibility = View.VISIBLE
+        }
+
         return rootView
     }
 
@@ -138,13 +146,13 @@ class MainScreenFragment : Fragment() {
 
     private fun onStartButtonClick() {
         if (canStartSession()) {
-            btnStart.visibility = View.INVISIBLE
-            btnQuit.visibility = View.VISIBLE
 
             requestAudioPermission()
 
             if (permissionToRecordAccepted) {
                 if (sessionHandler.canStartLearningSession()) {
+                    btnStart.visibility = View.INVISIBLE
+                    btnQuit.visibility = View.VISIBLE
                     sessionHandler.startLearningSession()
 
                     sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
@@ -159,6 +167,21 @@ class MainScreenFragment : Fragment() {
                     })
                 }
             }
+        }
+    }
+
+    private fun showSessionInfoInBox() {
+        if (sessionHandler.sessionRunning) {
+            sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
+                override fun onUpdate(millisUntilFinished: Long) {
+                    tvLearningInfo.text = sessionHandler.getSessionInfo()
+                }
+
+                override fun onFinish() {
+                    tvLearningInfo.text = "Learning session over"
+                    finishLearningSession()
+                }
+            })
         }
     }
 

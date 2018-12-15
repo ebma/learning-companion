@@ -1,5 +1,6 @@
 package de.htwberlin.learningcompanion.learning
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.CountDownTimer
 import android.util.Log
@@ -11,13 +12,21 @@ import java.util.*
 import java.util.concurrent.TimeUnit
 
 
-class SessionHandler(private val activity: Activity) {
+class SessionHandler private constructor(private val activity: Activity) {
 
     companion object {
         private val TAG = SessionHandler::class.java.simpleName
         private val INTERVAL_IN_SECONDS = 5 // maybe 1/min soon
         private val ON_UPDATE = 1
         private val ON_FINISH = 2
+
+        @SuppressLint("StaticFieldLeak")
+        @Volatile
+        private var INSTANCE: SessionHandler? = null
+
+        fun get(activity: Activity): SessionHandler = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: SessionHandler(activity).also { INSTANCE = it }
+        }
     }
 
     private val observerList = mutableListOf<LearningSessionObserver>()
@@ -31,7 +40,7 @@ class SessionHandler(private val activity: Activity) {
     private val sensorHandler = SensorHandler(activity.sensorManager)
     private val learningSessionEvaluator = SessionEvaluator(sensorHandler.lightDataList, sensorHandler.noiseDataList)
 
-    private var sessionRunning = false
+    var sessionRunning = false
 
     fun canStartLearningSession(): Boolean {
         val currentGoal = GoalRepository.get(activity).getCurrentGoal()
