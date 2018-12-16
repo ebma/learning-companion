@@ -44,49 +44,82 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv_settings_you_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="[      you     ]"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_name_text"
-        app:layout_constraintStart_toStartOf="@+id/vguideline"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/tv_settings_buddy_name_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:text="[   Charlie   ]"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_image_text"
-        app:layout_constraintStart_toStartOf="@+id/vguideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_you_text" />
+    <!--<TextView-->
+    <!--android:id="@+id/tv_settings_you_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="24dp"-->
+    <!--android:text="[      you     ]"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_name_text"-->
+    <!--app:layout_constraintStart_toStartOf="@+id/vguideline"-->
+    <!--app:layout_constraintTop_toTopOf="parent" />-->
+    <!---->
+    <!--<TextView-->
+    <!--android:id="@+id/tv_settings_buddy_name_text"-->
+    <!--android:layout_width="wrap_content"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:layout_marginStart="24dp"-->
+    <!--android:text="[   Charlie   ]"-->
+    <!--app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_image_text"-->
+    <!--app:layout_constraintStart_toStartOf="@+id/vguideline"-->
+    <!--app:layout_constraintTop_toBottomOf="@+id/tv_settings_you_text" />-->
 
     <TextView
         android:id="@+id/tv_settings_buddy_image_text"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginStart="24dp"
         android:text="TextView"
+        android:layout_marginTop="5dp"
         app:layout_constraintBottom_toTopOf="@+id/hguideline1"
         app:layout_constraintStart_toStartOf="@+id/vguideline"
-        app:layout_constraintTop_toBottomOf="@+id/tv_settings_buddy_name_text" />
+        app:layout_constraintTop_toBottomOf="@+id/input_buddy_name" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_user_name"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_buddy_name"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_settings_user_name"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:hint="hint" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/input_buddy_name"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_marginStart="24dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_image_text"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
+        app:layout_constraintTop_toBottomOf="@+id/input_user_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_settings_buddy_name"
+            android:layout_width="100dp"
+            android:layout_height="match_parent"
+            android:hint="hint" />
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hguideline1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.2" />
+        app:layout_constraintGuide_percent="0.25" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hguideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35" />
+        app:layout_constraintGuide_percent="0.4" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hguideline3"
@@ -184,8 +217,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:clickable="false"
         android:gravity="center"
-        app:layout_constraintEnd_toStartOf="@+id/switch1"
+        app:layout_constraintEnd_toStartOf="@+id/sw_camera"
         app:layout_constraintHorizontal_chainStyle="spread"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_microphone" />
@@ -204,10 +238,11 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_permissions_header" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/sw_camera"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
+        android:clickable="false"
         app:layout_constraintEnd_toStartOf="@+id/sw_gps"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/sw_microphone"
@@ -233,8 +268,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:clickable="false"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/switch1"
+        app:layout_constraintStart_toEndOf="@+id/sw_camera"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_gps" />
 
     <!-- ############################################# -->
@@ -258,11 +294,11 @@
         android:layout_width="wrap_content"
         android:layout_height="15dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="12dp"
         android:text="@string/settings_permissions_info"
         android:textSize="11dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/switch1" />
+        app:layout_constraintTop_toBottomOf="@+id/sw_camera" />
 
     <TextView
         android:id="@+id/tv_settings_intervention_header"
@@ -371,6 +407,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_interval_notice">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_settings_interval"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="hint" />
@@ -386,6 +423,7 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_frequency_notice">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_settings_frequency"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:hint="hint" />
