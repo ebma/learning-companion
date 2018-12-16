@@ -146,7 +146,7 @@ class SessionHandler private constructor(private val activity: Activity) {
     }
 
     fun getLightLevel(): LightLevel {
-        return learningSessionEvaluator.evaluateLight();
+        return learningSessionEvaluator.evaluateLight()
     }
 
     fun getLightValues(): ArrayList<Float> {
