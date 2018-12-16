@@ -6,14 +6,39 @@
     android:layout_height="match_parent"
     tools:context=".places.overview.PlaceOverviewFragment">
 
+    <TextView
+        android:id="@+id/tv_current_place_header"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:text="My current place is ..."
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_current_place_header2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="24dp"
+        android:text="My recent places were ..."
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cl_places_header" />
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_places_header"
-        android:layout_width="361dp"
-        android:layout_height="109dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_place_header">
 
         <ImageButton
             android:id="@+id/btn_new_place"
@@ -30,18 +55,6 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_current_place_header"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="8dp"
-            android:text="My current place is ..."
-            android:textColor="@color/textcolor_black"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
             android:id="@+id/tv_current_place_displayname"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -50,10 +63,11 @@
             android:layout_marginEnd="8dp"
             android:text="..."
             android:textAlignment="center"
+            android:textColor="@color/textcolor_black"
             android:textSize="16sp"
             app:layout_constraintEnd_toStartOf="@+id/btn_edit_place"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_place_header" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageButton
             android:id="@+id/btn_edit_place"
@@ -75,6 +89,7 @@
             android:layout_width="50dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:scaleType="fitCenter"
@@ -97,6 +112,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cl_places_header" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_current_place_header2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
