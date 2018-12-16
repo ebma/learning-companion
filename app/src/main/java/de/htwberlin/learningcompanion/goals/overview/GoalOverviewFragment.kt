@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.goals.GoalListAdapter
+import de.htwberlin.learningcompanion.goals.details.EditGoalFragment
 import de.htwberlin.learningcompanion.goals.setgoal.GoalNavHostFragment
-import de.htwberlin.learningcompanion.goals.setgoal.GoalNoHelpUserInputFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.util.setActivityTitle
@@ -114,18 +114,19 @@ class GoalOverviewFragment : Fragment() {
 
         activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
     }
+
     private fun navigateToCharlie() {
         val fragment = MainScreenFragment()
         activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
     }
 
     private fun navigateToEditGoal() {
-        val fragment = GoalNoHelpUserInputFragment()
-        val bundle = Bundle()
+        val fragment = EditGoalFragment()
         val currentGoal = GoalRepository.get(context!!).getCurrentGoal()
 
         if (currentGoal != null) {
-            bundle.putLong("ID", currentGoal!!.id)
+            val bundle = Bundle()
+            bundle.putLong("ID", currentGoal.id)
             fragment.arguments = bundle
             activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
         }

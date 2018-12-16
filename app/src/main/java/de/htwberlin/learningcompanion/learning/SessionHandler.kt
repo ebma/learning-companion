@@ -3,7 +3,6 @@ package de.htwberlin.learningcompanion.learning
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.CountDownTimer
-import android.util.Log
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.model.Goal
@@ -94,7 +93,7 @@ class SessionHandler private constructor(private val activity: Activity) {
         var min = diffSec / 60
         var sec = diffSec % 60
 
-        System.out.println("The difference is " + min + " minutes and " + sec + " seconds.");
+        System.out.println("The difference is $min minutes and $sec seconds.");
         return min.toInt()
 
     }
@@ -104,7 +103,6 @@ class SessionHandler private constructor(private val activity: Activity) {
             override fun onTick(millisUntilFinished: Long) {
                 remainingMillis = millisUntilFinished
                 notifyObservers(ON_UPDATE)
-                Log.d(TAG, "tick called")
             }
 
             override fun onFinish() {
