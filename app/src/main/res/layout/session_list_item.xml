@@ -46,7 +46,7 @@
 
     <ImageView
         android:id="@+id/iv_brightness"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -59,7 +59,7 @@
 
     <ImageView
         android:id="@+id/iv_noise"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
@@ -72,7 +72,7 @@
 
     <ImageView
         android:id="@+id/iv_rate"
-        android:layout_width="40dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
