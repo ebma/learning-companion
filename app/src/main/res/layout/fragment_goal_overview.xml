@@ -71,19 +71,44 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />
 
-        <ImageButton
-            android:id="@+id/btn_charlie_goal"
-            android:layout_width="50dp"
+        <!--<ImageButton-->
+        <!--android:id="@+id/btn_charlie_goal"-->
+        <!--android:layout_width="128dp"-->
+        <!--android:layout_height="46dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--android:scaleType="fitCenter"-->
+        <!--android:src="@drawable/ic_charlie"-->
+        <!--android:text="Charlie"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/btn_goal_edit"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/btn_delete_goal"-->
+        <!--app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />-->
+
+        <FrameLayout
+            android:layout_width="150dp"
             android:layout_height="50dp"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_charlie"
-            android:text="Charlie"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_goal_edit"
-            app:layout_constraintStart_toEndOf="@+id/btn_delete_goal"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />
+            app:layout_constraintStart_toEndOf="@+id/btn_delete_goal">
+
+            <ImageButton
+                android:id="@+id/btn_charlie_goal"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_charlie"
+                android:text="Charlie" />
+
+            <TextView
+                android:layout_width="49dp"
+                android:layout_height="match_parent"
+                android:clickable="false"
+                android:gravity="center"
+                android:text="home" />
+        </FrameLayout>
 
         <ImageButton
             android:id="@+id/btn_delete_goal"
