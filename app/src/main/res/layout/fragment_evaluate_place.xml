@@ -144,10 +144,12 @@
             app:isb_show_indicator="none"
             app:isb_thumb_color="@color/colorPrimary"
 
-            app:isb_tick_marks_size="10dp"
+            app:isb_tick_marks_size="16dp"
             app:isb_show_tick_marks_type="oval"
             app:isb_tick_marks_color="@color/colorPrimary"
             app:isb_track_background_color="@color/light_grey"
+
+            app:isb_track_progress_size="4dp"
 
             app:isb_ticks_count="5"
             app:isb_track_progress_color="@color/colorPrimary"
@@ -237,7 +239,9 @@
             app:isb_ticks_count="5"
             app:isb_track_progress_color="@color/lightred"
 
-            app:isb_tick_marks_size="10dp"
+            app:isb_track_progress_size="4dp"
+
+            app:isb_tick_marks_size="16dp"
             app:isb_show_tick_marks_type="oval"
             app:isb_tick_marks_color="@color/lightred"
             app:isb_track_background_color="@color/light_grey"
