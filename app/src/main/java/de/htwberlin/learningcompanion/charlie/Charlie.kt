@@ -6,6 +6,8 @@ import de.htwberlin.learningcompanion.db.PlaceRepository
 
 class Charlie(private val context: Context) {
 
+//    private lateinit var charlieName: String
+
     fun getInfoText(): String {
         val currentGoal = GoalRepository.get(context).getCurrentGoal()
         val currentPlace = PlaceRepository.get(context).getCurrentPlace()
@@ -31,5 +33,9 @@ class Charlie(private val context: Context) {
 
         return "Your current goal is: \n${currentGoal!!.getGoalText()}"
     }
+
+//    fun getCharlieName(): String {
+//        return charlieName
+//    }
 
 }
