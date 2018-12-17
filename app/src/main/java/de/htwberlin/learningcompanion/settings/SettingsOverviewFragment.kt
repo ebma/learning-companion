@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.Switch
+import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class SettingsOverviewFragment : Fragment() {
 
@@ -22,9 +25,15 @@ class SettingsOverviewFragment : Fragment() {
 
     private lateinit var userNameEditText: EditText
     private lateinit var buddyNameEditText: EditText
-    private lateinit var buddyImageEditText: EditText
+//    private lateinit var buddyImageEditText: EditText
     private lateinit var intervalEditText: EditText
     private lateinit var frequencyEditText: EditText
+
+    private lateinit var btn_buddyImage1: ImageButton
+    private lateinit var btn_buddyImage2: ImageButton
+    private lateinit var btn_buddyImage3: ImageButton
+    private lateinit var btn_buddyImage4: ImageButton
+    private lateinit var btn_buddyImage5: ImageButton
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -32,6 +41,7 @@ class SettingsOverviewFragment : Fragment() {
 
         findViews()
         setSwitchStands()
+        addClickListeners()
 
         return rootView
     }
@@ -45,6 +55,34 @@ class SettingsOverviewFragment : Fragment() {
 //        buddyImageEditText = rootView.findViewById(R.id.tv_settings_buddy_image_text)
         intervalEditText = rootView.findViewById(R.id.et_settings_interval)
         frequencyEditText = rootView.findViewById(R.id.et_settings_frequency)
+
+        btn_buddyImage1 = rootView.findViewById(R.id.iv_charlie_1)
+        btn_buddyImage2 = rootView.findViewById(R.id.iv_charlie_2)
+        btn_buddyImage3 = rootView.findViewById(R.id.iv_charlie_3)
+        btn_buddyImage4 = rootView.findViewById(R.id.iv_charlie_4)
+        btn_buddyImage5 = rootView.findViewById(R.id.iv_charlie_5)
+    }
+
+    private fun addClickListeners() {
+        btn_buddyImage1.onClick {
+            changeName("gentle Charlie")
+        }
+        btn_buddyImage2.onClick {
+            changeName("nerdy Charlie")
+        }
+        btn_buddyImage3.onClick {
+            changeName("calm Charlie")
+        }
+        btn_buddyImage4.onClick {
+            changeName("happy Charlie")
+        }
+        btn_buddyImage5.onClick {
+            changeName("goofy Charlie")
+        }
+    }
+
+    private fun changeName(newName: String) {
+        rootView.findViewById<TextView>(R.id.tv_settings_buddy_image_text).text = newName
     }
 
     private fun setSwitchStands() {

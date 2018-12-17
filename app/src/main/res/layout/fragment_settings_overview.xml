@@ -69,7 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_marginStart="24dp"
-        android:text="TextView"
+        android:text="..."
+        
         android:layout_marginTop="5dp"
         app:layout_constraintBottom_toTopOf="@+id/hguideline1"
         app:layout_constraintStart_toStartOf="@+id/vguideline"
@@ -129,11 +130,25 @@
         android:visibility="visible"
         app:layout_constraintGuide_percent="0.6" />
 
-    <ImageView
+    <!--<ImageView-->
+        <!--android:id="@+id/iv_charlie_1"-->
+        <!--android:layout_width="75dp"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:src="@drawable/ib_charlie_gentle"-->
+        <!--app:layout_constraintBottom_toTopOf="@+id/hguideline2"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/iv_charlie_2"-->
+        <!--app:layout_constraintHorizontal_bias="0.5"-->
+        <!--app:layout_constraintHorizontal_chainStyle="spread"-->
+        <!--app:layout_constraintStart_toStartOf="parent"-->
+        <!--app:layout_constraintTop_toTopOf="@+id/hguideline1" />-->
+
+    <ImageButton
         android:id="@+id/iv_charlie_1"
         android:layout_width="75dp"
         android:layout_height="75dp"
-        android:layout_marginStart="8dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
         android:src="@drawable/ib_charlie_gentle"
         app:layout_constraintBottom_toTopOf="@+id/hguideline2"
         app:layout_constraintEnd_toStartOf="@+id/iv_charlie_2"
@@ -142,45 +157,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/hguideline1" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/iv_charlie_2"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:src="@drawable/ib_charlie_nerdy"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/hguideline2"
         app:layout_constraintEnd_toStartOf="@+id/iv_charlie_3"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_charlie_1"
         app:layout_constraintTop_toTopOf="@+id/hguideline1" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/iv_charlie_3"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:src="@drawable/ib_charlie_calm"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/hguideline2"
         app:layout_constraintEnd_toStartOf="@+id/iv_charlie_4"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_charlie_2"
         app:layout_constraintTop_toTopOf="@+id/hguideline1" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/iv_charlie_4"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:src="@drawable/ib_charlie_happy"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/hguideline2"
         app:layout_constraintEnd_toStartOf="@+id/iv_charlie_5"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/iv_charlie_3"
         app:layout_constraintTop_toTopOf="@+id/hguideline1" />
 
-    <ImageView
+    <ImageButton
         android:id="@+id/iv_charlie_5"
         android:layout_width="75dp"
         android:layout_height="75dp"
         android:layout_marginEnd="8dp"
         android:src="@drawable/ib_charlie_goofy"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
         app:layout_constraintBottom_toTopOf="@+id/hguideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
