@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:text="Most achievable goals"
+                android:text="Top 3 recent achievable goals"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -104,6 +104,33 @@
                 tools:text="Write three essays for 30 minutes" />
 
             <TextView
+                android:id="@+id/tv_best_duration_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Most achievable duration"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tv_best_goal_3" />
+
+            <TextView
+                android:id="@+id/tv_best_duration_value"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/bg_semitransparent_rounded_border"
+                android:text=""
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_best_duration_title"
+                tools:text="30 Minutes" />
+
+            <TextView
                 android:id="@+id/tv_best_time_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
@@ -112,7 +139,7 @@
                 android:text="Best time to achieve your goal"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tv_best_goal_3" />
+                app:layout_constraintTop_toBottomOf="@+id/tv_best_duration_value" />
 
             <TextView
                 android:id="@+id/tv_best_time_value"
@@ -136,7 +163,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="24dp"
-                android:text="Best places"
+                android:text="Top 2 recent places to achieve goals"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_best_time_value" />
