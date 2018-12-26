@@ -12,6 +12,7 @@ import de.htwberlin.learningcompanion.help.HelpOverview
 import de.htwberlin.learningcompanion.learning.session.SessionOverviewFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.places.overview.PlaceOverviewFragment
+import de.htwberlin.learningcompanion.recommendation.RecommendationFragment
 import de.htwberlin.learningcompanion.settings.SettingsOverviewFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -57,6 +58,9 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_overview -> {
                 displaySelectedScreen(R.id.nav_overview)
             }
+            R.id.nav_recommendation -> {
+                displaySelectedScreen(R.id.nav_recommendation)
+            }
             R.id.nav_setting -> {
                 displaySelectedScreen(R.id.nav_setting)
             }
@@ -83,6 +87,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_myplace -> fragment = PlaceOverviewFragment()
             R.id.nav_overview -> fragment = SessionOverviewFragment()
             R.id.nav_mygoal -> fragment = GoalOverviewFragment()
+            R.id.nav_recommendation -> fragment = RecommendationFragment()
             R.id.nav_setting -> fragment = SettingsOverviewFragment()
             R.id.nav_help -> fragment = HelpOverview()
         }
