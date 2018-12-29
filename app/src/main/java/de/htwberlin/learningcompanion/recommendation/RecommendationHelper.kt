@@ -1,6 +1,7 @@
 package de.htwberlin.learningcompanion.recommendation
 
 import android.content.Context
+import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.model.Goal
@@ -97,7 +98,32 @@ class RecommendationHelper(private val context: Context) {
     }
 
     fun getBestDuration(): String {
-        return ""
+        val sessionsList = LearningSessionRepository.get(context).sessionsList
+
+        // map which maps DURATION to USERRATING
+        val mapWithDurations = hashMapOf<Int, Int>()
+
+        val goalRepository = GoalRepository.get(context)
+
+        sessionsList?.forEach {
+            val durationInMin = goalRepository.getGoalByID(it.goalID).durationInMin
+
+            mapWithDurations[durationInMin!!] = mapWithDurations[durationInMin]?.plus(it.userRating) ?: it.userRating
+        }
+
+        var bestDurationInMin = 0
+        var bestUserRatingSum = 0
+
+        val iterator = mapWithDurations.entries.iterator()
+        while (iterator.hasNext()) {
+            val entry = iterator.next()
+            if (entry.value > bestUserRatingSum) {
+                bestDurationInMin = entry.key
+                bestUserRatingSum = entry.value
+            }
+        }
+
+        return "$bestDurationInMin minutes"
     }
 
     fun getBestGoals(): List<Goal> {

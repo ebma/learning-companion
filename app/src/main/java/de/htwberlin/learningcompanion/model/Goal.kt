@@ -12,8 +12,8 @@ data class Goal(
         val amount: String,
         val field: String,
         val medium: String,
-        val durationInMin: Int? = null,
-        val untilTimeStamp: String? = null) {
+        var durationInMin: Int? = null,
+        var untilTimeStamp: String? = null) {
 
     @PrimaryKey(autoGenerate = true)
     var id: Long = 0

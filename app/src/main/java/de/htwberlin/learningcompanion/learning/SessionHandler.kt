@@ -71,7 +71,11 @@ class SessionHandler private constructor(private val activity: Activity) {
     }
 
     private fun getGoalTargetDuration(goal: Goal): Int {
-        return goal.durationInMin ?: calculateDurationUntilTimestamp(goal.untilTimeStamp!!)
+        if (goal.durationInMin == null) {
+            goal.durationInMin = calculateDurationUntilTimestamp(goal.untilTimeStamp!!)
+            GoalRepository.get(activity.applicationContext).updateGoal(goal)
+        }
+        return goal.durationInMin!!
     }
 
     private fun calculateDurationUntilTimestamp(timestamp: String): Int {
