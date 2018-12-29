@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.learning.LightLevel
+import de.htwberlin.learningcompanion.learning.NoiseLevel
 import kotlinx.android.synthetic.main.fragment_recommendation.*
 
 class RecommendationFragment : Fragment() {
@@ -47,7 +49,7 @@ class RecommendationFragment : Fragment() {
 
     private fun setBestDuration() {
         val bestDuration = recommendationHelper.getBestDuration()
-        if (bestDuration.isNotBlank())
+        if (bestDuration != 0)
             tv_best_duration_value.text = "$bestDuration minutes"
     }
 
@@ -72,7 +74,7 @@ class RecommendationFragment : Fragment() {
         val bestBrightnessValue = recommendationHelper.getBestBrightnessValue()
         if (bestBrightnessValue != 0) {
             tv_brightness_value.text = "$bestBrightnessValue lux"
-            tv_brightness_level.text = ""
+            tv_brightness_level.text = LightLevel.fromValue(bestBrightnessValue.toDouble()).name
         }
     }
 
@@ -80,9 +82,7 @@ class RecommendationFragment : Fragment() {
         val bestNoiseValue = recommendationHelper.getBestNoiseValue()
         if (bestNoiseValue != 0) {
             tv_noise_value.text = "$bestNoiseValue dB"
-            tv_noise_level.text = ""
+            tv_noise_level.text = NoiseLevel.fromValue(bestNoiseValue.toDouble()).name
         }
     }
-
-
 }

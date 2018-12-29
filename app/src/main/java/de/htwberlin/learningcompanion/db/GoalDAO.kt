@@ -30,6 +30,9 @@ interface GoalDAO {
     @Query("SELECT * FROM goals WHERE currentGoal == 1")
     fun getCurrentGoal(): Goal?
 
+    @Query("SELECT * FROM goals g, sessions s WHERE s.goal_id = g.id ORDER BY userRating DESC")
+    fun getGoalsByDescendingUserRating(): List<Goal>
+
     @Query("SELECT * FROM goals")
     fun getGoalsAsLiveData(): LiveData<List<Goal>>
 }
