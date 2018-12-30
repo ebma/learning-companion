@@ -8,8 +8,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_places_header"
-        android:layout_width="361dp"
-        android:layout_height="109dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -17,13 +19,13 @@
 
         <ImageButton
             android:id="@+id/btn_new_place"
-            android:layout_width="30dp"
-            android:layout_height="30dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="8dp"
             android:background="@android:color/transparent"
             android:scaleType="fitCenter"
-            android:src="@android:drawable/ic_input_add"
+            android:src="@android:drawable/ic_menu_add"
             android:text="Create new Place"
             android:tint="@android:color/holo_blue_bright"
             app:layout_constraintEnd_toEndOf="parent"
@@ -48,9 +50,11 @@
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
             android:text="..."
             android:textAlignment="center"
             android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/btn_edit_place"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_current_place_header" />
@@ -62,29 +66,16 @@
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="12dp"
+            android:backgroundTint="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_edit"
             android:text="Place"
+            android:tint="@android:color/holo_blue_bright"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_new_place"
             app:layout_constraintVertical_bias="0.0" />
 
-        <ImageButton
-            android:id="@+id/btn_charlie_place"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_charlie"
-            android:text="Charlie"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_place_displayname"
-            app:layout_constraintVertical_bias="0.0" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView

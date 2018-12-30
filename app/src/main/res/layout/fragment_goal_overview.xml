@@ -8,8 +8,10 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout"
-        android:layout_width="357dp"
-        android:layout_height="114dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
@@ -34,67 +36,55 @@
             android:layout_marginEnd="8dp"
             android:text="             ..."
             android:textSize="14sp"
-            app:layout_constraintEnd_toStartOf="@+id/btn_new_goal"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_title" />
 
         <ImageButton
             android:id="@+id/btn_new_goal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="8dp"
             android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_input_add"
+            android:src="@android:drawable/ic_menu_add"
             android:tint="@android:color/holo_blue_bright"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_goal_edit"
+            app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />
 
         <ImageButton
             android:id="@+id/btn_goal_edit"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@android:color/transparent"
             android:scaleType="fitCenter"
             android:src="@drawable/ic_edit"
             android:text="Edit"
+            android:tint="@android:color/holo_blue_bright"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_new_goal"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageButton
-            android:id="@+id/btn_charlie_goal"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_charlie"
-            android:text="Charlie"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintEnd_toStartOf="@+id/btn_new_goal"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/btn_delete_goal"
+            app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />
 
         <ImageButton
             android:id="@+id/btn_delete_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:backgroundTint="@android:color/transparent"
             android:src="@android:drawable/ic_menu_delete"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_charlie_goal"
-            app:layout_constraintHorizontal_bias="0.054"
+            app:layout_constraintEnd_toStartOf="@+id/btn_goal_edit"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text"
-            app:layout_constraintVertical_bias="1.0" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.recyclerview.widget.RecyclerView
