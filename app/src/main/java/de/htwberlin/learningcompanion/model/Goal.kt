@@ -29,8 +29,8 @@ data class Goal(
 
     fun getGoalText(): String {
         return when {
-            untilTimeStamp != null -> "${action}, ${field}, ${medium}, ${amount} until ${untilTimeStamp}"
-            durationInMin != null -> "${action}, ${field}, ${medium}, ${amount} for ${durationInMin} minutes"
+            untilTimeStamp != null -> "$action $amount $field $medium until $untilTimeStamp"
+            durationInMin != null -> "$action $amount $field $medium for $durationInMin minutes"
             else -> "${action}, ${field}, ${medium}, ${amount}"
         }
     }
