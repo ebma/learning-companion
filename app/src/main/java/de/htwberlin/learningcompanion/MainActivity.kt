@@ -16,6 +16,7 @@ import de.htwberlin.learningcompanion.recommendation.RecommendationFragment
 import de.htwberlin.learningcompanion.settings.SettingsOverviewFragment
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import org.jetbrains.anko.sdk27.coroutines.onClick
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
 
@@ -30,6 +31,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         nav_view.setNavigationItemSelectedListener(this)
         nav_view.setCheckedItem(R.id.nav_mainscreen)
+
+        fab_charlie.onClick { displaySelectedScreen(R.id.nav_mainscreen) }
 
         displaySelectedScreen(R.id.nav_mainscreen)
     }
@@ -90,6 +93,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             R.id.nav_recommendation -> fragment = RecommendationFragment()
             R.id.nav_setting -> fragment = SettingsOverviewFragment()
             R.id.nav_help -> fragment = HelpOverview()
+        }
+
+        if (itemId == R.id.nav_mainscreen) {
+            fab_charlie.hide()
+        } else {
+            fab_charlie.show()
         }
 
         if (fragment != null) {
