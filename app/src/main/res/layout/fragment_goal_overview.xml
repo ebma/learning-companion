@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="24dp"
+        android:layout_marginEnd="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -44,71 +44,69 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
+        <Button
             android:id="@+id/btn_new_goal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
-            android:layout_marginBottom="8dp"
-            android:background="@android:color/transparent"
-            android:src="@android:drawable/ic_input_add"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:text="add"
             android:tint="@android:color/holo_blue_bright"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_goal_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:scaleType="fitCenter"
+            android:text="Edit"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0" />
+            app:layout_constraintTop_toBottomOf="@+id/btn_new_goal" />
+
 
         <ImageButton
-            android:id="@+id/btn_goal_edit"
+            android:id="@+id/btn_charlie_goal"
             android:layout_width="50dp"
             android:layout_height="50dp"
+            android:layout_marginStart="8dp"
             android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
+            android:layout_marginEnd="8dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_edit"
-            android:text="Edit"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/ic_charlie"
+            android:text="Charlie"
+            app:layout_constraintEnd_toStartOf="@+id/btn_goal_edit"
+            app:layout_constraintStart_toEndOf="@+id/btn_delete_goal"
             app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />
+
+        <!--<FrameLayout-->
+        <!--android:layout_width="150dp"-->
+        <!--android:layout_height="50dp"-->
+        <!--android:layout_marginStart="8dp"-->
+        <!--android:layout_marginEnd="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--app:layout_constraintEnd_toStartOf="@+id/btn_goal_edit"-->
+        <!--app:layout_constraintStart_toEndOf="@+id/btn_delete_goal">-->
 
         <!--<ImageButton-->
         <!--android:id="@+id/btn_charlie_goal"-->
-        <!--android:layout_width="128dp"-->
-        <!--android:layout_height="46dp"-->
-        <!--android:layout_marginStart="8dp"-->
-        <!--android:layout_marginTop="16dp"-->
-        <!--android:layout_marginEnd="8dp"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent"-->
         <!--android:scaleType="fitCenter"-->
         <!--android:src="@drawable/ic_charlie"-->
-        <!--android:text="Charlie"-->
-        <!--app:layout_constraintEnd_toStartOf="@+id/btn_goal_edit"-->
-        <!--app:layout_constraintStart_toEndOf="@+id/btn_delete_goal"-->
-        <!--app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />-->
+        <!--android:text="Charlie" />-->
 
-        <FrameLayout
-            android:layout_width="150dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/btn_goal_edit"
-            app:layout_constraintStart_toEndOf="@+id/btn_delete_goal">
-
-            <ImageButton
-                android:id="@+id/btn_charlie_goal"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scaleType="fitCenter"
-                android:src="@drawable/ic_charlie"
-                android:text="Charlie" />
-
-            <TextView
-                android:layout_width="49dp"
-                android:layout_height="match_parent"
-                android:clickable="false"
-                android:gravity="center"
-                android:text="home" />
-        </FrameLayout>
+        <!--<TextView-->
+        <!--android:layout_width="49dp"-->
+        <!--android:layout_height="match_parent"-->
+        <!--android:clickable="false"-->
+        <!--android:gravity="center"-->
+        <!--android:text="home" />-->
+        <!--</FrameLayout>-->
 
         <ImageButton
             android:id="@+id/btn_delete_goal"
@@ -232,6 +230,7 @@
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
