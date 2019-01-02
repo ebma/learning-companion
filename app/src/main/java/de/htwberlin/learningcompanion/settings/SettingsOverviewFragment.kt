@@ -1,6 +1,8 @@
 package de.htwberlin.learningcompanion.settings
 
 import android.Manifest
+import android.content.Context
+import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,6 +14,8 @@ import android.widget.Switch
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputEditText
+import de.htwberlin.learningcompanion.MyPreference
 import de.htwberlin.learningcompanion.R
 import org.jetbrains.anko.sdk27.coroutines.onClick
 
@@ -43,8 +47,19 @@ class SettingsOverviewFragment : Fragment() {
         setSwitchStands()
         addClickListeners()
 
+//        val mypref = MyPreference()
+//        val userName = mypref.getUserName()
+//        val charlieNum = mypref.getCharlieNumber()
+//        val buddyName = mypref.getBuddyName()
+
+//        rootView.findViewById<TextView>(R.id.et_settings_user_name).text = userName
+
         return rootView
     }
+
+//    private fun saveData() {
+//        SharedPreferences pref = con
+//    }
 
     private fun findViews() {
         switchMicrophone = rootView.findViewById(R.id.sw_microphone)
@@ -104,4 +119,6 @@ class SettingsOverviewFragment : Fragment() {
     fun hasLocationPermission(): Boolean {
         return ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
+
+    val sharedPref = activity?.getSharedPreferences("LearningCompanion", Context.MODE_PRIVATE)
 }

@@ -1,5 +1,7 @@
 package de.htwberlin.learningcompanion
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
@@ -31,6 +33,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setCheckedItem(R.id.nav_mainscreen)
 
         displaySelectedScreen(R.id.nav_mainscreen)
+
+
     }
 
     override fun onBackPressed() {
