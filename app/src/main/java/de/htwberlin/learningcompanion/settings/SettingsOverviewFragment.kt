@@ -43,7 +43,7 @@ class SettingsOverviewFragment : Fragment() {
 
     private lateinit var btn_settings_save: Button
 
-    private val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE)
+    private lateinit var sharedPref: SharedPreferences
     private var charlieNumberChange = 0
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +60,7 @@ class SettingsOverviewFragment : Fragment() {
     }
 
     private fun setDefaultPreferences() {
-//        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+        sharedPref = activity!!.getPreferences(Context.MODE_PRIVATE) ?: return
 //        val num = sharedPref.getCharlieNumber()
         val charlieNum = sharedPref?.getInt("CharlieNumber", 0)
         val userNamePref = sharedPref?.getString("UserName", "You")
@@ -81,7 +81,7 @@ class SettingsOverviewFragment : Fragment() {
 
     private fun savePreferences() {
         // muss noch ne Bedinguing hinzufügen, wenn die Input Felder nicht leer sind
-        
+
         var uname = userNameEditText.text.toString()
         var bname = buddyNameEditText.text.toString()
 
