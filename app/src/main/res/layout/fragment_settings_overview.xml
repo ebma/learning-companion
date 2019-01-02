@@ -44,70 +44,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <!--<TextView-->
-    <!--android:id="@+id/tv_settings_you_text"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginStart="24dp"-->
-    <!--android:text="[      you     ]"-->
-    <!--app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_name_text"-->
-    <!--app:layout_constraintStart_toStartOf="@+id/vguideline"-->
-    <!--app:layout_constraintTop_toTopOf="parent" />-->
-    <!---->
-    <!--<TextView-->
-    <!--android:id="@+id/tv_settings_buddy_name_text"-->
-    <!--android:layout_width="wrap_content"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_marginStart="24dp"-->
-    <!--android:text="[   Charlie   ]"-->
-    <!--app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_image_text"-->
-    <!--app:layout_constraintStart_toStartOf="@+id/vguideline"-->
-    <!--app:layout_constraintTop_toBottomOf="@+id/tv_settings_you_text" />-->
+    <EditText
+        android:id="@+id/input_user_name"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/input_buddy_name"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="spread" />
+
+    <EditText
+        android:id="@+id/input_buddy_name"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_image_text"
+        app:layout_constraintStart_toStartOf="@+id/vguideline"
+        app:layout_constraintTop_toBottomOf="@+id/input_user_name" />
 
     <TextView
         android:id="@+id/tv_settings_buddy_image_text"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="5dp"
+        android:layout_width="140dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
 
+        android:layout_marginBottom="16dp"
         android:text="..."
         app:layout_constraintBottom_toTopOf="@+id/hguideline1"
         app:layout_constraintStart_toStartOf="@+id/vguideline"
         app:layout_constraintTop_toBottomOf="@+id/input_buddy_name" />
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_user_name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/input_buddy_name"
-        app:layout_constraintStart_toStartOf="@+id/vguideline"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_settings_user_name"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
-
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/input_buddy_name"
-        android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_marginStart="24dp"
-        app:layout_constraintBottom_toTopOf="@+id/tv_settings_buddy_image_text"
-        app:layout_constraintStart_toStartOf="@+id/vguideline"
-        app:layout_constraintTop_toBottomOf="@+id/input_user_name">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/et_settings_buddy_name"
-            android:layout_width="100dp"
-            android:layout_height="match_parent"
-            android:hint="hint" />
-    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/hguideline1"
@@ -130,19 +96,6 @@
         android:orientation="horizontal"
         android:visibility="visible"
         app:layout_constraintGuide_percent="0.6" />
-
-    <!--<ImageView-->
-    <!--android:id="@+id/iv_charlie_1"-->
-    <!--android:layout_width="75dp"-->
-    <!--android:layout_height="75dp"-->
-    <!--android:layout_marginStart="8dp"-->
-    <!--android:src="@drawable/ib_charlie_gentle"-->
-    <!--app:layout_constraintBottom_toTopOf="@+id/hguideline2"-->
-    <!--app:layout_constraintEnd_toStartOf="@+id/iv_charlie_2"-->
-    <!--app:layout_constraintHorizontal_bias="0.5"-->
-    <!--app:layout_constraintHorizontal_chainStyle="spread"-->
-    <!--app:layout_constraintStart_toStartOf="parent"-->
-    <!--app:layout_constraintTop_toTopOf="@+id/hguideline1" />-->
 
     <ImageButton
         android:id="@+id/iv_charlie_1"

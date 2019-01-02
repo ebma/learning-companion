@@ -8,16 +8,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.EditText
-import android.widget.ImageButton
-import android.widget.Switch
-import android.widget.TextView
+import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputEditText
+import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.MyPreference
 import de.htwberlin.learningcompanion.R
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.toast
 
 class SettingsOverviewFragment : Fragment() {
 
@@ -39,6 +38,8 @@ class SettingsOverviewFragment : Fragment() {
     private lateinit var btn_buddyImage4: ImageButton
     private lateinit var btn_buddyImage5: ImageButton
 
+    private lateinit var btn_settings_save: Button
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_settings_overview, container, false)
@@ -47,27 +48,28 @@ class SettingsOverviewFragment : Fragment() {
         setSwitchStands()
         addClickListeners()
 
-//        val mypref = MyPreference()
-//        val userName = mypref.getUserName()
-//        val charlieNum = mypref.getCharlieNumber()
-//        val buddyName = mypref.getBuddyName()
-
-//        rootView.findViewById<TextView>(R.id.et_settings_user_name).text = userName
+        setDefaultPreferences()
 
         return rootView
     }
 
-//    private fun saveData() {
-//        SharedPreferences pref = con
-//    }
+    private fun setDefaultPreferences() {
+        val sharedPref = activity?.getPreferences(Context.MODE_PRIVATE) ?: return
+//        val num = sharedPref.getCharlieNumber()
+        val charlieNum = sharedPref.getInt("CharlieNumber", 0)
+        val userNamePref = sharedPref.getString("UserName", "You")
+        val buddyNamePref = sharedPref.getString("BuddyName", "Charlie")
+        rootView.findViewById<EditText>(R.id.input_user_name).hint = userNamePref
+        rootView.findViewById<EditText>(R.id.input_buddy_name).hint = buddyNamePref
+        changeName(charlieNum.toString())
+    }
 
     private fun findViews() {
         switchMicrophone = rootView.findViewById(R.id.sw_microphone)
         switchCamera = rootView.findViewById(R.id.sw_camera)
         switchGps = rootView.findViewById(R.id.sw_gps)
-        userNameEditText = rootView.findViewById(R.id.et_settings_user_name)
-        buddyNameEditText = rootView.findViewById(R.id.et_settings_buddy_name)
-//        buddyImageEditText = rootView.findViewById(R.id.tv_settings_buddy_image_text)
+        userNameEditText = rootView.findViewById(R.id.input_user_name)
+        buddyNameEditText = rootView.findViewById(R.id.input_buddy_name)
         intervalEditText = rootView.findViewById(R.id.et_settings_interval)
         frequencyEditText = rootView.findViewById(R.id.et_settings_frequency)
 
@@ -76,6 +78,8 @@ class SettingsOverviewFragment : Fragment() {
         btn_buddyImage3 = rootView.findViewById(R.id.iv_charlie_3)
         btn_buddyImage4 = rootView.findViewById(R.id.iv_charlie_4)
         btn_buddyImage5 = rootView.findViewById(R.id.iv_charlie_5)
+
+        btn_settings_save = rootView.findViewById(R.id.btn_settings_save)
     }
 
     private fun addClickListeners() {
@@ -93,6 +97,10 @@ class SettingsOverviewFragment : Fragment() {
         }
         btn_buddyImage5.onClick {
             changeName("goofy Charlie")
+        }
+        btn_settings_save.onClick {
+            // set new values to preferences
+            toast("settings were saved")
         }
     }
 
@@ -119,6 +127,4 @@ class SettingsOverviewFragment : Fragment() {
     fun hasLocationPermission(): Boolean {
         return ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
-
-    val sharedPref = activity?.getSharedPreferences("LearningCompanion", Context.MODE_PRIVATE)
 }

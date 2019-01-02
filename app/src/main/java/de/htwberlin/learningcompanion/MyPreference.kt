@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.ContextCompat
 
-class MyPreference (context: Context) {
+class MyPreference constructor (context: Context) {
 
     val PREFERENCE_NAME = "CharlieSharedPreference"
 

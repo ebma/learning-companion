@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         displaySelectedScreen(R.id.nav_mainscreen)
 
+        val mypref = MyPreference(this)
 
     }
 
