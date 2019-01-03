@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.charlie.Charlie
 import de.htwberlin.learningcompanion.db.GoalRepository
@@ -22,6 +23,7 @@ import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.learning.SessionHandler
 import de.htwberlin.learningcompanion.learning.evaluation.EvaluationNavHostFragment
 import de.htwberlin.learningcompanion.model.LearningSession
+import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.noButton
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -49,7 +51,7 @@ class MainScreenFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_main_screen, container, false)
-        setActivityTitle(getString(R.string.title_nav_menu_main_screen))
+        setActivityTitle(SharedPreferencesHelper.get(context!!).getBuddyName())
 
         sessionHandler = SessionHandler.get(activity!!)
         charlie = Charlie(context!!)
@@ -121,6 +123,8 @@ class MainScreenFragment : Fragment() {
         navigateToEvaluateFragment()
         btnStart.visibility = View.VISIBLE
         btnQuit.visibility = View.INVISIBLE
+
+        (activity as MainActivity).lockDrawer(false)
     }
 
 
@@ -151,23 +155,28 @@ class MainScreenFragment : Fragment() {
 
             if (permissionToRecordAccepted) {
                 if (sessionHandler.canStartLearningSession()) {
-                    btnStart.visibility = View.INVISIBLE
-                    btnQuit.visibility = View.VISIBLE
-                    sessionHandler.startLearningSession()
-
-                    sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
-                        override fun onUpdate(millisUntilFinished: Long) {
-                            tvLearningInfo.text = sessionHandler.getSessionInfo()
-                        }
-
-                        override fun onFinish() {
-                            tvLearningInfo.text = "Learning session over"
-                            finishLearningSession()
-                        }
-                    })
+                    startLearningSession()
                 }
             }
         }
+    }
+
+    private fun startLearningSession() {
+        btnStart.visibility = View.INVISIBLE
+        btnQuit.visibility = View.VISIBLE
+        sessionHandler.startLearningSession()
+        (activity as MainActivity).lockDrawer(true)
+
+        sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
+            override fun onUpdate(millisUntilFinished: Long) {
+                tvLearningInfo.text = sessionHandler.getSessionInfo()
+            }
+
+            override fun onFinish() {
+                tvLearningInfo.text = "Learning session over"
+                finishLearningSession()
+            }
+        })
     }
 
     private fun showSessionInfoInBox() {
@@ -180,6 +189,7 @@ class MainScreenFragment : Fragment() {
                 override fun onFinish() {
                     tvLearningInfo.text = "Learning session over"
                     finishLearningSession()
+
                 }
             })
         }

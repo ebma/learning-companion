@@ -3,6 +3,7 @@ package de.htwberlin.learningcompanion
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_welcome.*
 
 class WelcomeActivity : Activity() {
@@ -14,6 +15,8 @@ class WelcomeActivity : Activity() {
         cl_welcome_activity.setOnClickListener {
             launchMainActivity()
         }
+
+        tv_buddy_name.text = SharedPreferencesHelper.get(applicationContext).getBuddyName()
     }
 
     private fun launchMainActivity() {

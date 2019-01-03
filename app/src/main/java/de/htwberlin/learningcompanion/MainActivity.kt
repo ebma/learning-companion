@@ -1,12 +1,11 @@
 package de.htwberlin.learningcompanion
 
-import android.content.Context
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
 import de.htwberlin.learningcompanion.goals.overview.GoalOverviewFragment
@@ -16,6 +15,7 @@ import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.places.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.recommendation.RecommendationFragment
 import de.htwberlin.learningcompanion.settings.SettingsOverviewFragment
+import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -34,9 +34,20 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
         nav_view.setCheckedItem(R.id.nav_mainscreen)
 
-        fab_charlie.onClick { displaySelectedScreen(R.id.nav_mainscreen) }
+        fab_charlie.onClick {
+            nav_view.setCheckedItem(R.id.nav_mainscreen)
+            displaySelectedScreen(R.id.nav_mainscreen)
+        }
+
+        changeMainScreenMenuItemText()
 
         displaySelectedScreen(R.id.nav_mainscreen)
+    }
+
+    private fun changeMainScreenMenuItemText() {
+        val menu = nav_view.menu
+        val mainScreenMenuItem = menu.findItem(R.id.nav_mainscreen)
+        mainScreenMenuItem.title = SharedPreferencesHelper.get(applicationContext!!).getBuddyName()
     }
 
     override fun onBackPressed() {
@@ -107,6 +118,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val ft = supportFragmentManager.beginTransaction()
             ft.replace(R.id.content_main, fragment)
             ft.commit()
+        }
+    }
+
+    fun lockDrawer(lock: Boolean) {
+        if (lock) {
+            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        } else {
+            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         }
     }
 }
