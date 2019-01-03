@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         displaySelectedScreen(R.id.nav_mainscreen)
     }
 
-    private fun changeMainScreenMenuItemText() {
+    fun changeMainScreenMenuItemText() {
         val menu = nav_view.menu
         val mainScreenMenuItem = menu.findItem(R.id.nav_mainscreen)
         mainScreenMenuItem.title = SharedPreferencesHelper.get(applicationContext!!).getBuddyName()

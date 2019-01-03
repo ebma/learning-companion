@@ -11,6 +11,7 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
+import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
 import org.jetbrains.anko.sdk27.coroutines.onClick
@@ -97,6 +98,8 @@ class SettingsOverviewFragment : Fragment() {
         saveUserName(userName)
         saveBuddyName(buddyName)
         saveBuddyMood(charlieNumberChange)
+
+        (activity as MainActivity).changeMainScreenMenuItemText()
 
         setHints()
 
