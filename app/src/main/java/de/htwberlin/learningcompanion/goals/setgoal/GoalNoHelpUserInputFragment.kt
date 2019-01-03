@@ -218,7 +218,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
 
         fillBundleWithArguments(bundle)
 
-        if (bundle.size() == 5)
+        if (bundle.size() == 6)
             Navigation.findNavController(rootView).navigate(R.id.action_goalNoHelpUserInputFragment_to_goalSummaryFragment, bundle)
     }
 
@@ -274,6 +274,9 @@ class GoalNoHelpUserInputFragment : Fragment() {
                     bundle.putString("duration", it)
             }
         }
+
+        val withHelp = false
+        bundle.putBoolean("withHelp", withHelp)
     }
 
     private fun tintTextInputLayout(layout: TextInputLayout, errorTint: Boolean) {
