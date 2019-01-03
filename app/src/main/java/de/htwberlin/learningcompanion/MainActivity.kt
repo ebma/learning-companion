@@ -37,9 +37,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         fab_charlie.onClick { displaySelectedScreen(R.id.nav_mainscreen) }
 
         displaySelectedScreen(R.id.nav_mainscreen)
-
-        val mypref = MyPreference(this)
-
     }
 
     override fun onBackPressed() {
