@@ -32,6 +32,10 @@ class SharedPreferencesHelper private constructor(context: Context) {
         }
     }
 
+    fun getCharlieNum() : Int {
+        return sharedPref.getInt("MoodNumber", 0)
+    }
+
     fun setBuddyMood(moodNumber: Int) {
         val editor = sharedPref.edit()
         editor.putInt("MoodNumber", moodNumber)
