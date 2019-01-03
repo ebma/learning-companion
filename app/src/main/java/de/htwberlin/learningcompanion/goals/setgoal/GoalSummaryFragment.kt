@@ -61,6 +61,9 @@ class GoalSummaryFragment : Fragment() {
 
     private fun addNoButtonClickListener() {
         rootView.findViewById<Button>(R.id.btn_no).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goalSummaryFragment_to_goalDecidePathFragment))
+
+//        activity?.supportFragmentManager?.backStackEntryCount
+
     }
 
     private fun addYesButtonOnClickListener() {

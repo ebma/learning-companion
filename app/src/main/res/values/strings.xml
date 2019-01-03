@@ -51,11 +51,18 @@
     <string name="settings_buddy_image">Buddy Image :</string>
     <string name="settings_gps">GPS :</string>
     <string name="settings_microphone">Microphone :</string>
-    <string name="settings_alert_setting_info">Alert Setting</string>
-    <string name="settings_start_end">Start and End :</string>
-    <string name="settings_interval">Interval :</string>
-    <string name="settings_frequency">Frequency :</string>
-    <string name="settings_info_can_be_changed">All Settings can be changed</string>
+    <string name="settings_camera">Camera :</string>
+
+    <string name="settings_permissions_header">GPS, Camera and Microphone Services</string>
+    <string name="settings_permissions_info">*NOTE: You can enable/disable the Settings at the <b>SETTINGS MENU</b></string>
+
+    <string name="settings_intervation_frequency">Intervention Frequency</string>
+    <string name="settings_intervation_frequency_notice">Charlie will alert you at least at start and at the end.</string>
+    <string name="settings_interval">Interval</string>
+    <string name="settings_interval_remark">Charlie will alert you every</string>
+    <string name="settings_frequency">Frequency</string>
+    <string name="settings_frequency_remark">Charlie will alert you</string>
+    <string name="settings_interval_times">times</string>
 
     <string name="place_noise_rating_silent">silent</string>
     <string name="place_noise_rating_quiet">quiet</string>
