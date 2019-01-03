@@ -70,9 +70,7 @@ class GoalOverviewFragment : Fragment() {
         btn_new_goal.onClick {
             navigateToSetGoalFragment()
         }
-        btn_charlie_goal.onClick {
-            navigateToCharlie()
-        }
+
         btn_goal_edit.onClick {
             navigateToEditGoal()
         }

@@ -69,20 +69,6 @@
             app:layout_constraintTop_toBottomOf="@+id/btn_new_goal" />
 
 
-        <ImageButton
-            android:id="@+id/btn_charlie_goal"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="8dp"
-            android:scaleType="fitCenter"
-            android:src="@drawable/ic_charlie"
-            android:text="Charlie"
-            app:layout_constraintEnd_toStartOf="@+id/btn_goal_edit"
-            app:layout_constraintStart_toEndOf="@+id/btn_delete_goal"
-            app:layout_constraintTop_toBottomOf="@+id/tv_current_goal_text" />
-
         <!--<FrameLayout-->
         <!--android:layout_width="150dp"-->
         <!--android:layout_height="50dp"-->

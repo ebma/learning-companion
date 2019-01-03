@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.R.id.btn_charlie_place
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.model.Place
@@ -66,9 +67,7 @@ class PlaceOverviewFragment : Fragment() {
         btn_new_place.onClick {
             navigateToPlaceDetailFragment()
         }
-        btn_charlie_place.onClick {
-            navigateToCharlie()
-        }
+
         btn_edit_place.onClick {
             navigateToEditPlace()
         }
