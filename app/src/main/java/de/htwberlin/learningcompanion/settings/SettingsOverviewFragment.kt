@@ -1,8 +1,6 @@
 package de.htwberlin.learningcompanion.settings
 
 import android.Manifest
-import android.content.Context
-import android.content.SharedPreferences
 import android.content.pm.PackageManager
 import android.content.res.ColorStateList
 import android.os.Bundle
@@ -12,11 +10,9 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import de.htwberlin.learningcompanion.MainActivity
-import de.htwberlin.learningcompanion.MyPreference
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
@@ -31,7 +27,9 @@ class SettingsOverviewFragment : Fragment() {
 
     private lateinit var userNameEditText: EditText
     private lateinit var buddyNameEditText: EditText
-    //    private lateinit var buddyImageEditText: EditText
+
+    private lateinit var buddyMoodTextView: TextView
+
     private lateinit var intervalEditText: EditText
     private lateinit var frequencyEditText: EditText
 
@@ -43,85 +41,29 @@ class SettingsOverviewFragment : Fragment() {
 
     private lateinit var btn_settings_save: Button
 
-    private lateinit var sharedPref: SharedPreferences
     private var charlieNumberChange = 0
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_settings_overview, container, false)
 
         findViews()
         setSwitchStands()
         addClickListeners()
 
-        setDefaultPreferences()
+        setHints()
 
         return rootView
-    }
-
-    private fun setDefaultPreferences() {
-        sharedPref = activity!!.getPreferences(Context.MODE_PRIVATE) ?: return
-//        val num = sharedPref.getCharlieNumber()
-        val charlieNum = sharedPref?.getInt("CharlieNumber", 0)
-        val userNamePref = sharedPref?.getString("UserName", "You")
-        val buddyNamePref = sharedPref?.getString("BuddyName", "Charlie")
-        rootView.findViewById<EditText>(R.id.input_user_name).hint = userNamePref
-        rootView.findViewById<EditText>(R.id.input_buddy_name).hint = buddyNamePref
-        when(charlieNum) {
-            1 -> changeName("gentle Charlie")
-            2 -> changeName("nerdy Charlie")
-            3 -> changeName("calm Charlie")
-            4 -> changeName("happy Charlie")
-            5 -> changeName("goofy Charlie")
-            else -> {
-                changeName("gentle Charlie")
-            }
-        }
-    }
-
-    private fun savePreferences() {
-        // muss noch ne Bedinguing hinzufügen, wenn die Input Felder nicht leer sind
-
-        var uname = userNameEditText.text.toString()
-        var bname = buddyNameEditText.text.toString()
-
-        setUserName(uname)
-        setBuddyName(bname)
-        setCharlieName(charlieNumberChange)
-
-        // change hint text in edit-fields
-        rootView.findViewById<EditText>(R.id.input_user_name).hint = uname
-        rootView.findViewById<EditText>(R.id.input_buddy_name).hint = bname
-    }
-
-    private fun setCharlieName(charlieNumber: Int) {
-        val editor = sharedPref!!.edit()
-        editor.putInt("CharlieNumber", charlieNumber)
-        editor.apply()
-    }
-
-    private fun setUserName(userName: String) {
-        val editor = sharedPref!!.edit()
-        editor.putString("UserName", userName)
-        editor.apply()
-    }
-
-    private fun setBuddyName(buddyName: String) {
-        val editor = sharedPref!!.edit()
-        editor.putString("BuddyName", buddyName)
-        editor.apply()
-    }
-
-    private fun changeName(newName: String) {
-        rootView.findViewById<TextView>(R.id.tv_settings_buddy_image_text).text = newName
     }
 
     private fun findViews() {
         switchMicrophone = rootView.findViewById(R.id.sw_microphone)
         switchCamera = rootView.findViewById(R.id.sw_camera)
         switchGps = rootView.findViewById(R.id.sw_gps)
+
         userNameEditText = rootView.findViewById(R.id.input_user_name)
         buddyNameEditText = rootView.findViewById(R.id.input_buddy_name)
+        buddyMoodTextView = rootView.findViewById(R.id.tv_settings_buddy_image_text)
+
         intervalEditText = rootView.findViewById(R.id.et_settings_interval)
         frequencyEditText = rootView.findViewById(R.id.et_settings_frequency)
 
@@ -134,25 +76,69 @@ class SettingsOverviewFragment : Fragment() {
         btn_settings_save = rootView.findViewById(R.id.btn_settings_save)
     }
 
+    private fun setHints() {
+        userNameEditText.hint = SharedPreferencesHelper.get(context!!).getUserName()
+        buddyNameEditText.hint = SharedPreferencesHelper.get(context!!).getBuddyName()
+
+        buddyMoodTextView.text = SharedPreferencesHelper.get(context!!).getBuddyMood() + " " + SharedPreferencesHelper.get(context!!).getBuddyName()
+    }
+
+    private fun savePreferences() {
+        var userName = SharedPreferencesHelper.get(context!!).getUserName()
+        if (!userNameEditText.text.none()) {
+            userName = userNameEditText.text.toString()
+        }
+
+        var buddyName = SharedPreferencesHelper.get(context!!).getBuddyName()
+        if (!buddyNameEditText.text.none()) {
+            buddyName = buddyNameEditText.text.toString()
+        }
+
+        saveUserName(userName)
+        saveBuddyName(buddyName)
+        saveBuddyMood(charlieNumberChange)
+
+        setHints()
+
+        userNameEditText.setText("")
+        buddyNameEditText.setText("")
+    }
+
+    private fun saveUserName(userName: String) {
+        SharedPreferencesHelper.get(context!!).setUserName(userName)
+    }
+
+    private fun saveBuddyName(buddyName: String) {
+        SharedPreferencesHelper.get(context!!).setBuddyName(buddyName)
+    }
+
+    private fun saveBuddyMood(moodNumber: Int) {
+        SharedPreferencesHelper.get(context!!).setBuddyMood(moodNumber)
+    }
+
+    private fun changeMoodText(newName: String) {
+        rootView.findViewById<TextView>(R.id.tv_settings_buddy_image_text).text = newName + " " + SharedPreferencesHelper.get(context!!).getBuddyName()
+    }
+
     private fun addClickListeners() {
         btn_buddyImage1.onClick {
-            changeName("gentle Charlie")
+            changeMoodText("gentle")
             charlieNumberChange = 1
         }
         btn_buddyImage2.onClick {
-            changeName("nerdy Charlie")
+            changeMoodText("nerdy")
             charlieNumberChange = 2
         }
         btn_buddyImage3.onClick {
-            changeName("calm Charlie")
+            changeMoodText("calm")
             charlieNumberChange = 3
         }
         btn_buddyImage4.onClick {
-            changeName("happy Charlie")
+            changeMoodText("happy")
             charlieNumberChange = 4
         }
         btn_buddyImage5.onClick {
-            changeName("goofy Charlie")
+            changeMoodText("goofy")
             charlieNumberChange = 5
         }
         btn_settings_save.onClick {
@@ -168,15 +154,15 @@ class SettingsOverviewFragment : Fragment() {
     }
 
     // check permissions with
-    fun hasWritePermission(): Boolean {
+    private fun hasWritePermission(): Boolean {
         return ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun hasAudioPermission(): Boolean {
+    private fun hasAudioPermission(): Boolean {
         return ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
     }
 
-    fun hasLocationPermission(): Boolean {
+    private fun hasLocationPermission(): Boolean {
         return ContextCompat.checkSelfPermission(activity!!, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
     }
 

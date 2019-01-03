@@ -306,10 +306,11 @@
         android:id="@+id/tv_settings_intervention_notice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="4dp"
         android:text="@string/settings_intervation_frequency_notice"
         android:textSize="11dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_settings_intervention_header" />
 
@@ -399,8 +400,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_settings_interval"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="hint" />
+            android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
@@ -415,19 +415,22 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_settings_frequency"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="hint" />
+            android:layout_height="match_parent" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/btn_settings_save"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/lightgreen"
         android:text="save"
+        android:textColor="@color/textcolor_white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
