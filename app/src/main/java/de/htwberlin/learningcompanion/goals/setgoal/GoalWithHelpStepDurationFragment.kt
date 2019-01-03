@@ -104,6 +104,7 @@ class GoalWithHelpStepDurationFragment : Fragment() {
             navigateToStepAmountFragmentWithValues()
         }
     }
+
     private fun navigateToStepAmountFragmentWithValues() {
         val bundle = Bundle()
         fillBundleWithArguments(bundle)
@@ -137,7 +138,7 @@ class GoalWithHelpStepDurationFragment : Fragment() {
 //        else
 //            bundle.putString("timestamp", forAmountEditText.text.toString())
 
-        if(bundle.size() == 5)
+        if(bundle.size() == 6)
             Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepDurationFragment_to_goalSummaryFragment, bundle)
     }
 
@@ -148,6 +149,9 @@ class GoalWithHelpStepDurationFragment : Fragment() {
         val amount = arguments?.getString("amount")
 
 //        val fieldEditText = rootView.findViewById<EditText>(R.id.et_field)
+
+        val withHelp = true
+        bundle.putBoolean("withHelp", withHelp)
 
         bundle.putString("action", action)
         bundle.putString("field", field)
