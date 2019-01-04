@@ -8,18 +8,18 @@
         <item>"Talk aloud to yourself about the materials you are studying to keep you from getting distracted by other thoughts or activities."</item>
     </string-array>
     <string-array name="buddy_grinning_sayings">
-        <item>"The four most beautiful words in our common language:\nI told you so. - Gore Vidal/n/nSo let's complete this goal!"</item>
-        <item>"The only way to keep your health is to eat what you don't want, drink what you don't like, and do what you'd rather not./nMark Twain"</item>
-        <item>"The difference between stupidity and genius is that genius has its limits./n/nAlbert Einstein"</item>
-        <item>"The only thing that interferes with my learning is my education./n/nAlbert Einstein"</item>
-        <item>"The world today doesn't make sense, so why should I paint pictures that do?/n/nPablo Picasso"</item>
+        <item>"The four most beautiful words in our common language:\nI told you so. - Gore Vidal\n\nSo let's complete this goal!"</item>
+        <item>"The only way to keep your health is to eat what you don't want, drink what you don't like, and do what you'd rather not.\nMark Twain"</item>
+        <item>"The difference between stupidity and genius is that genius has its limits.\n\nAlbert Einstein"</item>
+        <item>"The only thing that interferes with my learning is my education.\n\nAlbert Einstein"</item>
+        <item>"The world today doesn't make sense, so why should I paint pictures that do?\n\nPablo Picasso"</item>
     </string-array>
     <string-array name="buddy_relieved_sayings">
         <item>"Not going well?\nIf two wrongs don't make a right, try three."</item>
         <item>"Life is short, smile while you still have teeth."</item>
-        <item>"What keeps me going is goals./n/nMuhammad Ali"</item>
-        <item>"Make each day count by setting specific goals to succeed, then putting forth every effort to exceed your own expectations./n/nLes Brown"</item>
-        <item>"Each of you, as an individual, must pick your own goals. Listen to others, but do not become a blind follower./n/nThurgood Marshall"</item>
+        <item>"What keeps me going is goals.\n\nMuhammad Ali"</item>
+        <item>"Make each day count by setting specific goals to succeed, then putting forth every effort to exceed your own expectations.\n\nLes Brown"</item>
+        <item>"Each of you, as an individual, must pick your own goals. Listen to others, but do not become a blind follower.\n\nThurgood Marshall"</item>
         <item>"Imagine yourself moving through the assignment or answering the test questions without much difficulty."</item>
         <item>"When you can't get down to studying or get frustrated or interrupted during studying, count to 10 to help you get on track with it."</item>
     </string-array>
@@ -32,9 +32,9 @@
     </string-array>
     <string-array name="buddy_goofy_sayings">
         <item>"My friend thinks he is smart. He told me an onion is the only food that makes you cry so I threw a coconut at his face."</item>
-        <item>"Teacher: /"Which book has helped you the most in your life?/"/nStudent: /"My father's check book!/""</item>
-        <item>"Q: If you have 13 apples in one hand and 10 oranges in the other, what do you have?/n/n A: Big hands."</item>
-        <item>"Math Teacher: /"If I have 5 bottles in one hand and 6 in the other hand, what do I have?/"/n/nStudent:/"A drinking problem./""</item>
+        <item>"Teacher: \"Which book has helped you the most in your life?\"\nStudent: \"My father\'s check book!\""</item>
+        <item>"Q: If you have 13 apples in one hand and 10 oranges in the other, what do you have?\n\n A: Big hands."</item>
+        <item>"Math Teacher: \"If I have 5 bottles in one hand and 6 in the other hand, what do I have?\"\n\nStudent: \"A drinking problem.\""</item>
     </string-array>
 
 </resources>
