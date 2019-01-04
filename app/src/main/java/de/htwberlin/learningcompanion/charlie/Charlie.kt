@@ -1,10 +1,18 @@
 package de.htwberlin.learningcompanion.charlie
 
 import android.content.Context
+import android.widget.ImageView
+import android.widget.TextView
+import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
+import org.jetbrains.anko.sdk27.coroutines.onClick
+import java.util.*
 
 class Charlie(private val context: Context) {
+
+    private lateinit var imageView: ImageView
+    private lateinit var textView: TextView
 
     fun getInfoText(): String {
         val currentGoal = GoalRepository.get(context).getCurrentGoal()
@@ -15,6 +23,65 @@ class Charlie(private val context: Context) {
             currentPlace == null -> getPlaceInfoText()
             else -> getStartLearningInfoText()
         }
+    }
+
+    fun bindViews(imageView: ImageView, textView: TextView) {
+        this.imageView = imageView
+        this.textView = textView
+
+        imageView.onClick { showNewCharlieText() }
+    }
+
+    private fun showNewCharlieText() {
+        val randomArrayIndex = Random().nextInt(6)
+
+        when (randomArrayIndex) {
+            1 -> setRandomThinkingCharlie()
+            2 -> setRandomSmilingCharlie()
+            3 -> setRandomGrinningCharlie()
+            4 -> setRandomGoofyCharlie()
+            5 -> setRandomRelievedCharlie()
+        }
+    }
+
+    private fun setRandomThinkingCharlie() {
+        val stringArray = context.resources.getStringArray(R.array.buddy_thinking_sayings)
+        val randomStringIndex = Random().nextInt(stringArray.size)
+
+        textView.text = stringArray[randomStringIndex]
+        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_thinking))
+    }
+
+    private fun setRandomSmilingCharlie() {
+        val stringArray = context.resources.getStringArray(R.array.buddy_smiling_sayings)
+        val randomStringIndex = Random().nextInt(stringArray.size)
+
+        textView.text = stringArray[randomStringIndex]
+        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_smiling))
+    }
+
+    private fun setRandomGoofyCharlie() {
+        val stringArray = context.resources.getStringArray(R.array.buddy_goofy_sayings)
+        val randomStringIndex = Random().nextInt(stringArray.size)
+
+        textView.text = stringArray[randomStringIndex]
+        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_goofy))
+    }
+
+    private fun setRandomGrinningCharlie() {
+        val stringArray = context.resources.getStringArray(R.array.buddy_grinning_sayings)
+        val randomStringIndex = Random().nextInt(stringArray.size)
+
+        textView.text = stringArray[randomStringIndex]
+        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_grinning))
+    }
+
+    private fun setRandomRelievedCharlie() {
+        val stringArray = context.resources.getStringArray(R.array.buddy_relieved_sayings)
+        val randomStringIndex = Random().nextInt(stringArray.size)
+
+        textView.text = stringArray[randomStringIndex]
+        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_relieved))
     }
 
     private fun getGoalInfoText(): String {
