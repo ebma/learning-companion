@@ -31,7 +31,7 @@ data class LearningSession(
 
     var userRating: Int = 0 // range 0..100
 
-    var noiseValues = arrayListOf<Int>()
+    var noiseValues = arrayListOf<Float>()
     var lightValues = arrayListOf<Float>()
 
     var noiseRating = NoiseLevel.MEDIUM

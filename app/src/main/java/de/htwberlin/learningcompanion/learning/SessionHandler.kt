@@ -159,7 +159,7 @@ class SessionHandler private constructor(private val activity: Activity) {
         return sensorHandler.lightDataList
     }
 
-    fun getNoiseValues(): ArrayList<Int> {
+    fun getNoiseValues(): ArrayList<Float> {
         return sensorHandler.noiseDataList
     }
 
