@@ -17,7 +17,7 @@ import androidx.fragment.app.Fragment
 import com.github.library.bubbleview.BubbleTextView
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
-import de.htwberlin.learningcompanion.charlie.Charlie
+import de.htwberlin.learningcompanion.buddy.Buddy
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
@@ -50,14 +50,14 @@ class MainScreenFragment : Fragment() {
 
     private var permissionToRecordAccepted = false
 
-    private lateinit var charlie: Charlie
+    private lateinit var buddy: Buddy
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_main_screen, container, false)
         setActivityTitle(SharedPreferencesHelper.get(context!!).getBuddyName())
 
         sessionHandler = SessionHandler.get(activity!!)
-        charlie = Charlie(context!!)
+        buddy = Buddy(context!!)
 
         findViews()
         addClickListeners()
@@ -65,7 +65,8 @@ class MainScreenFragment : Fragment() {
         showCharlieInfoText()
 
 
-        charlie.bindViews(ivCharlieFace, tvCharlieText)
+        buddy.bindViews(ivCharlieFace, tvCharlieText)
+        buddy.showNewBuddyText()
 
         if (sessionHandler.sessionRunning) {
             showSessionInfoInBox()
@@ -208,7 +209,7 @@ class MainScreenFragment : Fragment() {
     }
 
     private fun showCharlieInfoText() {
-        tvCharlieInfo.text = charlie.getInfoText()
+        tvCharlieInfo.text = buddy.getInfoText()
     }
 
     private fun requestStoragePermission() {

@@ -77,7 +77,7 @@ class SessionFragment : Fragment() {
             entries.add(Entry(i.toFloat(), session.lightValues[i]))
         }
 
-        var dataSet = LineDataSet(entries, "Measured Brightness")
+        var dataSet = LineDataSet(entries, "Measured Brightness in Lux")
         dataSet.color = Color.RED
         dataSet.valueTextColor = Color.MAGENTA
 
@@ -119,7 +119,7 @@ class SessionFragment : Fragment() {
             entries.add(Entry(i.toFloat(), session.noiseValues[i].toFloat()))
         }
 
-        var dataSet = LineDataSet(entries, "Noise Amplitudes")
+        var dataSet = LineDataSet(entries, "Noise Values in dB")
         dataSet.color = Color.BLUE
         dataSet.valueTextColor = Color.argb(255, 100, 149, 237)
 

@@ -1,4 +1,4 @@
-package de.htwberlin.learningcompanion.charlie
+package de.htwberlin.learningcompanion.buddy
 
 import android.content.Context
 import android.widget.ImageView
@@ -9,7 +9,7 @@ import de.htwberlin.learningcompanion.db.PlaceRepository
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
-class Charlie(private val context: Context) {
+class Buddy(private val context: Context) {
 
     private lateinit var imageView: ImageView
     private lateinit var textView: TextView
@@ -29,10 +29,10 @@ class Charlie(private val context: Context) {
         this.imageView = imageView
         this.textView = textView
 
-        imageView.onClick { showNewCharlieText() }
+        imageView.onClick { showNewBuddyText() }
     }
 
-    private fun showNewCharlieText() {
+    fun showNewBuddyText() {
         val randomArrayIndex = Random().nextInt(6)
 
         when (randomArrayIndex) {
