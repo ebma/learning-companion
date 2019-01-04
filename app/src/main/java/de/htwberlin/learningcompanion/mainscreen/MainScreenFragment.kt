@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import com.github.library.bubbleview.BubbleTextView
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.charlie.Charlie
@@ -42,6 +43,7 @@ class MainScreenFragment : Fragment() {
 
     private lateinit var tvCharlieInfo: TextView
     private lateinit var tvLearningInfo: TextView
+    private lateinit var tvCharlieText: BubbleTextView
 
     private lateinit var ivPlaceBackground: ImageView
     private lateinit var ivCharlieFace: ImageView
@@ -49,7 +51,6 @@ class MainScreenFragment : Fragment() {
     private var permissionToRecordAccepted = false
 
     private lateinit var charlie: Charlie
-    private var nextColorNum = 1    // 1 - green, 2 - yellow, 3 - orange, 4 - pink, 5 - blue
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_main_screen, container, false)
@@ -63,7 +64,8 @@ class MainScreenFragment : Fragment() {
         setBackgroundPicture()
         showCharlieInfoText()
 
-        changeCharlieFace()
+
+        charlie.bindViews(ivCharlieFace, tvCharlieText)
 
         if (sessionHandler.sessionRunning) {
             showSessionInfoInBox()
@@ -92,162 +94,11 @@ class MainScreenFragment : Fragment() {
         }
     }
 
-    private fun changeCharlieFace() {
-        ivCharlieFace.setOnClickListener {
-            val charlieNum = SharedPreferencesHelper.get(context!!).getCharlieNum()
-
-            when(charlieNum) {
-                1 -> {
-                    when(nextColorNum) {
-                        1 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_smiling))
-                            nextColorNum = 2
-                        }
-                        2 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.yellow_charlie_smiling))
-                            nextColorNum = 3
-                        }
-                        3 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.orange_charlie_smiling))
-                            nextColorNum = 4
-                        }
-                        4 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.pink_charlie_smiling))
-                            nextColorNum = 5
-                        }
-                        5 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.blue_charlie_smiling))
-                            nextColorNum = 1
-                        }
-                        else -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_smiling))
-                            nextColorNum = 2
-                        }
-                    }
-                }
-                2 -> {
-                    when(nextColorNum) {
-                        1 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_thinking))
-                            nextColorNum = 2
-                        }
-                        2 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.yellow_charlie_thinking))
-                            nextColorNum = 3
-                        }
-                        3 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.orange_charlie_thinking))
-                            nextColorNum = 4
-                        }
-                        4 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.pink_charlie_thinking))
-                            nextColorNum = 5
-                        }
-                        5 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.blue_charlie_thinking))
-                            nextColorNum = 1
-                        }
-                        else -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_thinking))
-                            nextColorNum = 2
-                        }
-                    }
-                }
-                3 -> {
-                    when(nextColorNum) {
-                        1 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_relieved))
-                            nextColorNum = 2
-                        }
-                        2 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.yellow_charlie_relieved))
-                            nextColorNum = 3
-                        }
-                        3 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.orange_charlie_relieved))
-                            nextColorNum = 4
-                        }
-                        4 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.pink_charlie_relieved))
-                            nextColorNum = 5
-                        }
-                        5 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.blue_charlie_relieved))
-                            nextColorNum = 1
-                        }
-                        else -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_relieved))
-                            nextColorNum = 2
-                        }
-                    }
-                }
-                4 -> {
-                    when(nextColorNum) {
-                        1 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_grinning))
-                            nextColorNum = 2
-                        }
-                        2 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.yellow_charlie_grinning))
-                            nextColorNum = 3
-                        }
-                        3 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.orange_charlie_grinning))
-                            nextColorNum = 4
-                        }
-                        4 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.pink_charlie_grinning))
-                            nextColorNum = 5
-                        }
-                        5 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.blue_charlie_grinning))
-                            nextColorNum = 1
-                        }
-                        else -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_grinning))
-                            nextColorNum = 2
-                        }
-                    }
-                }
-                5 -> {
-                    when(nextColorNum) {
-                        1 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_goofy))
-                            nextColorNum = 2
-                        }
-                        2 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.yellow_charlie_goofy))
-                            nextColorNum = 3
-                        }
-                        3 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.orange_charlie_goofy))
-                            nextColorNum = 4
-                        }
-                        4 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.pink_charlie_goofy))
-                            nextColorNum = 5
-                        }
-                        5 -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.blue_charlie_goofy))
-                            nextColorNum = 1
-                        }
-                        else -> {
-                            ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.green_charlie_goofy))
-                            nextColorNum = 2
-                        }
-                    }
-                }
-                else -> {
-                    ivCharlieFace.setImageDrawable(context?.getDrawable(R.drawable.ib_charlie_gentle))
-                }
-            }
-        }
-    }
-
     private fun findViews() {
         btnStart = rootView.findViewById(R.id.btn_start)
         btnQuit = rootView.findViewById(R.id.btn_quit)
         tvCharlieInfo = rootView.findViewById(R.id.tv_charlie_info)
+        tvCharlieText = rootView.findViewById(R.id.tv_charlie_text)
         tvLearningInfo = rootView.findViewById(R.id.tv_learning_info)
         ivPlaceBackground = rootView.findViewById(R.id.iv_place_background)
         ivCharlieFace = rootView.findViewById(R.id.iv_charlie)
