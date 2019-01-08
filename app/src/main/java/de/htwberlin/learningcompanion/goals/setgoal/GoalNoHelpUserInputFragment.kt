@@ -15,7 +15,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
-import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
 import de.htwberlin.learningcompanion.db.GoalRepository
@@ -23,7 +22,6 @@ import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.support.v4.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
-
 import java.util.*
 
 
@@ -89,12 +87,17 @@ class GoalNoHelpUserInputFragment : Fragment() {
         amountEditText.setText(goal.amount)
         mediumEditText.setText(goal.medium)
 
-//        if(goal.durationInMin != null) {
-//            forAmountEditText.setText(goal.durationInMin!!)
-//        }  else {
-//            untilAmountEditText.setText(goal.untilTimeStamp)
-//        }
-
+        if (goal.durationInMin != null) {
+            forRadioButton.isChecked = true
+            forAmountEditText.isEnabled = true
+            untilAmountEditText.isEnabled = false
+            forAmountEditText.setText(goal.durationInMin.toString())
+        } else {
+            untilRadioButton.isChecked = true
+            untilAmountEditText.isEnabled = true
+            forAmountEditText.isEnabled = false
+            untilAmountEditText.setText(goal.untilTimeStamp)
+        }
     }
 
     private fun findViews() {
@@ -172,9 +175,6 @@ class GoalNoHelpUserInputFragment : Fragment() {
             val amountString = amountEditText.text.toString()
             val mediumString = mediumEditText.text.toString()
 
-            val durationInMin = 23
-            val untilTime = ""
-
             var updateGoal = Goal("", "", "", "", 2)
 
             if (untilRadioButton.isChecked) {
@@ -182,7 +182,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
                     if (it.isEmpty()) {
                         // TODO something?
                     } else
-                    updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
+                        updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
                 }
             } else {
                 forAmountEditText.text.toString().let {
