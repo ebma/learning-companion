@@ -79,10 +79,24 @@ class MainScreenFragment : Fragment() {
 
     private fun observeBuddyLiveData() {
         buddy.drawableLiveData.observe(this, Observer<Drawable> { drawable -> ivCharlieFace.setImageDrawable(drawable) })
-        buddy.speechLiveData.observe(this, Observer<String> { text -> tvCharlieText.text = text })
+        buddy.speechLiveData.observe(this, Observer<String> { text ->
+            run {
+                if (text.isEmpty()) {
+                    tvCharlieText.visibility = View.INVISIBLE
+                    tvCharlieText.text = ""
+                } else {
+                    tvCharlieText.visibility = View.VISIBLE
+                    tvCharlieText.text = text
+                }
+            }
+        })
 
         ivCharlieFace.onClick {
-            buddy.showNewBuddyText()
+            if (SessionHandler.get(activity!!).sessionRunning) {
+                buddy.setNewRandomBuddyLearningText()
+            } else {
+
+            }
         }
     }
 

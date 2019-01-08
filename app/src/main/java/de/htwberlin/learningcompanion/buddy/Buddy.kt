@@ -3,13 +3,18 @@ package de.htwberlin.learningcompanion.buddy
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.os.Handler
 import androidx.lifecycle.MutableLiveData
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
 import java.util.*
 
+const val MESSAGE_DURATION_IN_MILLIS = 10000L
+
 class Buddy private constructor(private val context: Context) {
+
+    private val defaultFaceDrawable = context.getDrawable(R.drawable.blue_charlie_smiling)
 
     val drawableLiveData = MutableLiveData<Drawable>()
     val speechLiveData = MutableLiveData<String>()
@@ -25,7 +30,7 @@ class Buddy private constructor(private val context: Context) {
         }
     }
 
-    fun showNewBuddyText() {
+    fun setNewRandomBuddyLearningText() {
         val randomArrayIndex = Random().nextInt(6)
 
         when (randomArrayIndex) {
@@ -38,47 +43,52 @@ class Buddy private constructor(private val context: Context) {
     }
 
     fun showExitProhibitedMessage() {
+        showMessageForFixedAmount(context.getString(R.string.exit_prohibited_message), context.getDrawable(R.drawable.blue_charlie_thinking))
+    }
 
+    private fun showMessageForFixedAmount(message: String, drawable: Drawable?) {
+        speechLiveData.value = message
+        drawableLiveData.value = drawable
+
+        Handler().postDelayed({
+            speechLiveData.postValue("")
+            drawableLiveData.postValue(defaultFaceDrawable)
+        }, MESSAGE_DURATION_IN_MILLIS)
     }
 
     private fun setRandomThinkingCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_thinking_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        speechLiveData.value = stringArray[randomStringIndex]
-        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_thinking)
+        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_thinking))
     }
 
     private fun setRandomSmilingCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_smiling_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        speechLiveData.value = stringArray[randomStringIndex]
-        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_smiling)
+        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_smiling))
     }
 
     private fun setRandomGoofyCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_goofy_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        speechLiveData.value = stringArray[randomStringIndex]
-        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_goofy)
+        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_goofy))
     }
 
     private fun setRandomGrinningCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_grinning_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        speechLiveData.value = stringArray[randomStringIndex]
-        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_grinning)
+        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_grinning))
     }
 
     private fun setRandomRelievedCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_relieved_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        speechLiveData.value = stringArray[randomStringIndex]
-        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_relieved)
+        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_relieved))
     }
 
     private fun getGoalInfoText(): String {
