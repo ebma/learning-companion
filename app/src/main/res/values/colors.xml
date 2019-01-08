@@ -27,4 +27,7 @@
 
     <color name="light_grey">#bdbdbd</color>
     <color name="grey">#757575</color>
+
+    <color name="btn_quit_green">#1c8b73</color>
+    <color name="btn_start_red">#f1ff63b9</color>
 </resources>

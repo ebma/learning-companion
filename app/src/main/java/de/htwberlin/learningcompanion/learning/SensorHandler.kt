@@ -19,7 +19,7 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
     private var lightSensor: Sensor? = null
 
     val lightDataList = arrayListOf<Float>()
-    val noiseDataList = arrayListOf<Int>()
+    val noiseDataList = arrayListOf<Float>()
 
     private var mRecorder: MediaRecorder? = null
 
@@ -97,10 +97,12 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
 
     private fun onCollectData(event: SensorEvent) {
         val amplitude = getAmplitude()
+        val decibelFromAmplitude = getDecibelFromAmplitude(amplitude)
+
         val lightValue = event.values[0]
 
         lightDataList.add(lightValue)
-        noiseDataList.add(amplitude)
+        noiseDataList.add(decibelFromAmplitude)
 
         eventCounter = 0
         info { "${event.values[0]} added" }
@@ -112,6 +114,15 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
             mRecorder!!.maxAmplitude
         else
             0
+    }
+
+    private fun getDecibelFromAmplitude(amplitude: Int): Float {
+        return if (amplitude == 0) {
+            0f
+        } else {
+            val db = 20 * Math.log(amplitude / 2700.0)
+            db.toFloat()
+        }
     }
 
 

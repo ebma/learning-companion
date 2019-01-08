@@ -39,7 +39,7 @@ enum class NoiseLevel { LOWEST, LOW, MEDIUM, HIGH, HIGHEST;
 }
 
 class SessionEvaluator(private val lightValues: ArrayList<Float>,
-                       private val noiseValues: ArrayList<Int>) {
+                       private val noiseValues: ArrayList<Float>) {
 
     private val TAG = SessionEvaluator::class.java.simpleName
 

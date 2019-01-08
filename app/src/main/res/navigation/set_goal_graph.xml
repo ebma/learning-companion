@@ -214,5 +214,19 @@
             app:exitAnim="@anim/slide_left"
             app:popEnterAnim="@anim/fade_in"
             app:popExitAnim="@anim/slide_right" />
+        <action
+            android:id="@+id/action_goalSummaryFragment_to_goalNoHelpUserInputFragment"
+            app:destination="@id/goalNoHelpUserInputFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right"/>
+        <action
+            android:id="@+id/action_goalSummaryFragment_to_goalWithHelpStepDurationFragment"
+            app:destination="@id/goalWithHelpStepDurationFragment"
+            app:enterAnim="@anim/fade_in"
+            app:exitAnim="@anim/slide_left"
+            app:popEnterAnim="@anim/fade_in"
+            app:popExitAnim="@anim/slide_right" />
     </fragment>
 </navigation>

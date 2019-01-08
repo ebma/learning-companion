@@ -60,7 +60,36 @@ class GoalSummaryFragment : Fragment() {
     }
 
     private fun addNoButtonClickListener() {
-        rootView.findViewById<Button>(R.id.btn_no).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goalSummaryFragment_to_goalDecidePathFragment))
+//        rootView.findViewById<Button>(R.id.btn_no).setOnClickListener(Navigation.createNavigateOnClickListener(R.id.action_goalSummaryFragment_to_goalDecidePathFragment))
+
+        val withHelp = arguments?.getBoolean("withHelp")
+        val bundle = Bundle()
+        fillBundleWithArguments(bundle)
+
+        rootView.findViewById<Button>(R.id.btn_no).setOnClickListener{
+            if (withHelp!!) {
+                // navigate to Step-Duration-Fragment
+                Navigation.findNavController(rootView).navigate(R.id.action_goalSummaryFragment_to_goalWithHelpStepDurationFragment, bundle)
+            } else {
+                // navigate to no-Help-User-Input-Fragment
+                Navigation.findNavController(rootView).navigate(R.id.action_goalSummaryFragment_to_goalNoHelpUserInputFragment, bundle)
+            }
+        }
+//        activity?.supportFragmentManager?.backStackEntryCount
+    }
+
+    private fun fillBundleWithArguments(bundle: Bundle) {
+        val action = arguments?.getString("action")
+        val field = arguments?.getString("field")
+        val medium = arguments?.getString("medium")
+        val amount = arguments?.getString("amount")
+        bundle.putString("action", action)
+        bundle.putString("field", field)
+        bundle.putString("medium", medium)
+        bundle.putString("amount", amount)
+
+        // mit Duration weiß ich erstmal nicht...
+
     }
 
     private fun addYesButtonOnClickListener() {

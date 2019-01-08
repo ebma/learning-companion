@@ -66,9 +66,7 @@ class PlaceOverviewFragment : Fragment() {
         btn_new_place.onClick {
             navigateToPlaceDetailFragment()
         }
-        btn_charlie_place.onClick {
-            navigateToCharlie()
-        }
+
         btn_edit_place.onClick {
             navigateToEditPlace()
         }
