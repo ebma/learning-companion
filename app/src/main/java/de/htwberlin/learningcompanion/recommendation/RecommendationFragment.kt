@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.learning.LightLevel
 import de.htwberlin.learningcompanion.learning.NoiseLevel
+import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_recommendation.*
 
 class RecommendationFragment : Fragment() {
@@ -21,6 +22,7 @@ class RecommendationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
+        setActivityTitle("Recommendation")
 
         recommendationHelper = RecommendationHelper(context!!)
 
