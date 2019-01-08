@@ -1,18 +1,18 @@
 package de.htwberlin.learningcompanion.buddy
 
+import android.annotation.SuppressLint
 import android.content.Context
-import android.widget.ImageView
-import android.widget.TextView
+import android.graphics.drawable.Drawable
+import androidx.lifecycle.MutableLiveData
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
-import org.jetbrains.anko.sdk27.coroutines.onClick
 import java.util.*
 
-class Buddy(private val context: Context) {
+class Buddy private constructor(private val context: Context) {
 
-    private lateinit var imageView: ImageView
-    private lateinit var textView: TextView
+    val drawableLiveData = MutableLiveData<Drawable>()
+    val speechLiveData = MutableLiveData<String>()
 
     fun getInfoText(): String {
         val currentGoal = GoalRepository.get(context).getCurrentGoal()
@@ -23,13 +23,6 @@ class Buddy(private val context: Context) {
             currentPlace == null -> getPlaceInfoText()
             else -> getStartLearningInfoText()
         }
-    }
-
-    fun bindViews(imageView: ImageView, textView: TextView) {
-        this.imageView = imageView
-        this.textView = textView
-
-        imageView.onClick { showNewBuddyText() }
     }
 
     fun showNewBuddyText() {
@@ -44,44 +37,48 @@ class Buddy(private val context: Context) {
         }
     }
 
+    fun showExitProhibitedMessage() {
+
+    }
+
     private fun setRandomThinkingCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_thinking_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        textView.text = stringArray[randomStringIndex]
-        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_thinking))
+        speechLiveData.value = stringArray[randomStringIndex]
+        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_thinking)
     }
 
     private fun setRandomSmilingCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_smiling_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        textView.text = stringArray[randomStringIndex]
-        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_smiling))
+        speechLiveData.value = stringArray[randomStringIndex]
+        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_smiling)
     }
 
     private fun setRandomGoofyCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_goofy_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        textView.text = stringArray[randomStringIndex]
-        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_goofy))
+        speechLiveData.value = stringArray[randomStringIndex]
+        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_goofy)
     }
 
     private fun setRandomGrinningCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_grinning_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        textView.text = stringArray[randomStringIndex]
-        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_grinning))
+        speechLiveData.value = stringArray[randomStringIndex]
+        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_grinning)
     }
 
     private fun setRandomRelievedCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_relieved_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        textView.text = stringArray[randomStringIndex]
-        imageView.setImageDrawable(context.getDrawable(R.drawable.blue_charlie_relieved))
+        speechLiveData.value = stringArray[randomStringIndex]
+        drawableLiveData.value = context.getDrawable(R.drawable.blue_charlie_relieved)
     }
 
     private fun getGoalInfoText(): String {
@@ -99,4 +96,13 @@ class Buddy(private val context: Context) {
         return "Your current goal is: \n${currentGoal!!.getGoalText()}"
     }
 
+    companion object {
+        @SuppressLint("StaticFieldLeak")
+        @Volatile
+        private var INSTANCE: Buddy? = null
+
+        fun get(context: Context): Buddy = INSTANCE ?: synchronized(this) {
+            INSTANCE ?: Buddy(context).also { INSTANCE = it }
+        }
+    }
 }

@@ -14,6 +14,7 @@ import android.widget.TextView
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.github.library.bubbleview.BubbleTextView
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
@@ -57,16 +58,14 @@ class MainScreenFragment : Fragment() {
         setActivityTitle(SharedPreferencesHelper.get(context!!).getBuddyName())
 
         sessionHandler = SessionHandler.get(activity!!)
-        buddy = Buddy(context!!)
+        buddy = Buddy.get(context!!)
 
         findViews()
         addClickListeners()
         setBackgroundPicture()
         showCharlieInfoText()
 
-
-        buddy.bindViews(ivCharlieFace, tvCharlieText)
-        buddy.showNewBuddyText()
+        observeBuddyLiveData()
 
         if (sessionHandler.sessionRunning) {
             showSessionInfoInBox()
@@ -76,6 +75,15 @@ class MainScreenFragment : Fragment() {
         }
 
         return rootView
+    }
+
+    private fun observeBuddyLiveData() {
+        buddy.drawableLiveData.observe(this, Observer<Drawable> { drawable -> ivCharlieFace.setImageDrawable(drawable) })
+        buddy.speechLiveData.observe(this, Observer<String> { text -> tvCharlieText.text = text })
+
+        ivCharlieFace.onClick {
+            buddy.showNewBuddyText()
+        }
     }
 
     private fun setBackgroundPicture() {
