@@ -70,13 +70,15 @@ class GoalNoHelpUserInputFragment : Fragment() {
             }
             if (goal != null) {
                 initLayoutWithGoal(goal!!)
+                setActivityTitle("Edit Learning Goal")
+                editMode = true
+            } else {
+                setActivityTitle("New Learning Goal")
+                editMode = false
             }
 
-            setActivityTitle("Edit goal")
-            editMode = true
-
         } else {
-            setActivityTitle("New Place")
+            setActivityTitle("New Learning Goal")
             editMode = false
         }
     }
