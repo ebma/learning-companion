@@ -2,14 +2,17 @@ package de.htwberlin.learningcompanion
 
 import android.os.Bundle
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import com.google.android.material.navigation.NavigationView
+import de.htwberlin.learningcompanion.buddy.Buddy
 import de.htwberlin.learningcompanion.goals.overview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.help.HelpOverview
+import de.htwberlin.learningcompanion.learning.SessionHandler
 import de.htwberlin.learningcompanion.learning.session.SessionOverviewFragment
 import de.htwberlin.learningcompanion.mainscreen.MainScreenFragment
 import de.htwberlin.learningcompanion.places.overview.PlaceOverviewFragment
@@ -28,7 +31,29 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         setSupportActionBar(toolbar)
 
         val toggle = ActionBarDrawerToggle(this, drawer_layout, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close)
-        drawer_layout.addDrawerListener(toggle)
+        drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
+            override fun onDrawerStateChanged(newState: Int) {
+                toggle.onDrawerStateChanged(newState)
+            }
+
+            override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
+                toggle.onDrawerSlide(drawerView, slideOffset)
+            }
+
+            override fun onDrawerClosed(drawerView: View) {
+                toggle.onDrawerClosed(drawerView) //To change body of created functions use File | Settings | File Templates.
+            }
+
+            override fun onDrawerOpened(drawerView: View) {
+                toggle.onDrawerOpened(drawerView)
+
+                if (SessionHandler.get(this@MainActivity).sessionRunning) {
+                    drawer_layout.closeDrawer(GravityCompat.START)
+                    Buddy.get(applicationContext).showExitProhibitedMessage()
+                }
+            }
+
+        })
         toggle.syncState()
 
         nav_view.setNavigationItemSelectedListener(this)
@@ -118,14 +143,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             val ft = supportFragmentManager.beginTransaction()
             ft.replace(R.id.content_main, fragment)
             ft.commit()
-        }
-    }
-
-    fun lockDrawer(lock: Boolean) {
-        if (lock) {
-            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-        } else {
-            drawer_layout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
         }
     }
 }

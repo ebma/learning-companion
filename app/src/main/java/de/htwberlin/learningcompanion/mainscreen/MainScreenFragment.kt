@@ -16,7 +16,6 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.github.library.bubbleview.BubbleTextView
-import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.buddy.Buddy
 import de.htwberlin.learningcompanion.db.GoalRepository
@@ -92,10 +91,12 @@ class MainScreenFragment : Fragment() {
         })
 
         ivCharlieFace.onClick {
-            if (SessionHandler.get(activity!!).sessionRunning) {
-                buddy.setNewRandomBuddyLearningText()
-            } else {
-
+            if (buddy.isInDefaultState) {
+                if (SessionHandler.get(activity!!).sessionRunning) {
+                    buddy.setNewRandomBuddyLearningText()
+                } else {
+                    buddy.setNewRandomBuddyBeforeLearningText()
+                }
             }
         }
     }
@@ -154,8 +155,6 @@ class MainScreenFragment : Fragment() {
         navigateToEvaluateFragment()
         btnStart.visibility = View.VISIBLE
         btnQuit.visibility = View.INVISIBLE
-
-        (activity as MainActivity).lockDrawer(false)
     }
 
 
@@ -196,7 +195,6 @@ class MainScreenFragment : Fragment() {
         btnStart.visibility = View.INVISIBLE
         btnQuit.visibility = View.VISIBLE
         sessionHandler.startLearningSession()
-        (activity as MainActivity).lockDrawer(true)
 
         sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
             override fun onUpdate(millisUntilFinished: Long) {

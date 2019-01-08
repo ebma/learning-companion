@@ -16,19 +16,10 @@ class Buddy private constructor(private val context: Context) {
 
     private val defaultFaceDrawable = context.getDrawable(R.drawable.blue_charlie_smiling)
 
+    var isInDefaultState = true
+
     val drawableLiveData = MutableLiveData<Drawable>()
     val speechLiveData = MutableLiveData<String>()
-
-    fun getInfoText(): String {
-        val currentGoal = GoalRepository.get(context).getCurrentGoal()
-        val currentPlace = PlaceRepository.get(context).getCurrentPlace()
-
-        return when {
-            currentGoal == null -> getGoalInfoText()
-            currentPlace == null -> getPlaceInfoText()
-            else -> getStartLearningInfoText()
-        }
-    }
 
     fun setNewRandomBuddyLearningText() {
         val randomArrayIndex = Random().nextInt(6)
@@ -42,15 +33,21 @@ class Buddy private constructor(private val context: Context) {
         }
     }
 
+    fun setNewRandomBuddyBeforeLearningText() {
+        showMessageForFixedAmount(getInfoText(), defaultFaceDrawable)
+    }
+
     fun showExitProhibitedMessage() {
         showMessageForFixedAmount(context.getString(R.string.exit_prohibited_message), context.getDrawable(R.drawable.blue_charlie_thinking))
     }
 
     private fun showMessageForFixedAmount(message: String, drawable: Drawable?) {
+        isInDefaultState = false
         speechLiveData.value = message
         drawableLiveData.value = drawable
 
         Handler().postDelayed({
+            isInDefaultState = true
             speechLiveData.postValue("")
             drawableLiveData.postValue(defaultFaceDrawable)
         }, MESSAGE_DURATION_IN_MILLIS)
@@ -89,6 +86,17 @@ class Buddy private constructor(private val context: Context) {
         val randomStringIndex = Random().nextInt(stringArray.size)
 
         showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_relieved))
+    }
+
+    fun getInfoText(): String {
+        val currentGoal = GoalRepository.get(context).getCurrentGoal()
+        val currentPlace = PlaceRepository.get(context).getCurrentPlace()
+
+        return when {
+            currentGoal == null -> getGoalInfoText()
+            currentPlace == null -> getPlaceInfoText()
+            else -> getStartLearningInfoText()
+        }
     }
 
     private fun getGoalInfoText(): String {
