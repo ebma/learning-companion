@@ -13,24 +13,33 @@
 
         <ImageView
             android:id="@+id/iv_charlie"
-            android:layout_width="150dp"
+            android:layout_width="0dp"
             android:layout_height="150dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_charlie" />
 
-        <TextView
+        <com.github.library.bubbleview.BubbleTextView
             android:id="@+id/tv_charlie_info"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
+            android:layout_marginEnd="32dp"
+            android:padding="16dp"
             android:text="Based on your goal evaluation my recommendations are...."
+            android:textColor="@color/white"
+            app:angle="20dp"
+            app:arrowCenter="true"
+            app:arrowHeight="16dp"
+            app:arrowLocation="top"
+            app:arrowPosition="0dp"
+            app:arrowWidth="16dp"
+            app:bubbleColor="@color/colorPrimary"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/v_guideline"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_charlie" />
 
         <androidx.constraintlayout.widget.Guideline
