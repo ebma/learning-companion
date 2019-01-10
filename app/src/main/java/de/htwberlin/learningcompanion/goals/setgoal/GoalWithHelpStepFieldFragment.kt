@@ -25,9 +25,6 @@ class GoalWithHelpStepFieldFragment : Fragment() {
     private lateinit var doneButton: ImageButton
     private lateinit var backButton: ImageButton
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//    }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -36,6 +33,8 @@ class GoalWithHelpStepFieldFragment : Fragment() {
 
         addDoneButtonClickListener()
         addBackButtonClickListener()
+
+        getFromBundle()
 
         return rootView
     }
@@ -47,6 +46,13 @@ class GoalWithHelpStepFieldFragment : Fragment() {
         doneButton = rootView.findViewById(R.id.btn_done)
         backButton = rootView.findViewById(R.id.btn_back)
 
+    }
+
+    private fun getFromBundle() {
+        var field = arguments?.getString("field")
+        if(!field.isNullOrEmpty()) {
+            fieldEditText.setText(field)
+        }
     }
 
     private fun addDoneButtonClickListener() {
@@ -73,13 +79,24 @@ class GoalWithHelpStepFieldFragment : Fragment() {
         val bundle = Bundle()
         fillBundleWithArguments(bundle)
 
-        if(bundle.size() == 2)
+//        if(bundle.size() == 2)
             Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepFieldFragment_to_goalWithHelpStepObjectFragment, bundle)
     }
 
     private fun fillBundleWithArguments(bundle: Bundle) {
         var action = arguments?.getString("action")
+//        val field = arguments?.getString("field")
+        val medium = arguments?.getString("medium")
+        val amount = arguments?.getString("amount")
+        var duration = arguments?.getString("duration")
+        var timestamp = arguments?.getString("timestamp")
+
         bundle.putString("action", action)
+//        bundle.putString("field", field)
+        bundle.putString("medium", medium)
+        bundle.putString("amount", amount)
+        bundle.putString("duration", duration)
+        bundle.putString("timestamp", timestamp)
 
         fieldEditText.text.toString().let {
             if (it.isEmpty()) {

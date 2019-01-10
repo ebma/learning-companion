@@ -37,6 +37,9 @@ class GoalWithHelpStepAmountFragment : Fragment() {
 
         addDoneButtonClickListener()
         addBackButtonClickListener()
+
+        getFromBundle()
+
         return rootView
     }
 
@@ -64,7 +67,7 @@ class GoalWithHelpStepAmountFragment : Fragment() {
         val bundle = Bundle()
         fillBundleWithArguments(bundle)
 
-        if(bundle.size() >= 3)
+//        if(bundle.size() >= 3)
             Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepObjectFragment_back_to_goalWithHelpStepObjectFragment, bundle)
     }
 
@@ -82,7 +85,7 @@ class GoalWithHelpStepAmountFragment : Fragment() {
 //        bundle.putString("medium", medium)
 //        bundle.putString("amount", amountEditText.text.toString())
 
-        if(bundle.size() == 4)
+        if(bundle.size() >= 1)
             Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepAmountFragment_to_goalWithHelpStepDurationFragment, bundle)
     }
 
@@ -90,11 +93,16 @@ class GoalWithHelpStepAmountFragment : Fragment() {
         val action = arguments?.getString("action")
         val field = arguments?.getString("field")
         val medium = arguments?.getString("medium")
-//        val fieldEditText = rootView.findViewById<EditText>(R.id.et_field)
+//        val amount = arguments?.getString("amount")
+        var duration = arguments?.getString("duration")
+        var timestamp = arguments?.getString("timestamp")
 
         bundle.putString("action", action)
         bundle.putString("field", field)
         bundle.putString("medium", medium)
+//        bundle.putString("amount", amount)
+        bundle.putString("duration", duration)
+        bundle.putString("timestamp", timestamp)
 
         amountEditText.text.toString().let {
             if (it.isEmpty()) {
@@ -103,6 +111,13 @@ class GoalWithHelpStepAmountFragment : Fragment() {
                 bundle.putString("amount", it)
                 tintTextInputLayout(amountInputLayout, false)
             }
+        }
+    }
+
+    private fun getFromBundle() {
+        var amount = arguments?.getString("amount")
+        if(!amount.isNullOrEmpty()) {
+            amountEditText.setText(amount)
         }
     }
 

@@ -81,6 +81,26 @@ class SharedPreferencesHelper private constructor(context: Context) {
         editor.apply()
     }
 
+    fun setInterval(interval: Int) {
+        val editor = sharedPref.edit()
+        editor.putInt("interval", interval)
+        editor.apply()
+    }
+
+    fun setFrequency(frequency: Int) {
+        val editor = sharedPref.edit()
+        editor.putInt("frequency", frequency)
+        editor.apply()
+    }
+
+    fun getInterval() : Int {
+        return sharedPref.getInt("interval", 0)
+    }
+
+    fun getFrequency() : Int {
+        return sharedPref.getInt("frequency", 0)
+    }
+
     companion object {
         @SuppressLint("StaticFieldLeak")
         @Volatile
