@@ -14,7 +14,7 @@ const val MESSAGE_DURATION_IN_MILLIS = 10000L
 
 class Buddy private constructor(private val context: Context) {
 
-    private val defaultFaceDrawable = context.getDrawable(R.drawable.blue_charlie_smiling)
+    private val buddyFaceHolder = BuddyFaceHolder.get(context)
 
     var isInDefaultState = true
 
@@ -34,11 +34,11 @@ class Buddy private constructor(private val context: Context) {
     }
 
     fun setNewRandomBuddyBeforeLearningText() {
-        showMessageForFixedAmount(getInfoText(), defaultFaceDrawable)
+        showMessageForFixedAmount(getInfoText(), buddyFaceHolder.getDefaultFace())
     }
 
     fun showExitProhibitedMessage() {
-        showMessageForFixedAmount(context.getString(R.string.exit_prohibited_message), context.getDrawable(R.drawable.blue_charlie_thinking))
+        showMessageForFixedAmount(context.getString(R.string.exit_prohibited_message), buddyFaceHolder.getThinkingFace())
     }
 
     private fun showMessageForFixedAmount(message: String, drawable: Drawable?) {
@@ -49,7 +49,7 @@ class Buddy private constructor(private val context: Context) {
         Handler().postDelayed({
             isInDefaultState = true
             speechLiveData.postValue("")
-            drawableLiveData.postValue(defaultFaceDrawable)
+            drawableLiveData.postValue(buddyFaceHolder.getDefaultFace())
         }, MESSAGE_DURATION_IN_MILLIS)
     }
 
@@ -57,35 +57,35 @@ class Buddy private constructor(private val context: Context) {
         val stringArray = context.resources.getStringArray(R.array.buddy_thinking_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_thinking))
+        showMessageForFixedAmount(stringArray[randomStringIndex], buddyFaceHolder.getThinkingFace())
     }
 
     private fun setRandomSmilingCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_smiling_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_smiling))
+        showMessageForFixedAmount(stringArray[randomStringIndex], buddyFaceHolder.getSmilingFace())
     }
 
     private fun setRandomGoofyCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_goofy_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_goofy))
+        showMessageForFixedAmount(stringArray[randomStringIndex], buddyFaceHolder.getGoofyFace())
     }
 
     private fun setRandomGrinningCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_grinning_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_grinning))
+        showMessageForFixedAmount(stringArray[randomStringIndex], buddyFaceHolder.getGrinningFace())
     }
 
     private fun setRandomRelievedCharlie() {
         val stringArray = context.resources.getStringArray(R.array.buddy_relieved_sayings)
         val randomStringIndex = Random().nextInt(stringArray.size)
 
-        showMessageForFixedAmount(stringArray[randomStringIndex], context.getDrawable(R.drawable.blue_charlie_relieved))
+        showMessageForFixedAmount(stringArray[randomStringIndex], buddyFaceHolder.getCalmFace())
     }
 
     fun getInfoText(): String {

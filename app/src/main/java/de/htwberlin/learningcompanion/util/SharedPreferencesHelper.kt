@@ -3,6 +3,7 @@ package de.htwberlin.learningcompanion.util
 import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
+import android.graphics.Color
 
 class SharedPreferencesHelper private constructor(context: Context) {
 
@@ -32,7 +33,20 @@ class SharedPreferencesHelper private constructor(context: Context) {
         }
     }
 
-    fun getCharlieNum() : Int {
+    fun getBuddyColor(): Int {
+        val charlieNum = sharedPref.getInt("MoodNumber", 0)
+
+        return when (charlieNum) {
+            1 -> Color.BLUE
+            2 -> Color.GREEN
+            3 -> Color.MAGENTA
+            4 -> Color.YELLOW
+            5 -> Color.RED
+            else -> Color.BLUE
+        }
+    }
+
+    fun getCharlieNum(): Int {
         return sharedPref.getInt("MoodNumber", 0)
     }
 
