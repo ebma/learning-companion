@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.buddy.BuddyFaceHolder
 import de.htwberlin.learningcompanion.learning.LightLevel
 import de.htwberlin.learningcompanion.learning.NoiseLevel
 import de.htwberlin.learningcompanion.util.setActivityTitle
@@ -25,6 +26,8 @@ class RecommendationFragment : Fragment() {
         setActivityTitle("Recommendation")
 
         recommendationHelper = RecommendationHelper(context!!)
+
+        iv_charlie.setImageDrawable(BuddyFaceHolder.get(context!!).getDefaultFace())
 
         fillLayout()
     }

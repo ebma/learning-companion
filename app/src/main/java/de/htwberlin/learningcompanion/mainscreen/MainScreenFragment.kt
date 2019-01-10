@@ -18,6 +18,7 @@ import androidx.lifecycle.Observer
 import com.github.library.bubbleview.BubbleTextView
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.buddy.Buddy
+import de.htwberlin.learningcompanion.buddy.BuddyFaceHolder
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
@@ -65,6 +66,8 @@ class MainScreenFragment : Fragment() {
         showCharlieInfoText()
 
         observeBuddyLiveData()
+
+        ivCharlieFace.setImageDrawable(BuddyFaceHolder.get(context!!).getDefaultFace())
 
         if (sessionHandler.sessionRunning) {
             showSessionInfoInBox()

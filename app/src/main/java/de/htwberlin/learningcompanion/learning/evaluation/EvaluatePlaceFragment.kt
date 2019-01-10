@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.buddy.BuddyFaceHolder
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
@@ -33,6 +34,7 @@ class EvaluatePlaceFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
 
+        iv_charlie.setImageDrawable(BuddyFaceHolder.get(context!!).getDefaultFace())
         currentGoal = GoalRepository.get(context!!).getCurrentGoal()!!
         currentPlace = PlaceRepository.get(context!!).getCurrentPlace()!!
         currentLearningSession = LearningSessionRepository.get(context!!).getNewestLearningSession()

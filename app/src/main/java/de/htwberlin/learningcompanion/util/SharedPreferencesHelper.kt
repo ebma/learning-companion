@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.graphics.Color
+import androidx.lifecycle.MutableLiveData
 
 class SharedPreferencesHelper private constructor(context: Context) {
 
@@ -13,6 +14,8 @@ class SharedPreferencesHelper private constructor(context: Context) {
     private val DEFAULT_COMPANION_NAME = "Charlie"
 
     private val sharedPref: SharedPreferences
+
+    val buddyColorLiveData = MutableLiveData<Int>()
 
     init {
         sharedPref = context.getSharedPreferences(SHARED_PREF_NAME, Context.MODE_PRIVATE)
@@ -54,6 +57,8 @@ class SharedPreferencesHelper private constructor(context: Context) {
         val editor = sharedPref.edit()
         editor.putInt("MoodNumber", moodNumber)
         editor.apply()
+
+        buddyColorLiveData.postValue(moodNumber)
     }
 
     fun getUserName(): String {

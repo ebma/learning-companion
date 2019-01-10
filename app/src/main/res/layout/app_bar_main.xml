@@ -34,6 +34,6 @@
         app:backgroundTint="@color/colorPrimary"
         app:layout_anchor="@+id/content_main"
         app:layout_anchorGravity="right|bottom"
-        app:srcCompat="@drawable/ic_charlie" />
+        app:srcCompat="@drawable/ic_blue_smile" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

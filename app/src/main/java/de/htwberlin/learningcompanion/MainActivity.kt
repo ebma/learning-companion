@@ -3,13 +3,16 @@ package de.htwberlin.learningcompanion
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
+import android.widget.ImageView
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.google.android.material.navigation.NavigationView
 import de.htwberlin.learningcompanion.buddy.Buddy
+import de.htwberlin.learningcompanion.buddy.BuddyFaceHolder
 import de.htwberlin.learningcompanion.goals.overview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.help.HelpOverview
 import de.htwberlin.learningcompanion.learning.SessionHandler
@@ -34,6 +37,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         drawer_layout.addDrawerListener(object : DrawerLayout.DrawerListener {
             override fun onDrawerStateChanged(newState: Int) {
                 toggle.onDrawerStateChanged(newState)
+
+                setUIElementsToCharlieFace()
             }
 
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -47,6 +52,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onDrawerOpened(drawerView: View) {
                 toggle.onDrawerOpened(drawerView)
 
+
                 if (SessionHandler.get(this@MainActivity).sessionRunning) {
                     drawer_layout.closeDrawer(GravityCompat.START)
                     Buddy.get(applicationContext).showExitProhibitedMessage()
@@ -59,6 +65,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         nav_view.setNavigationItemSelectedListener(this)
         nav_view.setCheckedItem(R.id.nav_mainscreen)
 
+
+        SharedPreferencesHelper.get(applicationContext).buddyColorLiveData.observe(this, Observer {
+            setUIElementsToCharlieFace()
+        })
+
         fab_charlie.onClick {
             nav_view.setCheckedItem(R.id.nav_mainscreen)
             displaySelectedScreen(R.id.nav_mainscreen)
@@ -67,6 +78,15 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         changeMainScreenMenuItemText()
 
         displaySelectedScreen(R.id.nav_mainscreen)
+
+        setUIElementsToCharlieFace()
+    }
+
+    fun setUIElementsToCharlieFace() {
+        runOnUiThread {
+            fab_charlie.setImageDrawable(BuddyFaceHolder.get(applicationContext).getDefaultFace())
+            drawer_layout.findViewById<ImageView>(R.id.nav_view_charlie_face)?.setImageDrawable(BuddyFaceHolder.get(applicationContext).getDefaultFace())
+        }
     }
 
     fun changeMainScreenMenuItemText() {

@@ -3,6 +3,7 @@ package de.htwberlin.learningcompanion
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import de.htwberlin.learningcompanion.buddy.BuddyFaceHolder
 import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
 import kotlinx.android.synthetic.main.activity_welcome.*
 
@@ -17,6 +18,8 @@ class WelcomeActivity : Activity() {
         }
 
         tv_buddy_name.text = SharedPreferencesHelper.get(applicationContext).getBuddyName()
+
+        iv_charlie.setImageDrawable(BuddyFaceHolder.get(applicationContext).getDefaultFace())
     }
 
     private fun launchMainActivity() {

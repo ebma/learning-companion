@@ -67,7 +67,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/h_guideline1"
-        app:srcCompat="@drawable/ic_charlie" />
+        app:srcCompat="@drawable/ic_blue_smile" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_charlie_info"
