@@ -95,9 +95,22 @@ class SettingsOverviewFragment : Fragment() {
             buddyName = buddyNameEditText.text.toString()
         }
 
+        var interval = SharedPreferencesHelper.get(context!!).getInterval()
+        if (!intervalEditText.text.none()) {
+            interval = intervalEditText.text.toString().toInt()
+        }
+
+        var frequency = SharedPreferencesHelper.get(context!!).getFrequency()
+        if(!frequencyEditText.text.none()) {
+            frequency = frequencyEditText.text.toString().toInt()
+        }
+
         saveUserName(userName)
         saveBuddyName(buddyName)
         saveBuddyMood(charlieNumberChange)
+
+        saveInterval(interval)
+        saveFrequency(frequency)
 
         (activity as MainActivity).changeMainScreenMenuItemText()
 
@@ -105,6 +118,8 @@ class SettingsOverviewFragment : Fragment() {
 
         userNameEditText.setText("")
         buddyNameEditText.setText("")
+        intervalEditText.setText("")
+        frequencyEditText.setText("")
     }
 
     private fun saveUserName(userName: String) {
@@ -117,6 +132,14 @@ class SettingsOverviewFragment : Fragment() {
 
     private fun saveBuddyMood(moodNumber: Int) {
         SharedPreferencesHelper.get(context!!).setBuddyMood(moodNumber)
+    }
+
+    private fun saveInterval(interval: Int) {
+        SharedPreferencesHelper.get(context!!).setInterval(interval)
+    }
+
+    private fun saveFrequency(frequency: Int) {
+        SharedPreferencesHelper.get(context!!).setFrequency(frequency)
     }
 
     private fun changeMoodText(newName: String) {
