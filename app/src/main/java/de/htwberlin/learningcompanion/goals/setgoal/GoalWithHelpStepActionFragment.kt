@@ -32,14 +32,21 @@ class GoalWithHelpStepActionFragment : Fragment() {
         findViews()
 
         addDoneButtonClickListener()
+        getFromBundle()
         return rootView
     }
 
     private fun findViews() {
-
         actionEditText = rootView.findViewById(R.id.et_action)
         actionInputLayout = rootView.findViewById(R.id.til_action)
         doneButton = rootView.findViewById<ImageButton>(R.id.btn_done)
+    }
+
+    private fun getFromBundle() {
+        var action = arguments?.getString("action")
+        if(!action.isNullOrEmpty()) {
+            actionEditText.setText(action)
+        }
     }
 
     private fun addDoneButtonClickListener() {
@@ -55,11 +62,23 @@ class GoalWithHelpStepActionFragment : Fragment() {
         val bundle = Bundle()
         fillBundleWithArguments(bundle)
 
-        if(bundle.size() == 1)
+//        if(bundle.size() == 1)
             Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepActionFragment_to_goalWithHelpStepFieldFragment, bundle)
     }
 
     private fun fillBundleWithArguments(bundle: Bundle) {
+        val field = arguments?.getString("field")
+        val medium = arguments?.getString("medium")
+        val amount = arguments?.getString("amount")
+        var duration = arguments?.getString("duration")
+        var timestamp = arguments?.getString("timestamp")
+
+        bundle.putString("field", field)
+        bundle.putString("medium", medium)
+        bundle.putString("amount", amount)
+        bundle.putString("duration", duration)
+        bundle.putString("timestamp", timestamp)
+
         actionEditText.text.toString().let {
             if (it.isEmpty()) {
                 tintTextInputLayout(actionInputLayout, true)

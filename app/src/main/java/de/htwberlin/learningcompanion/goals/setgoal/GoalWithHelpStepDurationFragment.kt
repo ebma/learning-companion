@@ -33,6 +33,8 @@ class GoalWithHelpStepDurationFragment : Fragment() {
         addRadioButtonClickListeners()
         addTimePickerDialogToUntilAmountEditText()
 
+        getFromBundle()
+
         return rootView
     }
 
@@ -138,8 +140,21 @@ class GoalWithHelpStepDurationFragment : Fragment() {
 //        else
 //            bundle.putString("timestamp", forAmountEditText.text.toString())
 
-        if(bundle.size() == 6)
+//        if(bundle.size() == 6)
             Navigation.findNavController(rootView).navigate(R.id.action_goalWithHelpStepDurationFragment_to_goalSummaryFragment, bundle)
+    }
+
+    private fun getFromBundle() {
+        var duration = arguments?.getString("duration")
+        var timestamp = arguments?.getString("timestamp")
+
+        if(!duration.isNullOrEmpty()) {
+            forRadioButton.isEnabled = true
+            forAmountEditText.setText(duration)
+        } else if (!timestamp.isNullOrEmpty()) {
+            untilRadioButton.isEnabled = true
+            untilAmountEditText.setText(timestamp)
+        }
     }
 
     private fun fillBundleWithArguments(bundle: Bundle) {
@@ -147,16 +162,18 @@ class GoalWithHelpStepDurationFragment : Fragment() {
         val field = arguments?.getString("field")
         val medium = arguments?.getString("medium")
         val amount = arguments?.getString("amount")
-
-//        val fieldEditText = rootView.findViewById<EditText>(R.id.et_field)
-
-        val withHelp = true
-        bundle.putBoolean("withHelp", withHelp)
+//        var duration = arguments?.getString("duration")
+//        var timestamp = arguments?.getString("timestamp")
 
         bundle.putString("action", action)
         bundle.putString("field", field)
         bundle.putString("medium", medium)
         bundle.putString("amount", amount)
+//        bundle.putString("duration", duration)
+//        bundle.putString("timestamp", timestamp)
+
+        val withHelp = true
+        bundle.putBoolean("withHelp", withHelp)
 
         if (untilRadioButton.isChecked) {
             untilAmountEditText.text.toString().let {
