@@ -18,6 +18,7 @@ import com.google.android.material.textfield.TextInputLayout
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
 import de.htwberlin.learningcompanion.db.GoalRepository
+import de.htwberlin.learningcompanion.goals.overview.GoalOverviewFragment
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.support.v4.runOnUiThread
@@ -171,42 +172,40 @@ class GoalNoHelpUserInputFragment : Fragment() {
     }
 
     private fun addDoneButtonClickListener() {
-        if (editMode) {
-            val actionString = actionEditText.text.toString()
-            val fieldString = fieldEditText.text.toString()
-            val amountString = amountEditText.text.toString()
-            val mediumString = mediumEditText.text.toString()
+        doneButton.setOnClickListener {
+            if (editMode) {
+                val actionString = actionEditText.text.toString()
+                val fieldString = fieldEditText.text.toString()
+                val amountString = amountEditText.text.toString()
+                val mediumString = mediumEditText.text.toString()
 
-            var updateGoal = Goal("", "", "", "", 2)
+                var updateGoal = Goal("", "", "", "", 2)
 
-            if (untilRadioButton.isChecked) {
-                untilAmountEditText.text.toString().let {
-                    if (it.isEmpty()) {
-                        // TODO something?
-                    } else
-                        updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
+                if (untilRadioButton.isChecked) {
+                    untilAmountEditText.text.toString().let {
+                        if (!it.isEmpty()) {
+                            updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
+                        }
+                    }
+                } else {
+                    forAmountEditText.text.toString().let {
+                        if (!it.isEmpty()) {
+                            updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
+                        }
+                    }
                 }
-            } else {
-                forAmountEditText.text.toString().let {
-                    if (it.isEmpty()) {
-                        // TODO something?
-                    } else
-                        updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
-                }
-            }
 
 //            val updateGoal = Goal(actionString, amountString, fieldString, mediumString)
-            updateGoal.id = goal?.id ?: 0
-            updateGoal(updateGoal)
-            toast("Goal updated")
-        } else {
-            doneButton.setOnClickListener {
+                updateGoal.id = goal?.id ?: 0
+                updateGoal(updateGoal)
+                toast("Goal updated")
+
+                val fragment = GoalOverviewFragment()
+                activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
+
+            } else {
                 navigateToSummaryFragmentWithValues()
             }
-        }
-
-        doneButton.setOnClickListener {
-            navigateToSummaryFragmentWithValues()
         }
     }
 

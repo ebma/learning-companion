@@ -109,7 +109,6 @@ class GoalOverviewFragment : Fragment() {
 
     private fun navigateToSetGoalFragment() {
         val fragment = GoalNavHostFragment()
-
         activity!!.supportFragmentManager.beginTransaction().addToBackStack("detailfragment").replace(R.id.content_main, fragment).commit()
     }
     private fun navigateToCharlie() {
