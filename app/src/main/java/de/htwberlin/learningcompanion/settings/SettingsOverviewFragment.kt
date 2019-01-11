@@ -81,7 +81,13 @@ class SettingsOverviewFragment : Fragment() {
         userNameEditText.hint = SharedPreferencesHelper.get(context!!).getUserName()
         buddyNameEditText.hint = SharedPreferencesHelper.get(context!!).getBuddyName()
 
-        buddyMoodTextView.text = SharedPreferencesHelper.get(context!!).getBuddyMood() + " " + SharedPreferencesHelper.get(context!!).getBuddyName()
+        buddyMoodTextView.text = SharedPreferencesHelper.get(context!!).getBuddyMood() + " " +
+                    SharedPreferencesHelper.get(context!!).getBuddyName()
+
+//        rootView.findViewById<TextView>(R.id.ti_settings_interval).hint =
+//                SharedPreferencesHelper.get(context!!).getInterval().toString() + " minutes"
+//        rootView.findViewById<TextView>(R.id.ti_settings_frequency).hint =
+//                SharedPreferencesHelper.get(context!!).getInterval().toString() + " times"
     }
 
     private fun savePreferences() {
