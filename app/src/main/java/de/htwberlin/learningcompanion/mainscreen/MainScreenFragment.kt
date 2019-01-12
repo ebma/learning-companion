@@ -11,7 +11,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
-import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -118,7 +117,6 @@ class MainScreenFragment : Fragment() {
             }
         } else {
             requestAllPermissions()
-//            requestStoragePermission()
         }
     }
 
@@ -192,6 +190,8 @@ class MainScreenFragment : Fragment() {
             if (permissionToRecordAccepted) {
                 startLearningSession()
             }
+        } else {
+            buddy.setInstructionText()
         }
     }
 
@@ -230,13 +230,6 @@ class MainScreenFragment : Fragment() {
         tvCharlieInfo.text = buddy.getInfoText()
     }
 
-    private fun requestStoragePermission() {
-        if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-            val permissions: Array<String> = arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            ActivityCompat.requestPermissions(activity!!, permissions, REQUEST_EXTERNAL_STORAGE_PERMISSION)
-        }
-    }
-
     private fun requestAudioPermission() {
         if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
@@ -250,7 +243,7 @@ class MainScreenFragment : Fragment() {
         if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            requestPermissions(permissions, REQUEST_RECORD_AUDIO_PERMISSION)
+            requestPermissions(permissions, REQUEST_ALL_PERMISSION)
         } else {
             permissionToRecordAccepted = true
         }
@@ -265,11 +258,18 @@ class MainScreenFragment : Fragment() {
             if (waitingForPermissionToStartSession) {
                 startLearningSession()
             }
+        } else if (requestCode == REQUEST_ALL_PERMISSION) {
+            permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
+
+            if (waitingForPermissionToStartSession) {
+                startLearningSession()
+            }
         }
     }
 
     companion object {
         const val REQUEST_RECORD_AUDIO_PERMISSION = 200
         const val REQUEST_EXTERNAL_STORAGE_PERMISSION = 201
+        const val REQUEST_ALL_PERMISSION = 202
     }
 }

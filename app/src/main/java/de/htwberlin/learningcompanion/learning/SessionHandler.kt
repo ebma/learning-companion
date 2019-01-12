@@ -16,7 +16,7 @@ class SessionHandler private constructor(private val activity: Activity) {
 
     companion object {
         private val TAG = SessionHandler::class.java.simpleName
-        private val INTERVAL_IN_SECONDS = 5 // maybe 1/min soon
+        private val TARGETED_AMOUNT_OF_SENSOR_VALUES: Int = 200
         private val ON_UPDATE = 1
         private val ON_FINISH = 2
 
@@ -62,8 +62,14 @@ class SessionHandler private constructor(private val activity: Activity) {
             startTimer()
 
             sensorHandler.clear()
-            sensorHandler.start(INTERVAL_IN_SECONDS)
+            sensorHandler.start(calculateIntervalForSession())
         }
+    }
+
+    private fun calculateIntervalForSession(): Int {
+        val goalTargetDurationInMin = getGoalTargetDuration(goal)
+        val goalTargetDurationInSec = goalTargetDurationInMin * 60
+        return Math.max(goalTargetDurationInSec / TARGETED_AMOUNT_OF_SENSOR_VALUES, 1) // value has to >= 1
     }
 
     fun startLearningSessionWithoutMeasuringSensors() {

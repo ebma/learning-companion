@@ -37,6 +37,10 @@ class Buddy private constructor(private val context: Context) {
         showMessageForFixedAmount(getInfoText(), buddyFaceHolder.getDefaultFace())
     }
 
+    fun setInstructionText() {
+        showMessageForFixedAmount(getInfoText(), buddyFaceHolder.getDefaultFace())
+    }
+
     fun showExitProhibitedMessage() {
         showMessageForFixedAmount(context.getString(R.string.exit_prohibited_message), buddyFaceHolder.getThinkingFace())
     }
