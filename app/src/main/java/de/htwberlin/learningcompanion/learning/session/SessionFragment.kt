@@ -64,8 +64,16 @@ class SessionFragment : Fragment() {
         Picasso.get().load(place.imageUri).fit().into(iv_place_preview)
 
 
-        initBrightnessChart()
-        initNoiseChart()
+        if (session.lightValues.isNotEmpty() && session.noiseValues.isNotEmpty()) {
+            initBrightnessChart()
+            initNoiseChart()
+        } else {
+            brightness_chart.visibility = View.GONE
+            noise_chart.visibility = View.GONE
+
+            tv_noise_value.text = session.noiseRating.name
+            tv_brightness_value.text = session.brightnessRating.name
+        }
     }
 
     private fun initBrightnessChart() {
