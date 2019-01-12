@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             override fun onDrawerStateChanged(newState: Int) {
                 toggle.onDrawerStateChanged(newState)
 
-                setUIElementsToCharlieFace()
+                setDrawerLayoutImageToCharlieFace()
             }
 
             override fun onDrawerSlide(drawerView: View, slideOffset: Float) {
@@ -80,6 +80,12 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         displaySelectedScreen(R.id.nav_mainscreen)
 
         setUIElementsToCharlieFace()
+    }
+
+    private fun setDrawerLayoutImageToCharlieFace() {
+        runOnUiThread {
+            drawer_layout.findViewById<ImageView>(R.id.nav_view_charlie_face)?.setImageDrawable(BuddyFaceHolder.get(applicationContext).getDefaultFace())
+        }
     }
 
     fun setUIElementsToCharlieFace() {
