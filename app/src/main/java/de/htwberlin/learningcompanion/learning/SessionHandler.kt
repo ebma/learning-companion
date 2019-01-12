@@ -41,6 +41,7 @@ class SessionHandler private constructor(private val activity: Activity) {
     private val learningSessionEvaluator = SessionEvaluator(sensorHandler.lightDataList, sensorHandler.noiseDataList)
 
     var sessionRunning = false
+    var measuringSensors = false
 
     fun canStartLearningSession(): Boolean {
         val currentGoal = GoalRepository.get(activity).getCurrentGoal()
@@ -53,14 +54,24 @@ class SessionHandler private constructor(private val activity: Activity) {
         }
     }
 
-    fun startLearningSession() {
+    fun startLearningSessionWithMeasuringSensors() {
         if (!sessionRunning) {
             sessionRunning = true
+            measuringSensors = true
             retrieveInformationFromGoal()
             startTimer()
 
             sensorHandler.clear()
             sensorHandler.start(INTERVAL_IN_SECONDS)
+        }
+    }
+
+    fun startLearningSessionWithoutMeasuringSensors() {
+        if (!sessionRunning) {
+            sessionRunning = true
+            measuringSensors = false
+            retrieveInformationFromGoal()
+            startTimer()
         }
     }
 
@@ -148,7 +159,10 @@ class SessionHandler private constructor(private val activity: Activity) {
 
         val timeString = String.format("%02d:%02d:%02d", TimeUnit.MILLISECONDS.toHours(remainingMillis), TimeUnit.MILLISECONDS.toMinutes(remainingMillis) - TimeUnit.HOURS.toMinutes(TimeUnit.MILLISECONDS.toHours(remainingMillis)), TimeUnit.MILLISECONDS.toSeconds(remainingMillis) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes(remainingMillis)))
 
-        return "Light: $lightLevel \nNoise: $noiseLevel \nRemaining time: $timeString"
+        return if (measuringSensors)
+            "Light: $lightLevel \nNoise: $noiseLevel \nRemaining time: $timeString"
+        else
+            "Remaining time: $timeString"
     }
 
     fun getLightLevel(): LightLevel {

@@ -50,6 +50,7 @@ class MainScreenFragment : Fragment() {
     private lateinit var ivCharlieFace: ImageView
 
     private var permissionToRecordAccepted = false
+    private var waitingForPermissionToStartSession = false
 
     private lateinit var buddy: Buddy
 
@@ -184,31 +185,21 @@ class MainScreenFragment : Fragment() {
     private fun onStartButtonClick() {
         if (canStartSession()) {
 
+            waitingForPermissionToStartSession = true
             requestAudioPermission()
-
-            if (permissionToRecordAccepted) {
-                if (sessionHandler.canStartLearningSession()) {
-                    startLearningSession()
-                }
-            }
         }
     }
 
     private fun startLearningSession() {
         btnStart.visibility = View.INVISIBLE
         btnQuit.visibility = View.VISIBLE
-        sessionHandler.startLearningSession()
+        if (permissionToRecordAccepted) {
+            sessionHandler.startLearningSessionWithMeasuringSensors()
+        } else {
+            sessionHandler.startLearningSessionWithoutMeasuringSensors()
+        }
 
-        sessionHandler.observe(object : SessionHandler.LearningSessionObserver {
-            override fun onUpdate(millisUntilFinished: Long) {
-                tvLearningInfo.text = sessionHandler.getSessionInfo()
-            }
-
-            override fun onFinish() {
-                tvLearningInfo.text = "Learning session over"
-                finishLearningSession()
-            }
-        })
+        showSessionInfoInBox()
     }
 
     private fun showSessionInfoInBox() {
@@ -221,14 +212,13 @@ class MainScreenFragment : Fragment() {
                 override fun onFinish() {
                     tvLearningInfo.text = "Learning session over"
                     finishLearningSession()
-
                 }
             })
         }
     }
 
     private fun canStartSession(): Boolean {
-        return GoalRepository.get(context!!).getCurrentGoal() != null && PlaceRepository.get(context!!).getCurrentPlace() != null
+        return sessionHandler.canStartLearningSession()
     }
 
     private fun showCharlieInfoText() {
@@ -245,7 +235,7 @@ class MainScreenFragment : Fragment() {
     private fun requestAudioPermission() {
         if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO)
-            ActivityCompat.requestPermissions(activity!!, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
+            requestPermissions(permissions, REQUEST_RECORD_AUDIO_PERMISSION)
         } else {
             permissionToRecordAccepted = true
         }
@@ -255,17 +245,21 @@ class MainScreenFragment : Fragment() {
         if (ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
                 || ContextCompat.checkSelfPermission(activity!!, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             val permissions: Array<String> = arrayOf(Manifest.permission.RECORD_AUDIO, Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            ActivityCompat.requestPermissions(activity!!, permissions, REQUEST_RECORD_AUDIO_PERMISSION)
+            requestPermissions(permissions, REQUEST_RECORD_AUDIO_PERMISSION)
         } else {
             permissionToRecordAccepted = true
         }
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+//        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
         if (requestCode == REQUEST_RECORD_AUDIO_PERMISSION) {
             permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
+
+            if (waitingForPermissionToStartSession) {
+                startLearningSession()
+            }
         }
     }
 
