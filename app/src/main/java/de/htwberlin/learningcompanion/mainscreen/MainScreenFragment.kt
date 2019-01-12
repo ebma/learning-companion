@@ -187,6 +187,11 @@ class MainScreenFragment : Fragment() {
 
             waitingForPermissionToStartSession = true
             requestAudioPermission()
+
+            // this will be set immediately if permission is already granted
+            if (permissionToRecordAccepted) {
+                startLearningSession()
+            }
         }
     }
 

@@ -1,11 +1,14 @@
 package de.htwberlin.learningcompanion.learning.evaluation
 
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.buddy.BuddyFaceHolder
@@ -45,16 +48,27 @@ class EvaluatePlaceFragment : Fragment() {
 
         if (permissionsGranted()) {
             // means that we collected the values and the user should not choose them
+            enableInputFields(false)
+        } else {
+            enableInputFields(true)
+        }
+    }
+
+    private fun enableInputFields(enable: Boolean) {
+        sb_noise_rating.isEnabled = enable
+        sb_brightness_rating.isEnabled = enable
+
+        if (enable) {
             sb_noise_rating.setProgress(currentLearningSession.noiseRating.ordinal.toFloat())
-            sb_noise_rating.isEnabled = false
             sb_brightness_rating.setProgress(currentLearningSession.brightnessRating.ordinal.toFloat())
-            sb_brightness_rating.isEnabled = false
+        } else {
+            sb_noise_rating.setProgress(currentLearningSession.noiseRating.ordinal.toFloat())
+            sb_brightness_rating.setProgress(currentLearningSession.brightnessRating.ordinal.toFloat())
         }
     }
 
     private fun permissionsGranted(): Boolean {
-        // TODO implement with actual permission check
-        return true
+        return ContextCompat.checkSelfPermission(activity!!, Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun addButtonClickListener() {
