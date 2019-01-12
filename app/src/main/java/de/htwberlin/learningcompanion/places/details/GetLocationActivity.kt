@@ -19,9 +19,11 @@ import org.jetbrains.anko.ctx
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.toast
 import org.osmdroid.config.Configuration
+import org.osmdroid.events.MapEventsReceiver
 import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
+import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
@@ -49,7 +51,8 @@ class GetLocationActivity : AppCompatActivity() {
 
     companion object {
         private val TAG = GetLocationActivity::class.java.simpleName
-        private val DEFAULT_ZOOM = 15.0
+        private val DEFAULT_WIDE_ZOOM = 12.0
+        private val DEFAULT_DETAILED_ZOOM = 15.0
         private val PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION = 1
     }
 
@@ -75,13 +78,14 @@ class GetLocationActivity : AppCompatActivity() {
         map?.setBuiltInZoomControls(true)
         map?.setMultiTouchControls(true)
 
-        map?.controller?.setZoom(DEFAULT_ZOOM)
+        map?.controller?.setZoom(DEFAULT_WIDE_ZOOM)
         moveCameraToLocation(defaultLocation)
 
         addLocationOverlay()
+        addLocationClickListener()
 
         btn_get_address.onClick {
-            getAddress()
+            onGetAddressClick()
         }
 
         btn_save_location.onClick {
@@ -90,25 +94,49 @@ class GetLocationActivity : AppCompatActivity() {
 
     }
 
-    private fun getAddress() {
+    private fun onGetAddressClick() {
         if (lastKnownLocation != null) {
-            val request = LocationToAddressRequest(applicationContext)
-
-            val geoPoint = GeoPoint(lastKnownLocation!!)
-            request.getAddress(geoPoint, object : LocationToAddressRequest.Callback {
-                override fun onResult(addressResult: Address) {
-                    tv_address.text = addressResult.display_name
-                    address = addressResult
-                    Log.d(TAG, "address: $addressResult")
-                }
-
-                override fun onError(errorMessage: String) {
-                    Log.e(TAG, errorMessage)
-                }
-            })
+            val geoPoint = GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude, lastKnownLocation!!.altitude)
+            getAddress(geoPoint)
         } else {
             toast("Your location was not found yet")
         }
+    }
+
+    private fun getAddress(geoPoint: GeoPoint) {
+        val request = LocationToAddressRequest(applicationContext)
+
+        request.getAddress(geoPoint, object : LocationToAddressRequest.Callback {
+            override fun onResult(addressResult: Address) {
+                tv_address.text = addressResult.display_name
+                address = addressResult
+                Log.d(TAG, "address: $addressResult")
+            }
+
+            override fun onError(errorMessage: String) {
+                Log.e(TAG, errorMessage)
+            }
+        })
+
+    }
+
+    private fun addLocationClickListener() {
+        var mReceive = object : MapEventsReceiver {
+            override fun longPressHelper(p: GeoPoint?): Boolean {
+                return true
+            }
+
+            override fun singleTapConfirmedHelper(geoPoint: GeoPoint?): Boolean {
+                if (geoPoint != null) {
+                    getAddress(geoPoint)
+                }
+                return true
+            }
+
+        }
+
+        var mapEventsOverlay = MapEventsOverlay(getBaseContext(), mReceive)
+        map?.overlays?.add(mapEventsOverlay)
     }
 
     private fun onSaveButtonClick() {
@@ -150,7 +178,10 @@ class GetLocationActivity : AppCompatActivity() {
             Log.d(TAG, "last known location $location")
 
             gpsLocationProvider.startLocationProvider { location, source ->
-                moveCameraToLocation(location)
+                // only move camera at first location sight
+                if (lastKnownLocation == null && location != null)
+                    moveCameraToLocation(location)
+
                 lastKnownLocation = location
                 Log.d(TAG, "location changed to ${location?.latitude} ${location?.longitude}")
             }
@@ -166,6 +197,7 @@ class GetLocationActivity : AppCompatActivity() {
         if (location != null) {
             val geoPoint = GeoPoint(location)
             map?.controller?.setCenter(geoPoint)
+            map?.controller?.setZoom(DEFAULT_DETAILED_ZOOM)
         }
     }
 
