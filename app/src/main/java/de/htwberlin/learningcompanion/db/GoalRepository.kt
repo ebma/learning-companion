@@ -48,10 +48,6 @@ class GoalRepository private constructor(context: Context) {
         return appDatabase.goalDao().getGoalByID(goalID)
     }
 
-    fun getGoalsByDescendingUserRating(): List<Goal> {
-        return appDatabase.goalDao().getGoalsByDescendingUserRating()
-    }
-
     fun getCurrentGoal(): Goal? {
         return appDatabase.goalDao().getCurrentGoal()
     }

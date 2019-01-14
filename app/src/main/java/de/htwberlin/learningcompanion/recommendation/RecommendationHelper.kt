@@ -1,9 +1,8 @@
 package de.htwberlin.learningcompanion.recommendation
 
 import android.content.Context
-import de.htwberlin.learningcompanion.db.GoalRepository
+import de.htwberlin.learningcompanion.db.AppDatabase
 import de.htwberlin.learningcompanion.db.LearningSessionRepository
-import de.htwberlin.learningcompanion.db.PlaceRepository
 import de.htwberlin.learningcompanion.learning.SessionEvaluator
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.model.LearningSession
@@ -12,39 +11,43 @@ import java.util.*
 
 class RecommendationHelper(private val context: Context) {
 
-    fun getBestPlaces(): List<Place> {
-        val placesList = PlaceRepository.get(context).placesList
+    private val recommendationDAO = AppDatabase.get(context).recommendationDao()
 
-        val placeRatingMap = hashMapOf<Place, Double>()
+    var bestGoals: List<Goal>? = null
+    var bestPlaces: List<Place>? = null
+    var bestTime: String? = null
+    var bestDuration: Int = 0
+    var bestBrightnessValue: Int = 0
+    var bestNoiseValue: Int = 0
 
-        placesList?.forEach { placeRatingMap[it] = calculateAverageUserRatingForPlace(it) }
-
-        val sortedPlaceRating = placeRatingMap.toList().sortedBy { (_, value) -> value }.toMap()
-        val placeRatingElements = sortedPlaceRating.toList()
-
-        return when {
-            placeRatingElements.size >= 2 -> listOf(placeRatingElements[0].first, placeRatingElements[1].first)
-            placeRatingElements.isNotEmpty() -> listOf(placeRatingElements[0].first)
-            else -> listOf()
-        }
+    interface CalculationCallback {
+        fun onCalculationFinished()
     }
 
-    private fun calculateAverageUserRatingForPlace(place: Place): Double {
-        val sessionsList = LearningSessionRepository.get(context).sessionsList
+    fun calculateRecommendation(calculationCallback: CalculationCallback) {
+        bestGoals = calculateBestGoals()
+        bestPlaces = calculateBestPlaces()
+        bestTime = calculateBestTime()
+        bestDuration = calculateBestDuration()
+        bestBrightnessValue = calculateBestBrightnessValue()
+        bestNoiseValue = calculateBestNoiseValue()
 
-        var placeRatingSum = 0.0
-        var count = 0
-        sessionsList?.forEach {
-            if (it.placeID == place.id) {
-                placeRatingSum += it.userRating
-                count++
-            }
-        }
-
-        return placeRatingSum / count
+        calculationCallback.onCalculationFinished()
     }
 
-    fun getBestTime(): String {
+    private fun calculateBestGoals(): List<Goal> {
+        val goalsByDescendingUserRating = recommendationDAO.getGoalsByDescendingUserRating()
+
+        val endIndex = Math.min(goalsByDescendingUserRating.size, 3)
+
+        return goalsByDescendingUserRating.subList(0, endIndex)
+    }
+
+    private fun calculateBestPlaces(): List<Place> {
+        return recommendationDAO.getPlacesByDescendingUserRating()
+    }
+
+    private fun calculateBestTime(): String {
         val sessionsList = LearningSessionRepository.get(context).sessionsList
 
         val morningSessions = mutableListOf<LearningSession>()
@@ -99,47 +102,19 @@ class RecommendationHelper(private val context: Context) {
             count++
         }
 
-        return ratingSum / count
+        val average = ratingSum / count
+
+        return if (average.equals(Double.NaN)) {
+            0.0
+        } else
+            average
     }
 
-    fun getBestDuration(): Int {
-        val sessionsList = LearningSessionRepository.get(context).sessionsList
-
-        // map which maps DURATION to USERRATING
-        val mapWithDurations = hashMapOf<Int, Int>()
-
-        val goalRepository = GoalRepository.get(context)
-
-        sessionsList?.forEach {
-            val durationInMin = goalRepository.getGoalByID(it.goalID).durationInMin
-
-            mapWithDurations[durationInMin!!] = mapWithDurations[durationInMin]?.plus(it.userRating) ?: it.userRating
-        }
-
-        var bestDurationInMin = 0
-        var bestUserRatingSum = 0
-
-        val iterator = mapWithDurations.entries.iterator()
-        while (iterator.hasNext()) {
-            val entry = iterator.next()
-            if (entry.value > bestUserRatingSum) {
-                bestDurationInMin = entry.key
-                bestUserRatingSum = entry.value
-            }
-        }
-
-        return bestDurationInMin
+    private fun calculateBestDuration(): Int {
+        return recommendationDAO.getBestDuration()
     }
 
-    fun getBestGoals(): List<Goal> {
-        val goalsByDescendingUserRating = GoalRepository.get(context).getGoalsByDescendingUserRating()
-
-        val endIndex = Math.min(goalsByDescendingUserRating.size, 3)
-
-        return goalsByDescendingUserRating.subList(0, endIndex)
-    }
-
-    fun getBestBrightnessValue(): Int {
+    private fun calculateBestBrightnessValue(): Int {
         val sessionsList = LearningSessionRepository.get(context).sessionsList
 
         // map which maps Light value average  to USERRATING
@@ -165,7 +140,7 @@ class RecommendationHelper(private val context: Context) {
         return bestLightAverage.toInt()
     }
 
-    fun getBestNoiseValue(): Int {
+    private fun calculateBestNoiseValue(): Int {
         val sessionsList = LearningSessionRepository.get(context).sessionsList
 
         // map which maps Noise value average to USERRATING
@@ -187,7 +162,6 @@ class RecommendationHelper(private val context: Context) {
                 bestUserRatingSum = entry.value
             }
         }
-
 
         return bestNoiseAverage.toInt()
     }

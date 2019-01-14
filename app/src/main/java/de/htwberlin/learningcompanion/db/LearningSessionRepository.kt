@@ -19,6 +19,7 @@ class LearningSessionRepository private constructor(context: Context) {
 
     init {
         appDatabase = AppDatabase.get(this.context)
+        sessionsList = appDatabase.sessionDao().getLearningSessions()
         sessionsLiveData = allLearningSessions
 
         sessionsLiveData.observeForever { sessions -> sessionsList = sessions }
