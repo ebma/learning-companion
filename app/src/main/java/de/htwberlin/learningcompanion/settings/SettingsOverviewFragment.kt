@@ -14,6 +14,7 @@ import com.google.android.material.textfield.TextInputLayout
 import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
+import de.htwberlin.learningcompanion.util.setActivityTitle
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.support.v4.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
@@ -46,6 +47,8 @@ class SettingsOverviewFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         rootView = inflater.inflate(R.layout.fragment_settings_overview, container, false)
+
+        setActivityTitle(getString(R.string.title_nav_menu_settings))
 
         findViews()
         setSwitchStands()
@@ -84,10 +87,10 @@ class SettingsOverviewFragment : Fragment() {
         buddyMoodTextView.text = SharedPreferencesHelper.get(context!!).getBuddyMood() + " " +
                     SharedPreferencesHelper.get(context!!).getBuddyName()
 
-//        rootView.findViewById<TextView>(R.id.ti_settings_interval).hint =
-//                SharedPreferencesHelper.get(context!!).getInterval().toString() + " minutes"
-//        rootView.findViewById<TextView>(R.id.ti_settings_frequency).hint =
-//                SharedPreferencesHelper.get(context!!).getInterval().toString() + " times"
+        rootView.findViewById<TextView>(R.id.et_settings_interval).hint =
+                SharedPreferencesHelper.get(context!!).getInterval().toString() + " minute(s)"
+        rootView.findViewById<TextView>(R.id.et_settings_frequency).hint =
+                SharedPreferencesHelper.get(context!!).getFrequency().toString() + " time(s)"
     }
 
     private fun savePreferences() {

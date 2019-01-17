@@ -16,4 +16,5 @@
     <dimen name="tv_with_help_example_list_hor_start">170dp</dimen>
 
     <dimen name="goal_with_help_buttons_from_bottom">70dp</dimen>
+    <dimen name="help_margin_start_end">16dp</dimen>
 </resources>

@@ -24,7 +24,7 @@ class RecommendationFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setActivityTitle("Recommendation")
+        setActivityTitle(getString(R.string.title_nav_menu_recommendation))
 
         recommendationHelper = RecommendationHelper(context!!)
 

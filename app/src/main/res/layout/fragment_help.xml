@@ -9,54 +9,69 @@
 
 
     <TextView
-        android:id="@+id/tv_help_full_text"
+        android:id="@+id/tv_help_1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-
+        android:layout_marginStart="@dimen/help_margin_start_end"
+        android:layout_marginEnd="@dimen/help_margin_start_end"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="Charlie is designed to help you to set, monitor and review your learning goal and provide you with information on learning places with additional data such as brightness, noise level."
-        android:textSize="14sp"
+        android:text="..."
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/tv_help_2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/help_margin_start_end"
+        android:layout_marginEnd="@dimen/help_margin_start_end"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="Charlie helps you to set a goal which needs to ne Specific, Measurable, Attainable, Realistic and Time Bound so that you can evaluate your goal once you are complete."
+        android:text="..."
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tv_help_full_text" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_help_1" />
 
     <TextView
-        android:id="@+id/textView7"
+        android:id="@+id/tv_help_3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/help_margin_start_end"
+        android:layout_marginEnd="@dimen/help_margin_start_end"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="When evaluating your set goal, Charlie will store data so that Charlie can recommend you the best place, best time or even best goal that you can achieve."
+        android:text="..."
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_help_2" />
 
     <TextView
-        android:id="@+id/textView8"
+        android:id="@+id/tv_help_4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="@dimen/help_margin_start_end"
+        android:layout_marginEnd="@dimen/help_margin_start_end"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:text="You can personlize Charlie so that Charlie can call you by name."
+        android:text="..."
+        android:textSize="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+        app:layout_constraintTop_toBottomOf="@+id/tv_help_3" />
+
+    <TextView
+        android:id="@+id/tv_help_5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/help_margin_start_end"
+        android:layout_marginEnd="@dimen/help_margin_start_end"
+        android:layout_marginTop="8dp"
+        android:text="..."
+        android:textSize="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_help_4" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
