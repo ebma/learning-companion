@@ -57,11 +57,11 @@
     <string name="settings_permissions_info">*NOTE: You can enable/disable the Settings at the <b>SETTINGS MENU</b></string>
 
     <string name="settings_intervation_frequency">Intervention Frequency</string>
-    <string name="settings_intervation_frequency_notice">Charlie will alert you at least at start and at the end.</string>
+    <string name="settings_intervation_frequency_notice"> will alert you at least at start and at the end.</string>
     <string name="settings_interval">Interval</string>
-    <string name="settings_interval_remark">Charlie will alert you every</string>
+    <string name="settings_interval_remark"> will alert you every</string>
     <string name="settings_frequency">Frequency</string>
-    <string name="settings_frequency_remark">Charlie will alert you</string>
+    <string name="settings_frequency_remark"> will alert you</string>
     <string name="settings_interval_times">times</string>
 
     <string name="place_noise_rating_silent">silent</string>

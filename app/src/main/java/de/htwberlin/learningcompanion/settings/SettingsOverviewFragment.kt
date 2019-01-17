@@ -31,6 +31,9 @@ class SettingsOverviewFragment : Fragment() {
     private lateinit var buddyNameEditText: EditText
 
     private lateinit var buddyMoodTextView: TextView
+    private lateinit var settingsIntervantionNotica: TextView
+    private lateinit var settingsIntervalNotice: TextView
+    private lateinit var settingsFrequencyNotice: TextView
 
     private lateinit var intervalEditText: EditText
     private lateinit var frequencyEditText: EditText
@@ -55,6 +58,7 @@ class SettingsOverviewFragment : Fragment() {
         addClickListeners()
 
         setHints()
+        setNoticeTextWithCharlie()
 
         return rootView
     }
@@ -77,7 +81,19 @@ class SettingsOverviewFragment : Fragment() {
         btn_buddyImage4 = rootView.findViewById(R.id.iv_charlie_4)
         btn_buddyImage5 = rootView.findViewById(R.id.iv_charlie_5)
 
+        settingsIntervantionNotica = rootView.findViewById(R.id.tv_settings_intervention_notice)
+        settingsFrequencyNotice = rootView.findViewById(R.id.tv_settings_frequency_notice)
+        settingsIntervalNotice = rootView.findViewById(R.id.tv_settings_interval_notice)
+
         btn_settings_save = rootView.findViewById(R.id.btn_settings_save)
+    }
+
+    private fun setNoticeTextWithCharlie() {
+        val charlieName = SharedPreferencesHelper.get(context!!).getBuddyName()
+
+        settingsIntervantionNotica.text = charlieName + " " + getString(R.string.settings_intervation_frequency_notice)
+        settingsFrequencyNotice.text = charlieName + " " + getString(R.string.settings_frequency_remark)
+        settingsIntervalNotice.text = charlieName + " " + getString(R.string.settings_interval_remark)
     }
 
     private fun setHints() {
