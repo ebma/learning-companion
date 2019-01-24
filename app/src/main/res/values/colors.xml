@@ -31,5 +31,8 @@
     <color name="btn_quit_green">#1c8b73</color>
     <color name="btn_start_red">#f1ff63b9</color>
 
+    <color name="seekbar_choosen_point_green">#4cd94c</color>
+    <color name="seekbar_choosen_point_orange">#d1bd40</color>
+
     <color name="btn_set_goal_arrow">#ffc35c</color>
 </resources>
