@@ -1,20 +1,22 @@
 package de.htwberlin.learningcompanion.places.details
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.location.Location
+import android.net.ConnectivityManager
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.model.Address
 import de.htwberlin.learningcompanion.network.LocationToAddressRequest
 import kotlinx.android.synthetic.main.activity_get_location.*
 import kotlinx.android.synthetic.main.content_get_location.*
+import org.jetbrains.anko.alert
 import org.jetbrains.anko.ctx
 import org.jetbrains.anko.sdk27.coroutines.onClick
 import org.jetbrains.anko.toast
@@ -27,6 +29,7 @@ import org.osmdroid.views.overlay.MapEventsOverlay
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
+
 
 val LOCATION_DISPLAYNAME_EXTRA = "location_name_extra"
 val LOCATION_LATITUDE_EXTRA = "location_latitude_extra"
@@ -61,7 +64,7 @@ class GetLocationActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        setContentView(R.layout.activity_get_location)
+        setContentView(de.htwberlin.learningcompanion.R.layout.activity_get_location)
 
         setSupportActionBar(toolbar)
         supportActionBar?.title = "Get location of current place"
@@ -72,7 +75,7 @@ class GetLocationActivity : AppCompatActivity() {
             getLocationPermission()
         }
 
-        map = findViewById(R.id.map)
+        map = findViewById(de.htwberlin.learningcompanion.R.id.map)
         map?.setTileSource(TileSourceFactory.MAPNIK)
 
         map?.setBuiltInZoomControls(true)
@@ -92,7 +95,18 @@ class GetLocationActivity : AppCompatActivity() {
             onSaveButtonClick()
         }
 
+        if (!isConnectedToNetwork(applicationContext)) {
+            showNoNetworkDialog()
+        }
     }
+
+    private fun showNoNetworkDialog() {
+        alert("You need to be connected to the internet to show the map", "No network connection") {
+            positiveButton("Stay") { toast("Okay") }
+            negativeButton("Leave") { finish() }
+        }.show()
+    }
+
 
     private fun onGetAddressClick() {
         if (lastKnownLocation != null) {
@@ -241,5 +255,17 @@ class GetLocationActivity : AppCompatActivity() {
                 }
             }
         }
+    }
+
+    fun isConnectedToNetwork(context: Context): Boolean {
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager?
+
+        var isConnected = false
+        if (connectivityManager != null) {
+            val activeNetwork = connectivityManager.activeNetworkInfo
+            isConnected = activeNetwork != null && activeNetwork.isConnectedOrConnecting
+        }
+
+        return isConnected
     }
 }
