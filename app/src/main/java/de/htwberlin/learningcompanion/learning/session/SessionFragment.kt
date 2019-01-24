@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.github.mikephil.charting.components.Description
 import com.github.mikephil.charting.components.LimitLine
+import com.github.mikephil.charting.components.XAxis
 import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
@@ -21,9 +22,7 @@ import de.htwberlin.learningcompanion.learning.SessionEvaluator
 import de.htwberlin.learningcompanion.model.Goal
 import de.htwberlin.learningcompanion.model.LearningSession
 import de.htwberlin.learningcompanion.model.Place
-import de.htwberlin.learningcompanion.util.LIGHT_MEDIUM_THRESHOLD
-import de.htwberlin.learningcompanion.util.NOISE_MEDIUM_THRESHOLD
-import de.htwberlin.learningcompanion.util.setActivityTitle
+import de.htwberlin.learningcompanion.util.*
 import kotlinx.android.synthetic.main.fragment_session.*
 
 
@@ -93,14 +92,35 @@ class SessionFragment : Fragment() {
         brightness_chart.data = lineData
         brightness_chart.invalidate()
 
+        brightness_chart.axisRight.isEnabled = false
+        brightness_chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+
         addLimitLinesToBrightnessChart()
     }
 
     private fun addLimitLinesToBrightnessChart() {
         val leftAxis = brightness_chart.axisLeft
 
-        var ll = LimitLine(LIGHT_MEDIUM_THRESHOLD.toFloat(), "Expected Average")
+        var ll = LimitLine(LIGHT_MEDIUM_THRESHOLD.toFloat(), "Medium Brightness Threshold")
         ll.lineColor = Color.DKGRAY
+        ll.lineWidth = 2f
+        ll.textColor = Color.BLACK
+        ll.textSize = 10f
+
+        leftAxis.addLimitLine(ll)
+
+
+        ll = LimitLine(LIGHT_LOW_THRESHOLD.toFloat(), "Low Brightness Threshold")
+        ll.lineColor = Color.RED
+        ll.lineWidth = 2f
+        ll.textColor = Color.BLACK
+        ll.textSize = 10f
+
+        leftAxis.addLimitLine(ll)
+
+
+        ll = LimitLine(LIGHT_HIGH_THRESHOLD.toFloat(), "High Brightness Threshold")
+        ll.lineColor = Color.GREEN
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
         ll.textSize = 10f
@@ -110,12 +130,14 @@ class SessionFragment : Fragment() {
         var averageBrightness = SessionEvaluator.calculateAverage(session.lightValues)
 
         ll = LimitLine(averageBrightness.toFloat(), "Your Average")
-        ll.lineColor = Color.RED
+        ll.lineColor = Color.BLUE
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
         ll.textSize = 10f
 
         leftAxis.addLimitLine(ll)
+
+        leftAxis.axisMaximum = Math.max(averageBrightness.plus(10).toFloat(), LIGHT_MEDIUM_THRESHOLD.plus(LIGHT_MEDIUM_THRESHOLD / 10).toFloat())
     }
 
     private fun initNoiseChart() {
@@ -135,13 +157,17 @@ class SessionFragment : Fragment() {
         noise_chart.data = lineData
         noise_chart.invalidate()
 
+        noise_chart.axisRight.isEnabled = false
+        noise_chart.xAxis.position = XAxis.XAxisPosition.BOTTOM
+
+
         addLimitLinesToNoiseChart()
     }
 
     private fun addLimitLinesToNoiseChart() {
         val leftAxis = noise_chart.axisLeft
 
-        var ll = LimitLine(NOISE_MEDIUM_THRESHOLD.toFloat(), "Expected Average")
+        var ll = LimitLine(NOISE_MEDIUM_THRESHOLD.toFloat(), "Medium Noise Threshold")
         ll.lineColor = Color.DKGRAY
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -149,14 +175,33 @@ class SessionFragment : Fragment() {
 
         leftAxis.addLimitLine(ll)
 
-        var averageNoise = SessionEvaluator.calculateAverage(session.noiseValues)
+        ll = LimitLine(NOISE_LOW_THRESHOLD.toFloat(), "Low Noise Threshold")
+        ll.lineColor = Color.GREEN
+        ll.lineWidth = 2f
+        ll.textColor = Color.BLACK
+        ll.textSize = 10f
 
-        ll = LimitLine(averageNoise.toFloat(), "Your Average")
+        leftAxis.addLimitLine(ll)
+
+        ll = LimitLine(NOISE_HIGH_THRESHOLD.toFloat(), "High Noise Threshold")
         ll.lineColor = Color.RED
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
         ll.textSize = 10f
 
         leftAxis.addLimitLine(ll)
+
+
+        var averageNoise = SessionEvaluator.calculateAverage(session.noiseValues)
+
+        ll = LimitLine(averageNoise.toFloat(), "Your Average")
+        ll.lineColor = Color.BLUE
+        ll.lineWidth = 2f
+        ll.textColor = Color.BLACK
+        ll.textSize = 10f
+
+        leftAxis.addLimitLine(ll)
+
+        leftAxis.axisMaximum = Math.max(averageNoise.plus(10).toFloat(), NOISE_MEDIUM_THRESHOLD.plus(NOISE_MEDIUM_THRESHOLD / 10).toFloat())
     }
 }
