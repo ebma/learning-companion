@@ -2,7 +2,8 @@ package de.htwberlin.learningcompanion.learning
 
 import de.htwberlin.learningcompanion.util.*
 
-enum class LightLevel { LOWEST, LOW, MEDIUM, HIGH, HIGHEST;
+enum class LightLevel(val levelName: String) {
+    LOWEST("Dark"), LOW("Dim"), MEDIUM("Medium"), HIGH("Bright"), HIGHEST("Shiny");
 
     companion object {
         fun fromValue(value: Double): LightLevel {
@@ -20,7 +21,8 @@ enum class LightLevel { LOWEST, LOW, MEDIUM, HIGH, HIGHEST;
     }
 }
 
-enum class NoiseLevel { LOWEST, LOW, MEDIUM, HIGH, HIGHEST;
+enum class NoiseLevel(val levelName: String) {
+    LOWEST("Silent"), LOW("Quite"), MEDIUM("Medium"), HIGH("Loud"), HIGHEST("Noisy");
 
     companion object {
         fun fromValue(value: Double): NoiseLevel {
@@ -46,19 +48,13 @@ class SessionEvaluator(private val lightValues: ArrayList<Float>,
     private var lightLevel: LightLevel = LightLevel.MEDIUM
     private var noiseLevel: NoiseLevel = NoiseLevel.MEDIUM
 
-    public fun evaluateLight(): LightLevel {
-        val lightAverage = calculateAverage(lightValues)
-
-        lightLevel = LightLevel.fromValue(lightAverage)
-
+    fun evaluateLight(): LightLevel {
+        lightLevel = LightLevel.fromValue(lightValues.last().toDouble())
         return lightLevel
     }
 
-    public fun evaluateNoise(): NoiseLevel {
-        val noiseAverage = calculateAverage(noiseValues)
-
-        noiseLevel = NoiseLevel.fromValue(noiseAverage)
-
+    fun evaluateNoise(): NoiseLevel {
+        noiseLevel = NoiseLevel.fromValue(noiseValues.last().toDouble())
         return noiseLevel
     }
 
