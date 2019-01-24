@@ -2,15 +2,13 @@ package de.htwberlin.learningcompanion.help
 
 import android.graphics.Typeface
 import android.os.Bundle
-import android.text.SpannableString
-import android.text.SpannableStringBuilder
-import android.text.Spanned
-import android.text.SpannedString
+import android.text.*
 import android.text.style.StyleSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.annotation.IntegerRes
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
@@ -46,26 +44,63 @@ class HelpOverview : Fragment() {
         val text4 = "You can personalize " + charlieName + " so that " + charlieName + " can call you by name and you can also call " + charlieName + " in your personal way."
         val text5 = "Colors scheme of " + charlieName + " are based on affective colors of trustworthy and playful to display positive affective state."
 
-        val styleBold = StyleSpan(Typeface.BOLD)
-
         val spannableString1 = SpannableString(charlieName + text1)
-        spannableString1.setSpan(styleBold, 0, charlieName.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString1.setSpan(StyleSpan(Typeface.BOLD), 0, charlieName.length, 0)
         tvHelpText1.text = spannableString1
 
         val spannableString2 = SpannableString(text2)
-        spannableString2.setSpan(styleBold, 0, "Messages".length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString2.setSpan(StyleSpan(Typeface.BOLD), 0, "Messages".length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        spannableString2.setSpan(StyleSpan(Typeface.BOLD), "Messages that ".length, "Messages that ".length + charlieName.length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         tvHelpText2.text = spannableString2
 
         val spannableString3 = SpannableString(text3)
-        spannableString3.setSpan(styleBold, "When ".length, "evaluating".length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString3.setSpan(StyleSpan(Typeface.BOLD), "When ".length, "when ".length + "evaluating".length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        spannableString3.setSpan(
+                StyleSpan(Typeface.BOLD),
+                "When evaluating your set goal,".length,
+                "When evaluating your set goal, ".length + charlieName.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+        spannableString3.setSpan(
+                StyleSpan(Typeface.BOLD),
+                "When evaluating your set goal, ".length + charlieName.length + " will store data so that ".length,
+                "When evaluating your set goal, ".length + charlieName.length + " will store data so that ".length + charlieName.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
         tvHelpText3.text = spannableString3
 
+        val spannableString4 = SpannableString(text4)
+        spannableString4.setSpan(
+                StyleSpan(Typeface.BOLD),
+                "You can personalize ".length,
+                "You can personalize ".length + charlieName.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+        spannableString4.setSpan(
+                StyleSpan(Typeface.BOLD),
+                ("You can personalize " + charlieName + " so that ").length,
+                ("You can personalize " + charlieName + " so that ").length + charlieName.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+        spannableString4.setSpan(
+                StyleSpan(Typeface.BOLD),
+                ("You can personalize " + charlieName + " so that " + charlieName + " can call you by name and you can also call ").length,
+                ("You can personalize " + charlieName + " so that " + charlieName + " can call you by name and you can also call ").length + charlieName.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE
+        )
+        tvHelpText4.text = spannableString4
+
         val spannableString5 = SpannableString(text5)
-        spannableString5.setSpan(styleBold, 0, "Colors".length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+        spannableString5.setSpan(StyleSpan(Typeface.BOLD), 0, "Colors".length, Spannable.SPAN_INCLUSIVE_INCLUSIVE)
+        spannableString5.setSpan(
+                StyleSpan(Typeface.BOLD),
+                "Colors scheme of ".length,
+                "Colors scheme of ".length + charlieName.length,
+                Spannable.SPAN_INCLUSIVE_INCLUSIVE)
         tvHelpText5.text = spannableString5
 
-        tvHelpText4.setText(text4)
     }
+
 
     private fun findViews() {
         tvHelpText1 = rootView.findViewById(R.id.tv_help_1)
