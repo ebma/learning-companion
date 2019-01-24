@@ -26,6 +26,7 @@ import org.osmdroid.tileprovider.tilesource.TileSourceFactory
 import org.osmdroid.util.GeoPoint
 import org.osmdroid.views.MapView
 import org.osmdroid.views.overlay.MapEventsOverlay
+import org.osmdroid.views.overlay.Marker
 import org.osmdroid.views.overlay.mylocation.GpsMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.IMyLocationProvider
 import org.osmdroid.views.overlay.mylocation.MyLocationNewOverlay
@@ -49,6 +50,9 @@ class GetLocationActivity : AppCompatActivity() {
     private var lastKnownLocation: Location? = null
 
     private var address: Address? = null
+
+    private lateinit var locationClickMarker: Marker
+
 
     private lateinit var gpsLocationProvider: IMyLocationProvider
 
@@ -83,6 +87,9 @@ class GetLocationActivity : AppCompatActivity() {
 
         map?.controller?.setZoom(DEFAULT_WIDE_ZOOM)
         moveCameraToLocation(defaultLocation)
+
+        locationClickMarker = Marker(map)
+        locationClickMarker.title = "Your selected position"
 
         addLocationOverlay()
         addLocationClickListener()
@@ -143,6 +150,7 @@ class GetLocationActivity : AppCompatActivity() {
             override fun singleTapConfirmedHelper(geoPoint: GeoPoint?): Boolean {
                 if (geoPoint != null) {
                     getAddress(geoPoint)
+                    placeMarker(geoPoint)
                 }
                 return true
             }
@@ -151,6 +159,12 @@ class GetLocationActivity : AppCompatActivity() {
 
         var mapEventsOverlay = MapEventsOverlay(getBaseContext(), mReceive)
         map?.overlays?.add(mapEventsOverlay)
+    }
+
+    private fun placeMarker(geoPoint: GeoPoint) {
+        locationClickMarker.position = geoPoint
+        locationClickMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM)
+        map?.overlays?.add(locationClickMarker)
     }
 
     private fun onSaveButtonClick() {
