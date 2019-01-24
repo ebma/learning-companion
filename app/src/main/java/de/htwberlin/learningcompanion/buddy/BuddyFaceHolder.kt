@@ -9,17 +9,17 @@ import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
 
 class BuddyFaceHolder private constructor(private val context: Context) {
 
-    val sharedPreferencesHelper = SharedPreferencesHelper.get(context)
+    private val sharedPreferencesHelper = SharedPreferencesHelper.get(context)
 
     fun getGoofyFace(): Drawable? {
         val buddyColor = sharedPreferencesHelper.getBuddyColor()
 
         return when (buddyColor) {
             Color.BLUE -> context.getDrawable(R.drawable.ic_blue_goofy)
-            Color.GREEN -> context.getDrawable(R.drawable.ic_green_goofy)
-            Color.MAGENTA -> context.getDrawable(R.drawable.ic_green_goofy_glasses)
-            Color.YELLOW -> context.getDrawable(R.drawable.ic_orange_goofy)
-            Color.RED -> context.getDrawable(R.drawable.ic_orange_goofy)
+            Color.GREEN -> context.getDrawable(R.drawable.green_goofy_glasses)
+            Color.MAGENTA -> context.getDrawable(R.drawable.pink_charlie_goofy)
+            Color.YELLOW -> context.getDrawable(R.drawable.orange_charlie_goofy)
+            Color.RED -> context.getDrawable(R.drawable.yellow_charlie_goofy)   // yellow
             else -> context.getDrawable(R.drawable.ic_blue_goofy)
         }
     }
@@ -29,10 +29,10 @@ class BuddyFaceHolder private constructor(private val context: Context) {
 
         return when (buddyColor) {
             Color.BLUE -> context.getDrawable(R.drawable.ic_blue_calm)
-            Color.GREEN -> context.getDrawable(R.drawable.ic_green_calm)
-            Color.MAGENTA -> context.getDrawable(R.drawable.ic_green_calm_glasses)
-            Color.YELLOW -> context.getDrawable(R.drawable.ic_orange_calm)
-            Color.RED -> context.getDrawable(R.drawable.ic_orange_calm)
+            Color.GREEN -> context.getDrawable(R.drawable.green_calm_glasses)
+            Color.MAGENTA -> context.getDrawable(R.drawable.pink_charlie_relieved)
+            Color.YELLOW -> context.getDrawable(R.drawable.yellow_charlie_relieved)
+            Color.RED -> context.getDrawable(R.drawable.orange_charlie_relieved)
             else -> context.getDrawable(R.drawable.ic_blue_calm)
         }
     }
@@ -42,10 +42,10 @@ class BuddyFaceHolder private constructor(private val context: Context) {
 
         return when (buddyColor) {
             Color.BLUE -> context.getDrawable(R.drawable.ic_blue_grinning)
-            Color.GREEN -> context.getDrawable(R.drawable.ic_green_grinning)
-            Color.MAGENTA -> context.getDrawable(R.drawable.ic_green_grinning_glasses)
-            Color.YELLOW -> context.getDrawable(R.drawable.ic_orange_grinning)
-            Color.RED -> context.getDrawable(R.drawable.ic_orange_grinning)
+            Color.GREEN -> context.getDrawable(R.drawable.green_grinning_glasses)
+            Color.MAGENTA -> context.getDrawable(R.drawable.pink_charlie_grinning)
+            Color.YELLOW -> context.getDrawable(R.drawable.yellow_charlie_grinning)
+            Color.RED -> context.getDrawable(R.drawable.orange_charlie_grinning)
             else -> context.getDrawable(R.drawable.ic_blue_grinning)
         }
     }
@@ -55,10 +55,10 @@ class BuddyFaceHolder private constructor(private val context: Context) {
 
         return when (buddyColor) {
             Color.BLUE -> context.getDrawable(R.drawable.ic_blue_smile)
-            Color.GREEN -> context.getDrawable(R.drawable.ic_green_smile)
-            Color.MAGENTA -> context.getDrawable(R.drawable.ic_green_smile_glasses)
-            Color.YELLOW -> context.getDrawable(R.drawable.ic_orange_smile)
-            Color.RED -> context.getDrawable(R.drawable.ic_orange_smile)
+            Color.GREEN -> context.getDrawable(R.drawable.green_smile_glasses)
+            Color.MAGENTA -> context.getDrawable(R.drawable.pink_charlie_smiling)
+            Color.YELLOW -> context.getDrawable(R.drawable.yellow_charlie_smiling)
+            Color.RED -> context.getDrawable(R.drawable.orange_charlie_smiling)
             else -> context.getDrawable(R.drawable.ic_blue_smile)
         }
     }
@@ -68,10 +68,10 @@ class BuddyFaceHolder private constructor(private val context: Context) {
 
         return when (buddyColor) {
             Color.BLUE -> context.getDrawable(R.drawable.ic_blue_thinking)
-            Color.GREEN -> context.getDrawable(R.drawable.ic_green_thinking)
-            Color.MAGENTA -> context.getDrawable(R.drawable.ic_green_thinking_glasses)
-            Color.YELLOW -> context.getDrawable(R.drawable.ic_orange_thinking)
-            Color.RED -> context.getDrawable(R.drawable.ic_orange_thinking)
+            Color.GREEN -> context.getDrawable(R.drawable.green_thinking_glasses)
+            Color.MAGENTA -> context.getDrawable(R.drawable.pink_charlie_thinking)
+            Color.YELLOW -> context.getDrawable(R.drawable.yellow_charlie_thinking)
+            Color.RED -> context.getDrawable(R.drawable.orange_charlie_thinking)
             else -> context.getDrawable(R.drawable.ic_blue_thinking)
         }
     }
@@ -81,10 +81,10 @@ class BuddyFaceHolder private constructor(private val context: Context) {
 
         return when (buddyColor) {
             Color.BLUE -> context.getDrawable(R.drawable.ic_blue_smile)
-            Color.GREEN -> context.getDrawable(R.drawable.ic_green_smile)
-            Color.MAGENTA -> context.getDrawable(R.drawable.ic_green_smile_glasses)
-            Color.YELLOW -> context.getDrawable(R.drawable.ic_orange_smile)
-            Color.RED -> context.getDrawable(R.drawable.ic_orange_smile)
+            Color.GREEN -> context.getDrawable(R.drawable.green_smile_glasses)
+            Color.MAGENTA -> context.getDrawable(R.drawable.pink_charlie_smiling)
+            Color.YELLOW -> context.getDrawable(R.drawable.yellow_charlie_smiling)
+            Color.RED -> context.getDrawable(R.drawable.orange_charlie_smiling)
             else -> context.getDrawable(R.drawable.ic_blue_smile)
         }
     }

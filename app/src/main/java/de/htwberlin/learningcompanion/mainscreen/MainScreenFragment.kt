@@ -159,7 +159,6 @@ class MainScreenFragment : Fragment() {
         btnQuit.visibility = View.INVISIBLE
     }
 
-
     private fun createNewSessionEntity() {
         val goalID = GoalRepository.get(context!!).getCurrentGoal()!!.id
         val placeID = PlaceRepository.get(context!!).getCurrentPlace()!!.id
