@@ -73,7 +73,7 @@
         android:layout_width="200dp"
         android:layout_height="200dp"
         android:layout_marginBottom="8dp"
-        android:src="@drawable/ic_blue_smile"
+        android:src="@drawable/blue_smile"
         app:layout_constraintBottom_toTopOf="@+id/guideline_middle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

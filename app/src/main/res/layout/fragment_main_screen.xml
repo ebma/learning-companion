@@ -116,7 +116,7 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/h_guideline2"
-        app:srcCompat="@drawable/ic_blue_smile" />
+        app:srcCompat="@drawable/blue_smile" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/h_guideline3"
