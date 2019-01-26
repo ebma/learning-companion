@@ -37,13 +37,13 @@
 
     <string name="goal_current_title">My current goal is ...</string>
 
-    <string name="title_nav_menu_main_screen">Charlie</string>
+    <string name="title_nav_menu_main_screen">Ready to Learn</string>
     <string name="title_nav_menu_place">My Places</string>
     <string name="title_nav_menu_goal">My Goals</string>
-    <string name="title_nav_menu_history">History</string>
+    <string name="title_nav_menu_history">My learning History</string>
     <string name="title_nav_menu_alert">Alert</string>
     <string name="title_nav_menu_recommendation">Recommendation</string>
-    <string name="title_nav_menu_settings">Settings</string>
+    <string name="title_nav_menu_settings">My learning companion</string>
     <string name="title_nav_menu_help">Help</string>
 
     <string name="settings_user_name">User Name :</string>

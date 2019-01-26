@@ -9,13 +9,13 @@
             android:icon="@drawable/ic_mainscreen"
             android:title="@string/title_nav_menu_main_screen" />
         <item
-            android:id="@+id/nav_myplace"
-            android:icon="@drawable/ic_house"
-            android:title="@string/title_nav_menu_place" />
-        <item
             android:id="@+id/nav_mygoal"
             android:icon="@drawable/ic_goal"
             android:title="@string/title_nav_menu_goal" />
+        <item
+            android:id="@+id/nav_myplace"
+            android:icon="@drawable/ic_house"
+            android:title="@string/title_nav_menu_place" />
         <item
             android:id="@+id/nav_overview"
             android:icon="@drawable/ic_overview"

@@ -11,7 +11,6 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.google.android.material.textfield.TextInputLayout
-import de.htwberlin.learningcompanion.MainActivity
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.util.SharedPreferencesHelper
 import de.htwberlin.learningcompanion.util.setActivityTitle
@@ -136,8 +135,6 @@ class SettingsOverviewFragment : Fragment() {
 
         saveInterval(interval)
         saveFrequency(frequency)
-
-        (activity as MainActivity).changeMainScreenMenuItemText()
 
         setHints()
 

@@ -75,8 +75,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             displaySelectedScreen(R.id.nav_mainscreen)
         }
 
-        changeMainScreenMenuItemText()
-
         displaySelectedScreen(R.id.nav_mainscreen)
 
         setUIElementsToCharlieFace()
@@ -93,12 +91,6 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             fab_charlie.setImageDrawable(BuddyFaceHolder.get(applicationContext).getDefaultFace())
             drawer_layout.findViewById<ImageView>(R.id.nav_view_charlie_face)?.setImageDrawable(BuddyFaceHolder.get(applicationContext).getDefaultFace())
         }
-    }
-
-    fun changeMainScreenMenuItemText() {
-        val menu = nav_view.menu
-        val mainScreenMenuItem = menu.findItem(R.id.nav_mainscreen)
-        mainScreenMenuItem.title = SharedPreferencesHelper.get(applicationContext!!).getBuddyName()
     }
 
     override fun onBackPressed() {
