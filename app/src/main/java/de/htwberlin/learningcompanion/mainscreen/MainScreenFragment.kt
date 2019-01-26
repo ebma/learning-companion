@@ -151,6 +151,19 @@ class MainScreenFragment : Fragment() {
         }.show()
     }
 
+    private fun openConfirmStartDialog() {
+        val currentGoal = GoalRepository.get(context!!).getCurrentGoal()
+        val currentPlace = PlaceRepository.get(context!!).getCurrentPlace()
+        alert("Your goal is ${currentGoal?.getGoalText()} and you are at ${currentPlace?.name}?", "Confirm Start") {
+            yesButton {
+                startLearningSession()
+            }
+            noButton {
+                toast("Change it as you like before starting")
+            }
+        }.show()
+    }
+
     private fun finishLearningSession() {
         sessionHandler.stopLearningSession()
         createNewSessionEntity()
@@ -187,7 +200,7 @@ class MainScreenFragment : Fragment() {
 
             // this will be set immediately if permission is already granted
             if (permissionToRecordAccepted) {
-                startLearningSession()
+                openConfirmStartDialog()
             }
         } else {
             buddy.setInstructionText()
@@ -261,7 +274,7 @@ class MainScreenFragment : Fragment() {
             permissionToRecordAccepted = grantResults[0] == PackageManager.PERMISSION_GRANTED
 
             if (waitingForPermissionToStartSession) {
-                startLearningSession()
+                openConfirmStartDialog()
             }
         }
     }
