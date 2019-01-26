@@ -10,8 +10,11 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import de.htwberlin.learningcompanion.R
+import de.htwberlin.learningcompanion.buddy.BuddyFaceHolder
+import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.model.LearningSession
 import de.htwberlin.learningcompanion.util.setActivityTitle
+import kotlinx.android.synthetic.main.fragment_session_overview.*
 
 class SessionOverviewFragment : Fragment() {
 
@@ -49,6 +52,23 @@ class SessionOverviewFragment : Fragment() {
             setHasFixedSize(true)
             layoutManager = viewManager
             adapter = viewAdapter
+        }
+
+
+        setBuddyInfoText()
+        setBuddyImage()
+    }
+
+    private fun setBuddyImage() {
+        iv_charlie.setImageDrawable(BuddyFaceHolder.get(context!!).getDefaultFace())
+    }
+
+    private fun setBuddyInfoText() {
+        if (LearningSessionRepository.get(context!!).sessionsList != null &&
+                LearningSessionRepository.get(context!!).sessionsList!!.isNotEmpty()) {
+            tv_charlie_info.text = "This is the overview of your learning history. \nYou can tap each entry to see the details."
+        } else {
+            tv_charlie_info.text = "This is the overview of your learning history. \nThere are no sessions to review yet."
         }
     }
 }
