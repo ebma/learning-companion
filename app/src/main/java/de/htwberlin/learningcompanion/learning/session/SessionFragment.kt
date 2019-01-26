@@ -40,7 +40,7 @@ class SessionFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        setActivityTitle("Watch session")
+        setActivityTitle("Detailed Learning History")
 
         loadSession()
         initLayoutWithSession()
@@ -56,6 +56,7 @@ class SessionFragment : Fragment() {
 
     private fun initLayoutWithSession() {
         speedView.speedPercentTo(session.userRating, 2000)
+        speedView.unit = "% (Goal Achievement)"
 
         tv_goal.text = goal.getGoalText()
         tv_place.text = place.name
@@ -101,7 +102,7 @@ class SessionFragment : Fragment() {
     private fun addLimitLinesToBrightnessChart() {
         val leftAxis = brightness_chart.axisLeft
 
-        var ll = LimitLine(LIGHT_MEDIUM_THRESHOLD.toFloat(), "Medium Brightness Threshold")
+        var ll = LimitLine(LIGHT_MEDIUM_THRESHOLD.toFloat(), "Medium")
         ll.lineColor = Color.DKGRAY
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -110,7 +111,7 @@ class SessionFragment : Fragment() {
         leftAxis.addLimitLine(ll)
 
 
-        ll = LimitLine(LIGHT_LOW_THRESHOLD.toFloat(), "Low Brightness Threshold")
+        ll = LimitLine(LIGHT_LOW_THRESHOLD.toFloat(), "\u2b07 Dark")
         ll.lineColor = Color.RED
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -119,7 +120,7 @@ class SessionFragment : Fragment() {
         leftAxis.addLimitLine(ll)
 
 
-        ll = LimitLine(LIGHT_HIGH_THRESHOLD.toFloat(), "High Brightness Threshold")
+        ll = LimitLine(LIGHT_HIGH_THRESHOLD.toFloat(), "\u2b06 Bright")
         ll.lineColor = Color.GREEN
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -167,7 +168,7 @@ class SessionFragment : Fragment() {
     private fun addLimitLinesToNoiseChart() {
         val leftAxis = noise_chart.axisLeft
 
-        var ll = LimitLine(NOISE_MEDIUM_THRESHOLD.toFloat(), "Medium Noise Threshold")
+        var ll = LimitLine(NOISE_MEDIUM_THRESHOLD.toFloat(), "Medium")
         ll.lineColor = Color.DKGRAY
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -175,7 +176,7 @@ class SessionFragment : Fragment() {
 
         leftAxis.addLimitLine(ll)
 
-        ll = LimitLine(NOISE_LOW_THRESHOLD.toFloat(), "Low Noise Threshold")
+        ll = LimitLine(NOISE_LOW_THRESHOLD.toFloat(), "\u2b07 Silent")
         ll.lineColor = Color.GREEN
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -183,7 +184,7 @@ class SessionFragment : Fragment() {
 
         leftAxis.addLimitLine(ll)
 
-        ll = LimitLine(NOISE_HIGH_THRESHOLD.toFloat(), "High Noise Threshold")
+        ll = LimitLine(NOISE_HIGH_THRESHOLD.toFloat(), "\u2b06 Noisy")
         ll.lineColor = Color.RED
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
