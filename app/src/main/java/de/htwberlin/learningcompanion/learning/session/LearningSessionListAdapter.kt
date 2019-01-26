@@ -1,5 +1,6 @@
 package de.htwberlin.learningcompanion.learning.session
 
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +40,9 @@ class LearningSessionListAdapter(private val sessionDataSet: ArrayList<LearningS
         private val ivNoise: ImageView
         private val ivUserrating: ImageView
 
+        private val thumbUpDrawable: Drawable?
+        private val thumbDownDrawable: Drawable?
+
         private val clSessionListItem: ConstraintLayout
 
         init {
@@ -48,6 +52,9 @@ class LearningSessionListAdapter(private val sessionDataSet: ArrayList<LearningS
             ivBrightness = rootView.findViewById(R.id.iv_brightness)
             ivNoise = rootView.findViewById(R.id.iv_noise)
             ivUserrating = rootView.findViewById(R.id.iv_rate)
+
+            thumbUpDrawable = rootView.context.getDrawable(R.drawable.ic_thumb_up)
+            thumbDownDrawable = rootView.context.getDrawable(R.drawable.ic_thumb_down)
 
             clSessionListItem = rootView.findViewById(R.id.cl_session_list_item)
         }
@@ -63,7 +70,11 @@ class LearningSessionListAdapter(private val sessionDataSet: ArrayList<LearningS
             ivBrightness.setColorFilter(getColorForLightLevel(session.brightnessRating))
             ivNoise.setColorFilter(getColorForNoiseLevel(session.noiseRating))
             ivUserrating.setColorFilter(getColorForUserrating(session.userRating))
-
+            if (session.userRating >= 70) {
+                ivUserrating.setImageDrawable(thumbUpDrawable)
+            } else {
+                ivUserrating.setImageDrawable(thumbDownDrawable)
+            }
             clSessionListItem.onClick {
                 navigateToViewSessionFragment()
             }
