@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.GoalRepository
 import de.htwberlin.learningcompanion.db.PlaceRepository
+import de.htwberlin.learningcompanion.model.Goal
+import de.htwberlin.learningcompanion.model.Place
 import java.util.*
 
 const val MESSAGE_DURATION_IN_MILLIS = 10000L
@@ -99,7 +101,7 @@ class Buddy private constructor(private val context: Context) {
         return when {
             currentGoal == null -> getGoalInfoText()
             currentPlace == null -> getPlaceInfoText()
-            else -> getStartLearningInfoText()
+            else -> getStartLearningInfoText(currentGoal, currentPlace)
         }
     }
 
@@ -111,11 +113,8 @@ class Buddy private constructor(private val context: Context) {
         return "Please press \"Menu\" and go to \"My places\" to set the place where you want to learn."
     }
 
-    private fun getStartLearningInfoText(): String {
-        // return "You can start your learning session by clicking on the \"Start\" Button below."
-        val currentGoal = GoalRepository.get(context).getCurrentGoal()
-
-        return "Your current goal is: \n${currentGoal!!.getGoalText()}"
+    private fun getStartLearningInfoText(currentGoal: Goal, currentPlace: Place): String {
+        return "Your current goal is: \n${currentGoal.getGoalText()} \nYour current place is ${currentPlace.name}"
     }
 
     companion object {
