@@ -72,6 +72,6 @@
     <string name="place_brightness_rating_dim">dim</string>
     <string name="place_brightness_rating_bright">bright</string>
     <string name="place_brightness_rating_shiny">shiny</string>
-    <string name="exit_prohibited_message">You can only review your learning once your learning is complete!</string>
+    <string name="exit_prohibited_message">Let us keep concentrating on achieving your goal. You can look around when you are done or have quit.</string>
 
 </resources>
