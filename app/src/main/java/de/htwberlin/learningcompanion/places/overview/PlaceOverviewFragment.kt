@@ -74,6 +74,8 @@ class PlaceOverviewFragment : Fragment() {
     }
 
     private fun updateHeaderLayout() {
+        rootView.findViewById<ImageView>(R.id.iv_charlie).setImageDrawable(BuddyFaceHolder.get(context!!).getDefaultFace())
+
         val placeRepository = PlaceRepository.get(context!!)
         val textView = rootView.findViewById<TextView>(R.id.tv_charlie_info)
 
@@ -85,8 +87,7 @@ class PlaceOverviewFragment : Fragment() {
                 textView.text = "Your currently selected place is: ${currentPlace.name}"
             } else {
                 textView.text = "You do not have a place selected. \nGo ahead and add a new place or choose an existing one."
-        }
-            rootView.findViewById<ImageView>(R.id.iv_charlie).setImageDrawable(BuddyFaceHolder.get(context!!).getDefaultFace())
+            }
         }
     }
 

@@ -184,7 +184,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
                 if (untilRadioButton.isChecked) {
                     untilAmountEditText.text.toString().let {
                         if (!it.isEmpty()) {
-                            updateGoal = Goal(actionString, amountString, fieldString, mediumString, it.toInt())
+                            updateGoal = Goal(actionString, amountString, fieldString, mediumString, null, it)
                         }
                     }
                 } else {
