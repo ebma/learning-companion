@@ -195,8 +195,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
                     }
                 }
 
-//            val updateGoal = Goal(actionString, amountString, fieldString, mediumString)
-                updateGoal.id = goal?.id ?: 0
+//                updateGoal.id = goal?.id ?: 0
                 updateGoal(updateGoal)
                 toast("Goal updated")
 
@@ -210,7 +209,7 @@ class GoalNoHelpUserInputFragment : Fragment() {
     }
 
     private fun updateGoal(goal: Goal) {
-        context?.let { GoalRepository.get(it).updateGoal(goal) }
+        context?.let { GoalRepository.get(it).insertGoal(goal) }
 
     }
 
