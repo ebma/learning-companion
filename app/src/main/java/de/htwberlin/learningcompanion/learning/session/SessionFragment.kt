@@ -56,7 +56,7 @@ class SessionFragment : Fragment() {
 
     private fun initLayoutWithSession() {
         speedView.speedPercentTo(session.userRating, 2000)
-        speedView.unit = "% (Goal Achievement)"
+        speedView.unit = "% (Your Rating)"
 
         tv_goal.text = goal.getGoalText()
         tv_place.text = place.name
@@ -103,6 +103,7 @@ class SessionFragment : Fragment() {
         val leftAxis = brightness_chart.axisLeft
 
         var ll = LimitLine(LIGHT_MEDIUM_THRESHOLD.toFloat(), "Medium")
+        ll.enableDashedLine(5f, 10f, 180f)
         ll.lineColor = Color.DKGRAY
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -112,6 +113,7 @@ class SessionFragment : Fragment() {
 
 
         ll = LimitLine(LIGHT_LOW_THRESHOLD.toFloat(), "\u2b07 Dark")
+        ll.enableDashedLine(5f, 10f, 180f)
         ll.lineColor = Color.RED
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -121,6 +123,7 @@ class SessionFragment : Fragment() {
 
 
         ll = LimitLine(LIGHT_HIGH_THRESHOLD.toFloat(), "\u2b06 Bright")
+        ll.enableDashedLine(5f, 10f, 180f)
         ll.lineColor = Color.GREEN
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -169,6 +172,7 @@ class SessionFragment : Fragment() {
         val leftAxis = noise_chart.axisLeft
 
         var ll = LimitLine(NOISE_MEDIUM_THRESHOLD.toFloat(), "Medium")
+        ll.enableDashedLine(5f, 10f, 180f)
         ll.lineColor = Color.DKGRAY
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -177,6 +181,7 @@ class SessionFragment : Fragment() {
         leftAxis.addLimitLine(ll)
 
         ll = LimitLine(NOISE_LOW_THRESHOLD.toFloat(), "\u2b07 Silent")
+        ll.enableDashedLine(5f, 10f, 180f)
         ll.lineColor = Color.GREEN
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
@@ -185,6 +190,7 @@ class SessionFragment : Fragment() {
         leftAxis.addLimitLine(ll)
 
         ll = LimitLine(NOISE_HIGH_THRESHOLD.toFloat(), "\u2b06 Noisy")
+        ll.enableDashedLine(5f, 10f, 180f)
         ll.lineColor = Color.RED
         ll.lineWidth = 2f
         ll.textColor = Color.BLACK
