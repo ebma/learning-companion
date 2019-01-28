@@ -64,6 +64,7 @@
     <string name="settings_frequency_remark"> will alert you</string>
     <string name="settings_interval_times">times</string>
 
+    <string name="place_use_camera_note">You can set the picture using camera or your gallery as a background.</string>
     <string name="place_noise_rating_silent">silent</string>
     <string name="place_noise_rating_quiet">quiet</string>
     <string name="place_noise_rating_loud">loud</string>
