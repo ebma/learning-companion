@@ -126,7 +126,6 @@ class MyPlaceFragment : Fragment() {
         runOnUiThread {
             if (errorTint)
                 layout.setHintTextColor(ColorStateList.valueOf(resources.getColor(android.R.color.holo_red_dark)))
-//                layout.hintTextColors = ColorStateList.valueOf(resources.getColor(android.R.color.holo_red_dark))
             else
                 layout.setHintTextColor(ColorStateList.valueOf(resources.getColor(android.R.color.darker_gray)))
         }
