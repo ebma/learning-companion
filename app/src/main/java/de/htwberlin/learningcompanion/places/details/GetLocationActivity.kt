@@ -105,6 +105,11 @@ class GetLocationActivity : AppCompatActivity() {
         if (!isConnectedToNetwork(applicationContext)) {
             showNoNetworkDialog()
         }
+
+        // if GPS is noot allowed
+        if(!locationPermissionGranted) {
+            toast("please tap where you are in the map")
+        }
     }
 
     private fun showNoNetworkDialog() {
