@@ -3,6 +3,7 @@ package de.htwberlin.learningcompanion.places.details
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.ColorStateList
 import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,6 +11,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.fragment.app.Fragment
+import com.google.android.material.textfield.TextInputLayout
 import com.squareup.picasso.Picasso
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.db.AppDatabase
@@ -19,6 +21,7 @@ import de.htwberlin.learningcompanion.places.overview.PlaceOverviewFragment
 import de.htwberlin.learningcompanion.util.setActivityTitle
 import kotlinx.android.synthetic.main.fragment_my_place.*
 import org.jetbrains.anko.sdk27.coroutines.onClick
+import org.jetbrains.anko.support.v4.runOnUiThread
 import org.jetbrains.anko.support.v4.toast
 
 
@@ -113,8 +116,19 @@ class MyPlaceFragment : Fragment() {
                 }
                 navigateToPlaceOverview()
             } else {
-                toast("Missing name")
+                tintTextInputLayout(etName, true)
+                toast("Please insert name for your place")
             }
+        }
+    }
+
+    private fun tintTextInputLayout(layout: EditText, errorTint: Boolean) {
+        runOnUiThread {
+            if (errorTint)
+                layout.setHintTextColor(ColorStateList.valueOf(resources.getColor(android.R.color.holo_red_dark)))
+//                layout.hintTextColors = ColorStateList.valueOf(resources.getColor(android.R.color.holo_red_dark))
+            else
+                layout.setHintTextColor(ColorStateList.valueOf(resources.getColor(android.R.color.darker_gray)))
         }
     }
 
