@@ -97,12 +97,12 @@ class SensorHandler(private val sensorManager: SensorManager) : SensorEventListe
 
     private fun onCollectData(event: SensorEvent) {
         val amplitude = getAmplitude()
-        val decibelFromAmplitude = getDecibelFromAmplitude(amplitude)
+//        val decibelFromAmplitude = getDecibelFromAmplitude(amplitude)
 
         val lightValue = event.values[0]
 
         lightDataList.add(lightValue)
-        noiseDataList.add(decibelFromAmplitude)
+        noiseDataList.add(amplitude.toFloat())
 
         eventCounter = 0
         info { "${event.values[0]} added" }
