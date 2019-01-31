@@ -153,7 +153,7 @@ class SessionFragment : Fragment() {
             entries.add(Entry(i.toFloat(), session.noiseValues[i].toFloat()))
         }
 
-        var dataSet = LineDataSet(entries, "Noise Values in dB")
+        var dataSet = LineDataSet(entries, "Noise Values")
         dataSet.color = Color.BLUE
         dataSet.valueTextColor = Color.argb(255, 100, 149, 237)
 

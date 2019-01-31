@@ -102,7 +102,7 @@ class RecommendationFragment : Fragment() {
 
     private fun setBestNoise() {
         val bestNoiseValue = recommendationHelper.bestNoiseValue
-        tv_noise_value.text = "$bestNoiseValue dB"
+        tv_noise_value.text = "$bestNoiseValue"
         tv_noise_level.text = NoiseLevel.fromValue(bestNoiseValue.toDouble()).levelName
 
     }
