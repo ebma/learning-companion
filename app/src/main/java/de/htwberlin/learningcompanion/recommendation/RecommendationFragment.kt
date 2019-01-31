@@ -96,14 +96,14 @@ class RecommendationFragment : Fragment() {
     private fun setBestBrightness() {
         val bestBrightnessValue = recommendationHelper.bestBrightnessValue
         tv_brightness_value.text = "$bestBrightnessValue lux"
-        tv_brightness_level.text = LightLevel.fromValue(bestBrightnessValue.toDouble()).name
+        tv_brightness_level.text = LightLevel.fromValue(bestBrightnessValue.toDouble()).levelName
 
     }
 
     private fun setBestNoise() {
         val bestNoiseValue = recommendationHelper.bestNoiseValue
         tv_noise_value.text = "$bestNoiseValue dB"
-        tv_noise_level.text = NoiseLevel.fromValue(bestNoiseValue.toDouble()).name
+        tv_noise_level.text = NoiseLevel.fromValue(bestNoiseValue.toDouble()).levelName
 
     }
 }
