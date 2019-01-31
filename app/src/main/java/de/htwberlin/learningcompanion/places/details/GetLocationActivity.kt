@@ -94,10 +94,6 @@ class GetLocationActivity : AppCompatActivity() {
         addLocationOverlay()
         addLocationClickListener()
 
-        btn_get_address.onClick {
-            onGetAddressClick()
-        }
-
         btn_save_location.onClick {
             onSaveButtonClick()
         }
@@ -106,27 +102,16 @@ class GetLocationActivity : AppCompatActivity() {
             showNoNetworkDialog()
         }
 
-        // if GPS is noot allowed
-        if(!locationPermissionGranted) {
+        // if GPS is not allowed
+        if (!locationPermissionGranted) {
             toast("please tap where you are in the map")
         }
     }
 
     private fun showNoNetworkDialog() {
-        alert("You need to be connected to the internet to show the map", "No network connection") {
-            positiveButton("Stay") { toast("Okay") }
-            negativeButton("Leave") { finish() }
+        alert("You need to be connected to the internet to use the map.", "No network connection") {
+            positiveButton("Leave") { finish() }
         }.show()
-    }
-
-
-    private fun onGetAddressClick() {
-        if (lastKnownLocation != null) {
-            val geoPoint = GeoPoint(lastKnownLocation!!.latitude, lastKnownLocation!!.longitude, lastKnownLocation!!.altitude)
-            getAddress(geoPoint)
-        } else {
-            toast("Your location was not found yet")
-        }
     }
 
     private fun getAddress(geoPoint: GeoPoint) {
@@ -212,8 +197,10 @@ class GetLocationActivity : AppCompatActivity() {
 
             gpsLocationProvider.startLocationProvider { location, source ->
                 // only move camera at first location sight
-                if (lastKnownLocation == null && location != null)
+                if (lastKnownLocation == null && location != null) {
                     moveCameraToLocation(location)
+                    getAddress(GeoPoint(location.latitude, location.longitude))
+                }
 
                 lastKnownLocation = location
                 Log.d(TAG, "location changed to ${location?.latitude} ${location?.longitude}")
