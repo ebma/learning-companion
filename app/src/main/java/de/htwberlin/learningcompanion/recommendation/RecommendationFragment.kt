@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import de.htwberlin.learningcompanion.R
 import de.htwberlin.learningcompanion.buddy.BuddyFaceHolder
+import de.htwberlin.learningcompanion.db.LearningSessionRepository
 import de.htwberlin.learningcompanion.learning.LightLevel
 import de.htwberlin.learningcompanion.learning.NoiseLevel
 import de.htwberlin.learningcompanion.util.setActivityTitle
@@ -30,13 +31,17 @@ class RecommendationFragment : Fragment() {
 
         iv_charlie.setImageDrawable(BuddyFaceHolder.get(context!!).getDefaultFace())
 
-        recommendationHelper.calculateRecommendation(object : RecommendationHelper.CalculationCallback {
-            override fun onCalculationFinished() {
-                runOnUiThread {
-                    fillLayout()
+        if (LearningSessionRepository.get(context!!).sessionsList!!.isEmpty()) {
+            tv_charlie_info.text = "Please finish some learning sessions to view your recommendations."
+        } else {
+            recommendationHelper.calculateRecommendation(object : RecommendationHelper.CalculationCallback {
+                override fun onCalculationFinished() {
+                    runOnUiThread {
+                        fillLayout()
+                    }
                 }
-            }
-        })
+            })
+        }
 
     }
 
